@@ -1,8 +1,8 @@
 import React from 'react'
 import Footer from "../../Components/footer";
 import LoginSide from "../../Components/loginside";
-import LoginHeader from "../../components/LoginHeader";
-import LoginForm from '../../Components/LoginForm';
+import LoginHeader from "../../Components/loginHeader";
+import LoginForm from '../../Components/loginForm';
 
 
 const MentorLogin = () => {
