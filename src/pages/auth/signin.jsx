@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from "../../Components/footer";
+// import Footer from "../../Components/footer";
 import LoginSide from "../../Components/loginside";
 import LoginHeader from "../../Components/loginHeader";
 import LoginForm from '../../Components/loginForm';
@@ -16,7 +16,7 @@ const MentorLogin = () => {
         </div>
       </div>
       <div className="-mt-20">
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );
