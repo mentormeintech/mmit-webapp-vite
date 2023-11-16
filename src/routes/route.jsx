@@ -3,6 +3,8 @@ import MentorLogin from '../pages/auth/signin';
 import MenteeSignUp from '../pages/auth/menteesignup';
 import MentorSignUp from '../pages/auth/mentorsignup';
 import Home from '../pages/index';
+import FindAMentor from '../pages/findamentor';
+
 
 
 // import Onboard from '../pages/onboard/onboard';
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
 	{
 		path: '/auth/mentorsignup',
 		element: <MentorSignUp />,
+	},
+	{
+		path: '/findamentor',
+		element: <FindAMentor />,
 	},
 	// {
 	// 	path: '/dashboard',

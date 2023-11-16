@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { BsFillPersonFill, BsFillClipboard2MinusFill } from "react-icons/bs";
 
 const ProfileCard = ({
@@ -12,16 +11,16 @@ const ProfileCard = ({
   image,
 }) => {
   return (
-    
+
     <div className=" flex sm:h-[435px] sm:w-[19rem] w-[90%] flex-col sm:ml-0 whitespace-nowrap rounded-b-[0.5rem] rounded-t-[2rem] border">
       <div className="h-56">
-        <Image
+        <img
           className="rounded-md"
           src={image}
           width={1000}
           height={200}
           alt="mentor-dp"
-        ></Image>
+        />
       </div>
       <div className="flex mt-[4.5rem] xs:mt-[6.5rem] sm:mt-10 flex-col">
         <p className="ml-4 mt-4 sm:mt-2 text-xl font-semibold">{name}</p>
