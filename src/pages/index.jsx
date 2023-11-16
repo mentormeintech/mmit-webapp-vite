@@ -16,7 +16,6 @@ const Home = () => {
   return (
     <>
       <MetaTags title="Home &mdash; MentorMeInTech" desc="MMIT Landing page" />
-
       <Header />
 
       <HeroSection />

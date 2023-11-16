@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 
 
-const Header = () => {
+export default function Header() {
   const { token, type } = useSelector(state => state.mentor_me_user)
   const dispatch = useDispatch()
   useEffect(() => {
@@ -29,7 +29,7 @@ const Header = () => {
     { href: "/partnership", text: "Partnership" },
     { href: "#", text: "About Us" },
     { href: "#", text: "Insights" },
-    (type === 'mentor' && token === '') ? { href: "auth/mentorsignup", text: "Become A Mentor" } : ( (type === 'mentor' && token !== '') ? {href: "", text: ""  } : {href: "auth/mentorsignup", text: "Become A Mentor"  }),
+    (type === 'mentor' && token === '') ? { href: "auth/mentorsignup", text: "Become A Mentor" } : ((type === 'mentor' && token !== '') ? { href: "", text: "" } : { href: "auth/mentorsignup", text: "Become A Mentor" }),
     //  ( type === 'mentee' && token !== '')? { href: "auth/mentorsignup", text: "Become A Mentor" } : {href: '', text:''},
     // { href: "auth/mentorsignup", text: "Become A Mentor" }
     ,
@@ -96,5 +96,3 @@ const Header = () => {
     </div>
   );
 };
-
-export default Header;
