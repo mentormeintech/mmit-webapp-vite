@@ -1,5 +1,5 @@
 import Header from "./../components/Header";
-import Footer from "../Components/footer";
+import Footer from "../components/footer";
 import { MetaTags } from "./../features/MetaTags";
 
 import {
