@@ -83,7 +83,7 @@ export default function LoginForm() {
           setloading(false);
         }
       } else {
-        Alert("Please select user type", "warning");
+        Alert("Please select mentor or mentee", "warning");
       }
     } catch (error) {
       Alert(error.message, "error");
