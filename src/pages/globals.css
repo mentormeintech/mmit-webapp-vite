@@ -1,0 +1,25 @@
+/* src/styles/globals.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --Montserrat: 'Montserrat', sans-serif;
+    --textDark: #454545;
+    --theme_orange: #F89878;
+    --white: #fff;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    /* font-family: 'Montserrat', sans-serif; */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Your custom global styles can go here */
