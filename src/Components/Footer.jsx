@@ -1,3 +1,4 @@
+import React from 'react'
 import { FaLinkedinIn } from "react-icons/fa";
 import { SocialLink } from "../features/landingPage/HeroSection";
 import { RiInstagramFill, RiTwitterXFill } from "react-icons/ri";
