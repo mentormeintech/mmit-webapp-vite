@@ -5,7 +5,7 @@ import { RiInstagramFill, RiTwitterXFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const FooterLink = ({ href, children }) => (
-  <Link to={href} className="transition-all hover:text-secondary-500">
+  <Link to={href} className="transition-all hover:text-secondary-500" target='_blank'>
     {children}
   </Link>
 );
