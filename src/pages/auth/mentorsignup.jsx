@@ -1,6 +1,6 @@
 import SignupHeader from "../../components/signupHeader";
 import SignupForm from "../../components/signupForm";
-import Footer from "../../Components/footer"
+import Footer from "../../components/footer"
 
 
 const MenteeSignup = () => {
