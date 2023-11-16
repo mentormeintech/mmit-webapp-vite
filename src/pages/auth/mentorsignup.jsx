@@ -1,5 +1,5 @@
-import SignupHeader from "../../components/signupHeader";
-import SignupForm from "../../components/signupForm";
+import SignupHeader from "../../components/signupheader";
+import SignupForm from "../../components/signupform";
 import Footer from "../../components/footer"
 
 

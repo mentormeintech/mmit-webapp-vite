@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { registeredUser } from "../redux/slices/userslice";
 import { signInUser } from "../utilities/apiClient";
 import Alert from "../features/Alert";
-import Loader from "../Components/loader";
+import Loader from "./loader";
 import { setToken } from "../utilities/axiosClient";
 
 const SignupForm = (props) => {
