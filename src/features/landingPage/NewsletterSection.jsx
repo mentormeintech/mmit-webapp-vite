@@ -3,7 +3,7 @@ import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
 import Alert from '../Alert'
 import { postRequest } from "../../utilities/apiClient";
-import Loader from "../../Components/loader";
+import Loader from "../../components/loader";
 
 export const NewsletterSection = () => {
   const [loading, setloading] = useState(false)
