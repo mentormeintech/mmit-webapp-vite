@@ -3,7 +3,8 @@ import { FaToggleOn } from "react-icons/fa"
 
 function MentorsSettingsComps(props) {
   const { mentorship, dashboard } = props
-  if (mentorship.personalInfo) {
+  console.log('mentorship', mentorship)
+  if (mentorship && mentorship?.personalInfo) {
     return <>
       <form className="w-9/12">
         <section className="w-6/12">
@@ -34,7 +35,7 @@ function MentorsSettingsComps(props) {
               <p>Phone Numbersss</p>
               <label htmlFor="phone-number" className="cursor-pointer">Edit</label>
             </div>
-            <input type="text" id="phone-number" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343]" defaultValue={dashboard?.mobile || ''}/>
+            <input type="text" id="phone-number" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343]" defaultValue={dashboard?.mobile || ''} />
           </div>
         </section>
 
@@ -51,7 +52,7 @@ function MentorsSettingsComps(props) {
     </>
   }
 
-  else if (mentorship.login) {
+  else if (mentorship && mentorship?.login) {
     return <section className="w-[500px]">
       {/* <div className="mb-6">
         <div className="flex items-center justify-between">
@@ -76,7 +77,7 @@ function MentorsSettingsComps(props) {
     </section>
   }
 
-  else if (mentorship.notification) {
+  else if (mentorship && mentorship?.notification) {
     return <section className="w-[716px]">
       <div className="flex items-center justify-between bg-[#F9F9F9] mb-4 p-3 rounded-lg">
         <p className="w-9/12 text-[20px] font-medium">When deactivated, you will not receive message requests or new messages from your mentees. Your previous messages will remain concealed until you reactivate this function.</p>
@@ -112,7 +113,7 @@ function MentorsSettingsComps(props) {
               <p>Tools</p>
               <label htmlFor="tools" className="cursor-pointer">Edit</label>
             </div>
-            <input type="text" id="tools" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.tools || ''}/>
+            <input type="text" id="tools" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.tools || ''} />
           </div>
 
           <div className="w-full mb-8">
@@ -120,7 +121,7 @@ function MentorsSettingsComps(props) {
               <p>Company</p>
               <label htmlFor="company" className="cursor-pointer">Edit</label>
             </div>
-            <input type="text" id="company" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.company || ''}/>
+            <input type="text" id="company" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.company || ''} />
           </div>
 
           <div className="w-full mb-8">
@@ -130,7 +131,10 @@ function MentorsSettingsComps(props) {
             </div>
             <input type="text" style={{
               textTransform: 'capitalize'
-            }} id="role" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.area_of_expertise[0]?.name || ''} />
+            }} id="role" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard && dashboard?.area_of_expertise && dashboard?.area_of_expertise[0]?.name || ''} />
+            {/* <input type="text" style={{
+              textTransform: 'capitalize'
+            }} id="role" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={ dashboard && dashboard?.area_of_expertise[0]?.name || ''} /> */}
           </div>
 
           <div className="w-full mb-8">
@@ -138,7 +142,7 @@ function MentorsSettingsComps(props) {
               <p>LinkedIn Profile</p>
               <label htmlFor="linkedIn" className="cursor-pointer">Edit</label>
             </div>
-            <input type="text" id="linkedIn" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.linked_in_url}/>
+            <input type="text" id="linkedIn" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.linked_in_url} />
           </div>
 
           <div className="w-full mb-8">

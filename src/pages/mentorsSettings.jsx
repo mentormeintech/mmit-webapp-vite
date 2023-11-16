@@ -1,11 +1,11 @@
 import React, {useState} from "react"
 import MentorsSettingsComps from "../components/MentorsSettingsComps"
-import MentorSide from "./../components/MentorSide"
-import { CurrentMentor } from "./../components/CurrentMentor";
-import Header_Signin from "./../components/Header_Signin"
+import MentorSide from "../components/MentorSide"
+import { CurrentMentor } from "../components/CurrentMentor";
+import Header_Signin from "../components/Header_Signin"
 import { useSelector } from "react-redux"
 
-function MentorsSettings() {
+function MentorSettings() {
   const [mentorship, setMentorship] = useState({
     profile: true,
     personalInfo: false,
@@ -74,4 +74,4 @@ const Mentor = CurrentMentor
   )
 }
 
-export default MentorsSettings
+export default MentorSettings

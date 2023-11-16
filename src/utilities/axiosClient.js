@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getValidToken } from "./tokenClient";
 
-const URL = import.meta.env.NODE_ENV === 'development' ? import.meta.env.VITE_LOCAL_BASE_URL : import.meta.env.VITE_LIVE_BASE_URL
+const URL = import.meta.env.VITE_NODE_ENV === 'development' ? import.meta.env.VITE_LOCAL_BASE_URL : import.meta.env.VITE_LIVE_BASE_URL
 export const host = `${URL}/api`;
 const encoded = btoa(`${import.meta.env.VITE_BASIC_USERNAME}:${import.meta.env.VITE_BASIC_PASSWORD}`);
 // Create an axios instance

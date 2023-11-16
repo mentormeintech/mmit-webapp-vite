@@ -5,13 +5,14 @@ import { MobileSidebar } from "../features/MobileSidebar";
 import { useDispatch, useSelector, } from "react-redux";
 import { logOutUser } from "../redux/slices/userslice";
 import { logUserOut } from "../utilities/apiClient";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 
 export default function Header() {
   const { token, type } = useSelector(state => state.mentor_me_user)
   const dispatch = useDispatch()
+  const location = useLocation()
   useEffect(() => {
     AOS.init({
       once: true,
@@ -29,7 +30,7 @@ export default function Header() {
     { href: "/partnership", text: "Partnership" },
     { href: "#", text: "About Us" },
     { href: "#", text: "Insights" },
-    (type === 'mentor' && token === '') ? { href: "auth/mentorsignup", text: "Become A Mentor" } : ((type === 'mentor' && token !== '') ? { href: "", text: "" } : { href: "auth/mentorsignup", text: "Become A Mentor" }),
+    (type === 'mentor' && token === '') ? { href: "/auth/mentorsignup", text: "Become A Mentor" } : ((type === 'mentor' && token !== '') ? { href: "", text: "" } : { href: "/auth/mentorsignup", text: "Become A Mentor" }),
     //  ( type === 'mentee' && token !== '')? { href: "auth/mentorsignup", text: "Become A Mentor" } : {href: '', text:''},
     // { href: "auth/mentorsignup", text: "Become A Mentor" }
     ,
@@ -64,6 +65,9 @@ export default function Header() {
                       className={`transition-all ${link.href === "#"
                         ? "cursor-not-allowed opacity-50"
                         : "hover:text-sky-600"
+                        } ${location.pathname === link?.href
+                          ? "text-sky-600"
+                          : "hover:text-sky-600"
                         }`}
                     >
                       {link.text}

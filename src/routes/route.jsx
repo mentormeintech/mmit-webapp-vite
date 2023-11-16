@@ -4,6 +4,12 @@ import MenteeSignUp from '../pages/auth/menteesignup';
 import MentorSignUp from '../pages/auth/mentorsignup';
 import Home from '../pages/index';
 import FindAMentor from '../pages/findamentor';
+import BookASession from '../pages/bookasession';
+import PartnershipPage from '../pages/partnership';
+import MentorDashboard from '../pages/mentor';
+import MentorBooking from '../pages/mentorsBooking';
+import MentorSettings from '../pages/mentorsSettings';
+import MentorsSupport from '../pages/mentorsSupport';
 
 
 
@@ -33,6 +39,30 @@ const router = createBrowserRouter([
 	{
 		path: '/findamentor',
 		element: <FindAMentor />,
+	},
+	{
+		path: '/bookasession',
+		element: <BookASession />,
+	},
+	{
+		path: '/partnership',
+		element: <PartnershipPage />,
+	},
+	{
+		path: '/mentor',
+		element: <MentorDashboard />,
+	},
+	{
+		path: '/mentorsBooking',
+		element: <MentorBooking />,
+	},
+	{
+		path: '/mentorsSettings',
+		element: <MentorSettings />,
+	},
+	{
+		path: '/mentorsSupport',
+		element: <MentorsSupport />,
 	},
 	// {
 	// 	path: '/dashboard',

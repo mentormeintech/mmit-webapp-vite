@@ -1,7 +1,7 @@
-import MentorSide from './../components/MentorSide';
-import { CurrentMentor } from "./../components/CurrentMentor";
+import MentorSide from '../components/MentorSide';
+import { CurrentMentor } from "../components/CurrentMentor";
 import React from 'react'
-import Header_Signin from './../components/Header_Signin';
+import Header_Signin from '../components/Header_Signin';
 import { Link } from 'react-router-dom';
 
 function MentorsSupport() {

@@ -1,9 +1,7 @@
-import Image from "next/image"
-
 const PartnershipLeft = () => {
   return (
     <section className="w-[47%] pt-24">
-        <Image src="/images/team-members.png" alt="team members" width={604} height={551} className="mb-10"/>
+        <img src="/images/team-members.png" alt="team members" width={604} height={551} className="mb-10"/>
         <div className="pl-[18px]">
         <p className="mb-8">{'At MMIT, we recognize the power of collaboration and the value it brings to the tech community. While we are in the exciting phase of building our mentorship platform, we are actively seeking like-minded partners who share our passion for nurturing tech talent and fostering growth.'}</p>
 

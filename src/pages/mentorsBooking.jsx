@@ -1,9 +1,9 @@
-import MentorSide from "./../components/MentorSide";
+import MentorSide from "../components/MentorSide";
 import React, { useState } from "react"
-import { CurrentMentor } from "./../components/CurrentMentor";
-import Header_Signin from "./../components/Header_Signin";
+import { CurrentMentor } from "../components/CurrentMentor";
+import Header_Signin from "../components/Header_Signin";
 
-function MentorsBooking() {
+function MentorBooking() {
     const [bookingSection, setBookingSection] = useState({
         upcoming: true,
         pending: false,
@@ -76,4 +76,4 @@ function MentorsBooking() {
   )
 }
 
-export default MentorsBooking
+export default MentorBooking

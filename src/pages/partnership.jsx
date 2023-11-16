@@ -1,9 +1,8 @@
-import Handshake from "./../components/Handshake";
-import Footer from "./../components/footer";
-import PartnershipLeft from "./../components/PartnershipLeft";
-import PartnershipForm from "./../components/PartnershipForm";
-import Header from "./../components/Header";
-import Image from "next/image";
+import Handshake from "../components/Handshake";
+import Footer from "../components/footer";
+import PartnershipLeft from "../components/PartnershipLeft.jsx";
+import PartnershipForm from "../components/PartnershipForm";
+import Header from "../components/Header";
 
 function PartnershipPage() {
   return (
@@ -11,7 +10,7 @@ function PartnershipPage() {
       <Header />
       <Handshake /> {/* This is the correct usage of the Handshake component */}
       <div className="relative flex justify-between pb-[400px] pl-24 pt-14">
-        <Image
+        <img
           src="/images/right-tri.png"
           width={352}
           height={557}

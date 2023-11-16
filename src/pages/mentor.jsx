@@ -1,16 +1,16 @@
 import React from "react";
-import MentorSide from "./../components/MentorSide";
+import MentorSide from "../components/MentorSide";
 import { AiOutlineCheckSquare } from "react-icons/ai";
-import Header_Signin from "./../components/Header_Signin";
+import Header_Signin from "../components/Header_Signin";
 import { useLayoutEffect, useState } from "react";
-import { userDashboard } from "./../utilities/apiClient";
-import Alert from "./../features/Alert";
-import Spinner from "./../components/Spinner";
+import { userDashboard } from "../utilities/apiClient";
+import Alert from "../features/Alert";
+import Spinner from "../components/Spinner";
 import { useDispatch } from "react-redux";
-import { dashboardData } from "./../redux/slices/userslice";
+import { dashboardData } from "../redux/slices/userslice";
 
 
-const Page = () => {
+const MentorDashboard = () => {
   const dispatch = useDispatch()
   const [loading, setloading] = useState(false)
   let arr = []
@@ -133,4 +133,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default MentorDashboard
