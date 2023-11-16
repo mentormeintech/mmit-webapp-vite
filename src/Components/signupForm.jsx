@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { registeredUser } from "../redux/slices/userslice";
 import { signInUser } from "../utilities/apiClient";
 import Alert from "../features/Alert";
-import Loader from "./Loader";
+import Loader from "../Components/loader";
 import { setToken } from "../utilities/axiosClient";
 
 const SignupForm = (props) => {
@@ -23,6 +23,8 @@ const SignupForm = (props) => {
   const navigate = useNavigate();
   const { user_type } = props;
   const url = user_type === "mentor" ? "mentor/signup" : "mentee/signup";
+
+
 
   async function registerUser(event) {
     try {

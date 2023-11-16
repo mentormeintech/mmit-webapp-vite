@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 
-const SignupHeader = () => {
+export default function SignupHeader() {
 	return (
 		<div className="flex flex-row items-center relative">
 			<div className="absolute flex items-center left-20">
@@ -28,5 +28,3 @@ const SignupHeader = () => {
 		</div>
 	)
 }
-
-export default SignupHeader

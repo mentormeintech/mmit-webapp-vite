@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineCheck } from "react-icons/ai";
 import Alert from "../features/Alert";
 import { setToken } from "../utilities/axiosClient";
-import Loader from "./Loader";
+import Loader from "./loader";
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
