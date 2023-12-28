@@ -73,6 +73,21 @@ const FindAMentor = () => {
     }
   }
 
+  async function filterByCareerType(career_id) {
+    try {
+      console.log('Careeer id', career_id)
+      if (career_id === 'all') {
+        // Alert(career_id, "error");
+      }
+      else {
+        // Alert(career_id, "warning");
+      }
+    } catch (error) {
+      Alert(error.message, "warning");
+      setloading()
+    }
+  }
+
 
   return (
     <>
@@ -98,11 +113,11 @@ const FindAMentor = () => {
         <div className=" sm:ml-10 inline-flex flex-row items-center justify-between gap-7 relative ml-4 whitespace-nowrap pt-7 font-semibold">
           <img src="images/tabler_arrow-up.svg" width={20} height={20} alt="" />
           <ul className="ml-[-20px] flex flex-row justify-between p-[10px] text-base">
-            <li className="mr-8 cursor-pointer text-base">All</li>
+            <li className="mr-8 cursor-pointer text-base" onClick={() => filterByCareerType('all')}>All</li>
             {careers && careers?.map((career, index) => (
               <>
-                {index < careers?.length - 1 && <li className="mr-8 cursor-pointer capitalize" key={index}>{career?.name}</li>}
-                {index + 1 === careers?.length && <li className="cursor-pointer capitalize">{career?.name}</li>}
+                <li className="mr-5 cursor-pointer capitalize" key={index} onClick={() => filterByCareerType(career._id)}>{career?.name}</li>
+                {/* {index + 1 === careers?.length && <li className="cursor-pointer capitalize">{career?.name}</li>} */}
               </>
             ))}
             {/* <li className="mr-8 cursor-pointer">Product Design</li>
