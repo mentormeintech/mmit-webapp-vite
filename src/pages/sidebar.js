@@ -27,7 +27,7 @@ const Sidebar = () => {
             className=" flex flex-row items-center gap-2 py-1 active:text-blue-500"
           >
             <GoHomeFill />
-            Home
+            Home 
           </Link>
           <Link
             to="/booking"
