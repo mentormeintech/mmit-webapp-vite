@@ -13,6 +13,9 @@
     "mmit:dev": "git push -u dev main"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.2",
     "aos": "^2.3.4",
     "axios": "^1.6.2",
     "framer-motion": "^10.16.5",
@@ -29,7 +32,6 @@
     "reactstrap": "^9.2.1",
     "redux-persist": "^6.0.0",
     "reduxjs-toolkit-persist": "^7.2.1",
-    "styled-components": "^6.1.1",
     "typeface-inter": "^3.18.1",
     "typeface-nunito": "^1.1.13"
   },

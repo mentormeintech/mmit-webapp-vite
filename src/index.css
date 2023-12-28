@@ -1,3 +1,7 @@
+:root {
+  --primary: #0e88d8;
+  --secondary: #eb9572;
+}
 
 a {
   text-decoration: none;
@@ -6,6 +10,7 @@ a {
 li {
   list-style: none;
 }
+
 
 @media (prefers-color-scheme: light) {
   :root {

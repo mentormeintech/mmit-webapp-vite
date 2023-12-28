@@ -12,22 +12,28 @@ const ProfileCard = ({
 }) => {
   return (
 
-    <div className=" flex sm:h-[435px] sm:w-[19rem] w-[90%] flex-col sm:ml-0 whitespace-nowrap rounded-b-[0.5rem] rounded-t-[2rem] border">
+    <div className="flex sm:h-[435px] sm:w-[19rem] w-[90%] flex-col sm:ml-0 whitespace-nowrap rounded-b-[0.5rem] rounded-t-[2rem] border bg-red">
       <div className="h-56">
-        <img
+        {image ? <img
           className="rounded-md"
           src={image}
           width={1000}
           height={200}
           alt="mentor-dp"
-        />
+        /> : <img
+          className="rounded-md"
+          src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3f0j-Ox8s4hYDLrs9CN2EP9QqPGTxyvkpshO4_iza3Q&s'}
+          width={1000}
+          height={200}
+          alt="mentor-dp"
+        />}
       </div>
       <div className="flex mt-[4.5rem] xs:mt-[6.5rem] sm:mt-10 flex-col">
-        <p className="ml-4 mt-4 sm:mt-2 text-xl font-semibold">{name}</p>
+        <p className="capitalize ml-4 mt-4 sm:mt-2 text-xl font-semibold">{name}</p>
         <div className="mt-2 ml-14 flex flex-col">
           <div className=" -ml-10 flex flex-row items-center text-sm ">
             <BsFillClipboard2MinusFill />
-            <span className="ml-2">{role}</span>
+            <span className="ml-2 capitalize">{role}</span>
           </div>
           <div className="-ml-10 mt-2 flex flex-row items-center text-sm">
             <BsFillPersonFill />
@@ -42,7 +48,7 @@ const ProfileCard = ({
           <p className="text-xs font-medium text-neutral-700 text-opacity-70">
             Experience
           </p>
-          <p className="text-xs font-semibold">{experience}</p>
+          <p className="text-xs font-semibold capitalize">{`${experience} years`}</p>
         </div>
         <div>
           <p className="text-xs font-medium text-neutral-700 text-opacity-70">
