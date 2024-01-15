@@ -23,6 +23,7 @@ export default function Career() {
             setloading(true);
             // await setToken()
             const response = await userGetRequest(`careers`)
+            console.log('response',response)
             if (response && response.success === true) {
                 dispatch(careerData(response.data))
                 setcareers(response.data)
@@ -79,7 +80,7 @@ export default function Career() {
             {loading ? <Spinner /> : <>
                 <div>
                     {/* <SignupHeader /> */}
-                    <CareerPath careers={careers} setcareerPath={setcareerPath} careerPath={careerPath} createCareer={createCareer} loading={careerLoading} />
+                    {/* <CareerPath careers={careers} setcareerPath={setcareerPath} careerPath={careerPath} createCareer={createCareer} loading={careerLoading} /> */}
                 </div>
                 <Footer />
             </>}

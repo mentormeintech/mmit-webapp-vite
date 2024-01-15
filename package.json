@@ -32,6 +32,7 @@
     "reactstrap": "^9.2.1",
     "redux-persist": "^6.0.0",
     "reduxjs-toolkit-persist": "^7.2.1",
+    "styled-components": "^6.1.8",
     "typeface-inter": "^3.18.1",
     "typeface-nunito": "^1.1.13"
   },
@@ -47,5 +48,8 @@
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.5",
     "vite": "^4.4.5"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   }
 }
