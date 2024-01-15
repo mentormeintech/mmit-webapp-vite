@@ -3,7 +3,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import { Container, Title, View, ButtonView, Button, LinkButton, CheckBoxView } from '../styled/component';
-import Loader from './Loader';
+import Loader from './loader';
 
 export default function CareerPath(props) {
     const { careers, setcareerPath,careerPath, createCareer, loading } = props
