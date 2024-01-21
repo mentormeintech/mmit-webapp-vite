@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export default function SignupHeader() {
 	return (
-		<div className="flex flex-row items-center relative">
+		<div data-aos="fade-down" className="relative flex flex-row items-center">
 			<div className="absolute flex items-center left-20">
 				<Link to="/">
 					<img

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import "aos/dist/aos.css";
+import { useState, useEffect } from 'react'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
@@ -10,9 +11,17 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import router from './routes/route';
+import AOS from "aos";
+
 
 function App() {
   const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+    });
+  }, []);
 
   return (
     <Provider store={store}>

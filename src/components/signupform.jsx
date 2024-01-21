@@ -65,13 +65,14 @@ const SignupForm = (props) => {
 
   // #0F88D
   return (
-    <div className="flex smd:w-[500px] flex-col justify-center p-10 smd:relative smd:right-0 sm:flex sm:flex-col sm:justify-center lg:relative lg:right-8 xl:mx-auto">
-      <div className="text-base font-normal xl:w-full leading-relaxed text-neutral-700 smd:w-[90%] ">
+    <div data-aos='fade-left' className="flex smd:w-[500px] flex-col justify-center p-10 smd:relative smd:right-0 sm:flex sm:flex-col sm:justify-center lg:relative lg:right-8 xl:mx-auto">
+      <div data-aos='fade-left' className="text-base font-normal xl:w-full leading-relaxed text-neutral-700 smd:w-[90%] ">
         {`"Take the Leap and Join Our Transformative Mentorship Program,
       Where Passionate Individuals Connect, Learn, and Inspire Each
       Other Towards Personal and Professional Excellence."`}
       </div>
       <form
+        data-aos='fade-left'
         className="mt-5 flex w-[320px] md:w-[400px] flex-col justify-center text-base smd:ml-0"
         onSubmit={handleSubmit(registerUser)}
       >
@@ -153,18 +154,16 @@ const SignupForm = (props) => {
         <div className="mt-8 w-[320px]">
           <div className="flex flex-col">
             <button
-              className={`inline-flex h-14 items-center justify-center whitespace-nowrap rounded-2xl bg-sky-600 py-3.5 text-xl font-bold text-white smd:px-52 ${
-                loading === true ? "cursor-not-allowed" : "cursor-pointer"
-              }`}
+              className={`inline-flex h-14 items-center justify-center whitespace-nowrap rounded-2xl bg-sky-600 py-3.5 text-xl font-bold text-white smd:px-52 ${loading === true ? "cursor-not-allowed" : "cursor-pointer"
+                }`}
               disabled={loading === true ? true : false}
             >
               {loading ? <Loader /> : "Sign Up"}
             </button>
             {message && (
               <span
-                className={`text-xs ${
-                  success === false ? "text-red-500" : "text-cyan-500"
-                } mt-3`}
+                className={`text-xs ${success === false ? "text-red-500" : "text-cyan-500"
+                  } mt-3`}
               >
                 {message}
               </span>

@@ -92,7 +92,7 @@ export default function LoginForm() {
     }
   }
   return (
-    <div className="relative -top-10 p-20">
+    <div data-aos='fade-left' className="relative -top-10 p-20">
       <h1 className="mb-2 smd:text-4xl text-2xl font-semibold">Login into your Account</h1>
       <small className="text-base font-normal text-zinc-800 text-opacity-40">
         {'To enjoy all of our cool features'}

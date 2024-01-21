@@ -42,7 +42,7 @@ const SocialMediaLinks = () => {
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col gap-10 bg-secondary-200 px-10 py-10 text-sm sm:px-20">
+    <footer data-aos="zoom-in-up" className="flex flex-col gap-10 bg-secondary-200 px-10 py-10 text-sm sm:px-20">
       <div className="container mx-auto flex flex-col gap-6 md:flex-row md:justify-between">
         <div className="">
           <img

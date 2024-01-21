@@ -8,7 +8,7 @@ const MenteeSignup = () => {
       <div className="w-full overflow-hidden">
         <SignupHeader />
         <div className="flex lg:flex-row flex-col items-center justify-evenly">
-          <div className="lg:block hidden">
+          <div data-aos="fade-right" className="lg:block hidden">
             <div className="relative -top-20 left-20 flex flex-col">
               <h1 className="w-[49rem] text-5xl font-semibold  text-black">
                 {'Mentee'} <span className="text-orange-400">&</span> Experienced
