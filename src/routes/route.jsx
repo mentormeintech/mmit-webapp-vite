@@ -11,6 +11,7 @@ import MentorBooking from '../pages/mentorsBooking';
 import MentorSettings from '../pages/mentorsSettings';
 import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
+import Mentorregister from '../pages/auth/mentorregist';
 
 
 
@@ -69,10 +70,10 @@ const router = createBrowserRouter([
 		path: '/auth/career',
 		element: <Career />,
 	},
-	// {
-	// 	path: '/dashboard',
-	// 	element: <Home/>,
-	// },
+	{
+		path: '/mentorregist',
+		element: <Mentorregister/>,
+	},
 	// {
 	// 	path: '/call',
 	// 	element: <CallScreen/>,

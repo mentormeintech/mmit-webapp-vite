@@ -1,6 +1,5 @@
 import FindAMentor from "../pages/findamentor";
 import { MdEmail } from "react-icons/md";
-import Link from "next/link";
 
 const Singupconfirm = () => {
 	return (
@@ -15,7 +14,7 @@ const Singupconfirm = () => {
 					begin mentoring.
 				</p>
 			</div>
-			<Link href={"/auth/signin"}>
+			<a href={"/auth/signin"}>
 				<button
 					type="button"
 					className="w-32 h-12 -mt-16 cursor-pointer bg-blue-500 px-5 py-3 rounded shadow items-center mx-auto flex flex-col ">
@@ -23,7 +22,7 @@ const Singupconfirm = () => {
 						Back to Login
 					</div>
 				</button>
-			</Link>
+			</a>
 		</div>
 	);
 };

@@ -1,4 +1,4 @@
-import Image from "next/image"
+
 
 function MentorHome({Mentor}) {
 
@@ -29,12 +29,12 @@ function MentorHome({Mentor}) {
             <div className="flex items-center">
               {
                 arr.map((x, index) => {
-                  return <Image src="/images/icons/star-fill.png" alt="" width={40} height={40} key={index}/>
+                  return <img src="/images/icons/star-fill.png" alt="" width={40} height={40} key={index}/>
                 })
               }
               {
                 rem.map((x, index) => {
-                  return <Image src="/images/icons/star-light.png" alt="" width={40} height={40} key={index}/>
+                  return <img src="/images/icons/star-light.png" alt="" width={40} height={40} key={index}/>
                 })
               }
             </div>

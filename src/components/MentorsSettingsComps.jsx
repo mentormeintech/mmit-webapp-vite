@@ -1,67 +1,17 @@
 import { BsEyeSlash } from "react-icons/bs"
 import { FaToggleOn } from "react-icons/fa"
+import Personalinfo from "./personalinfo"
 
 function MentorsSettingsComps(props) {
   const { mentorship, dashboard } = props
   console.log('mentorship', mentorship)
+  console.log('mentorship dashboard', dashboard)
   if (mentorship && mentorship?.personalInfo) {
-    return <>
-      <form className="w-9/12">
-        <section className="w-6/12">
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>Full Name</p>
-              <label htmlFor="full-name" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" id="full-name" placeholder="John Doe" className="w-full outline-none" />
-          </div>
-
-          <div className="mb-8">
-            <label className="block mb-3">Gender</label>
-            <select className="bg-transparent outline-none w-40" defaultValue={'Male'}>
-              <option></option>
-              <option>Male</option>
-              <option>Female</option>
-            </select>
-          </div>
-
-          <div className="mb-8">
-            <label className="block mb-3">Country</label>
-            <input type="text" id="" placeholder="NG NIGERIA" className="outline-none" />
-          </div>
-
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>Phone Numbersss</p>
-              <label htmlFor="phone-number" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" id="phone-number" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343]" defaultValue={dashboard?.mobile || ''} />
-          </div>
-        </section>
-
-        <div className=" mb-8">
-          <div className="flex justify-between items-center mb-3">
-            <p>About</p>
-            <label htmlFor="about" className="cursor-pointer">Edit</label>
-          </div>
-          <textarea id="about" className="outline-none h-56 bg-[#FDF8F8] resize-none w-full py-2 px-4" defaultValue={dashboard?.about_me || ''}></textarea>
-        </div>
-
-        <button className="bg-[#FE9B7E] rounded-md w-96 h-11 text-white">save</button>
-      </form>
-    </>
+    return <Personalinfo dashboard={dashboard} />
   }
 
   else if (mentorship && mentorship?.login) {
     return <section className="w-[500px]">
-      {/* <div className="mb-6">
-        <div className="flex items-center justify-between">
-          <p>Email Address</p>
-          <label htmlFor="email" className="text-[#0F88D9]">Change email address</label>
-        </div>
-        <input type="text" readOnly={true} id="email" className="w-full border outline-none h-10 rounded-md" />
-      </div> */}
-
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <p>Change Password</p>
@@ -96,7 +46,7 @@ function MentorsSettingsComps(props) {
     </section>
   }
 
-  else {
+  else if (mentorship && mentorship?.profile) {
     return <>
       <form>
         <section className="w-72">
