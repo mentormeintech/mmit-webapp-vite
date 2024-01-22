@@ -1,5 +1,6 @@
 import React from "react";
 import { BsFillPersonFill, BsFillClipboard2MinusFill } from "react-icons/bs";
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ProfileCard = ({
   name,
@@ -10,9 +11,12 @@ const ProfileCard = ({
   attendance,
   image,
 }) => {
+
+  const navigate = useNavigate()
+
   return (
 
-    <div className="flex sm:h-[435px] sm:w-[19rem] w-[90%] flex-col sm:ml-0 whitespace-nowrap rounded-b-[0.5rem] rounded-t-[2rem] border bg-red">
+    <div className="flex sm:h-[435px] sm:w-[19rem] w-[90%] flex-col sm:ml-0 whitespace-nowrap rounded-b-[0.5rem] rounded-t-[2rem] border bg-red" onClick={() => navigate(`/profile/${name}`)}>
       <div className="h-56">
         {image ? <img
           className="rounded-md"

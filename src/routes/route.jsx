@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import MentorLogin from '../pages/auth/signin';
 import MenteeSignUp from '../pages/auth/menteesignup';
 import MentorSignUp from '../pages/auth/mentorsignup';
+import MentorProfile from '../pages/auth/mentorProfile';
 import Home from '../pages/index';
 import FindAMentor from '../pages/findamentor';
 import BookASession from '../pages/bookasession';
@@ -74,10 +75,10 @@ const router = createBrowserRouter([
 		path: '/mentorregist',
 		element: <Mentorregister/>,
 	},
-	// {
-	// 	path: '/call',
-	// 	element: <CallScreen/>,
-	// },
+	{
+		path: '/profile/:mentor_name',
+		element: <MentorProfile/>,
+	},
 	// {
 	// 	path: '*',
 	// 	element: <NotFound/>,
