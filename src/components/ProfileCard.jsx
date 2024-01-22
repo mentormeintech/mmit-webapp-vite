@@ -16,7 +16,7 @@ const ProfileCard = ({
 
   return (
 
-    <div className="flex sm:h-[435px] sm:w-[19rem] w-[90%] flex-col sm:ml-0 whitespace-nowrap rounded-b-[0.5rem] rounded-t-[2rem] border bg-red" onClick={() => navigate(`/profile/${name}`)}>
+    <div className="flex sm:h-[435px] sm:w-[19rem] w-[90%] flex-col sm:ml-0 whitespace-nowrap rounded-b-[0.5rem] rounded-t-[2rem] border bg-red cursor-pointer" onClick={() => navigate(`/profile/${name}`)}>
       <div className="h-56">
         {image ? <img
           className="rounded-md"
