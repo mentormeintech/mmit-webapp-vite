@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import SignupHeader from "../../components/SignupHeader";
+import SignupHeader from "../../components/signupheader";
 import Footer from "../../components/footer";
 import { useDispatch } from "react-redux";
 import CareerPath from '../../components/CareerPath';
