@@ -55,7 +55,7 @@ export const NewsletterSection = () => {
             <p className="md:w-[35%] md:font-bold md:text-xl text-[#0F88D9]">
               Subscribe to our Newsletter
             </p>
-            <div className="flex flex-col md:flex-row bg-secondary-200 md:p-4 md:w-[65%]">
+            <div className="flex flex-col md:flex-row bg-secondary-200 md:p-2 md:w-[85%]">
               <input
                 type="email"
                 name="email"
