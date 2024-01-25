@@ -133,11 +133,8 @@ const FindAMentor = () => {
 			setloading();
 		}
 	};
-	//console.log(searchTerm)
-	console.log(mentorData.docs);
 	async function filterByCareerType(career_id) {
 		try {
-			console.log("Career id", career_id);
 			setloading(true);
 			const response = await userGetRequest(
 				`mentors?page=${pageQuery.page}&limit=${pageQuery.limit}`
@@ -172,11 +169,11 @@ const FindAMentor = () => {
 				<div className="justify-center overflow-hidden m-auto w-[100%]">
 					<Header />
 
-					<div className="ml-[10px] sm:ml-[100px] mt-[100px] mb-[30px] font-medium text-[17px] sm:text-[20px]">
+					<div className="ml-[10px] sm:ml-[100px] mt-[100px] mb-[30px] font-bold text-[17px] sm:text-[20px]">
 						MENTORS
 					</div>
 					<div className="flex flex-row ml-[10px] mr-[10px] sm:mr-0  sm:ml-[100px] items-center">
-						<div className="relative z-10 w-[100%] mr-[10px] sm:mr-[40px] sm:w-[70%] flex items-center pl-[5px] border-x-2 border-b-2">
+						<div className="relative z-10 w-[100%] mr-[10px] sm:mr-[40px] sm:w-[70%] flex items-center pl-[5px] border-b-2">
 							<img
 								src="images/search-icon.svg"
 								className="absolute z-40 w-[25px] sm:w-8"
@@ -343,19 +340,6 @@ const FindAMentor = () => {
 										mentor?.years_of_experience || 0
 									}
 									attendance={mentor?.attendance || "97%"}
-									image={mentor.image}
-								/>
-							))}
-						{mentors &&
-							mentors?.map((mentor, index) => (
-								<ProfileCard
-									key={index}
-									name={mentor.name}
-									role={mentor.role}
-									sessions={mentor.sessions}
-									reviews={mentor.reviews}
-									experience={mentor.experience}
-									attendance={mentor.attendance}
 									image={mentor.image}
 								/>
 							))}
