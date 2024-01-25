@@ -82,7 +82,7 @@ export default function Footer() {
       </div>
 
       <p className="text-xs md:text-center">
-        © 2023 MentorMeInTech. All rights reserved
+        © 2024 MentorMeInTech. All rights reserved
       </p>
     </footer>
   );
