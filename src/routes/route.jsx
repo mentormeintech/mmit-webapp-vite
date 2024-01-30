@@ -13,6 +13,8 @@ import MentorSettings from '../pages/mentorsSettings';
 import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
 import Mentorregister from '../pages/auth/mentorregist';
+import Privacypolicy from '../pages/privacy-policy';
+import TermsUse from '../pages/terms-use';
 
 
 
@@ -73,11 +75,19 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/mentorregist',
-		element: <Mentorregister/>,
+		element: <Mentorregister />,
 	},
 	{
 		path: '/profile/:mentor_name',
-		element: <MentorProfile/>,
+		element: <MentorProfile />,
+	},
+	{
+		path: '/privacy-policy',
+		element: <Privacypolicy />,
+	},
+	{
+		path: '/terms-use',
+		element: <TermsUse />,
 	},
 	// {
 	// 	path: '*',

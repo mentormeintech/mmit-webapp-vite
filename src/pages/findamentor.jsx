@@ -168,7 +168,6 @@ const FindAMentor = () => {
 			) : (
 				<div className="justify-center overflow-hidden m-auto w-[100%]">
 					<Header />
-
 					<div className="ml-[10px] sm:ml-[100px] mt-[100px] mb-[30px] font-bold text-[17px] sm:text-[20px]">
 						MENTORS
 					</div>
