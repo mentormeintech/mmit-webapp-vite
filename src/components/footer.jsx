@@ -2,13 +2,23 @@ import React from 'react'
 import { FaLinkedinIn } from "react-icons/fa";
 import { SocialLink } from "../features/landingPage/HeroSection";
 import { RiInstagramFill, RiTwitterXFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import classNames from 'classnames';
 
-const FooterLink = ({ href, children }) => (
-  <Link to={href} className="transition-all hover:text-secondary-500" target='_blank'>
-    {children}
-  </Link>
-);
+const FooterLink = ({ href, children }) => {
+  const location = useLocation();
+  const currentRoute = location.pathname;
+  console.log('currentRoute',currentRoute)
+  const linkClasses = classNames('transition-all hover:text-secondary-500 cursor-pointer', {
+    'text-secondary-500': currentRoute === href
+  });
+  return (
+    // <Link to={href} className={`transition-all hover:text-secondary-500 cursor-pointer `} target='_blank'>
+    <Link to={href} className={linkClasses} target='_blank'>
+      {children}
+    </Link>
+  )
+};
 
 const SocialMediaLinks = () => {
   const socialLinks = [
@@ -41,6 +51,8 @@ const SocialMediaLinks = () => {
 };
 
 export default function Footer() {
+  const location = useLocation();
+  const currentRoute = location.pathname;
   return (
     <footer data-aos="zoom-in-up" className="flex flex-col gap-10 bg-secondary-200 px-10 py-10 text-sm sm:px-20">
       <div className="container mx-auto flex flex-col gap-6 md:flex-row md:justify-between">
@@ -66,17 +78,17 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col flex-wrap gap-6 sm:flex-row md:justify-end">
-            <FooterLink href="#">Join MMIT</FooterLink>
-            <FooterLink href="#faq">FAQ</FooterLink>
-            <FooterLink href="#">Help center</FooterLink>
-            <FooterLink href="#">Partnerships</FooterLink>
+            <FooterLink href="#" currentRoute={currentRoute}>Join MMIT</FooterLink>
+            <FooterLink href="#faq" currentRoute={currentRoute}>FAQ</FooterLink>
+            <FooterLink href="#" currentRoute={currentRoute}>Help center</FooterLink>
+            <FooterLink href="/partnership">Partnerships</FooterLink>
           </div>
 
           <div className="flex flex-col flex-wrap gap-6 sm:flex-row md:justify-end">
-            <FooterLink href="#">Contact us</FooterLink>
-            <FooterLink href="#">Privacy policy</FooterLink>
-            <FooterLink href="#">Terms of use</FooterLink>
-            <FooterLink href="#">Sitemap</FooterLink>
+            <FooterLink href="#" currentRoute={currentRoute}>Contact us</FooterLink>
+            <FooterLink href="/privacy-policy" currentRoute={currentRoute}>Privacy policy</FooterLink>
+            <FooterLink href="/terms-use" currentRoute={currentRoute}>Terms of use</FooterLink>
+            <FooterLink href="#" currentRoute={currentRoute}>Sitemap</FooterLink>
           </div>
         </div>
       </div>

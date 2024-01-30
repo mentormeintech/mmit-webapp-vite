@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
   --primary: #0e88d8;
+  --theme-blue: #0F88D9;
   --secondary: #eb9572;
+  --text-dark: #454545;
+  --Montserrat: "Montserrat", sans-serif
 }
 
+*{
+  font-family: "Montserrat", sans-serif;
+}
 a {
   text-decoration: none;
 }
