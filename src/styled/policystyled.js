@@ -26,6 +26,7 @@ export const PolicyText = styled.h5`
   color: var(--text-dark);
   font-family: var(--Montserrat);
   margin-bottom: 1em;
+  line-height: 1.7rem;
 `;
 
 export const PolicyHead = styled.h2`
