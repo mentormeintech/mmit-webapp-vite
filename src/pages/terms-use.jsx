@@ -1,9 +1,9 @@
 import React from 'react'
 import Header from "../components/Header";
 import Footer from "../components/footer";
-import { PolicyHead, PolicyText, PolicyTime, PolicyTitle, PolicyHeadTitle } from '../styled/policystyled';
+import { PolicyText, PolicyTime, PolicyTitle, PolicyHeadTitle } from '../styled/policystyled';
 import { formatDateWithOf } from '../utilities/util';
-import { policyData } from '../utilities/pageData.util';
+import { policyData, termsData } from '../utilities/pageData.util';
 
 export default function TermsUse() {
     return (
@@ -17,103 +17,123 @@ export default function TermsUse() {
                     </PolicyTitle>
                     <PolicyTime className='pt-[.5rem]'>{`Updated on ${formatDateWithOf(new Date('2023-01-30:13:44:00'))}`}</PolicyTime>
                 </div>
-                <div className='mt-[2rem]'>
+                <div className='mt-[4rem]'>
                     {/* Step 1 */}
                     <PolicyText>
-                        {policyData.policyintro}
+                        {termsData.termsintro}
                     </PolicyText>
                     {/* Step 2 */}
                     <>
-                        <PolicyHead>
-                            {policyData.infohead}
-                        </PolicyHead>
-                        <PolicyHeadTitle>
-                            {policyData.infoheadtitle}
+                        <PolicyHeadTitle className='mt-[2.6rem]'>
+                            {termsData.acceptterms}
                         </PolicyHeadTitle>
                         <PolicyText>
-                            {policyData.infoheadtitletext}
+                            {termsData.accepttermstext}
                         </PolicyText>
-                        <PolicyHeadTitle>
-                            {policyData.infoheadtitle2}
+                        <PolicyHeadTitle className='mt-[2.6rem]'>
+                            {termsData.privacy}
                         </PolicyHeadTitle>
                         <PolicyText>
-                            {policyData.infoheadtitletext2}
+                            {termsData.privacytext}
                         </PolicyText>
+                        <PolicyHeadTitle className='mt-[2.6rem]'>
+                            {termsData.account}
+                        </PolicyHeadTitle>
+                        <PolicyText>
+                            {termsData.accounttext}
+                        </PolicyText>
+
                     </>
                     {/* Step 3 */}
                     <>
-                        <PolicyHeadTitle>
-                            {policyData.useinfo}
-                        </PolicyHeadTitle>
-                        <PolicyHeadTitle>
-                            {policyData.providing}
+                        <PolicyHeadTitle className='mt-[2.6rem]'>
+                            {termsData.obligation}
                         </PolicyHeadTitle>
                         <PolicyText>
-                            {policyData.providingtext}
+                            {termsData.obligationtext}
                         </PolicyText>
-                        <PolicyHeadTitle>
-                            {policyData.communication}
+                        {termsData.obligationarray?.map((obligation, index) => (
+                            <PolicyText key={index}>
+                                {obligation}
+                            </PolicyText>
+                        ))}
+                        <PolicyHeadTitle className='mt-[2.6rem]'>
+                            {termsData.mentor}
                         </PolicyHeadTitle>
-                        <PolicyText>
-                            {policyData.communicationText}
-                        </PolicyText>
-                        <PolicyHeadTitle>
-                            {policyData.analytics}
+                        {termsData.mentorarray?.map((mentor, index) => (
+                            <PolicyText key={index}>
+                                {mentor}
+                            </PolicyText>
+                        ))}
+                        <PolicyHeadTitle className='mt-[2.6rem]'>
+                            {termsData.intellectual}
                         </PolicyHeadTitle>
-                        <PolicyText>
-                            {policyData.analyticstext}
-                        </PolicyText>
+                        {termsData.intellectualarray?.map((intellectual, index) => (
+                            <PolicyText key={index}>
+                                {intellectual}
+                            </PolicyText>
+                        ))}
+                        <PolicyHeadTitle className='mt-[2.6rem]'>
+                            {termsData.limitation}
+                        </PolicyHeadTitle>
+                        {termsData.limitationarray?.map((limitation, index) => (
+                            <PolicyText key={index}>
+                                {limitation}
+                            </PolicyText>
+                        ))}
                     </>
                     {/* Step 4 */}
                     <>
                         <PolicyHeadTitle>
-                            {policyData.datasecurity}
+                            {termsData.indentification}
                         </PolicyHeadTitle>
                         <PolicyText>
-                            {policyData.datasecuritytext}
+                            {termsData.indentificationtext}
                         </PolicyText>
                         <PolicyHeadTitle>
-                            {policyData.sharinginfo}
+                            {termsData.modification}
+                        </PolicyHeadTitle>
+                        {termsData.modificationarray?.map((modification, index) => (
+                            <PolicyText key={index}>
+                                {modification}
+                            </PolicyText>
+                        ))}
+                        <PolicyHeadTitle>
+                            {termsData.thirdparty}
                         </PolicyHeadTitle>
                         <PolicyText>
-                            {policyData.sharinginfotext}
-                        </PolicyText>
-                        <PolicyText>
-                            {policyData.sharinginfotext1}
+                            {termsData.thirdpartytext}
                         </PolicyText>
                     </>
                     {/* Step 5 */}
                     <>
                         <PolicyHeadTitle>
-                            {policyData.thirdparty}
+                            {termsData.governing}
                         </PolicyHeadTitle>
                         <PolicyText>
-                            {policyData.thirdpartytext}
+                            {termsData.governingtext}
                         </PolicyText>
                         <PolicyHeadTitle>
-                            {policyData.children}
+                            {termsData.severability}
                         </PolicyHeadTitle>
                         <PolicyText>
-                            {policyData.childrentext}
+                            {termsData.severabilitytext}
                         </PolicyText>
                         <PolicyHeadTitle>
-                            {policyData.changestopolicy}
+                            {termsData.entire}
                         </PolicyHeadTitle>
                         <PolicyText>
-                            {policyData.changestopolicytext}
+                            {termsData.entiretext}
                         </PolicyText>
-                    </>
-                    {/* Step 6 */}
-                    <>
                         <PolicyHeadTitle>
-                            {policyData.contact}
+                            {termsData.contact}
                         </PolicyHeadTitle>
                         <PolicyText>
-                            {policyData.contacttext}
+                            {termsData.contacttext}
                             <a href='mailto:mentormeintech.com@gmail.com' className='cursor-pointer text-secondary-500'>{" "}mentormeintech</a>
                         </PolicyText>
                         <PolicyText className='mt-[3rem]'>
-                            {policyData.agree}
+                            {termsData.using}
                         </PolicyText>
                     </>
                 </div>
