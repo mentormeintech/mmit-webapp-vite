@@ -15,6 +15,7 @@ import Career from '../pages/auth/career';
 import Mentorregister from '../pages/auth/mentorregist';
 import Privacypolicy from '../pages/privacy-policy';
 import TermsUse from '../pages/terms-use';
+import MenteeProfilePage from '../pages/menteeProfilePage';
 
 
 
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
 	{
 		path: '/findamentor',
 		element: <FindAMentor />,
+	},
+	{
+		path: '/menteeProfilePage',
+		element: <MenteeProfilePage />,
 	},
 	{
 		path: '/bookasession',
