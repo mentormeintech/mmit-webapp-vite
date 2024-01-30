@@ -9,7 +9,7 @@ export default function TermsUse() {
     return (
         <div className="justify-center overflow-hidden m-auto w-[100%]">
             <Header />
-            <div className=' m-auto w-[73%] mt-[7rem] mb-[3rem] p-1'>
+            <div data-aos="fade-down" data-aos-easing="linear"  data-aos-duration="1500" className=' m-auto w-[73%] mt-[7rem] mb-[3rem] p-1'>
                 <div className='bg-[#F6FAFDC9] w-[35%] p-4'>
                     {/* <div className='bg-[#F6FAFDC9]'> */}
                     <PolicyTitle>
