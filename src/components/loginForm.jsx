@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import {
@@ -12,7 +12,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import Alert from "../features/Alert";
 import { setToken } from "../utilities/axiosClient";
 import Loader from "./loader";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ export default function LoginForm() {
           if (response.data.user_type === "mentor") {
             if (response.data.step1 === false) {
               dispatch(
-                registeredUser({ token: response.token, user: response.data }),
+                registeredUser({ token: response.token, user: response.data })
               );
               setmessage("Registration not completed");
               Alert("Registration not completed", "warning");
@@ -54,7 +54,7 @@ export default function LoginForm() {
               return navigate("/mentorregist");
             }
             dispatch(
-              loggedInUser({ token: response.token, user: response.data }),
+              loggedInUser({ token: response.token, user: response.data })
             );
             setmessage(response.message);
             setsuccess(response.success);
@@ -65,7 +65,7 @@ export default function LoginForm() {
             }, 40);
           } else {
             dispatch(
-              loggedInUser({ token: response.token, user: response.data }),
+              loggedInUser({ token: response.token, user: response.data })
             );
             setmessage(response.message);
             setsuccess(response.success);
@@ -73,7 +73,8 @@ export default function LoginForm() {
             await setToken();
             return setTimeout(() => {
               setloading(false);
-              navigate("/findamentor");
+              // navigate("/findamentor");
+              navigate("/menteeProfilePage");
             }, 40);
           }
         } else {
@@ -92,10 +93,12 @@ export default function LoginForm() {
     }
   }
   return (
-    <div data-aos='fade-left' className="relative -top-10 p-20">
-      <h1 className="mb-2 smd:text-4xl text-2xl font-semibold">Login into your Account</h1>
+    <div data-aos="fade-left" className="relative -top-10 p-20">
+      <h1 className="mb-2 smd:text-4xl text-2xl font-semibold">
+        Login into your Account
+      </h1>
       <small className="text-base font-normal text-zinc-800 text-opacity-40">
-        {'To enjoy all of our cool features'}
+        {"To enjoy all of our cool features"}
       </small>
       <p className="smd:mt-8 mt-4 text-xl font-normal text-black">
         Log in as <span className="text-xl text-orange-300">*</span>
@@ -109,8 +112,9 @@ export default function LoginForm() {
             className="hidden"
           />
           <div
-            className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${type === "mentor" ? "border-[#0F88D9]" : "border-black"
-              }`}
+            className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${
+              type === "mentor" ? "border-[#0F88D9]" : "border-black"
+            }`}
             onClick={() => changeUser("mentor")}
           >
             {type === "mentor" && <AiOutlineCheck color="#0F88D9" />}
@@ -127,8 +131,9 @@ export default function LoginForm() {
             className="hidden"
           />
           <div
-            className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${type === "mentee" ? "border-[#0F88D9]" : "border-black"
-              }`}
+            className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${
+              type === "mentee" ? "border-[#0F88D9]" : "border-black"
+            }`}
             onClick={() => changeUser("mentee")}
           >
             {type === "mentee" && <AiOutlineCheck color="#0F88D9" />}
@@ -175,16 +180,18 @@ export default function LoginForm() {
         <div className=" mt-8">
           <div className="flex flex-col">
             <button
-              className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white smd:w-96 ${loading === true ? "cursor-not-allowed" : "cursor-pointer"
-                }`}
+              className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white smd:w-96 ${
+                loading === true ? "cursor-not-allowed" : "cursor-pointer"
+              }`}
               disabled={loading === true ? true : false}
             >
               {loading ? <Loader /> : "Login"}
             </button>
             {message && (
               <span
-                className={`text-xs ${success === false ? "text-red-500" : "text-cyan-500"
-                  } mt-3`}
+                className={`text-xs ${
+                  success === false ? "text-red-500" : "text-cyan-500"
+                } mt-3`}
               >
                 {message}
               </span>
@@ -205,6 +212,4 @@ export default function LoginForm() {
       </form>
     </div>
   );
-};
-
-
+}
