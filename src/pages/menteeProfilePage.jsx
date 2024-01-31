@@ -2,8 +2,14 @@ import React, { useState, useEffect } from "react";
 import ProfileCard from "../components/ProfileCard";
 import Header from "../components/Header";
 import Footer from "../components/footer";
+import DynamicParagraph from "../components/DynamicParagraph";
+import Alert from "../features/Alert";
+import { userGetRequest } from "../utilities/apiClient";
+import { Link } from "react-router-dom";
+
 
 const menteeProfilePage = () => {
+  const [loading, setloading] = useState(false);
   const [pageQuery, setpageQuery] = useState({ page: 1, limit: 20 });
   const [data, setdata] = useState({
     docs: [],
@@ -19,7 +25,9 @@ const menteeProfilePage = () => {
   });
 
   useEffect(() => {
+    console.log("ran1");
     getMentors();
+    console.log("ran2");
   }, [pageQuery]);
 
   async function getMentors() {
@@ -44,48 +52,40 @@ const menteeProfilePage = () => {
   const firstThreeMentors = data?.docs?.slice(0, 3);
 
   return (
-    <>
+    <div className="pt-20 mx-3">
       <Header />
       <h2>Welcome Ololade Martha</h2>
 
-      <div>
-        <div>
-          <span>1 of 3</span>
-          <span>Key Ingredient for achieving success</span>
-          <span>Two arrows</span>
-        </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, saepe
-          iste ipsa incidunt eaque nesciunt unde dolor dignissimos dolores
-          quidem laboriosam laborum ducimus repellat architecto modi aspernatur
-          iure illo quos.
-        </p>
-      </div>
+      <DynamicParagraph />
 
-      <div>
-        <h3>Mentors to meet</h3>
-        <ProfileCard />
-        {firstThreeMentors &&
-          firstThreeMentors?.map((mentor, index) => (
-            <ProfileCard
-              key={index}
-              name={`${mentor?.first_name?.toLowerCase()} ${mentor?.last_name?.toLowerCase()}`}
-              role={
-                mentor?.area_of_expertise &&
-                mentor?.area_of_expertise.length > 0
-                  ? mentor?.area_of_expertise[0]?.name
-                  : "NIL"
-              }
-              sessions={mentor.sessions || "0"} //sessions organised by the mentors
-              reviews={mentor.ratings && mentor.ratings?.length}
-              experience={mentor?.years_of_experience || 0}
-              attendance={mentor?.attendance || "97%"}
-              image={mentor.image}
-            />
-          ))}
+      <div className="pb-10">
+        <h3 className="my-5">Mentors to meet</h3>
+        <div className="flex gap-3">
+          {firstThreeMentors &&
+            firstThreeMentors.map((mentor, index) => (
+              <ProfileCard
+                key={index}
+                name={`${mentor?.first_name?.toLowerCase()} ${mentor?.last_name?.toLowerCase()}`}
+                role={
+                  mentor?.area_of_expertise &&
+                  mentor?.area_of_expertise.length > 0
+                    ? mentor?.area_of_expertise[0]?.name
+                    : "NIL"
+                }
+                sessions={mentor.sessions || "0"} //sessions organised by the mentors
+                reviews={mentor.ratings && mentor.ratings?.length}
+                experience={mentor?.years_of_experience || 0}
+                attendance={mentor?.attendance || "97%"}
+                image={mentor.image}
+              />
+            ))}
+        </div>
+        <div className="flex justify-center mt-5">
+            <Link to="/findamentor" className="p-4 rounded-lg text-white bg-[#0F88D9]">Browse more mentor</Link>
+        </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
