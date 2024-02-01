@@ -19,6 +19,8 @@ const MenteeSide = ({ Mentee }) => {
     navigate("/auth/signin");
   };
 
+  console.log("location", location)
+
   const nameIcon = `${Mentee?.first_name?.charAt(0)}${Mentee?.last_name?.charAt(
     0
   )}`;
@@ -47,9 +49,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/mentee"
+            to="/menteeProfilePage"
             className={`${
-              location.pathname == "/mentee" ? "text-[#0F88D9]" : ""
+              location.pathname == "/menteeProfilePage" ? "text-[#0F88D9]" : ""
             } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
@@ -63,7 +65,7 @@ const MenteeSide = ({ Mentee }) => {
           <Link
             to="/menteesBooking"
             className={`${
-              location.pathname == "/mentorsBooking" ? "text-[#0F88D9]" : ""
+              location.pathname == "/menteesBooking" ? "text-[#0F88D9]" : ""
             } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
@@ -75,9 +77,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/"
+            to="/menteeGroupSessions"
             className={`${
-              location.pathname == "/mentorsBooking" ? "text-[#0F88D9]" : ""
+              location.pathname == "/menteeGroupSessions" ? "text-[#0F88D9]" : ""
             } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
@@ -89,9 +91,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/mentorsSettings"
+            to="/menteesSettings"
             className={`${
-              location.pathname == "/mentorsSettings" ? "text-[#0F88D9]" : ""
+              location.pathname == "/menteesSettings" ? "text-[#0F88D9]" : ""
             } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
@@ -103,9 +105,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/mentorsSupport"
+            to="/menteesSupport"
             className={`${
-              location.pathname == "/mentorsSupport" ? "text-[#0F88D9]" : ""
+              location.pathname == "/menteesSupport" ? "text-[#0F88D9]" : ""
             } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">

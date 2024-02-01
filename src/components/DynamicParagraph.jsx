@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
 const DynamicParagraph = () => {
   const paragraphs = [
@@ -49,7 +50,7 @@ const DynamicParagraph = () => {
               )
             }
           >
-            {"<"}
+            <FaArrowLeft />
           </button>
           <button
             onClick={() =>
@@ -58,7 +59,7 @@ const DynamicParagraph = () => {
               )
             }
           >
-            {">"}
+            <FaArrowRight />
           </button>
         </span>
       </div>
