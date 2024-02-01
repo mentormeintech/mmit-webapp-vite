@@ -3,16 +3,16 @@ import React, { useState, useEffect } from "react";
 const DynamicParagraph = () => {
   const paragraphs = [
     {
-      heading: "Key Ingredient for achieving success",
-      text: "Goal Setting and Action Planning: Set clear and achievable goals for yourself with the guidance of your mentor. Break down your goals into actionable steps and create a plan to accomplish them. Regularly review your progress, make adjustments as needed, and celebrate milestones along the way.",
+      heading: "Key Ingredients for Achieving Success",
+      text: "Goal Setting and Action Planning: Set clear and achievable goals for yourself with the guidance of your mentor. Break down your goals into actionable steps and create a plan to accomplish them. Regularly review your progress, make adjustments as needed, and celebrate milestones along the way. Key Ingredients for Achieving Success",
     },
     {
       heading: "Heading 2",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, saepeiste ipsa incidunt eaque nesciunt unde dolor dignissimos doloresquidem laboriosam laborum ducimus repellat architecto modi aspernaturiure illo quos",
+      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, saepeiste ipsa incidunt eaque nesciunt unde dolor dignissimos doloresquidem laboriosam laborum ducimus repellat architecto modi aspernaturiure illo quos dfdignissimos doloresquidem laboriosam laborum ducimus repellat.",
     },
     {
       heading: "Heading 3",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, saepeiste ipsa incidunt eaque nesciunt unde dolor dignissimos doloresquidem laboriosam laborum ducimus repellat architecto modi aspernaturiure illo quos",
+      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, saepeiste ipsa incidunt eaque nesciunt unde dolor dignissimos doloresquidem laboriosam laborum ducimus repellat architecto modi aspernaturiure illo quos dfdignissimos doloresquidem laboriosam laborum ducimus repellat.",
     },
   ];
 
@@ -62,7 +62,7 @@ const DynamicParagraph = () => {
           </button>
         </span>
       </div>
-      <p className="p-2 bg-[#F1F9FF]">{paragraphs[sequence].text}</p>
+      <p className="p-2 px-3 bg-[#F1F9FF]">{paragraphs[sequence].text}</p>
     </div>
   );
 };

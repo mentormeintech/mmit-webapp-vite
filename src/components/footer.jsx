@@ -94,7 +94,7 @@ export default function Footer() {
       </div>
 
       <p className="text-xs md:text-center">
-        © 2024 MentorMeInTech. All rights reserved
+        © {new Date().getFullYear()} MentorMeInTech. All rights reserved
       </p>
     </footer>
   );
