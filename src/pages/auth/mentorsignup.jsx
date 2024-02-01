@@ -6,12 +6,12 @@ import Footer from "../../components/footer"
 const MenteeSignup = () => {
     return (
         <>
-            <div className="w-full flex flex-col">
+            <div className="w-[100%] flex flex-col">
                 <SignupHeader />
-                <div data-aos="fade-right" className="w-11/12 flex flex-row items-center self-center justify-center">
-                    <div>
-                        <div className="relative -top-40 flex flex-col justify-between">
-                            <h1 className="w-[33rem] text-4xl font-semibold text-black">
+                <div data-aos="fade-right" className="flex w-[100%] lg:flex-row flex-col items-center self-center justify-center">
+                    <div className="w-[85%] sm:ml-[20px]">
+                        <div className="relative lg:mt-0 mt-[30px] md:w-[410px] lg:-top-40 flex flex-col justify-between">
+                            <h1 className="md:w-[33rem] text-[25px] smd:text-4xl font-semibold text-black ">
                                 {'Mentor'} <span className="text-orange-400">&</span> Experienced
                                 Professionals
                             </h1>

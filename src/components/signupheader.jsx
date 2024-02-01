@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export default function SignupHeader() {
 	return (
-		<div data-aos="fade-down" className="relative flex flex-row items-center">
+		<div data-aos="fade-down" className="relative flex flex-row items-center w-[100%]">
 			<div className="absolute flex items-center left-20">
 				<Link to="/">
 					<img
@@ -18,9 +18,9 @@ export default function SignupHeader() {
 			<img
 				src="/images/background.png"
 				alt="Background"
-				width={2000}
+				
 				height={50}
-				className="h-40"
+				className="h-40 w-[100%]"
 			/>
 			<h1 className="absolute z-10 smd:text-4xl text-2xl font-semibold text-white ml-6 flex text-center left-1/2 transform -translate-x-1/2">
 				Join Us
