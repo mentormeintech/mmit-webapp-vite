@@ -14,6 +14,7 @@ import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
 import Mentorregister from '../pages/auth/mentorregist';
 import Privacypolicy from '../pages/privacy-policy';
+import MenteeProfilePage from '../pages/menteeProfilePage';
 import TermsUse from '../pages/terms-use';
 // import Schedule from '../pages/schedule';
 import Schedule from '../pages/schedule2';
