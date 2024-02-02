@@ -8,13 +8,13 @@ const override = {
 };
 
 export default function Loader(props) {
-    const { loading } = props
+    const { loading, loader_color } = props
     //   let [loading, setLoading] = useState(true);
     let [color, setColor] = useState("#ffffff");
 
     return (
         <PulseLoader
-            color={'#fff'}
+            color={loader_color || '#fff'}
             loading={loading}
             cssOverride={override}
             size={10}

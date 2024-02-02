@@ -4,6 +4,7 @@
   --theme-blue: #0F88D9;
   --secondary: #eb9572;
   --text-dark: #454545;
+  --smoke-white: #F5F5F5;
   --Montserrat: "Montserrat", sans-serif
 }
 
@@ -25,11 +26,11 @@ li {
     background-color: #ffffff;
   }
 
-  a:hover {
+  /* a:hover {
     color: #747bff;
   }
 
   button {
     background-color: #f9f9f9;
-  }
+  } */
 }

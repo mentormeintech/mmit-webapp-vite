@@ -8,6 +8,8 @@
     --Montserrat: 'Montserrat', sans-serif;
     --textDark: #454545;
     --theme_orange: #F89878;
+    --pale-yellow: #fffccc;
+    --light-gray: #F5F5F5;
     --white: #fff;
 }
 
@@ -21,5 +23,38 @@ body {
 * {
     box-sizing: border-box;
 }
+
+.rbc-header {
+    background: var(--theme-blue);
+    color: var(--white) !important;
+    font-weight: 500 !important;
+    padding: .5rem 0rem !important;
+    font-family: var(--Montserrat) !important;
+    border-radius: .3rem;
+}
+.rbc-day-bg {
+    /* background: var(--smoke-white); */
+    font-family: var(--Montserrat) !important;
+    border-radius: .3rem;
+}
+.rbc-today {
+    background: var(--pale-yellow) !important;
+    /* padding: .3rem 1rem; */
+    color: var(--white) !important;
+    font-family: var(--Montserrat) !important;
+    font-weight: 400 !important;
+}
+.rbc-button-link{
+    color: var(--textDark) !important;
+    font-family: var(--Montserrat) !important;
+    font-weight: 500 !important;
+}
+
+.rbc-event {
+    background: var(--theme_orange) !important;
+    font-family: var(--Montserrat) !important;
+    font-weight: 400 !important;
+}
+
 
 /* Your custom global styles can go here */

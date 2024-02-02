@@ -3,9 +3,9 @@ import React, { useState, useLayoutEffect } from 'react';
 import moment from "moment";
 import { Box, InputLabel, Input, Modal } from '@mui/material';
 import { useForm } from "react-hook-form";
-import Loader from '../components/loader';
+import Loader from './loader';
 import { FormHelperSPan, FormView, InputFormControl, InputView, ButtonOutline } from '../styled/component';
-import MessageAlert from '../components/MessageAlert';
+import MessageAlert from './MessageAlert';
 
 const style = {
     position: 'absolute',

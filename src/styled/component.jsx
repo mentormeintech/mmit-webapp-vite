@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 // import styled from 'styled-components';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import { Link } from 'react-router-dom';
+import { FormControlLabel, Button as MaterialButton, FormControl, FormHelperText } from '@mui/material';
 
 export const Container = styled.div`
   display: flex;
@@ -65,4 +65,48 @@ export const LinkButton = styled(Link)`
   font-weight: 500;
   padding: .6em 4em;
   border-radius: 5px;
+`;
+
+export const FormView = styled.form`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const InputView = styled.div`
+  width: 100%;
+  display: flex;
+  // justify-content: space-between;
+  margin: .4rem 0em;
+`;
+
+export const InputFormControl = styled(FormControl)`
+   width: 90%;
+`;
+
+export const FormHelperSPan = styled(FormHelperText)`
+color: red !important;
+`;
+
+// export const ButtonOutline = styled(MaterialButton)`
+//   width: 100% !important;
+//   padding: 0.2rem 4rem !important;
+//   border: .09rem solid #123B64 !important;
+//   color: #123B64 !important;
+//   text-transform: capitalize !important;
+//   font-size: 1.2em  !important;
+// `;
+export const ButtonOutline = styled.button`
+  width: 100% !important;
+  padding: 0.2rem 4rem !important;
+  border: .07rem solid #123B64 !important;
+  color: #123B64 !important;
+  text-transform: capitalize !important;
+  font-size: 1.2rem  !important;
+  font-family: var(--Montserrat);
+  font-weight: 500;
+  background: transparent;
+  border-radius: .2rem;
 `;
