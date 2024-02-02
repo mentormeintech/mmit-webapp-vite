@@ -15,6 +15,8 @@ import Career from '../pages/auth/career';
 import Mentorregister from '../pages/auth/mentorregist';
 import Privacypolicy from '../pages/privacy-policy';
 import TermsUse from '../pages/terms-use';
+// import Schedule from '../pages/schedule';
+import Schedule from '../pages/schedule2';
 
 
 
@@ -88,6 +90,10 @@ const router = createBrowserRouter([
 	{
 		path: '/terms-use',
 		element: <TermsUse />,
+	},
+	{
+		path: '/schedule',
+		element: <Schedule />,
 	},
 	// {
 	// 	path: '*',

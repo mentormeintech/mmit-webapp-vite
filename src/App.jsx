@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 import router from './routes/route';
 import AOS from "aos";
-
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 function App() {
   const [count, setCount] = useState(0)
