@@ -48,6 +48,10 @@ const router = createBrowserRouter([
 		element: <FindAMentor />,
 	},
 	{
+		path: '/menteeProfilePage',
+		element: <MenteeProfilePage />,
+	},
+	{
 		path: '/bookasession',
 		element: <BookASession />,
 	},
