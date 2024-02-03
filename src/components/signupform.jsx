@@ -65,7 +65,7 @@ const SignupForm = (props) => {
 
   // #0F88D
   return (
-    <div data-aos='fade-left' className="flex smd:w-[500px] flex-col justify-center p-10 smd:relative smd:right-0 sm:flex sm:flex-col sm:justify-center lg:relative lg:right-8 xl:mx-auto">
+    <div data-aos='fade-left' className="flex smd:w-[500px] flex-col justify-center pb-10 smd:relative smd:right-0 sm:flex sm:flex-col sm:justify-center lg:relative lg:right-8 xl:mx-auto">
       <div data-aos='fade-left' className="text-base font-normal xl:w-full leading-relaxed text-neutral-700 smd:w-[90%] ">
         {`"Take the Leap and Join Our Transformative Mentorship Program,
       Where Passionate Individuals Connect, Learn, and Inspire Each
