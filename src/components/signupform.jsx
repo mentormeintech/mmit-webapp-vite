@@ -73,43 +73,47 @@ const SignupForm = (props) => {
       </div>
       <form
         data-aos='fade-left'
-        className="mt-5 flex w-[320px] md:w-[400px] flex-col justify-center text-base smd:ml-0"
+        className="mt-5 flex w-9/12 md:w-[600px] flex-col justify-center text-base smd:ml-0"
         onSubmit={handleSubmit(registerUser)}
       >
-        <div className="mb-[1rem] flex flex-row items-center smd:w-full">
-          <div className="flex w-[30%] flex-col smd:w-[40%]">
-            <p className="xs:text-xl">First Name</p>
-            <input
-              className="inline-flex h-12 w-28 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none smd:w-full"
-              type="text"
-              placeholder="Ololade"
-              {...register("first_name", { required: true })}
-            />
-            {errors.first_name && (
-              <span className="mt-1 text-xs text-red-500">
-                This field is required
-              </span>
-            )}
-          </div>
-          <div className="ml-4 flex flex-col">
-            <p className="xs:text-xl ml-5 smd:ml-0">Last Name</p>
-            <input
-              className="inline-flex h-12 w-44 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 ml-5 smd:ml-0 pl-5 pt-1.5 outline-none smd:w-full"
-              type="text"
-              placeholder="Martha"
-              {...register("last_name", { required: true })}
-            />
-            {errors.last_name && (
-              <span className="mt-1 text-xs text-red-500">
-                This field is required
-              </span>
-            )}
-          </div>
+        {/* <form
+        data-aos='fade-left'
+        className="mt-5 flex w-9/12 md:w-[900px] flex-col justify-center text-base smd:ml-0"
+        onSubmit={handleSubmit(registerUser)}
+      > */}
+        <div className="flex flex-col w-9/12">
+          {/* <div className="flex flex-col smd:w-9/12"> */}
+          <p className="xs:text-xl">First Name</p>
+          <input
+            className="inline-flex h-12 w-28 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none smd:w-full"
+            type="text"
+            placeholder="Ololade"
+            {...register("first_name", { required: true })}
+          />
+          {errors.first_name && (
+            <span className="mt-1 text-xs text-red-500">
+              This field is required
+            </span>
+          )}
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col mt-3 mb-2 w-9/12">
+          <p className="xs:text-xl ml-5 smd:ml-0">Last Name</p>
+          <input
+            className="inline-flex h-12 w-44 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 ml-5 smd:ml-0 pl-5 pt-1.5 outline-none smd:w-full"
+            type="text"
+            placeholder="Martha"
+            {...register("last_name", { required: true })}
+          />
+          {errors.last_name && (
+            <span className="mt-1 text-xs text-red-500">
+              This field is required
+            </span>
+          )}
+        </div>
+        <div className="flex flex-col mt-2 mb-2 w-9/12">
           <p className="xs:text-xl">Email Address</p>
           <input
-            className="inline-flex h-12 w-80 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pr-12 pt-1.5 outline-none sm:w-96"
+            className="inline-flex h-12 w-44 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 ml-5 smd:ml-0 pl-5 pt-1.5 outline-none smd:w-full"
             type="email"
             name="email"
             placeholder="123456789@gmail.com"
@@ -121,10 +125,10 @@ const SignupForm = (props) => {
             </span>
           )}
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-9/12">
           <p className="mt-3 xs:text-xl">Password</p>
           <input
-            className="inline-flex h-12 w-80 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none sm:w-96"
+            className="inline-flex h-12 w-44 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 ml-5 smd:ml-0 pl-5 pt-1.5 outline-none smd:w-full"
             type="password"
             name="password"
             placeholder="********"
@@ -136,10 +140,10 @@ const SignupForm = (props) => {
             </span>
           )}
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-9/12">
           <p className="mt-3 xs:text-xl">Confirm Password</p>
           <input
-            className="inline-flex h-12 w-80 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none sm:w-96"
+            className="inline-flex h-12 w-44 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 ml-5 smd:ml-0 pl-5 pt-1.5 outline-none smd:w-full"
             type="password"
             name="repeat_password"
             placeholder="********"
@@ -152,7 +156,7 @@ const SignupForm = (props) => {
           )}
         </div>
         <div className="mt-8 w-[320px]">
-          <div className="flex flex-col">
+          <div className="flex flex-col w-9/12">
             <button
               className={`inline-flex h-14 items-center justify-center whitespace-nowrap rounded-2xl bg-sky-600 py-3.5 text-xl font-bold text-white smd:px-52 ${loading === true ? "cursor-not-allowed" : "cursor-pointer"
                 }`}

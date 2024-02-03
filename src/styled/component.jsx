@@ -90,14 +90,7 @@ export const FormHelperSPan = styled(FormHelperText)`
 color: red !important;
 `;
 
-// export const ButtonOutline = styled(MaterialButton)`
-//   width: 100% !important;
-//   padding: 0.2rem 4rem !important;
-//   border: .09rem solid #123B64 !important;
-//   color: #123B64 !important;
-//   text-transform: capitalize !important;
-//   font-size: 1.2em  !important;
-// `;
+
 export const ButtonOutline = styled.button`
   width: 100% !important;
   padding: 0.2rem 4rem !important;
