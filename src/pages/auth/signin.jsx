@@ -8,9 +8,9 @@ import LoginForm from '../../components/loginForm';
 const MentorLogin = () => {
   return (
     <>
-      <div className="overflow-hidden">
+      <div>
         <LoginHeader />
-        <div className="flex flex-col md:flex md:flex-row items-center justify-evenly">
+        <div className="flex flex-col md:flex md:flex-row justify-around mx-5 mt-[5rem] mb-[10rem]">
           <LoginSide />
           <LoginForm />
         </div>

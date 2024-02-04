@@ -92,8 +92,9 @@ export default function LoginForm() {
       setloading(false);
     }
   }
+
   return (
-    <div data-aos="fade-left" className="relative -top-10 p-20">
+    <div data-aos="fade-left" className="relative mb-5 lg:flex lg:flex-col">
       <h1 className="mb-2 smd:text-4xl text-2xl font-semibold">
         Login into your Account
       </h1>
@@ -112,9 +113,8 @@ export default function LoginForm() {
             className="hidden"
           />
           <div
-            className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${
-              type === "mentor" ? "border-[#0F88D9]" : "border-black"
-            }`}
+            className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${type === "mentor" ? "border-[#0F88D9]" : "border-black"
+              }`}
             onClick={() => changeUser("mentor")}
           >
             {type === "mentor" && <AiOutlineCheck color="#0F88D9" />}
@@ -131,9 +131,8 @@ export default function LoginForm() {
             className="hidden"
           />
           <div
-            className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${
-              type === "mentee" ? "border-[#0F88D9]" : "border-black"
-            }`}
+            className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${type === "mentee" ? "border-[#0F88D9]" : "border-black"
+              }`}
             onClick={() => changeUser("mentee")}
           >
             {type === "mentee" && <AiOutlineCheck color="#0F88D9" />}
@@ -143,11 +142,11 @@ export default function LoginForm() {
           </div>
         </label>
       </div>
-      <form className="mt-5 w-[320px]" onSubmit={handleSubmit(registerUser)}>
+      <form className="mt-5 w-11/12" onSubmit={handleSubmit(registerUser)}>
         <div className="flex flex-col">
           <p className="text-xl">Email Address</p>
           <input
-            className="inline-flex h-12 w-full items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none smd:w-96"
+            className="inline-flex items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none smd:w-96"
             type="email"
             name="email"
             placeholder="123456789@gmail.com"
@@ -177,28 +176,26 @@ export default function LoginForm() {
         <small className="text-15px mt-2 block cursor-pointer font-normal text-sky-600">
           Forgot password?
         </small>
-        <div className=" mt-8">
+        <div className="mt-8 w-full">
           <div className="flex flex-col">
             <button
-              className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white smd:w-96 ${
-                loading === true ? "cursor-not-allowed" : "cursor-pointer"
-              }`}
+              className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white smd:w-96 ${loading === true ? "cursor-not-allowed" : "cursor-pointer"
+                }`}
               disabled={loading === true ? true : false}
             >
               {loading ? <Loader /> : "Login"}
             </button>
             {message && (
               <span
-                className={`text-xs ${
-                  success === false ? "text-red-500" : "text-cyan-500"
-                } mt-3`}
+                className={`text-xs ${success === false ? "text-red-500" : "text-cyan-500"
+                  } mt-3`}
               >
                 {message}
               </span>
             )}
           </div>
-          <div className="ml-0 flex w-full items-center justify-center space-x-2 smd:ml-5 smd:w-96">
-            <div className="py-2 text-sm font-medium text-neutral-400">
+          <div className="ml-0 flex items-center justify-center">
+            <div className="py-2 text-sm font-medium text-neutral-400 mr-5">
               Don’t have an account?
             </div>
             <a
