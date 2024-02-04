@@ -8,10 +8,10 @@ const MenteeSignup = () => {
         <>
             <div className="w-full flex flex-col">
                 <SignupHeader />
-                <div data-aos="fade-right" className="mt-[5rem] w-11/12 flex flex-row self-center justify-center">
-                    <div className="ml-[5.5rem]"> 
+                <div data-aos="fade-right" className="mt-[5rem] w-11/12 overflow-x-hidden items-center sm:items-start flex flex-col sm:flex-row self-center justify-between lg:justify-center">
+                    <div className="lg:ml-[5.5rem]"> 
                         <div className="relative flex flex-col justify-between">
-                            <h1 className="w-[33rem] text-4xl font-semibold text-black">
+                            <h1 className="lg:w-[33rem] smd:w-[460px] sm:w-[min-content]  md:w-[25rem] text-3xl md:text-4xl font-semibold text-black">
                                 {'Mentor'} <span className="text-orange-400">&</span> Experienced
                                 Professionals
                             </h1>
