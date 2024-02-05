@@ -16,7 +16,7 @@ const MenteeSignup = () => {
                                 Professionals
                             </h1>
                             <img
-                                className="mt-8 w-1/2"
+                                className="mt-8 w-2/3"
                                 src={image}
                                 width={1000}
                                 height={50}
