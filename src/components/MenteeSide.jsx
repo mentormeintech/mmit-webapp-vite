@@ -10,38 +10,17 @@ import { useDispatch, useSelector } from "react-redux";
 const MenteeSide = ({ Mentee }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { dashboard } = useSelector((state) => state.mentor_me_user);
+//   const { dashboard } = useSelector((state) => state.mentor_me_user);
   const location = useLocation();
-  Mentee = !dashboard ? Mentee : dashboard;
+//   Mentee = !dashboard ? Mentee : dashboard;
   const logOut = () => {
     logUserOut();
     dispatch(logOutUser({ token: "", user: {} }));
     navigate("/auth/signin");
   };
 
-  console.log("location", location)
-
-  const nameIcon = `${Mentee?.first_name?.charAt(0)}${Mentee?.last_name?.charAt(
-    0
-  )}`;
   return (
     <aside className="w-fit px-10 lg:w-3/12 pt-8 border-r flex justify-center min-h-[calc(100vh-144px)]">
-      {/* {Mentee?.image && Mentee?.image?.link ? (
-        <img
-          src="/images/mentorPic.png"
-          alt=""
-          width={40}
-          height={40}
-          className="h-[40px] w-[40px] mr-10 mt-2"
-        />
-      ) : (
-        <div
-          width={40}
-          height={40}
-          className="flex justify-center items-center font-bold h-[40px] w-[40px] mr-1.5 p-2 bg-[#e3e3e3] rounded-full"
-        >{`${nameIcon}`}</div>
-      )} */}
-
       <ul>
         <li className="mb-12 text-lg font-semibold">
           {Mentee?.first_name} {Mentee?.last_name}
@@ -79,7 +58,9 @@ const MenteeSide = ({ Mentee }) => {
           <Link
             to="/menteeGroupSessions"
             className={`${
-              location.pathname == "/menteeGroupSessions" ? "text-[#0F88D9]" : ""
+              location.pathname == "/menteeGroupSessions"
+                ? "text-[#0F88D9]"
+                : ""
             } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
@@ -118,12 +99,12 @@ const MenteeSide = ({ Mentee }) => {
         </li>
 
         <li className="mb-5" onClick={logOut}>
-          <Link to="" className="flex items-center hover:text-[#0F88D9]">
+          <div to="" className="flex items-center hover:text-[#0F88D9]">
             <i className="mr-2 text-xl">
               <HiOutlineLogout />
             </i>
             Logout
-          </Link>
+          </div>
         </li>
       </ul>
     </aside>
