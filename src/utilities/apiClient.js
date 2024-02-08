@@ -1,9 +1,7 @@
 import { setToken, useAxios } from "./axiosClient";
 import { accessToken, getValidToken } from "./tokenClient";
 
-
 setToken(getValidToken())
-
 export const signInUser = async (url, formData) => {
     try {
         const response = await useAxios.post(`/${url}`, formData);
@@ -13,6 +11,7 @@ export const signInUser = async (url, formData) => {
         } else if (status === 200 && data.success === true) {
             sessionStorage.setItem(`${accessToken}`, data.token)
             localStorage.setItem(`${accessToken}`, data.token)
+            await setToken(data.token)
             return { data: data.payload, status, success: data.success, message: data?.message, token: data.token };
         }
     } catch (error) {

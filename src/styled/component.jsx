@@ -75,11 +75,38 @@ export const FormView = styled.form`
   flex-direction: column;
 `;
 
+export const ColorView = styled.div`
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  margin: .4rem 0em;
+`;
 export const InputView = styled.div`
   width: 100%;
   display: flex;
   // justify-content: space-between;
   margin: .4rem 0em;
+`;
+
+export const ColourInput = styled.input`
+  margin-top: 3rem;
+  width: 4rem;
+  height: 4rem
+  border: none;
+  display: flex;
+  cursor: pointer;
+`;
+
+export const Colour = styled.div`
+  margin-top: 3rem;
+  width: 4rem;
+  height: 4rem
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  cursor: pointer;
+  background-color: ${props => props.color ? props.color : 'var(--theme_orange)'};
 `;
 
 export const InputFormControl = styled(FormControl)`
@@ -102,4 +129,14 @@ export const ButtonOutline = styled.button`
   font-weight: 500;
   background: transparent;
   border-radius: .2rem;
+`;
+export const ScheduleView = styled.div`
+  color: white;
+  padding: .5rem;
+  // height: 100%;
+  display: flex;
+  cursor: pointer;
+  justify-content: flex-start;
+  // align-items: center;
+  background: ${props => props.bg ? `${props.bg} !important` : 'var(--theme_orange) !important'};
 `;

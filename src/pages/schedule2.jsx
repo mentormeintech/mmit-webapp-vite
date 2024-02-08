@@ -4,8 +4,9 @@ import moment from "moment";
 import { Box, InputLabel, Input, Modal } from '@mui/material';
 import { useForm } from "react-hook-form";
 import Loader from '../components/loader';
-import { FormHelperSPan, FormView, InputFormControl, InputView, ButtonOutline } from '../styled/component';
+import { FormHelperSPan, FormView, InputFormControl, InputView, ColorView, ColourInput, Colour, ButtonOutline, ScheduleView } from '../styled/component';
 import MessageAlert from '../components/MessageAlert';
+import { eventColors } from '../utilities/pageData.util';
 
 const style = {
     position: 'absolute',
@@ -25,6 +26,7 @@ const defaultState = {
     title: '',
     start: new Date(),
     end: new Date(),
+    bg: '',
 }
 function Schedule2(props) {
     const {
@@ -36,6 +38,7 @@ function Schedule2(props) {
     const localizer = momentLocalizer(moment);
     const [myEvents, setEvents] = useState([])
     const [open, setOpen] = useState(false);
+    const [bgColor, setbgColor] = useState('#000')
     const [title, setTitle] = useState('');
     const [start, setStart] = useState(new Date());
     const [end, setEnd] = useState(new Date());
@@ -44,13 +47,14 @@ function Schedule2(props) {
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    
+
     const events = [
         {
             id: 1,
             start: moment("2024-02-18T10:00:00").toDate(),
             end: moment("2024-02-18T11:00:00").toDate(),
             title: "MRI Registration",
+            bg: selectRandomColor(),
             data: {
                 type: "Reg",
             },
@@ -59,7 +63,8 @@ function Schedule2(props) {
             id: 2,
             start: new Date('2024-02-02:14:00'),
             end: new Date('2024-02-02:15:00'),
-            title: "ENT Appointment",
+            title: "ENT Appointment With Doscotr Sas",
+            bg: selectRandomColor(),
             data: {
                 type: "App",
             },
@@ -82,28 +87,44 @@ function Schedule2(props) {
     const components = {
         event: (props) => {
             const eventType = props?.event?.data?.type;
-            switch (eventType) {
-                case "Reg":
-                    return (
-                        <div style={{ color: "white", display: 'flex', padding: '.5rem', justifyContent: 'flex-start', alignItems: 'center', height: "100%" }}>
-                            {props.title}
-                        </div>
-                    );
-                case "App":
-                    return (
-                        <>
-                            <div
-                                style={{ color: "white", padding: '.5rem', height: "100%", display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}
-                            >
-                                {props.title}
-                            </div>
-                        </>
-                    );
-                default:
-                    return null;
-            }
+            const bg = props?.event?.bg;
+            return (
+                <ScheduleView className='ScheduleView' bg={bg}>
+                    {props.title.substring(0, 19 - 3) + '...' || 'No Title'}
+                    {/* {props.title} */}
+                </ScheduleView>
+            )
+            // switch (eventType) {
+            //     case "Reg":
+            //         return (
+            //             <ScheduleView className='ScheduleView bg-[#f3f4]' color={props.bg}>
+            //                 {props.title.substring(0, 19 - 3) + '...' || 'No Title'}
+            //                 {/* {props.title} */}
+            //             </ScheduleView>
+            //         );
+            //     case "App":
+            //         return (
+            //             <ScheduleView className='ScheduleView1 bg-[#f3f4]'>
+            //                 {/* {props.title} */}
+            //                 {props.title.substring(0, 19 - 3) + '...' || 'No Title'}
+            //             </ScheduleView>
+            //         );
+            //     default:
+            //         return (
+            //             <ScheduleView className='ScheduleView2 bg-[#f3f4]'>
+            //                 {props?.title.substring(0, 19 - 3) + '...' || 'No Title'}
+            //             </ScheduleView>
+            //         );
+            // }
         },
     };
+
+
+    function selectRandomColor() {
+        const randomIndex = Math.floor(Math.random() * eventColors.length);
+        console.log('randomIndex', randomIndex)
+        return eventColors[randomIndex];
+    }
 
     const handleSelectSlot = ({ start, end }) => {
         handleOpen()
@@ -111,36 +132,43 @@ function Schedule2(props) {
 
     const handleAddEvent = (data) => {
         try {
-            const { title, start, end } = data
-            if (title && start && end) {
-                setloading(true)
-                const newEvent = {
-                    id: myEvents.length + 1,
-                    title: title,
-                    start: new Date(start),
-                    end: new Date(end),
-                    mentee: [],
-                    data: {
-                        type: "",
-                    },
-                }
-                const updatedEvents = [...myEvents, newEvent];
-                setTimeout(() => {
-                    setloading(false)
-                }, 1200);
-                setmessageBox({ message: 'Event added', type: 'success' })
-                setTimeout(() => {
-                    handleClose()
-                    reset(defaultState);
-                }, 2000);
-                return setEvents(updatedEvents);
+            const { title, start, end, bg } = data
+            console.log('data', data)
+            if (new Date(start).getTime() > new Date(end).getTime()) {
+                setmessageBox({ message: "Start date can't be after end date", type: 'warning' })
             }
             else {
-                setTimeout(() => {
-                    setloading(false)
-                }, 1200);
-                clearMessage()
-                return alert('Some input are empty')
+                if (title && start && end) {
+                    setloading(true)
+                    const newEvent = {
+                        id: myEvents.length + 1,
+                        title: title,
+                        start: new Date(start),
+                        end: new Date(end),
+                        bg: bgColor ? bgColor : selectRandomColor(),
+                        mentee: [],
+                        data: {
+                            type: "",
+                        },
+                    }
+                    const updatedEvents = [...myEvents, newEvent];
+                    setTimeout(() => {
+                        setloading(false)
+                    }, 1200);
+                    setmessageBox({ message: 'Event added', type: 'success' })
+                    setTimeout(() => {
+                        handleClose()
+                        reset(defaultState);
+                    }, 2000);
+                    return setEvents(updatedEvents);
+                }
+                else {
+                    setTimeout(() => {
+                        setloading(false)
+                    }, 1200);
+                    clearMessage()
+                    return alert('Some input are empty')
+                }
             }
         } catch (error) {
             setmessageBox({ message: error.message, type: 'warning' })
@@ -151,7 +179,7 @@ function Schedule2(props) {
         finally {
             setTimeout(() => {
                 clearMessage()
-            }, 2000);
+            }, 5000);
         }
     }
 
@@ -170,7 +198,7 @@ function Schedule2(props) {
                 startAccessor="start"
                 endAccessor="end"
                 style={{ marginTop: '1rem', marginBottom: '2rem', width: '90%', }}
-                // components={components}
+                components={components}
                 selectable
                 popup
                 onSelectSlot={handleSelectSlot}
@@ -206,10 +234,39 @@ function Schedule2(props) {
                         <InputView>
                             <InputFormControl variant="standard">
                                 <InputLabel htmlFor="component-simple">End Date</InputLabel>
-                                <Input id="component-simple1" placeholder='End Date'  {...register("end", { required: true })} readOnly={loading ? true : false} type='datetime-local' />
+                                <Input id="component-simple1" placeholder='End Date' min={new Date('2023-11-12T13:00')}  {...register("end", { required: true })} readOnly={loading ? true : false} type='datetime-local' />
                                 {errors.end && (<FormHelperSPan id="component-error-text">{"End date field is required"}</FormHelperSPan>)}
                             </InputFormControl>
                         </InputView>
+                        <input type="number" id="quantity" name="quantity" max="30"/>
+                        <InputView>
+                            <InputFormControl variant="standard">
+                                <InputLabel htmlFor="component-simple">{'Duration'}</InputLabel>
+                                <Input id="component-duration" placeholder='Duration' max="10" type='number' {...register("duration", { required: true })} readOnly={loading ? true : false} />
+                                <input type="number" id="quantity" name="quantity" max="10"/>
+                                {errors.end && (<FormHelperSPan id="component-error-text">{"End date field is required"}</FormHelperSPan>)}
+                            </InputFormControl>
+                        </InputView>
+                        {/* <InputView>
+                            <InputFormControl variant="standard">
+                                <ColorView>
+                                    <InputLabel htmlFor="component-simple">{`Pick Background Color ${bgColor}`}</InputLabel>
+                                    {eventColors.map((color, index) => (
+                                        <>
+                                            <ColourInput id="component-bg" placeholder='Background Color'  {...register("bg", { required: true })} readOnly={loading ? true : false} value={color} name='bg' type='color' />
+                                            <div style={{
+                                                background: 'red',
+                                                width: '6rem',
+                                                height: '6rem',
+                                            }}>
+                                                <Colour key={index} color={color} />
+                                            </div>
+                                        </>
+                                    ))}
+                                </ColorView>
+                                {!bgColor && (<FormHelperSPan id="component-error-text">{"Background color field is required"}</FormHelperSPan>)}
+                            </InputFormControl>
+                        </InputView> */}
                         <InputView>
                             <div className="flex flex-col mt-5">
                                 <ButtonOutline
