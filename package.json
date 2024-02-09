@@ -13,6 +13,7 @@
     "mmit:dev": "git push -u dev main"
   },
   "dependencies": {
+    "@bitnoi.se/react-scheduler": "^0.1.4",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.6",

@@ -5,7 +5,7 @@ import { FaBars } from 'react-icons/fa'
 
 function Header_Signin() {
   return (
-    <nav className='bg-stone-200 h-36 w-full flex items-center pr-4 fixed top-0 left-0'>
+    <nav className='bg-stone-200 h-36 w-full flex items-center pr-4 fixed top-0 left-0 z-50'>
         <div>
 			<img
 				width={200}

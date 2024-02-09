@@ -70,7 +70,7 @@ export default function LoginForm() {
             setmessage(response.message);
             setsuccess(response.success);
             Alert(response.message, "success");
-            await setToken();
+            await setToken(response.token);
             return setTimeout(() => {
               setloading(false);
               // navigate("/findamentor");

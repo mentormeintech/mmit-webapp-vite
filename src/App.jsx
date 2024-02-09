@@ -13,6 +13,7 @@ import {
 import router from './routes/route';
 import AOS from "aos";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import "@bitnoi.se/react-scheduler/dist/style.css";
 
 function App() {
   const [count, setCount] = useState(0)
