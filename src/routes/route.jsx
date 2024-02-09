@@ -51,7 +51,7 @@ const router = createBrowserRouter([
 		element: <FindAMentor />,
 	},
 	{
-		path: '/menteeProfilePage',
+		path: '/menteeprofile',
 		element: <MenteeProfilePage />,
 	},
 	{

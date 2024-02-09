@@ -49,9 +49,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/menteeProfilePage"
+            to="/menteeprofile"
             className={`${
-              location.pathname == "/menteeProfilePage" ? "text-[#0F88D9]" : ""
+              location.pathname == "/menteeprofile" ? "text-[#0F88D9]" : ""
             } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">

@@ -74,7 +74,7 @@ export default function LoginForm() {
             return setTimeout(() => {
               setloading(false);
               // navigate("/findamentor");
-              navigate("/menteeProfilePage");
+              navigate("/menteeprofile");
             }, 40);
           }
         } else {
