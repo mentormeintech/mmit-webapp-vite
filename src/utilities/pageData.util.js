@@ -1,3 +1,4 @@
+export const eventColors = ['#4169E1','#DC143C','#00C957','#DAA520','#8A2BE2','#FF6347', '#9932CC',"#C82E2D","#FF8C00","#008080"]
 export const policyData = {
     // step 1
     policyintro: "Thank you for visiting mentormeintech. This Privacy Policy outlines how we collect, use, store, and disclose your personal information when you interact with our website. We are committed to protecting your privacy and ensuring the security of your personal data. Please take the time to review this policy to understand our practices",

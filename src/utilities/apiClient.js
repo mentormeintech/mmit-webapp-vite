@@ -1,9 +1,7 @@
 import { setToken, useAxios } from "./axiosClient";
 import { accessToken, getValidToken } from "./tokenClient";
 
-
 setToken(getValidToken())
-
 export const signInUser = async (url, formData) => {
     try {
         const response = await useAxios.post(`/${url}`, formData);
@@ -13,6 +11,7 @@ export const signInUser = async (url, formData) => {
         } else if (status === 200 && data.success === true) {
             sessionStorage.setItem(`${accessToken}`, data.token)
             localStorage.setItem(`${accessToken}`, data.token)
+            await setToken(data.token)
             return { data: data.payload, status, success: data.success, message: data?.message, token: data.token };
         }
     } catch (error) {
@@ -24,8 +23,8 @@ export const signUpMentorStep2 = async (url, formData) => {
     try {
         const response = await useAxios.post(`/${url}`, formData);
         const { data, status } = response;
-        if (status !== 200 && data.success === false) {
-            return { data: {}, status, success: data.success, message: data?.message };
+        if (status !== 200) {
+            return { data: {}, status, success: false, message: data?.message || response?.response?.data?.message };
         } else if (status === 200 && data.success === true) {
             return { data: data.payload, status, success: data.success, message: data?.message };
         }
@@ -50,10 +49,11 @@ export const createUser = async (url, formData) => {
 
 export const userDashboard = async (url) => {
     try {
+        await setToken(localStorage.getItem(accessToken))
         const response = await useAxios.get(`/${url}`);
         const { data, status } = response;
         if (status !== 200 && data.success === false) {
-            return { data: {}, status, success: data.success, message: data?.message };
+            return { data: {}, status, success: false, message: data?.message || error?.response?.data?.message };
         } else if (status === 200 && data.success === true) {
             return { data: data.payload, status, success: data.success, message: data?.message };
         }
@@ -107,6 +107,7 @@ export const putRequest = async (url, formData) => {
 export const logUserOut = async (url) => {
     try {
         sessionStorage.removeItem(`${accessToken}`)
+        sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
         localStorage.removeItem(`${accessToken}`)
         // return redirect('/auth/signin')
         // return window.location.href = '/auth/signin'

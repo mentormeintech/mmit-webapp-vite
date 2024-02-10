@@ -51,7 +51,8 @@ body {
 }
 
 .rbc-event {
-    background: var(--theme_orange) !important;
+    /* background: var(--theme_orange) !important; */
+    background-color: white !important;
     font-family: var(--Montserrat) !important;
     font-weight: 400 !important;
 }

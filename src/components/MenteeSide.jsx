@@ -6,21 +6,54 @@ import { MdSettings } from "react-icons/md";
 import { logOutUser } from "../redux/slices/userslice";
 import { logUserOut } from "../utilities/apiClient";
 import { useDispatch, useSelector } from "react-redux";
+import { accessToken } from "../utilities/tokenClient";
 
 const MenteeSide = ({ Mentee }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 //   const { dashboard } = useSelector((state) => state.mentor_me_user);
   const location = useLocation();
+<<<<<<< HEAD
 //   Mentee = !dashboard ? Mentee : dashboard;
+=======
+  Mentee = !dashboard ? Mentee : dashboard;
+  
+>>>>>>> 2da2860bacb70c4b69c584fb693acb82108675bf
   const logOut = () => {
     logUserOut();
-    dispatch(logOutUser({ token: "", user: {} }));
+    dispatch(logOutUser({ token: '', user: {}, dashboard: {} }))
+    localStorage.removeItem(accessToken)
+    sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
     navigate("/auth/signin");
   };
 
+<<<<<<< HEAD
   return (
     <aside className="w-fit px-10 lg:w-3/12 pt-8 border-r flex justify-center min-h-[calc(100vh-144px)]">
+=======
+
+  const nameIcon = `${Mentee?.first_name?.charAt(0)}${Mentee?.last_name?.charAt(
+    0
+  )}`;
+  return (
+    <aside className="w-fit px-10 lg:w-3/12 pt-8 border-r flex justify-center min-h-[calc(100vh-144px)]">
+      {Mentee?.image && Mentee?.image?.link ? (
+        <img
+          src="/images/mentorPic.png"
+          alt=""
+          width={40}
+          height={40}
+          className="h-[40px] w-[40px] mr-10 mt-2"
+        />
+      ) : (
+        <div
+          width={40}
+          height={40}
+          className="flex justify-center items-center font-bold h-[40px] w-[40px] mr-1.5 p-2 bg-[#e3e3e3] rounded-full"
+        >{`${nameIcon}`}</div>
+      )}
+
+>>>>>>> 2da2860bacb70c4b69c584fb693acb82108675bf
       <ul>
         <li className="mb-12 text-lg font-semibold">
           {Mentee?.first_name} {Mentee?.last_name}
@@ -28,9 +61,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/menteeProfilePage"
+            to="/mentee"
             className={`${
-              location.pathname == "/menteeProfilePage" ? "text-[#0F88D9]" : ""
+              location.pathname == "/mentee" ? "text-[#0F88D9]" : ""
             } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
@@ -42,9 +75,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/menteesBooking"
+            to="/mentee/booking"
             className={`${
-              location.pathname == "/menteesBooking" ? "text-[#0F88D9]" : ""
+              location.pathname == "/mentee/booking" ? "text-[#0F88D9]" : ""
             } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
@@ -56,12 +89,18 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
+<<<<<<< HEAD
             to="/menteeGroupSessions"
             className={`${
               location.pathname == "/menteeGroupSessions"
                 ? "text-[#0F88D9]"
                 : ""
             } flex items-center hover:text-[#0F88D9]`}
+=======
+            to="/group-session"
+            className={`${location.pathname == "/group-session" ? "text-[#0F88D9]" : ""
+              } flex items-center hover:text-[#0F88D9]`}
+>>>>>>> 2da2860bacb70c4b69c584fb693acb82108675bf
           >
             <i className="mr-2 text-xl">
               <BsFillBookFill />
@@ -73,9 +112,8 @@ const MenteeSide = ({ Mentee }) => {
         <li className="mb-5">
           <Link
             to="/menteesSettings"
-            className={`${
-              location.pathname == "/menteesSettings" ? "text-[#0F88D9]" : ""
-            } flex items-center hover:text-[#0F88D9]`}
+            className={`${location.pathname == "/menteesSettings" ? "text-[#0F88D9]" : ""
+              } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
               <MdSettings />
@@ -87,9 +125,8 @@ const MenteeSide = ({ Mentee }) => {
         <li className="mb-5">
           <Link
             to="/menteesSupport"
-            className={`${
-              location.pathname == "/menteesSupport" ? "text-[#0F88D9]" : ""
-            } flex items-center hover:text-[#0F88D9]`}
+            className={`${location.pathname == "/menteesSupport" ? "text-[#0F88D9]" : ""
+              } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
               <AiFillQuestionCircle />
@@ -98,14 +135,24 @@ const MenteeSide = ({ Mentee }) => {
           </Link>
         </li>
 
+<<<<<<< HEAD
         <li className="mb-5" onClick={logOut}>
           <div to="" className="flex items-center hover:text-[#0F88D9]">
+=======
+        <div className="mb-5" onClick={logOut}>
+          <Link to="" className="flex items-center hover:text-[#0F88D9]">
+>>>>>>> 2da2860bacb70c4b69c584fb693acb82108675bf
             <i className="mr-2 text-xl">
               <HiOutlineLogout />
             </i>
             Logout
+<<<<<<< HEAD
           </div>
         </li>
+=======
+          </Link>
+        </div>
+>>>>>>> 2da2860bacb70c4b69c584fb693acb82108675bf
       </ul>
     </aside>
   );

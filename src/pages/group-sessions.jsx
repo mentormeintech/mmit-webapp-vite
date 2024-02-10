@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
 import Sidebar from './sidebar';
+import MenteeSide from '../components/MenteeSide';
+import Header from '../components/Header';
 
 
 const Groupsession = () => {
   return (
-    <>
-      <Sidebar />
-      <div className='flex flex-col item-center relative ml-72 mt-12'>
+    <div className="pt-20 mx-3">
+      <Header />
+      <div className="flex">
+        <MenteeSide />
+        <div className='flex flex-col item-center relative ml-72 mt-12'>
         <p className='text-black text-2xl font-semibold'>Group sessions</p>
         <img
           src='/images/Illustration.png'
@@ -26,7 +30,8 @@ const Groupsession = () => {
           </button>
         </Link>
       </div>
-    </>
+      </div>
+    </div>
   );
 };
 

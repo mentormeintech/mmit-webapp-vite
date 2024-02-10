@@ -1,4 +1,4 @@
-import { useNavigate,useLocation,Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { AiFillCloud, AiFillHome, AiFillQuestionCircle } from "react-icons/ai";
 import { BsFillBookFill } from "react-icons/bs";
 import { HiOutlineLogout } from "react-icons/hi";
@@ -6,6 +6,7 @@ import { MdSettings } from "react-icons/md";
 import { logOutUser } from "../redux/slices/userslice";
 import { logUserOut } from "../utilities/apiClient";
 import { useDispatch, useSelector } from "react-redux";
+import { accessToken } from '../utilities/tokenClient';
 
 
 const MentorSide = ({ Mentor }) => {
@@ -14,17 +15,17 @@ const MentorSide = ({ Mentor }) => {
     const { dashboard } = useSelector(state => state.mentor_me_user)
     const location = useLocation();
     Mentor = !dashboard ? Mentor : dashboard
+
     const logOut = () => {
         logUserOut();
-        dispatch(logOutUser({ token: '', user: {} }))
-        navigate('/auth/signin')
+        dispatch(logOutUser({ token: '', user: {}, dashboard: {} }))
+        navigate("/auth/signin");
     }
 
     const nameIcon = `${Mentor?.first_name?.charAt(0)}${Mentor?.last_name?.charAt(0)}`
     return (
-        <aside className="w-fit p-4 mt-36 lg:w-3/12 pt-8 border-r flex justify-center min-h-[calc(100vh-144px)]">
+        <aside className=" p-4 mt-36 lg:w-1/6 pt-8 border-r flex justify-center min-h-[calc(100vh-144px)]">
             {Mentor?.image && Mentor?.image?.link ? <img src="/images/mentorPic.png" alt="" width={40} height={40} className="h-[40px] w-[40px] mr-10 mt-2" /> : <div width={40} height={40} className="flex justify-center items-center font-bold h-[40px] w-[40px] mr-5 mt-2 bg-[#e3e3e3] rounded-full" >{`${nameIcon}`}</div>}
-
             <ul>
                 <li className="mb-9">
                     <ul>
@@ -42,28 +43,28 @@ const MentorSide = ({ Mentor }) => {
                 </li>
 
                 <li className="mb-5">
-                    <Link to="/mentorsBooking" className={`${location.pathname == '/mentorsBooking' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`}>
+                    <Link to="/mentor/booking" className={`${location.pathname == '/mentor/booking' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`}>
                         <i className="mr-2 text-xl"><BsFillBookFill /></i>
                         Bookings
                     </Link>
                 </li>
 
                 <li className="mb-5">
-                    <Link to="" className="flex items-center hover:text-[#0F88D9]">
+                    <Link to="/mentor/calender" className={`${location.pathname == '/mentor/calender' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`}>
                         <i className="mr-2 text-xl"><AiFillCloud /></i>
                         Calendar
                     </Link>
                 </li>
 
                 <li className="mb-5">
-                    <Link to="/mentorsSettings" className={`${location.pathname == '/mentorsSettings' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`} >
+                    <Link to="/mentor-settings" className={`${location.pathname == '/mentor-settings' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`} >
                         <i className="mr-2 text-xl"><MdSettings /></i>
                         Settings
                     </Link>
                 </li>
 
                 <li className="mb-5">
-                    <Link to="/mentorsSupport" className={`${location.pathname == '/mentorsSupport' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`}>
+                    <Link to="/mentor-support" className={`${location.pathname == '/mentor-support' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`}>
                         <i className="mr-2 text-xl"><AiFillQuestionCircle /></i>
                         Support
                     </Link>
