@@ -1,4 +1,4 @@
-import Header from "./../components/Header";
+import Header from "../components/Header";
 import { GoHomeFill } from "react-icons/go";
 import { FaBookOpen } from "react-icons/fa";
 import { BiSolidGroup } from "react-icons/bi";

@@ -5,13 +5,14 @@ import { MobileSidebar } from "../features/MobileSidebar";
 import { useDispatch, useSelector, } from "react-redux";
 import { logOutUser } from "../redux/slices/userslice";
 import { logUserOut } from "../utilities/apiClient";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
 
 export default function Header() {
-  const { token, type } = useSelector(state => state.mentor_me_user)
+  const { token, type, dashboard } = useSelector(state => state.mentor_me_user)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => {
     AOS.init({
@@ -22,6 +23,9 @@ export default function Header() {
   const logOut = () => {
     logUserOut();
     dispatch(logOutUser({ token: '', user: {} }))
+  }
+  const goToProfile = () => {
+    navigate(`/${type}`)
   }
 
   const links = [
@@ -35,6 +39,10 @@ export default function Header() {
     // { href: "auth/mentorsignup", text: "Become A Mentor" }
     ,
   ];
+
+  const nameIcon = `${dashboard?.first_name?.charAt(0)}${dashboard?.last_name?.charAt(
+    0
+  )}`;
 
   return (
     <div className="fixed left-0 top-0 z-50 w-full bg-[#EDE6E7]">
@@ -94,6 +102,13 @@ export default function Header() {
                 Log in
               </button>
             </Link>
+          </div>}
+          {type && type !== '' && <div className="flex items-center justify-center cursor-pointer rounded-full w-[2.5rem] h-[2.5rem] border border-primary-500 transition-all hover:bg-black/10" style={{
+            marginLeft: '-6rem'
+          }} onClick={() => goToProfile()}>
+            <h3 className="font-bold" >
+              {nameIcon}
+            </h3>
           </div>}
         </div>
       </div>

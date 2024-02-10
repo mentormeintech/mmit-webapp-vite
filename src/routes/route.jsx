@@ -9,6 +9,7 @@ import BookASession from '../pages/bookasession';
 import PartnershipPage from '../pages/partnership';
 import MentorDashboard from '../pages/mentor';
 import MentorBooking from '../pages/mentorsBooking';
+import MenteeBooking from '../pages/menteebooking/pages';
 import MentorSettings from '../pages/mentorsSettings';
 import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
@@ -20,6 +21,9 @@ import TermsUse from '../pages/terms-use';
 import Scheduler from '../pages/scheduler1';
 import Schedule from '../pages/schedule2';
 import MentorCalender from '../pages/calender/pages';
+// import ErrorPage from '../errorboudary';
+import { accessToken } from '../utilities/tokenClient';
+import Groupsession from '../pages/group-sessions';
 
 
 
@@ -59,6 +63,10 @@ const router = createBrowserRouter([
 		element: <BookASession />,
 	},
 	{
+		path: '/group-session',
+		element: <Groupsession />,
+	},
+	{
 		path: '/partnership',
 		element: <PartnershipPage />,
 	},
@@ -67,8 +75,12 @@ const router = createBrowserRouter([
 		element: <MentorDashboard />,
 	},
 	{
-		path: '/mentorsBooking',
+		path: '/mentor/booking',
 		element: <MentorBooking />,
+	},
+	{
+		path: '/mentee/booking',
+		element: <MenteeBooking />,
 	},
 	{
 		path: '/mentor/calender',

@@ -11,8 +11,11 @@ const MenteeSide = ({ Mentee }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { dashboard } = useSelector((state) => state.mentor_me_user);
+  const checking = useSelector((state) => state);
+  console.log('checking',checking)
   const location = useLocation();
   Mentee = !dashboard ? Mentee : dashboard;
+  
   const logOut = () => {
     logUserOut();
     dispatch(logOutUser({ token: "", user: {} }));
@@ -26,7 +29,7 @@ const MenteeSide = ({ Mentee }) => {
   )}`;
   return (
     <aside className="w-fit px-10 lg:w-3/12 pt-8 border-r flex justify-center min-h-[calc(100vh-144px)]">
-      {/* {Mentee?.image && Mentee?.image?.link ? (
+      {Mentee?.image && Mentee?.image?.link ? (
         <img
           src="/images/mentorPic.png"
           alt=""
@@ -40,7 +43,7 @@ const MenteeSide = ({ Mentee }) => {
           height={40}
           className="flex justify-center items-center font-bold h-[40px] w-[40px] mr-1.5 p-2 bg-[#e3e3e3] rounded-full"
         >{`${nameIcon}`}</div>
-      )} */}
+      )}
 
       <ul>
         <li className="mb-12 text-lg font-semibold">
@@ -49,10 +52,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/menteeprofile"
-            className={`${
-              location.pathname == "/menteeprofile" ? "text-[#0F88D9]" : ""
-            } flex items-center hover:text-[#0F88D9]`}
+            to="/mentee"
+            className={`${location.pathname == "/mentee" ? "text-[#0F88D9]" : ""
+              } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
               <AiFillHome />
@@ -63,10 +65,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/menteesBooking"
-            className={`${
-              location.pathname == "/menteesBooking" ? "text-[#0F88D9]" : ""
-            } flex items-center hover:text-[#0F88D9]`}
+            to="/mentee/booking"
+            className={`${location.pathname == "/mentee/booking" ? "text-[#0F88D9]" : ""
+              } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
               <BsFillBookFill />
@@ -77,10 +78,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/menteeGroupSessions"
-            className={`${
-              location.pathname == "/menteeGroupSessions" ? "text-[#0F88D9]" : ""
-            } flex items-center hover:text-[#0F88D9]`}
+            to="/group-session"
+            className={`${location.pathname == "/group-session" ? "text-[#0F88D9]" : ""
+              } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
               <BsFillBookFill />
@@ -92,9 +92,8 @@ const MenteeSide = ({ Mentee }) => {
         <li className="mb-5">
           <Link
             to="/menteesSettings"
-            className={`${
-              location.pathname == "/menteesSettings" ? "text-[#0F88D9]" : ""
-            } flex items-center hover:text-[#0F88D9]`}
+            className={`${location.pathname == "/menteesSettings" ? "text-[#0F88D9]" : ""
+              } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
               <MdSettings />
@@ -106,9 +105,8 @@ const MenteeSide = ({ Mentee }) => {
         <li className="mb-5">
           <Link
             to="/menteesSupport"
-            className={`${
-              location.pathname == "/menteesSupport" ? "text-[#0F88D9]" : ""
-            } flex items-center hover:text-[#0F88D9]`}
+            className={`${location.pathname == "/menteesSupport" ? "text-[#0F88D9]" : ""
+              } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
               <AiFillQuestionCircle />
