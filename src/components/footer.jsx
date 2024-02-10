@@ -8,7 +8,6 @@ import classNames from 'classnames';
 const FooterLink = ({ href, children }) => {
   const location = useLocation();
   const currentRoute = location.pathname;
-  console.log('currentRoute',currentRoute)
   const linkClasses = classNames('transition-all hover:text-secondary-500 cursor-pointer', {
     'text-secondary-500': currentRoute === href
   });

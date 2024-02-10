@@ -23,8 +23,8 @@ export const signUpMentorStep2 = async (url, formData) => {
     try {
         const response = await useAxios.post(`/${url}`, formData);
         const { data, status } = response;
-        if (status !== 200 && data.success === false) {
-            return { data: {}, status, success: data.success, message: data?.message };
+        if (status !== 200) {
+            return { data: {}, status, success: false, message: data?.message || response?.response?.data?.message };
         } else if (status === 200 && data.success === true) {
             return { data: data.payload, status, success: data.success, message: data?.message };
         }
@@ -49,10 +49,11 @@ export const createUser = async (url, formData) => {
 
 export const userDashboard = async (url) => {
     try {
+        await setToken(localStorage.getItem(accessToken))
         const response = await useAxios.get(`/${url}`);
         const { data, status } = response;
         if (status !== 200 && data.success === false) {
-            return { data: {}, status, success: data.success, message: data?.message };
+            return { data: {}, status, success: false, message: data?.message || error?.response?.data?.message };
         } else if (status === 200 && data.success === true) {
             return { data: data.payload, status, success: data.success, message: data?.message };
         }

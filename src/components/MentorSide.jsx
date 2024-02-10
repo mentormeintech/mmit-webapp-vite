@@ -6,6 +6,7 @@ import { MdSettings } from "react-icons/md";
 import { logOutUser } from "../redux/slices/userslice";
 import { logUserOut } from "../utilities/apiClient";
 import { useDispatch, useSelector } from "react-redux";
+import { accessToken } from '../utilities/tokenClient';
 
 
 const MentorSide = ({ Mentor }) => {
@@ -14,9 +15,12 @@ const MentorSide = ({ Mentor }) => {
     const { dashboard } = useSelector(state => state.mentor_me_user)
     const location = useLocation();
     Mentor = !dashboard ? Mentor : dashboard
+
     const logOut = () => {
         logUserOut();
         dispatch(logOutUser({ token: '', user: {} }))
+        localStorage.removeItem(accessToken)
+        sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
         navigate('/auth/signin')
     }
 
@@ -41,7 +45,7 @@ const MentorSide = ({ Mentor }) => {
                 </li>
 
                 <li className="mb-5">
-                    <Link to="/mentorsBooking" className={`${location.pathname == '/mentorsBooking' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`}>
+                    <Link to="/mentor/booking" className={`${location.pathname == '/mentor/booking' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`}>
                         <i className="mr-2 text-xl"><BsFillBookFill /></i>
                         Bookings
                     </Link>

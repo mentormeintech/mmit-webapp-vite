@@ -30,15 +30,11 @@ const menteeProfilePage = () => {
   const [menteeData, setmenteeData] = useState({});
 
   useEffect(() => {
-    console.log("ran1");
     getMentors();
-    console.log("menteeDataheer", menteeData);
     // retrieveMenteeData();
-    console.log("ran2");
   }, [pageQuery]);
 
   useEffect(() => {
-    console.log("menteeDataheer", menteeData);
   }, [menteeData]);
 
   useLayoutEffect(() => {
@@ -57,9 +53,12 @@ const menteeProfilePage = () => {
         }, 40);
         // return Alert(response.message, 'success')
       }
+      else {
+        setloading(false);
+        return Alert(response.message || 'Something went wrong', "warning");
+      }
       // setloading(false)
-      setloading(false);
-      return Alert(response.message, "warning");
+
     } catch (error) {
       setloading(false);
       Alert(error.message, "error");
