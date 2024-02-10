@@ -6,7 +6,7 @@ import { FaBars } from 'react-icons/fa'
 function Header_Signin() {
   return (
     <nav className='bg-stone-200 h-36 w-full flex items-center pr-4 fixed top-0 left-0 z-50'>
-        <div>
+        <a href='/'>
 			<img
 				width={200}
 				height={1000}
@@ -14,7 +14,7 @@ function Header_Signin() {
 				className="ml-[100px] mb-[38]"
 				src="/images/mmit-logo.png"
 			/>
-		</div>
+		</a>
 
 		<div className='flex text-[#303030] ml-auto mr-8 text-2xl'>
 			<div className='bg-[#D9D9D9] flex items-center justify-center w-12 h-12 rounded-full mr-3'><AiFillBell /></div>

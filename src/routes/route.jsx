@@ -9,6 +9,7 @@ import BookASession from '../pages/bookasession';
 import PartnershipPage from '../pages/partnership';
 import MentorDashboard from '../pages/mentor';
 import MentorBooking from '../pages/mentorsBooking';
+import MenteeBooking from '../pages/menteebooking/pages';
 import MentorSettings from '../pages/mentorsSettings';
 import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
@@ -21,7 +22,7 @@ import Schedule from '../pages/schedule2';
 import MentorCalender from '../pages/calender/pages';
 import ErrorPage from '../errorboudary';
 import { accessToken } from '../utilities/tokenClient';
-
+import Groupsession from '../pages/group-sessions';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
 		element: <BookASession />,
 	},
 	{
+		path: '/group-session',
+		element: <Groupsession />,
+	},
+	{
 		path: '/partnership',
 		element: <PartnershipPage />,
 	},
@@ -80,18 +85,18 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/mentee/booking',
-		element: <MentorBooking />,
+		element: <MenteeBooking />,
 	},
 	{
 		path: '/mentor/calender',
 		element: <MentorCalender />,
 	},
 	{
-		path: '/mentorsSettings',
+		path: '/mentor-settings',
 		element: <MentorSettings />,
 	},
 	{
-		path: '/mentorsSupport',
+		path: '/mentor-support',
 		element: <MentorsSupport />,
 	},
 	{
