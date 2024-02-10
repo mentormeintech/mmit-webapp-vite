@@ -22,7 +22,7 @@ import Schedule from '../pages/schedule2';
 import MentorCalender from '../pages/calender/pages';
 import ErrorPage from '../errorboudary';
 import { accessToken } from '../utilities/tokenClient';
-
+import Groupsession from '../pages/group-sessions';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context

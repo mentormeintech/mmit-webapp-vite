@@ -6,19 +6,21 @@ import { MdSettings } from "react-icons/md";
 import { logOutUser } from "../redux/slices/userslice";
 import { logUserOut } from "../utilities/apiClient";
 import { useDispatch, useSelector } from "react-redux";
+import { accessToken } from "../utilities/tokenClient";
 
 const MenteeSide = ({ Mentee }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { dashboard } = useSelector((state) => state.mentor_me_user);
   const checking = useSelector((state) => state);
-  console.log('checking',checking)
   const location = useLocation();
   Mentee = !dashboard ? Mentee : dashboard;
   
   const logOut = () => {
     logUserOut();
     dispatch(logOutUser({ token: "", user: {} }));
+    localStorage.removeItem(accessToken)
+    sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
     navigate("/auth/signin");
   };
 
