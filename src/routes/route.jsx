@@ -92,11 +92,11 @@ const router = createBrowserRouter([
 		element: <MentorCalender />,
 	},
 	{
-		path: '/mentorsSettings',
+		path: '/mentor-settings',
 		element: <MentorSettings />,
 	},
 	{
-		path: '/mentorsSupport',
+		path: '/mentor-support',
 		element: <MentorsSupport />,
 	},
 	{

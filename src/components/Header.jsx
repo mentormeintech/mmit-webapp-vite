@@ -22,8 +22,19 @@ export default function Header() {
 
   const logOut = () => {
     logUserOut();
-    dispatch(logOutUser({ token: '', user: {} }))
+    dispatch(logOutUser({ token: '', user: {}, dashboard: {} }))
+    navigate("/auth/signin");
   }
+
+  // const logOut = () => {
+  //   logUserOut();
+  //   dispatch(logOutUser({ token: "", user: {} }));
+  //   localStorage.removeItem(accessToken)
+  //   sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
+  //   navigate("/auth/signin");
+  // };
+
+
   const goToProfile = () => {
     navigate(`/${type}`)
   }
@@ -86,11 +97,12 @@ export default function Header() {
             </div>
           </div>
 
-          {token !== '' ? <div className="hidden flex-row gap-4 text-sm font-medium lg:flex">
+          {/* <div className="hidden flex-row gap-4 text-sm font-medium lg:flex">
             <button className="rounded border border-primary-500 px-4 py-2 transition-all hover:bg-black/10" onClick={() => logOut()}>
               Log Out
             </button>
-          </div> : <div className="hidden flex-row gap-4 text-sm font-medium lg:flex">
+          </div> */}
+          {token !== '' ? <div className="hidden flex-row gap-4 text-sm font-medium lg:flex"></div> : <div className="hidden flex-row gap-4 text-sm font-medium lg:flex">
             <Link to="/auth/menteesignup">
               <button className="rounded border border-primary-500 bg-primary-500 px-4 py-2  text-white transition-all hover:bg-opacity-70">
                 Sign up

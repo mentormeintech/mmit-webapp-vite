@@ -18,10 +18,8 @@ const MentorSide = ({ Mentor }) => {
 
     const logOut = () => {
         logUserOut();
-        dispatch(logOutUser({ token: '', user: {} }))
-        localStorage.removeItem(accessToken)
-        sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
-        navigate('/auth/signin')
+        dispatch(logOutUser({ token: '', user: {}, dashboard: {} }))
+        navigate("/auth/signin");
     }
 
     const nameIcon = `${Mentor?.first_name?.charAt(0)}${Mentor?.last_name?.charAt(0)}`
@@ -59,14 +57,14 @@ const MentorSide = ({ Mentor }) => {
                 </li>
 
                 <li className="mb-5">
-                    <Link to="/mentorsSettings" className={`${location.pathname == '/mentorsSettings' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`} >
+                    <Link to="/mentor-settings" className={`${location.pathname == '/mentor-settings' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`} >
                         <i className="mr-2 text-xl"><MdSettings /></i>
                         Settings
                     </Link>
                 </li>
 
                 <li className="mb-5">
-                    <Link to="/mentorsSupport" className={`${location.pathname == '/mentorsSupport' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`}>
+                    <Link to="/mentor-support" className={`${location.pathname == '/mentor-support' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`}>
                         <i className="mr-2 text-xl"><AiFillQuestionCircle /></i>
                         Support
                     </Link>

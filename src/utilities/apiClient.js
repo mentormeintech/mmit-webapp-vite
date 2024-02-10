@@ -107,6 +107,7 @@ export const putRequest = async (url, formData) => {
 export const logUserOut = async (url) => {
     try {
         sessionStorage.removeItem(`${accessToken}`)
+        sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
         localStorage.removeItem(`${accessToken}`)
         // return redirect('/auth/signin')
         // return window.location.href = '/auth/signin'

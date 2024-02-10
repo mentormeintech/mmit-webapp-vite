@@ -12,13 +12,12 @@ const MenteeSide = ({ Mentee }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { dashboard } = useSelector((state) => state.mentor_me_user);
-  const checking = useSelector((state) => state);
   const location = useLocation();
   Mentee = !dashboard ? Mentee : dashboard;
   
   const logOut = () => {
     logUserOut();
-    dispatch(logOutUser({ token: "", user: {} }));
+    dispatch(logOutUser({ token: '', user: {}, dashboard: {} }))
     localStorage.removeItem(accessToken)
     sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
     navigate("/auth/signin");
@@ -118,14 +117,14 @@ const MenteeSide = ({ Mentee }) => {
           </Link>
         </li>
 
-        <li className="mb-5" onClick={logOut}>
+        <div className="mb-5" onClick={logOut}>
           <Link to="" className="flex items-center hover:text-[#0F88D9]">
             <i className="mr-2 text-xl">
               <HiOutlineLogout />
             </i>
             Logout
           </Link>
-        </li>
+        </div>
       </ul>
     </aside>
   );

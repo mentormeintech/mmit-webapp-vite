@@ -4,8 +4,6 @@ import Personalinfo from "./personalinfo"
 
 function MentorsSettingsComps(props) {
   const { mentorship, dashboard } = props
-  console.log('mentorship', mentorship)
-  console.log('mentorship dashboard', dashboard)
   if (mentorship && mentorship?.personalInfo) {
     return <Personalinfo dashboard={dashboard} />
   }
