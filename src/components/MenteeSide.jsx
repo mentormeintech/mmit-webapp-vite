@@ -22,7 +22,6 @@ const MenteeSide = ({ Mentee }) => {
     navigate("/auth/signin");
   };
 
-  console.log("location", location)
 
   const nameIcon = `${Mentee?.first_name?.charAt(0)}${Mentee?.last_name?.charAt(
     0
@@ -53,8 +52,9 @@ const MenteeSide = ({ Mentee }) => {
         <li className="mb-5">
           <Link
             to="/mentee"
-            className={`${location.pathname == "/mentee" ? "text-[#0F88D9]" : ""
-              } flex items-center hover:text-[#0F88D9]`}
+            className={`${
+              location.pathname == "/mentee" ? "text-[#0F88D9]" : ""
+            } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
               <AiFillHome />
@@ -66,8 +66,9 @@ const MenteeSide = ({ Mentee }) => {
         <li className="mb-5">
           <Link
             to="/mentee/booking"
-            className={`${location.pathname == "/mentee/booking" ? "text-[#0F88D9]" : ""
-              } flex items-center hover:text-[#0F88D9]`}
+            className={`${
+              location.pathname == "/mentee/booking" ? "text-[#0F88D9]" : ""
+            } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
               <BsFillBookFill />

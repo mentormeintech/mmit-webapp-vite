@@ -9,34 +9,34 @@ export default function MenteeBooking() {
         doneSessions: false,
     })
 
-    function upcomingSection() {
+    function upcomingSection(){
         setBookingSection({
-            upcoming: true, pending: false, doneSessions: false
+           upcoming: true, pending: false, doneSessions: false
         })
     }
 
-    function pendingSection() {
+    function pendingSection(){
         setBookingSection({
-            upcoming: false, pending: true, doneSessions: false
+           upcoming: false, pending: true, doneSessions: false
         })
     }
 
-    function doneSessionSection() {
+    function doneSessionSection(){
         setBookingSection({
-            upcoming: false, pending: false, doneSessions: true
+           upcoming: false, pending: false, doneSessions: true
         })
     }
 
-    function alternateSections() {
-        if (bookingSection.upcoming) {
+    function alternateSections(){
+        if(bookingSection.upcoming){
             return <p>You have no upcoming sessions</p>
         }
 
-        else if (bookingSection.pending) {
+        else if(bookingSection.pending){
             return <p>You have no pending sessions</p>
         }
 
-        else if (bookingSection.doneSessions) {
+        else if(bookingSection.doneSessions){
             return <p>You have no done sessions</p>
         }
     }
