@@ -34,7 +34,7 @@ export default function LoginForm() {
 
   // const url = 'mentor/signin'
 
-  async function registerUser(event) {
+  async function loginUser(event) {
     try {
       if (type === "mentee" || type === "mentor") {
         setloading(true);
@@ -73,8 +73,7 @@ export default function LoginForm() {
             await setToken(response.token);
             return setTimeout(() => {
               setloading(false);
-              // navigate("/findamentor");
-              navigate("/menteeprofile");
+              navigate("/mentee");
             }, 40);
           }
         } else {
@@ -142,7 +141,7 @@ export default function LoginForm() {
           </div>
         </label>
       </div>
-      <form className="mt-5 w-11/12" onSubmit={handleSubmit(registerUser)}>
+      <form className="mt-5 w-11/12" onSubmit={handleSubmit(loginUser)}>
         <div className="flex flex-col">
           <p className="text-xl">Email Address</p>
           <input

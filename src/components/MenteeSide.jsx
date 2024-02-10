@@ -13,13 +13,13 @@ const MenteeSide = ({ Mentee }) => {
   const { dashboard } = useSelector((state) => state.mentor_me_user);
   const location = useLocation();
   Mentee = !dashboard ? Mentee : dashboard;
+  
   const logOut = () => {
     logUserOut();
     dispatch(logOutUser({ token: "", user: {} }));
     navigate("/auth/signin");
   };
 
-  console.log("location", location)
 
   const nameIcon = `${Mentee?.first_name?.charAt(0)}${Mentee?.last_name?.charAt(
     0
@@ -49,9 +49,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/menteeprofile"
+            to="/mentee"
             className={`${
-              location.pathname == "/menteeprofile" ? "text-[#0F88D9]" : ""
+              location.pathname == "/mentee" ? "text-[#0F88D9]" : ""
             } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
@@ -63,9 +63,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/menteesBooking"
+            to="/mentee/booking"
             className={`${
-              location.pathname == "/menteesBooking" ? "text-[#0F88D9]" : ""
+              location.pathname == "/mentee/booking" ? "text-[#0F88D9]" : ""
             } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
