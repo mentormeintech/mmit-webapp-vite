@@ -13,12 +13,8 @@ const MenteeSide = ({ Mentee }) => {
   const dispatch = useDispatch();
 //   const { dashboard } = useSelector((state) => state.mentor_me_user);
   const location = useLocation();
-<<<<<<< HEAD
-//   Mentee = !dashboard ? Mentee : dashboard;
-=======
   Mentee = !dashboard ? Mentee : dashboard;
   
->>>>>>> 2da2860bacb70c4b69c584fb693acb82108675bf
   const logOut = () => {
     logUserOut();
     dispatch(logOutUser({ token: '', user: {}, dashboard: {} }))
@@ -26,11 +22,6 @@ const MenteeSide = ({ Mentee }) => {
     sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
     navigate("/auth/signin");
   };
-
-<<<<<<< HEAD
-  return (
-    <aside className="w-fit px-10 lg:w-3/12 pt-8 border-r flex justify-center min-h-[calc(100vh-144px)]">
-=======
 
   const nameIcon = `${Mentee?.first_name?.charAt(0)}${Mentee?.last_name?.charAt(
     0
@@ -53,7 +44,6 @@ const MenteeSide = ({ Mentee }) => {
         >{`${nameIcon}`}</div>
       )}
 
->>>>>>> 2da2860bacb70c4b69c584fb693acb82108675bf
       <ul>
         <li className="mb-12 text-lg font-semibold">
           {Mentee?.first_name} {Mentee?.last_name}
@@ -89,18 +79,9 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-<<<<<<< HEAD
-            to="/menteeGroupSessions"
-            className={`${
-              location.pathname == "/menteeGroupSessions"
-                ? "text-[#0F88D9]"
-                : ""
-            } flex items-center hover:text-[#0F88D9]`}
-=======
             to="/group-session"
             className={`${location.pathname == "/group-session" ? "text-[#0F88D9]" : ""
               } flex items-center hover:text-[#0F88D9]`}
->>>>>>> 2da2860bacb70c4b69c584fb693acb82108675bf
           >
             <i className="mr-2 text-xl">
               <BsFillBookFill />
@@ -135,24 +116,14 @@ const MenteeSide = ({ Mentee }) => {
           </Link>
         </li>
 
-<<<<<<< HEAD
-        <li className="mb-5" onClick={logOut}>
-          <div to="" className="flex items-center hover:text-[#0F88D9]">
-=======
         <div className="mb-5" onClick={logOut}>
           <Link to="" className="flex items-center hover:text-[#0F88D9]">
->>>>>>> 2da2860bacb70c4b69c584fb693acb82108675bf
             <i className="mr-2 text-xl">
               <HiOutlineLogout />
             </i>
             Logout
-<<<<<<< HEAD
-          </div>
-        </li>
-=======
           </Link>
         </div>
->>>>>>> 2da2860bacb70c4b69c584fb693acb82108675bf
       </ul>
     </aside>
   );
