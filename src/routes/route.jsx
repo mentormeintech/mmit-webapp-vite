@@ -24,6 +24,7 @@ import MentorCalender from '../pages/calender/pages';
 import ErrorPage from '../errorboudary';
 import { accessToken } from '../utilities/tokenClient';
 import Groupsession from '../pages/group-sessions';
+import MenteeSettings from '../pages/menteesettings/page';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
@@ -89,8 +90,12 @@ const router = createBrowserRouter([
 		element: <MenteeBooking />,
 	},
 	{
-		path: '/mentee/support',
+		path: '/mentee-support',
 		element: <MenteeSupport />,
+	},
+	{
+		path: '/mentee-settings',
+		element: <MenteeSettings />,
 	},
 	{
 		path: '/mentor/calender',
