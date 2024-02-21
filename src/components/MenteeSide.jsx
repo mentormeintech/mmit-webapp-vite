@@ -92,8 +92,8 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/menteesSettings"
-            className={`${location.pathname == "/menteesSettings" ? "text-[#0F88D9]" : ""
+            to="/mentor-settings"
+            className={`${location.pathname == "/mentor-settings" ? "text-[#0F88D9]" : ""
               } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
@@ -105,8 +105,8 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/menteesSupport"
-            className={`${location.pathname == "/menteesSupport" ? "text-[#0F88D9]" : ""
+            to="/mentor-support"
+            className={`${location.pathname == "/mentor-support" ? "text-[#0F88D9]" : ""
               } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
