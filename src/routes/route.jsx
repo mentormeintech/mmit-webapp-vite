@@ -10,6 +10,7 @@ import PartnershipPage from '../pages/partnership';
 import MentorDashboard from '../pages/mentor';
 import MentorBooking from '../pages/mentorsBooking';
 import MenteeBooking from '../pages/menteebooking/pages';
+import MenteeSupport from '../pages/menteesupport/page';
 import MentorSettings from '../pages/mentorsSettings';
 import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
 	{
 		path: '/mentee/booking',
 		element: <MenteeBooking />,
+	},
+	{
+		path: '/mentee/support',
+		element: <MenteeSupport />,
 	},
 	{
 		path: '/mentor/calender',

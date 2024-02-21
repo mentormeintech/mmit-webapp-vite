@@ -11,7 +11,7 @@ import { accessToken } from "../utilities/tokenClient";
 const MenteeSide = ({ Mentee }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { dashboard } = useSelector((state) => state.mentor_me_user);
+//   const { dashboard } = useSelector((state) => state.mentor_me_user);
   const location = useLocation();
   Mentee = !dashboard ? Mentee : dashboard;
   
@@ -22,7 +22,6 @@ const MenteeSide = ({ Mentee }) => {
     sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
     navigate("/auth/signin");
   };
-
 
   const nameIcon = `${Mentee?.first_name?.charAt(0)}${Mentee?.last_name?.charAt(
     0
