@@ -11,7 +11,7 @@ import { accessToken } from "../utilities/tokenClient";
 const MenteeSide = ({ Mentee }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-//   const { dashboard } = useSelector((state) => state.mentor_me_user);
+  const { dashboard } = useSelector((state) => state.mentor_me_user);
   const location = useLocation();
   Mentee = !dashboard ? Mentee : dashboard;
   
