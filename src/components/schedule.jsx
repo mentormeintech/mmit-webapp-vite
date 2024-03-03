@@ -122,7 +122,7 @@ function MentorSchedule(props) {
                 if (title && start && end) {
                     setloading(true)
                     const newEvent = {
-                        title: title,
+                        title: title || 'available',
                         start: new Date(start),
                         end: new Date(end),
                         bg: selectRandomColor() ? selectRandomColor() : bgColor,
@@ -194,16 +194,6 @@ function MentorSchedule(props) {
                         <Box sx={style}>
                             {messageBox && messageBox.message && <MessageAlert message={messageBox.message} type={messageBox.type} clearMessage={clearMessage} />}
                             <FormView onSubmit={handleSubmit(handleAddEvent)}>
-                                <InputView className="mb-[10rem]" style={{
-                                    marginBottom: '1rem',
-                                    marginTop: '1rem'
-                                }}>
-                                    <InputFormControl variant="standard">
-                                        <InputLabel htmlFor="component-simple">Event Title</InputLabel>
-                                        <Input id="component-simple" placeholder='Event Title'  {...register("title", { required: true })} readOnly={loading ? true : false} />
-                                        {errors.title && (<FormHelperSPan id="component-error-text">{"Event title field is required"}</FormHelperSPan>)}
-                                    </InputFormControl>
-                                </InputView>
                                 <InputView>
                                     <InputFormControl variant="standard">
                                         <InputLabel htmlFor="component-simple">Start Date</InputLabel>
