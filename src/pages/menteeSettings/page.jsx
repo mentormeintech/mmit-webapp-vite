@@ -40,26 +40,12 @@ function MenteeSettings() {
     });
   }
 
-  // <div className="pt-20 mx-3">
-  //   <Header />
-  //   <div className="flex">
-  //     <MenteeSide />
-  //     <section className="w-9/12 py-8 px-5">
-  //       <div className="flex gap-x-3">
-  //         <div className="border p-6">Help Center</div>
-  //         <div className="border p-6">Contact us</div>
-  //         <div className="border p-6">Privacy Policy</div>
-  //         <div className="border p-6">FAQ</div>
-  //       </div>
-  //     </section>
-  //   </div>
-  // </div>
   return (
     <div className="pt-20 mx-3">
       <Header_Signin />
       <div className="flex text-[#454545]">
         <MenteeSide />
-        <section className="w-9/12 mt-36 py-8 px-5">
+        <section className="w-9/12 mt-[3rem] py-8 px-5">
           <h4 className="text-[#454545] text-xl font-semibold mb-12">
             Settings
           </h4>
