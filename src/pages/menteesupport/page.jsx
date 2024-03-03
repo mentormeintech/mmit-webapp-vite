@@ -9,7 +9,7 @@ const MenteeSupport = () => {
       <Header_Signin />
       <div className="flex">
         <MenteeSide />
-        <section className="w-9/12 py-8 px-5">
+        <section className="w-9/12 mt-[3rem] py-8 px-5">
           <div className="flex gap-x-3">
             <div className="border p-6">Help Center</div>
             <div className="border p-6">Contact us</div>

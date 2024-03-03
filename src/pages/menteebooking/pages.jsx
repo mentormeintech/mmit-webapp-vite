@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import Header from "../../components/Header";
 import MenteeSide from "../../components/MenteeSide";
+import Header_Signin from "../../components/Header_Signin";
 
 export default function MenteeBooking() {
     const [bookingSection, setBookingSection] = useState({
@@ -44,10 +44,10 @@ export default function MenteeBooking() {
 
     return (
         <div className="pt-20 mx-3">
-            <Header />
+            <Header_Signin />
             <div className="flex">
                 <MenteeSide />
-                <section className="w-9/12 py-8 px-5">
+                <section className="w-9/12 py-8 px-5 mt-[3rem]">
                     <h4 className="text-[24px] font-semibold mb-3">Booking</h4>
                     <p>The session timings are following your local timezone Nigeria.</p>
 

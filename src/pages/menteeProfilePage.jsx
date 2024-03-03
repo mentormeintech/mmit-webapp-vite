@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import ProfileCard from "../components/ProfileCard";
-import Header from "../components/Header";
 import Footer from "../components/footer";
 import MenteeSide from "../components/MenteeSide";
 import DynamicParagraph from "../components/DynamicParagraph";
@@ -10,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userDashboard } from "../utilities/apiClient";
 import { dashboardData } from "../redux/slices/userslice";
+import Header_Signin from "../components/Header_Signin";
 
 const menteeProfilePage = () => {
   const [loading, setloading] = useState(false);
@@ -88,10 +88,10 @@ const menteeProfilePage = () => {
 
   return (
     <div className="pt-20 mx-3">
-      <Header />
+      <Header_Signin />
       <div className="flex gap-x-4">
         <MenteeSide Mentee={menteeData} />
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-y-4 mt-[2.5rem]">
           <h2 className="text-3xl my-5 font-semibold">
             Welcome {menteeData?.first_name} {menteeData?.last_name}
           </h2>
