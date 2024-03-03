@@ -12,6 +12,7 @@ import MentorBooking from '../pages/mentorsBooking';
 import MenteeBooking from '../pages/menteebooking/pages';
 import MenteeSupport from '../pages/menteesupport/page';
 import MentorSettings from '../pages/mentorsSettings';
+import MenteeSettings from '../pages/menteeSettings/page';
 import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
 import Mentorregister from '../pages/auth/mentorregist';
@@ -24,7 +25,6 @@ import MentorCalender from '../pages/calender/pages';
 import ErrorPage from '../errorboudary';
 import { accessToken } from '../utilities/tokenClient';
 import Groupsession from '../pages/group-sessions';
-import MenteeSettings from '../pages/menteesettings/page';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
