@@ -254,7 +254,7 @@ function MentorSchedule(props) {
                                                 }`}
                                             disabled={loading === true ? true : false}
                                         >
-                                            {loading ? <Loader loader_color={'#F89878'} /> : "Create Event"}
+                                            {loading ? <Loader loader_color={'#F89878'} /> : "Create Schedule"}
                                         </ButtonOutline>
                                         {message && (
                                             <span

@@ -23,7 +23,6 @@ const MenteeSide = ({ Mentee }) => {
     navigate("/auth/signin");
   };
 
-
   const nameIcon = `${Mentee?.first_name?.charAt(0)}${Mentee?.last_name?.charAt(
     0
   )}`;
@@ -94,7 +93,7 @@ const MenteeSide = ({ Mentee }) => {
         <li className="mb-5">
           <Link
             to="/mentee-settings"
-            className={`${location.pathname == "/menteesSettings" ? "text-[#0F88D9]" : ""
+            className={`${location.pathname == "/mentee-settings" ? "text-[#0F88D9]" : ""
               } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
@@ -106,8 +105,8 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/menteesSupport"
-            className={`${location.pathname == "/menteesSupport" ? "text-[#0F88D9]" : ""
+            to="/mentee-support"
+            className={`${location.pathname == "/mentee-support" ? "text-[#0F88D9]" : ""
               } flex items-center hover:text-[#0F88D9]`}
           >
             <i className="mr-2 text-xl">
