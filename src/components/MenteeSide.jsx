@@ -27,7 +27,7 @@ const MenteeSide = ({ Mentee }) => {
     0
   )}`;
   return (
-    <aside className="w-fit px-10 lg:w-3/12 pt-8 border-r flex justify-center min-h-[calc(100vh-144px)]">
+    <aside className="w-fit px-10 lg:w-3/12 pt-8 border-r flex justify-center min-h-[calc(100vh-144px)] mt-[2rem]">
       {Mentee?.image && Mentee?.image?.link ? (
         <img
           src="/images/mentorPic.png"
@@ -92,7 +92,7 @@ const MenteeSide = ({ Mentee }) => {
 
         <li className="mb-5">
           <Link
-            to="/mentee-support"
+            to="/mentee-settings"
             className={`${location.pathname == "/mentee-settings" ? "text-[#0F88D9]" : ""
               } flex items-center hover:text-[#0F88D9]`}
           >

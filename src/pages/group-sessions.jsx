@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 import Sidebar from './sidebar';
 import MenteeSide from '../components/MenteeSide';
-import Header from '../components/Header';
+import Header_Signin from '../components/Header_Signin';
 
 
 const Groupsession = () => {
   return (
     <div className="pt-20 mx-3">
-      <Header />
+      <Header_Signin />
       <div className="flex">
         <MenteeSide />
-        <div className='flex flex-col item-center relative ml-72 mt-12'>
+        <div className='flex flex-col item-center relative ml-72 mt-[4rem]'>
         <p className='text-black text-2xl font-semibold'>Group sessions</p>
         <img
           src='/images/Illustration.png'
