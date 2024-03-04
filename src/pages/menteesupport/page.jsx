@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../components/Header";
 import MenteeSide from "../../components/MenteeSide";
+import { Link } from "react-router-dom";
 
 const MenteeSupport = () => {
   return (
@@ -12,7 +13,7 @@ const MenteeSupport = () => {
           <div className="flex gap-x-3">
             <div className="border p-6">Help Center</div>
             <div className="border p-6">Contact us</div>
-            <div className="border p-6">Privacy Policy</div>
+            <Link to="/privacy-policy" className="border p-6">Privacy Policy</Link>
             <div className="border p-6">FAQ</div>
           </div>
         </section>
