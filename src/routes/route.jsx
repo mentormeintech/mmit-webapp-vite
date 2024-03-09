@@ -25,6 +25,8 @@ import MentorCalender from '../pages/calender/pages';
 import ErrorPage from '../errorboudary';
 import { accessToken } from '../utilities/tokenClient';
 import Groupsession from '../pages/group-sessions';
+import ForgotPassword from '../pages/forgot-password/pages';
+import PasswordRequest from '../pages/forgot-password/password-request/page';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
 	{
 		path: '/auth/signin',
 		element: <MentorLogin />,
+	},
+	{
+		path: '/forgot-password/:user_token',
+		element: <ForgotPassword />,
+	},
+	{
+		path: '/password-request',
+		element: <PasswordRequest />,
 	},
 	{
 		path: '/auth/menteesignup',
