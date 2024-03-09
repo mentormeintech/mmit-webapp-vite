@@ -173,7 +173,7 @@ export default function LoginForm() {
             </span>
           )}
         </div>
-        <a href="/forgot-password" className="text-15px mt-2 block cursor-pointer font-normal text-sky-600">
+        <a href="/password-request" className="text-15px mt-2 block cursor-pointer font-normal text-sky-600">
           Forgot password?
         </a>
         <div className="mt-8 w-full">
