@@ -23,7 +23,8 @@ export default function Header() {
   const logOut = () => {
     logUserOut();
     dispatch(logOutUser({ token: '', user: {}, dashboard: {} }))
-    navigate("/auth/signin");
+    // navigate("/auth/signin");
+    return navigate("/mentorregist");
   }
 
   // const logOut = () => {

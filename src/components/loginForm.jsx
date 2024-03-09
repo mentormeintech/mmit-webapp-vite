@@ -12,7 +12,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import Alert from "../features/Alert";
 import { setToken } from "../utilities/axiosClient";
 import Loader from "./loader";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -93,7 +93,8 @@ export default function LoginForm() {
   }
 
   return (
-    <div data-aos="fade-left" className="relative mb-5 lg:flex lg:flex-col">
+    <div className="relative mb-5 lg:flex lg:flex-col">
+      {/* <div data-aos="fade-left" className="relative mb-5 lg:flex lg:flex-col"> */}
       <h1 className="mb-2 smd:text-4xl text-2xl font-semibold">
         Login into your Account
       </h1>
@@ -172,9 +173,9 @@ export default function LoginForm() {
             </span>
           )}
         </div>
-        <small className="text-15px mt-2 block cursor-pointer font-normal text-sky-600">
+        <a href="/forgot-password" className="text-15px mt-2 block cursor-pointer font-normal text-sky-600">
           Forgot password?
-        </small>
+        </a>
         <div className="mt-8 w-full">
           <div className="flex flex-col">
             <button

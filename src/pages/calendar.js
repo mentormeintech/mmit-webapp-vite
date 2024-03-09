@@ -30,7 +30,7 @@ function displayBookingLimit(){
 }
   return (
     <>
-        <Header_Signin />
+        {/* <Header_Signin /> */}
         <main className='text-[#454545] px-4 sm:px-10 md:px-24 py-7'>
 
           <div className='mb-12'>
