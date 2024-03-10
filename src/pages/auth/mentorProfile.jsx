@@ -12,7 +12,6 @@ import { useState } from "react";
 const MentorProfile = () => {
 	const { mentor_name } = useParams();
 	const [card, setCard] = useState(true);
-	// console.log("mentor_name", mentor_name);
 	const showProfileCard = () => {
 		setCard(true);
 	};
