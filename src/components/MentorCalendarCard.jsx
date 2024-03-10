@@ -32,6 +32,7 @@ function MentorCalendarCard() {
 	const handleSelectSlot = ({ start }) => {
 		setSelectedDate(start);
 		setOpen(true);
+		console.log(open)
 	};
 
 	const handleClose = () => {
@@ -118,7 +119,7 @@ function MentorCalendarCard() {
 				components={{
 					event: CustomEvent,
 				}}
-				onView={(newView) => setView(newView)} // Update the view state when the view changes
+				onView={(newView) => setView(newView)}
 				style={{ padding: 0, margin: 0 }}
 			/>
 			<Modal
