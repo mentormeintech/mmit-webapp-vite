@@ -21,7 +21,7 @@ const MentorProfile = () => {
 	};
 
 	return (
-		<div className="w-[98.9vw] overflow-x-hidden">
+		<div className="w-[100vw] overflow-x-hidden">
 			<Header />
 			<div
 				data-aos="fade-down"
