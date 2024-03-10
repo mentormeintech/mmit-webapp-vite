@@ -1,5 +1,3 @@
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { cloneElement, useEffect } from "react";
 import { FaLinkedinIn } from "react-icons/fa";
 import { RiInstagramFill, RiTwitterXFill } from "react-icons/ri";
@@ -15,12 +13,6 @@ export const HeroSection = () => {
 		typeSpeed: 200,
 		deleteSpeed: 100,
 	});
-	useEffect(() => {
-		AOS.init({
-			duration: 500,
-			once: true,
-		});
-	}, []);
 
 	return (
 		<section

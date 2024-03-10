@@ -1,6 +1,3 @@
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
 import { MobileSidebar } from "../features/MobileSidebar";
 import { useDispatch, useSelector, } from "react-redux";
 import { logOutUser } from "../redux/slices/userslice";
@@ -14,11 +11,7 @@ export default function Header() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  useEffect(() => {
-    AOS.init({
-      once: true,
-    });
-  }, []);
+
 
   const logOut = () => {
     logUserOut();

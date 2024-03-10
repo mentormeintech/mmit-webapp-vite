@@ -1,6 +1,3 @@
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
 import { TbEyeCog, TbTargetArrow } from "react-icons/tb";
 
 const VisionMissionCard = ({ title, children, Icon }) => (
@@ -17,12 +14,7 @@ const VisionMissionCard = ({ title, children, Icon }) => (
 );
 
 export const VisionMissionSection = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 500,
-      once: true,
-    });
-  }, []);
+
 
   return (
     <section id="vision" className="w-full py-20">
