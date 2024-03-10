@@ -116,7 +116,7 @@ export default function Header() {
               </button>
             </Link>
           </div>}
-          {type && type !== '' && <div className="flex items-center justify-center cursor-pointer rounded-full w-[2.5rem] h-[2.5rem] border border-primary-500 transition-all hover:bg-black/10" style={{
+          {type && type !== '' && dashboard?.first_name && dashboard?.last_name && <div className="flex items-center justify-center cursor-pointer rounded-full w-[2.5rem] h-[2.5rem] border border-primary-500 transition-all hover:bg-black/10" style={{
             marginLeft: '-6rem'
           }} onClick={() => goToProfile()}>
             <h3 className="font-bold" >
