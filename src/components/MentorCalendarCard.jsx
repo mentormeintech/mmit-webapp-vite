@@ -1,38 +1,28 @@
-import { Calendar, momentLocalizer } from "react-big-calendar";
+import { Calendar,Views, momentLocalizer } from "react-big-calendar";
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Modal, Box, Radio, RadioGroup, FormControlLabel } from "@mui/material";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { ScheduleView } from "../styled/component";
 
 const localizer = momentLocalizer(moment);
 
-function MentorCalendarCard() {
+function MentorCalendarCard(props) {
+	const { mentorEvent } = props
 	const [view, setView] = useState("month");
 	const [events, setEvents] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [selectedDate, setSelectedDate] = useState(null);
 	const [selectedTime, setSelectedTime] = useState(null);
-
+	console.log('mentorEvents', mentorEvent)
 	useEffect(() => {
-		const sampleEvents = [
-			{
-				title: "Event 1",
-				start: new Date("2024-03-10T09:00:00"),
-				end: new Date("2024-03-10T10:00:00"),
-			},
-			{
-				title: "Event 2",
-				start: new Date("2024-03-12T11:00:00"),
-				end: new Date("2024-03-12T12:00:00"),
-			},
-		];
-		setEvents(sampleEvents);
+		setEvents(mentorEvent);
 	}, []);
 
 	const handleSelectSlot = ({ start }) => {
+		console.log('start', start)
 		setSelectedDate(start);
 		setOpen(true);
-		console.log(open)
 	};
 
 	const handleClose = () => {
@@ -66,47 +56,24 @@ function MentorCalendarCard() {
 		}
 	};
 
-	const CustomEvent = ({ event }) => {
-		const height =
-			event.end - event.start > 3600000
-				? `${Math.max(20, (event.end - event.start) / 1800000)}px`
-				: "auto";
-		const monthViewStyle = {
-			backgroundColor: "#7393B3",
-			color: "white",
-			padding: "4px",
-			borderRadius: "3px",
-			cursor: "pointer",
-			width: "100%",
-			height: height,
-		};
-		const weekViewStyle = {
-			backgroundColor: "#7393B3",
-			color: "white",
-			padding: "4px",
-			marginLeft: "-128px",
-			borderRadius: "3px",
-			cursor: "pointer",
-			width: "100%",
-			height: height,
-		};
 
-		const getViewStyle = () => {
-			switch (view) {
-				case "month":
-					return monthViewStyle;
-				case "week":
-					return weekViewStyle;
-				case "day":
-					return weekViewStyle;
-				default:
-					return monthViewStyle;
-			}
-		};
+	const handleSelectEvent = (event) => {
+		const { title, end, start } = event
+		alert(title)
+	}
 
-		return <div style={getViewStyle()}>{event.title}</div>;
+	const components = {
+        event: (props) => {
+            const eventType = props?.event?.data?.type;
+            const bg = props?.event?.bg;
+            return (
+                <ScheduleView className='capitalize ScheduleView' bg={bg}>
+                    {props.title.substring(0, 19 - 3) + '...' || 'No Title'}
+                </ScheduleView>
+            )
+        },
 	};
-
+	
 	return (
 		<div className="relative h-screen">
 			<Calendar
@@ -115,10 +82,10 @@ function MentorCalendarCard() {
 				startAccessor="start"
 				endAccessor="end"
 				selectable
-				onSelectSlot={handleSelectSlot}
-				components={{
-					event: CustomEvent,
-				}}
+				// defaultView={Views.WEEK}
+				onSelectEvent={handleSelectEvent}
+				// onSelectSlot={handleSelectSlot}
+				components={components}
 				onView={(newView) => setView(newView)}
 				style={{ padding: 0, margin: 0 }}
 			/>

@@ -1,6 +1,7 @@
 import React from "react";
 import { BsFillPersonFill, BsFillClipboard2MinusFill } from "react-icons/bs";
 import { useNavigate, useParams } from 'react-router-dom';
+import { accessToken, mentorAccess } from "../utilities/tokenClient";
 
 const ProfileCard = ({
   name,
@@ -10,13 +11,19 @@ const ProfileCard = ({
   experience,
   attendance,
   image,
+  id,
+  index
 }) => {
 
   const navigate = useNavigate()
-
+  
+  async function navigateToProfilePage() {
+    localStorage.setItem(mentorAccess, id)
+    navigate(`/profile/${name}`)
+  }
   return (
 
-    <div className="flex sm:w-[17rem] w-[90%] p-[7px] flex-col sm:ml-0 whitespace-nowrap rounded-b-[0.5rem] rounded-t-[1rem] border bg-red cursor-pointer" onClick={() => navigate(`/profile/${name}`)}>
+    <div key={index} className="flex sm:w-[17rem] w-[90%] p-[7px] flex-col sm:ml-0 whitespace-nowrap rounded-b-[0.5rem] rounded-t-[1rem] border bg-red cursor-pointer" onClick={navigateToProfilePage}>
       <div className="h-56">
         {image ? <img
           className="rounded-[1rem] w-[100%] h-[135%] sm:h-[120%]"

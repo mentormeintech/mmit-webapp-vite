@@ -239,7 +239,7 @@ const BookASession = () => {
 								</li>
 								{careers &&
 									careers?.map((career, index) => (
-										<>
+										<div key={index}>
 											<li
 												className="mr-5 cursor-pointer capitalize"
 												key={index}
@@ -303,7 +303,7 @@ const BookASession = () => {
 												)}
 											</li>
 											{/* {index + 1 === careers?.length && <li className="cursor-pointer capitalize">{career?.name}</li>} */}
-										</>
+										</div>
 									))}
 							</ul>
 						</div>
@@ -332,6 +332,7 @@ const BookASession = () => {
 							data?.docs?.map((mentor, index) => (
 								<ProfileCard
 									key={index}
+									index={index}
 									name={`${mentor?.first_name?.toLowerCase()} ${mentor?.last_name?.toLowerCase()}`}
 									role={
 										mentor?.area_of_expertise &&
@@ -346,6 +347,7 @@ const BookASession = () => {
 									experience={
 										mentor?.years_of_experience || 0
 									}
+									id={mentor._id}
 									attendance={mentor?.attendance || "97%"}
 									image={mentor.image}
 								/>
