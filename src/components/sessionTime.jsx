@@ -20,9 +20,6 @@ function SessionTime(props) {
     // console.log('selectedDate', new Date(selectedDate).getMinutes())
     return (
         <>
-            <input id="appt-time" type="time" name="appt-time" value={time} min={new Date(selectedDate)}
-                onChange={(event) => console.log('Date chagees', event)}
-            />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 {/* <DemoContainer components={['MobileTimePicker']}> */}
                 <DemoContainer components={['TimePicker']}>
