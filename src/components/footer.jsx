@@ -60,11 +60,11 @@ export default function Footer() {
 	const currentRoute = location.pathname;
 	return (
 		<motion.div
-    style={{
-      transform: isInView ? "none" : "translateY(200px)",
-      opacity: isInView ? 1 : 0,
-      transition: "all 0.2s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s"
-    }}
+			style={{
+				transform: isInView ? "none" : "translateY(200px)",
+				opacity: isInView ? 1 : 0,
+				transition: "all 0.2s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+			}}
 			ref={ref}
 		>
 			<footer className="flex flex-col gap-10 bg-secondary-200 px-10 py-10 text-sm sm:px-20">
