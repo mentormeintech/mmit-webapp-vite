@@ -10,7 +10,6 @@ import {
 } from "../styled/policystyled";
 import { formatDateWithOf } from "../utilities/util";
 import { policyData } from "../utilities/pageData.util";
-import { motion } from "framer-motion";
 
 export default function Privacypolicy() {
     useEffect(() => {
