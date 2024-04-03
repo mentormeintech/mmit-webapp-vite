@@ -29,39 +29,45 @@ function MentorScheduleCard(props) {
 		setEvents(mentorEvent);
 	}, []);
 
-	return (
-		<div className="relative h-max pb-20">
-			{loading ? (
-				<Spinner loading={loading} />
-			) : (
-				<div className="flex flex-wrap items-center mx-auto justify-between gap-6 w-max max-w-[90%] border p-4 rounded-2xl shadow-lg">
-					{mentorEvent?.map((event) => (
-						<div className="rounded-md border shadow-md w-72 h-max">
-							<div
-								className="text-center text-xl rounded-t-md p-4 font-semibold"
-								style={{
-									backgroundColor: event.bg,
-								}}
-							>
-								Available
-							</div>
-							<div className="p-2 flex flex-col items-center">
-								<div className="text-3xl font-semibold mb-3">
-									{moment(event.start).format("h:mma")}
-								</div>
-								<div className="text-2xl font-semibold">
-									{moment(event.start).format("MMMM D")},
-								</div>
-								<div className="text-2xl font-semibold">
-									{moment(event.start).format("YYYY")}
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-			)}
-		</div>
-	);
-}
+			return (
+				<div className="relative h-max pb-20">
+            {loading ? (
+                <Spinner loading={loading} />
+            ) : (
+                <div className="flex flex-wrap items-center mx-auto justify-between gap-6 w-max max-w-[90%] border p-4 rounded-2xl shadow-lg">
+                    {mentorEvent?.map((event, index) => (
+                        <React.Fragment key={index}>
+                            {event.available ? (
+                                <div className="rounded-md border shadow-md w-72 h-max">
+                                    <div
+                                        className="text-center text-xl rounded-t-md p-4 font-semibold"
+                                        style={{
+                                            backgroundColor: event.bg,
+                                        }}
+                                    >
+                                        Available
+                                    </div>
+                                    <div className="p-2 flex flex-col items-center">
+                                        <div className="text-3xl font-semibold mb-3">
+                                            {moment(event.start).format("h:mma")}
+                                        </div>
+                                        <div className="text-2xl font-semibold">
+                                            {moment(event.start).format("MMMM D")}
+                                        </div>
+                                        <div className="text-2xl font-semibold">
+                                            {moment(event.start).format("YYYY")}
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div key={index}></div>
+                            )}
+                        </React.Fragment>
+                    ))}
+                </div>
+            )}
+        </div>
+			);
+		}
 
-export default MentorScheduleCard;
+		export default MentorScheduleCard;
