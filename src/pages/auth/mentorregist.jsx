@@ -24,7 +24,7 @@ const Mentorregister = () => {
     about_me: '',
     ...stepData
   })
-  const [message, setmessage] = useState('Testing Mesage')
+  const [message, setmessage] = useState('')
   const [success, setsuccess] = useState(false)
   const [loading, setloading] = useState(false)
   const dispatch = useDispatch()

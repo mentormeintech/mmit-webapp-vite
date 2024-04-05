@@ -91,7 +91,7 @@ const menteeProfilePage = () => {
       <Header_Signin />
       <div className="flex gap-x-4">
         <MenteeSide Mentee={menteeData} />
-        <div className="flex flex-col gap-y-4 mt-[2.5rem]">
+        <div className="flex flex-col gap-y-4 mt-[2.5Sessionrem]">
           <h2 className="text-3xl my-5 font-semibold">
             Welcome {menteeData?.first_name} {menteeData?.last_name}
           </h2>
