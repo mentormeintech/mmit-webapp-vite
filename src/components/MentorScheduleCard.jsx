@@ -113,7 +113,7 @@ function MentorScheduleCard(props) {
 						<React.Fragment key={index}>
 							{event.available ? (
 								<div
-									className="rounded-md border pb-3 shadow-md w-72 h-max"
+									className="rounded-md border pb-3 shadow-md w-72 h-max cursor-pointer"
 									onClick={() => handleSelectEvent(event)}
 								>
 									<div
