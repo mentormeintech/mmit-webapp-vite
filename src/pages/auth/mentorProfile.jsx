@@ -34,6 +34,7 @@ const MentorProfile = () => {
 	async function getMentorEvent() {
 		try {
 			const mentor_id = localStorage.getItem(mentorAccess);
+			console.log('mentor_id',mentor_id)
 			if (!mentor_id) {
 				return navigation("/findamentor");
 			}
@@ -134,7 +135,7 @@ const MentorProfile = () => {
 						{card ? (
 							<MentorCard />
 						) : (
-							<MentorScheduleCard mentorEvent={mentorEvents} />
+							<MentorScheduleCard mentorEvent={mentorEvents} mentor_id={localStorage.getItem(mentorAccess)} />
 						)}
 						<motion.div
 							initial={{ scale: 0, opacity: 0 }}
