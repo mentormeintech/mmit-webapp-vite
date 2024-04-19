@@ -22,7 +22,7 @@ import TermsUse from '../pages/terms-use';
 import Scheduler from '../pages/scheduler1';
 import Schedule from '../pages/schedule2';
 import MentorCalender from '../pages/calender/pages';
-import Notifications from '../pages/Notifications';
+import Notifications from '../pages/mentor-notification/page';
 import ErrorPage from '../errorboudary';
 import { accessToken } from '../utilities/tokenClient';
 import Groupsession from '../pages/group-sessions';
@@ -150,6 +150,10 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/notifications',
+		element: <Notifications />,
+	},
+	{
+		path: 'mentor/notifications',
 		element: <Notifications />,
 	},
 	{
