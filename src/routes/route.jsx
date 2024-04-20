@@ -28,6 +28,7 @@ import { accessToken } from '../utilities/tokenClient';
 import Groupsession from '../pages/group-sessions';
 import ForgotPassword from '../pages/forgot-password/pages';
 import PasswordRequest from '../pages/forgot-password/password-request/page';
+import MenteeNotification from '../pages/mentee-notification/page';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
@@ -149,8 +150,8 @@ const router = createBrowserRouter([
 		element: <Scheduler />,
 	},
 	{
-		path: '/notifications',
-		element: <Notifications />,
+		path: '/mentee/notifications',
+		element: <MenteeNotification />,
 	},
 	{
 		path: 'mentor/notifications',
