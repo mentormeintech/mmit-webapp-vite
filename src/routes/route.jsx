@@ -150,11 +150,11 @@ const router = createBrowserRouter([
 		element: <Scheduler />,
 	},
 	{
-		path: '/mentee/notifications',
+		path: '/mentee-notifications',
 		element: <MenteeNotification />,
 	},
 	{
-		path: 'mentor/notifications',
+		path: 'mentor-notifications',
 		element: <Notifications />,
 	},
 	{
