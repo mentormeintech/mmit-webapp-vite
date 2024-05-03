@@ -87,7 +87,7 @@ export default function Footer() {
             <FooterLink href="#" currentRoute={currentRoute}>Contact us</FooterLink>
             <FooterLink href="/privacy-policy" currentRoute={currentRoute}>Privacy policy</FooterLink>
             <FooterLink href="/terms-use" currentRoute={currentRoute}>Terms of use</FooterLink>
-            <FooterLink href="#" currentRoute={currentRoute}>Sitemap</FooterLink>
+            <FooterLink href="/site-map" currentRoute={currentRoute}>Sitemap</FooterLink>
           </div>
         </div>
       </div>
