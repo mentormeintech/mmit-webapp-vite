@@ -56,7 +56,7 @@ export default function Career() {
                 if (response && response.success === true) {
                     Alert(response.message, 'success')
                     setTimeout(() => {
-                        navigate('auth/mentorregist')
+                        navigate('/mentorregist')
                         setcareerLoading(false);
                     }, 40);
                 }

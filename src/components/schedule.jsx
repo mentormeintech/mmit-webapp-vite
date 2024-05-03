@@ -119,7 +119,7 @@ function MentorSchedule(props) {
                 setmessageBox({ message: "Start date can't be after end date", type: 'warning' })
             }
             else {
-                if (title && start && end) {
+                if (start && end) {
                     setloading(true)
                     const newEvent = {
                         title: title || 'available',

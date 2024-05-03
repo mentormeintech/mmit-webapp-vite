@@ -5,7 +5,7 @@ import './index.css'
 import ErrorBoundary from './errorboudary.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )

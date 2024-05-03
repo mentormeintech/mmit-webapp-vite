@@ -23,9 +23,13 @@ import SiteMap from '../pages/site-map';
 import Scheduler from '../pages/scheduler1';
 import Schedule from '../pages/schedule2';
 import MentorCalender from '../pages/calender/pages';
+import Notifications from '../pages/mentor-notification/page';
 import ErrorPage from '../errorboudary';
 import { accessToken } from '../utilities/tokenClient';
 import Groupsession from '../pages/group-sessions';
+import ForgotPassword from '../pages/forgot-password/pages';
+import PasswordRequest from '../pages/forgot-password/password-request/page';
+import MenteeNotification from '../pages/mentee-notification/page';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
@@ -49,6 +53,14 @@ const router = createBrowserRouter([
 	{
 		path: '/auth/signin',
 		element: <MentorLogin />,
+	},
+	{
+		path: '/forgot-password/:user_token',
+		element: <ForgotPassword />,
+	},
+	{
+		path: '/password-request',
+		element: <PasswordRequest />,
 	},
 	{
 		path: '/auth/menteesignup',
@@ -143,110 +155,19 @@ const router = createBrowserRouter([
 		element: <Scheduler />,
 	},
 	{
+		path: '/mentee-notifications',
+		element: <MenteeNotification />,
+	},
+	{
+		path: 'mentor-notifications',
+		element: <Notifications />,
+	},
+	{
 		path: '*',
 		// errorElement: <ErrorBoundary />,
 		element: <ErrorPage />,
 	},
 ]);
-// const router = createBrowserRouter([
-// 	{
-// 		path: '/',
-// 		element: <Home />,
-// 		// errorElement: <ErrorPage />,
-// 	},
-// 	{
-// 		path: '/auth/signin',
-// 		element: <MentorLogin />,
-// 	},
-// 	{
-// 		path: '/auth/menteesignup',
-// 		element: <MenteeSignUp />,
-// 	},
-// 	{
-// 		path: '/auth/mentorsignup',
-// 		element: <MentorSignUp />,
-// 	},
-// 	{
-// 		path: '/findamentor',
-// 		element: <FindAMentor />,
-// 	},
-// 	{
-// 		path: '/mentee',
-// 		element: <MenteeProfilePage />,
-// 	},
-// 	{
-// 		path: '/bookasession',
-// 		element: <BookASession />,
-// 	},
-// 	{
-// 		path: '/partnership',
-// 		element: <PartnershipPage />,
-// 	},
-// 	{
-// 		path: '/mentor',
-// 		element: <MentorDashboard />,
-// 	},
-// 	{
-// 		path: '/mentor/booking',
-// 		element: <MentorBooking />,
-// 	},
-// 	{
-// 		path: '/mentee/booking',
-// 		element: <MentorBooking />,
-// 	},
-// 	{
-// 		path: '/mentor/calender',
-// 		element: <MentorCalender />,
-// 	},
-// 	{
-// 		path: '/mentorsSettings',
-// 		element: <MentorSettings />,
-// 	},
-// 	{
-// 		path: '/mentorsSupport',
-// 		element: <MentorsSupport />,
-// 	},
-// 	{
-// 		path: '/auth/career',
-// 		element: <Career />,
-// 	},
-// 	{
-// 		path: '/mentorregist',
-// 		element: <Mentorregister />,
-// 	},
-// 	{
-// 		path: '/profile/:mentor_name',
-// 		element: <MentorProfile />,
-// 	},
-// 	{
-// 		path: '/privacy-policy',
-// 		element: <Privacypolicy />,
-// 	},
-// 	{
-// 		path: '/terms-use',
-// 		element: <TermsUse />,
-// 	},
-// 	{
-// 		path: '/schedule',
-// 		element: <Schedule />,
-// 	},
-// 	{
-// 		path: '/scheduler',
-// 		element: <Scheduler />,
-// 	},
-// 	{
-// 		path: '*',
-// 		// errorElement: <ErrorBoundary />,
-// 		element: <ErrorPage />,
-// 	},
-// ]);
-
-// export const privateRoutes = router.map(route => {
-// 	return {
-// 		...route,
-// 		element: <PrivateRoute {...route} />,
-// 	};
-// });
 
 
 export default router;

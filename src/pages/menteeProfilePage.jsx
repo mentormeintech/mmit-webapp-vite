@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { userDashboard } from "../utilities/apiClient";
 import { dashboardData } from "../redux/slices/userslice";
 import Header_Signin from "../components/Header_Signin";
+import { setToken } from "../utilities/axiosClient";
 
 const menteeProfilePage = () => {
   const [loading, setloading] = useState(false);
@@ -86,12 +87,30 @@ const menteeProfilePage = () => {
 
   const firstThreeMentors = data?.docs?.slice(0, 3);
 
+  const getMyNotifications = async () => {
+    try {
+      await setToken()
+      setloading(true);
+      const response = await userGetRequest('notifications/mentor')
+      if (response && response?.success === true) {
+        setdata({ ...data, ...response.data });
+        setloading(false);
+      } else {
+        Alert(response.message, "warning");
+        setloading(false);
+      }
+    } catch (error) {
+      Alert(error.message, "warning");
+      setloading();
+    }
+  }
+
   return (
     <div className="pt-20 mx-3">
-      <Header_Signin />
+      <Header_Signin userData={menteeData} />
       <div className="flex gap-x-4">
         <MenteeSide Mentee={menteeData} />
-        <div className="flex flex-col gap-y-4 mt-[2.5rem]">
+        <div className="flex flex-col gap-y-4 mt-[2.5Sessionrem]">
           <h2 className="text-3xl my-5 font-semibold">
             Welcome {menteeData?.first_name} {menteeData?.last_name}
           </h2>
@@ -109,7 +128,7 @@ const menteeProfilePage = () => {
                     name={`${mentor?.first_name?.toLowerCase()} ${mentor?.last_name?.toLowerCase()}`}
                     role={
                       mentor?.area_of_expertise &&
-                      mentor?.area_of_expertise.length > 0
+                        mentor?.area_of_expertise.length > 0
                         ? mentor?.area_of_expertise[0]?.name
                         : "NIL"
                     }
