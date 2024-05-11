@@ -23,8 +23,8 @@ function MentorScheduleCard(props) {
 
 	useEffect(() => {
 		console.log("mentorEvent",mentorEvent)
-		setEvents(mentorEvent);
-		console.log(mentorEvent);
+		setEvents(mentorEvent.docs);
+		// console.log(mentorEvent);
 	}, []);
 
 	const handleSelectSlot = ({ start }) => {
