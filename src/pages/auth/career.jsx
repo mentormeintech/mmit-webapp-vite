@@ -23,7 +23,6 @@ export default function Career() {
             setloading(true);
             // await setToken()
             const response = await userGetRequest(`careers`)
-            console.log('response',response)
             if (response && response.success === true) {
                 dispatch(careerData(response.data))
                 setcareers(response.data)

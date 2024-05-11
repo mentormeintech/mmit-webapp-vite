@@ -31,12 +31,13 @@ const Notifications = () => {
 		}
 	}
 
-	const approveSession = async (event_id, session_id, status) => {
+	const approveSession = async (event_id, session_id, status, meeting_time) => {
 		try {
+			console.log("meeting_time",meeting_time)
 			await setToken()
 			// alert(event_id)
 			setloading(true);
-			const response = status === "approved" ? await putRequest(`event/approve?status=${status}&event_id=${event_id}&session_id=${session_id}`) : await putRequest(`event/reject?status=${status}&event_id=${event_id}&session_id=${session_id}`)
+			const response = status === "approved" ? await putRequest(`event/approve?status=${status}&event_id=${event_id}&session_id=${session_id}&meeting_time=${meeting_time}`) : await putRequest(`event/reject?status=${status}&event_id=${event_id}&session_id=${session_id}&meeting_time=${meeting_time}`)
 			if (response && response?.success === true) {
 				setloading(false);
 				Alert(response.message, "success");
@@ -64,11 +65,11 @@ const Notifications = () => {
 							session_item?.status === 'not approved' && <div className="flex flex-col gap-3" key={index}>
 								<div>
 									{item?.mentee[index]?.first_name} {item?.mentee[index]?.last_name} {""}
-									would like to schedule a session for{" "} {session_item?.status}
+									would like to schedule a session for{" "}
 									{moment(session_item?.time || new Date).format("MMMM Do, YYYY, h:mm A")}
 								</div>
 								<div className="flex gap-4 w-full justify-end">
-									<button className="text-white font-semibold bg-green-700 hover:bg-green-600 p-2 rounded-xl shadow-md" onClick={() => approveSession(item._id, session_item._id, "approved")}>
+									<button className="text-white font-semibold bg-green-700 hover:bg-green-600 p-2 rounded-xl shadow-md" onClick={() => approveSession(item._id, session_item._id, "approved", session_item?.time)}>
 										Accept
 									</button>
 									<button className="text-white font-semibold bg-red-700 hover:bg-red-600 p-2 rounded-xl shadow-md" onClick={() => approveSession(item._id, session_item._id, "rejected")}>

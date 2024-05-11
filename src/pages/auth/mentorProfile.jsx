@@ -34,7 +34,6 @@ const MentorProfile = () => {
 	async function getMentorEvent() {
 		try {
 			const mentor_id = localStorage.getItem(mentorAccess);
-			console.log('mentor_id',mentor_id)
 			if (!mentor_id) {
 				return navigation("/findamentor");
 			}
@@ -44,7 +43,6 @@ const MentorProfile = () => {
 			);
 			if (response && response.success === true) {
 				setmentorEvents(response?.data);
-				console.log("response?.data)",response?.data)
 				setloading(false);
 			} else {
 				Alert(response.message, "warning");

@@ -8,7 +8,7 @@ import FindAMentor from '../pages/findamentor';
 import BookASession from '../pages/bookasession';
 import PartnershipPage from '../pages/partnership';
 import MentorDashboard from '../pages/mentor';
-import MentorBooking from '../pages/mentorsBooking';
+import MentorBooking from '../pages/mentor-booking/page';
 import MenteeBooking from '../pages/menteebooking/pages';
 import MenteeSupport from '../pages/menteesupport/page';
 import MentorSettings from '../pages/mentorsSettings';
@@ -20,8 +20,6 @@ import Privacypolicy from '../pages/privacy-policy';
 import MenteeProfilePage from '../pages/menteeProfilePage';
 import TermsUse from '../pages/terms-use';
 import SiteMap from '../pages/site-map';
-import Scheduler from '../pages/scheduler1';
-import Schedule from '../pages/schedule2';
 import MentorCalender from '../pages/calender/pages';
 import Notifications from '../pages/mentor-notification/page';
 import ErrorPage from '../errorboudary';
@@ -145,14 +143,6 @@ const router = createBrowserRouter([
 	{
 		path: '/site-map',
 		element: <SiteMap />,
-	},
-	{
-		path: '/schedule',
-		element: <Schedule />,
-	},
-	{
-		path: '/scheduler',
-		element: <Scheduler />,
 	},
 	{
 		path: '/mentee-notifications',

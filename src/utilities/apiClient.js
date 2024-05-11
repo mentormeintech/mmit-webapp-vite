@@ -100,7 +100,6 @@ export const userGetRequest = async (url) => {
             return { data: data.payload, status: parseInt(status), success: data.success, message: data?.message };
         }
     } catch (error) {
-        console.log("error?.response?.data", error?.response?.data)
         return { status: error?.response?.status || 500, message: error?.response?.data?.message || error?.message, success: false };
     }
 };

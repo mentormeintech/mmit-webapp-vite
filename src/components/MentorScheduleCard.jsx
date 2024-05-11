@@ -25,12 +25,6 @@ function MentorScheduleCard(props) {
 		setEvents(mentorEvent);
 	}, []);
 
-	const handleSelectSlot = ({ start }) => {
-		console.log("start", start);
-		setSelectedDate(start);
-		setOpen(true);
-	};
-
 	const sendAmPm = (date) => {
 		let newDate = new Date(date).getHours();
 		if (newDate < 12) {

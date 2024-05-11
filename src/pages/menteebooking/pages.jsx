@@ -29,7 +29,7 @@ export default function MenteeBooking() {
 
     function alternateSections(){
         if(bookingSection.upcoming){
-            return <p>You have no upcoming sessions</p>
+            return <p>You have no upcoming sessionsadasa</p>
         }
 
         else if(bookingSection.pending){

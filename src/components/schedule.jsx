@@ -4,13 +4,14 @@ import moment from "moment";
 import { Box, InputLabel, Input, Modal } from '@mui/material';
 import { useForm } from "react-hook-form";
 import Loader from './loader';
-import { FormHelperSPan, FormView, InputFormControl, InputView, ColorView, ColourInput, Colour, ButtonOutline, ScheduleView } from '../styled/component';
+import { FormHelperSPan, FormView, InputFormControl, InputView, ButtonOutline, ScheduleView } from '../styled/component';
 import MessageAlert from './MessageAlert';
 import { eventColors } from '../utilities/pageData.util';
 import { postRequest, userGetRequest } from '../utilities/apiClient';
 import { setToken } from '../utilities/axiosClient';
 import { accessToken } from '../utilities/tokenClient';
 import Spinner from './Spinner';
+import { convertTimeToDate } from '../utilities/util';
 
 const style = {
     position: 'absolute',
@@ -28,6 +29,7 @@ const style = {
 
 const defaultState = {
     title: '',
+    event_date: new Date(),
     start: new Date(),
     end: new Date(),
     bg: '',
@@ -114,22 +116,24 @@ function MentorSchedule(props) {
     const handleAddEvent = async (data) => {
         try {
             setToken(localStorage.getItem(accessToken))
-            const { title, start, end, bg } = data
+            const { title, bg, event_date } = data
+            const start = convertTimeToDate(data.start)
+            const end = convertTimeToDate(data.end)
             if (new Date(start).getTime() > new Date(end).getTime()) {
                 setmessageBox({ message: "Start date can't be after end date", type: 'warning' })
             }
             else {
-                if (start && end) {
+                if (start && end && event_date) {
                     setloading(true)
                     const newEvent = {
                         title: title || 'available',
                         start: new Date(start),
                         end: new Date(end),
+                        event_date: new Date(event_date),
                         bg: selectRandomColor() ? selectRandomColor() : bgColor,
                         // type: "",
                     }
                     const response = await postRequest('event/create', newEvent)
-                    console.log('postRequest', response)
                     if (response && response.success === true) {
                         // setEvents(response.data)
                         setmessageBox({ message: 'Event added', type: 'success' })
@@ -196,16 +200,23 @@ function MentorSchedule(props) {
                             <FormView onSubmit={handleSubmit(handleAddEvent)}>
                                 <InputView>
                                     <InputFormControl variant="standard">
-                                        <InputLabel htmlFor="component-simple">Start Date</InputLabel>
-                                        <Input id="component-simple1" placeholder=''  {...register("start", { required: true })} readOnly={loading ? true : false} type='datetime-local' />
-                                        {errors.start && (<FormHelperSPan id="component-error-text">{"Start date field is required"}</FormHelperSPan>)}
+                                        <InputLabel htmlFor="component-simple">Session Date</InputLabel>
+                                        <Input id="component-simple1" placeholder=''  {...register("event_date", { required: true })} readOnly={loading ? true : false} type='date' />
+                                        {errors.start && (<FormHelperSPan id="component-error-text">{"Event date field is required"}</FormHelperSPan>)}
                                     </InputFormControl>
                                 </InputView>
                                 <InputView>
                                     <InputFormControl variant="standard">
-                                        <InputLabel htmlFor="component-simple">End Date</InputLabel>
-                                        <Input id="component-simple1" placeholder='End Date' min={new Date('2023-11-12T13:00')}  {...register("end", { required: true })} readOnly={loading ? true : false} type='datetime-local' />
-                                        {errors.end && (<FormHelperSPan id="component-error-text">{"End date field is required"}</FormHelperSPan>)}
+                                        <InputLabel htmlFor="component-simple">Start Time</InputLabel>
+                                        <Input id="component-simple1" placeholder='' min={new Date()}  {...register("start", { required: true })} readOnly={loading ? true : false} type='time' />
+                                        {errors.start && (<FormHelperSPan id="component-error-text">{"Start time field is required"}</FormHelperSPan>)}
+                                    </InputFormControl>
+                                </InputView>
+                                <InputView>
+                                    <InputFormControl variant="standard">
+                                        <InputLabel htmlFor="component-simple">End Time</InputLabel>
+                                        <Input id="component-simple1" placeholder='End Date' min={new Date()}  {...register("end", { required: true })} readOnly={loading ? true : false} type='time' />
+                                        {errors.end && (<FormHelperSPan id="component-error-text">{"End time field is required"}</FormHelperSPan>)}
                                     </InputFormControl>
                                 </InputView>
                                 <input type="number" id="quantity" name="quantity" max="30" />

@@ -13,7 +13,6 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 export default function ForgotPasswordForm() {
     const { user_token } = useParams()
     const navigate = useNavigate();
-    // console.log('ForgotPasswordForm user_token', user_token)
     const dispatch = useDispatch();
     const { type } = useSelector((state) => state.mentor_me_user);
     const {

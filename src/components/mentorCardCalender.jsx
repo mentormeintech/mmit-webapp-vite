@@ -30,7 +30,6 @@ function MentorCalendarCard(props) {
 	}, []);
 
 	const handleSelectSlot = ({ start }) => {
-		console.log('start', start)
 		setSelectedDate(start);
 		setOpen(true);
 	};
