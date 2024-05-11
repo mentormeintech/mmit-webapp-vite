@@ -19,6 +19,7 @@ import Mentorregister from '../pages/auth/mentorregist';
 import Privacypolicy from '../pages/privacy-policy';
 import MenteeProfilePage from '../pages/menteeProfilePage';
 import TermsUse from '../pages/terms-use';
+import SiteMap from '../pages/site-map';
 import Scheduler from '../pages/scheduler1';
 import Schedule from '../pages/schedule2';
 import MentorCalender from '../pages/calender/pages';
@@ -140,6 +141,10 @@ const router = createBrowserRouter([
 	{
 		path: '/terms-use',
 		element: <TermsUse />,
+	},
+	{
+		path: '/site-map',
+		element: <SiteMap />,
 	},
 	{
 		path: '/schedule',

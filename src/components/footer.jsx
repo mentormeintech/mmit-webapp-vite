@@ -105,6 +105,23 @@ export default function Footer() {
 							</FooterLink>
 						</div>
 
+<<<<<<< HEAD
+          <div className="flex flex-col flex-wrap gap-6 sm:flex-row md:justify-end">
+            <FooterLink href="#" currentRoute={currentRoute}>Contact us</FooterLink>
+            <FooterLink href="/privacy-policy" currentRoute={currentRoute}>Privacy policy</FooterLink>
+            <FooterLink href="/terms-use" currentRoute={currentRoute}>Terms of use</FooterLink>
+            <FooterLink href="/site-map" currentRoute={currentRoute}>Sitemap</FooterLink>
+          </div>
+        </div>
+      </div>
+
+      <p className="text-xs md:text-center">
+        © {new Date().getFullYear()} MentorMeInTech. All rights reserved
+      </p>
+    </footer>
+  );
+};
+=======
 						<div className="flex flex-col flex-wrap gap-6 sm:flex-row md:justify-end">
 							<FooterLink href="#" currentRoute={currentRoute}>
 								Contact us
@@ -127,6 +144,7 @@ export default function Footer() {
 						</div>
 					</div>
 				</div>
+>>>>>>> 8fd383a93cc1529c05080038f81abf5c9102e7f4
 
 				<p className="text-xs md:text-center">
 					© {new Date().getFullYear()} MentorMeInTech. All rights
