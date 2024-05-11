@@ -11,7 +11,7 @@ import { setToken } from "../utilities/axiosClient";
 import Spinner from "./Spinner";
 
 function MentorScheduleCard(props) {
-	const { mentorEvent,mentor_id } = props;
+	const { mentorEvent, mentor_id } = props;
 	const [view, setView] = useState("month");
 	const [events, setEvents] = useState([]);
 	const [open, setOpen] = useState(false);
@@ -67,8 +67,7 @@ function MentorScheduleCard(props) {
 			setOpen(false);
 			setloading(true);
 			const response = await postRequest(
-				`event/book?time=${new Date(selectedTime)}&event_id=${
-					currentEvent._id
+				`event/book?time=${new Date(selectedTime)}&event_id=${currentEvent._id
 				}&mentor_id=${mentor_id}`,
 				{}
 			);
@@ -109,9 +108,9 @@ function MentorScheduleCard(props) {
 				<Spinner loading={loading} />
 			) : (
 				<div className="flex flex-wrap items-center mx-auto justify-evenly gap-6 w-max max-w-[100%] p-4 rounded-2xl cursor-pointer">
-					{mentorEvent?.map((event, index) => (
+					{events?.map((event, index) => (
 						<React.Fragment key={index}>
-							{event.available ? (
+							{event?.available ? (
 								<div
 									className="rounded-md border pb-3 shadow-md w-72 h-max cursor-pointer"
 									onClick={() => handleSelectEvent(event)}
