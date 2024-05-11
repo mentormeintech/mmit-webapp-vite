@@ -22,9 +22,9 @@ function MentorScheduleCard(props) {
 	const navigation = useNavigate();
 
 	useEffect(() => {
-		console.log("mentorEvent",mentorEvent)
-		setEvents(mentorEvent.docs);
-		// console.log(mentorEvent);
+		console.log("mentorEvent",)
+		setEvents(mentorEvent);
+		console.log(mentorEvent);
 	}, []);
 
 	const handleSelectSlot = ({ start }) => {
