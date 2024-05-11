@@ -27,11 +27,9 @@ function MentorBooking() {
                 return navigation("/mentor");
             }
             setloading(true);
-            // const response = await userGetRequest(`event/mentor/events?mentor_id=${dashboard._id}`);
-            const response = await userGetRequest(`event/upcoming-session`);
+            const response = await userGetRequest(`event/upcoming-session?mentor_id=${dashboard._id}`);
             if (response && response.success === true) {
                 setUpcomingSessions(response?.data);
-                // console.log("response?.data",response?.data)
                 setloading(false);
             } else {
                 Alert(response.message, "warning");
