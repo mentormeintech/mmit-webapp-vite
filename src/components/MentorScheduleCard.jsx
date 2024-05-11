@@ -22,9 +22,7 @@ function MentorScheduleCard(props) {
 	const navigation = useNavigate();
 
 	useEffect(() => {
-		console.log("mentorEvent",)
 		setEvents(mentorEvent);
-		console.log(mentorEvent);
 	}, []);
 
 	const handleSelectSlot = ({ start }) => {
@@ -109,7 +107,7 @@ function MentorScheduleCard(props) {
 				<Spinner loading={loading} />
 			) : (
 				<div className="flex flex-wrap items-center mx-auto justify-evenly gap-6 w-max max-w-[100%] p-4 rounded-2xl cursor-pointer">
-					{events?.map((event, index) => (
+					{events && events.length > 0 ? events?.map((event, index) => (
 						<React.Fragment key={index}>
 							{event?.available ? (
 								<div
@@ -146,7 +144,18 @@ function MentorScheduleCard(props) {
 								<div key={index}></div>
 							)}
 						</React.Fragment>
-					))}
+					)): 	<div
+					className="rounded-md border pb-3 shadow-md w-72 h-max cursor-pointer"
+				>
+					<div
+						className="text-center text-xl text-white rounded-t-md p-4 font-semibold"
+						style={{
+							backgroundColor: 'var(--theme-blue)',
+						}}
+					>
+						No Session Available
+					</div>
+				</div>}
 				</div>
 			)}
 
