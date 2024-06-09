@@ -298,7 +298,7 @@ const Mentorregister = () => {
                     />
                   </div>
                   <div className="mb-4">
-                    <p>LinkedIn URL Label</p>
+                    <p>LinkedIn URL</p>
                     <input
                       type="text"
                       name="linked_in_url"
