@@ -26,11 +26,11 @@ export default function Privacypolicy() {
           }
         };
     
-        animateScroll();
+        // animateScroll();
     
-        return () => {
-          cancelAnimationFrame(animateScroll);
-        };
+        // return () => {
+        //   cancelAnimationFrame(animateScroll);
+        // };
       }, []);
 	return (
 		<div className="justify-center overflow-hidden m-auto w-[100%]">
