@@ -92,7 +92,7 @@ const MentorProfile = () => {
                                 <h1 className="text-2xl md:text-4xl font-semibold capitalize mb-2">
                                     {mentor_name || "NIL"}
                                 </h1>
-                                <p className="text-lg md:text-xl">
+                                <p className="text-lg md:text-xl capitalize">
                                     {selected_mentor.area_of_expertise[0]?.name}
                                 </p>
                             </div>
