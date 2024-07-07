@@ -82,9 +82,7 @@ const FindAMentor = () => {
   async function getMentors() {
     try {
       setloading(true);
-      const response = await userGetRequest(
-        `mentors?page=${pageQuery.page}&limit=${pageQuery.limit}`
-      );
+      const response = await userGetRequest(`mentors?page=${pageQuery.page}&limit=${pageQuery.limit}`);
       if (response && response?.success === true) {
         setdata({ ...data, ...response.data });
         setMentorData({ ...mentorData, ...response.data });
@@ -305,11 +303,12 @@ const FindAMentor = () => {
               data?.docs?.map((mentor, index) => (
                 <ProfileCard
                   key={index}
-									index={index}
+                  index={index}
+                  mentor={mentor}
                   name={`${mentor?.first_name?.toLowerCase()} ${mentor?.last_name?.toLowerCase()}`}
                   role={
                     mentor?.area_of_expertise &&
-                    mentor?.area_of_expertise.length > 0
+                      mentor?.area_of_expertise.length > 0
                       ? mentor?.area_of_expertise[0]?.name
                       : "NIL"
                   }

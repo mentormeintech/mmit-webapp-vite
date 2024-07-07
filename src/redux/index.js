@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from "redux";
 import userTypeReducer from './slices/userslice'
 import careerReducer from './slices/craeerSlice'
+import mentorReducer from './slices/mentorSlice'
 import {
     persistReducer, persistStore, FLUSH,
     REHYDRATE,
@@ -24,6 +25,7 @@ const persistConfig = {
 // combine all the available reducer into one using combineReducers method from redux
 const rootReducer = combineReducers({
     mentor_me_user: userTypeReducer,
+    selected_mentor: mentorReducer,
     mentor_me_careers: careerReducer,
 });
 

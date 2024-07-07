@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   --primary: #0e88d8;
   --theme-blue: #0F88D9;
@@ -8,13 +9,22 @@
   --Montserrat: "Montserrat", sans-serif
 }
 
-*{
+* {
   font-family: var(--Montserrat);
 }
+
 a {
   text-decoration: none;
 }
 
+.project {
+  text-transform: capitalize;
+}
+
+.mentor-details {
+  text-align: left;
+  width: 100%;
+}
 li {
   list-style: none;
 }

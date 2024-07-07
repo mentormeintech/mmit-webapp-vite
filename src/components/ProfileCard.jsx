@@ -2,23 +2,19 @@ import React from "react";
 import { BsFillPersonFill, BsFillClipboard2MinusFill } from "react-icons/bs";
 import { useNavigate, useParams } from 'react-router-dom';
 import { accessToken, mentorAccess } from "../utilities/tokenClient";
+import { selectedMentor } from "../redux/slices/mentorSlice";
+import { useDispatch } from "react-redux";
 
-const ProfileCard = ({
-  name,
-  role,
-  sessions,
-  reviews,
-  experience,
-  attendance,
-  image,
-  id,
-  index
-}) => {
+const ProfileCard = (props) => {
+
+  const { name, role, sessions, reviews, experience, attendance, image, id, index, mentor } = props
 
   const navigate = useNavigate()
-  
+  const dispatch = useDispatch();
+
   async function navigateToProfilePage() {
     localStorage.setItem(mentorAccess, id)
+    dispatch(selectedMentor(mentor));
     navigate(`/profile/${name}`)
   }
   return (

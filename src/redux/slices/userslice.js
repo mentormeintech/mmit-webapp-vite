@@ -5,6 +5,7 @@ const initialState = {
     token: '',
     user: {},
     dashboard: {},
+    selected_mentor: {},
     stepData: {
         gender: '',
         country: '',
@@ -35,6 +36,9 @@ export const userTypeSlice = createSlice({
         registeredUser: (state, action) => {
             state.token = action.payload.token
             state.user = action.payload.user
+        },
+        selectedMentor: (state, action) => {
+            state.selected_mentor = action.payload.selected_mentor
         },
         saveStepData: (state, action) => {
             state.stepData = action.payload.formData

@@ -16,17 +16,8 @@ export default function Header() {
 	const logOut = () => {
 		logUserOut();
 		dispatch(logOutUser({ token: "", user: {}, dashboard: {} }));
-		// navigate("/auth/signin");
 		return navigate("/mentorregist");
 	};
-
-	// const logOut = () => {
-	//   logUserOut();
-	//   dispatch(logOutUser({ token: "", user: {} }));
-	//   localStorage.removeItem(accessToken)
-	//   sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
-	//   navigate("/auth/signin");
-	// };
 
 	const goToProfile = () => {
 		navigate(`/${type}`);
@@ -43,9 +34,6 @@ export default function Header() {
 			: type === "mentor" && token !== ""
 			? { href: "", text: "" }
 			: { href: "/auth/mentorsignup", text: "Become A Mentor" },
-		//  ( type === 'mentee' && token !== '')? { href: "auth/mentorsignup", text: "Become A Mentor" } : {href: '', text:''},
-		// { href: "auth/mentorsignup", text: "Become A Mentor" }
-		,
 	];
 
 	const nameIcon = `${dashboard?.first_name?.charAt(
@@ -53,7 +41,7 @@ export default function Header() {
 	)}${dashboard?.last_name?.charAt(0)}`;
 
 	return (
-		<div className="fixed left-0 top-0 z-50 w-full bg-[#EDE6E7]">
+		<div className="fixed top-0 left-0 w-full z-50 bg-[#EDE6E7]">
 			<motion.div
 				initial={{ y: -200 }}
 				animate={{ y: 0 }}
@@ -102,11 +90,6 @@ export default function Header() {
 							</div>
 						</div>
 
-						{/* <div className="hidden flex-row gap-4 text-sm font-medium lg:flex">
-            <button className="rounded border border-primary-500 px-4 py-2 transition-all hover:bg-black/10" onClick={() => logOut()}>
-              Log Out
-            </button>
-          </div> */}
 						{token !== "" ? (
 							<div className="hidden flex-row gap-4 text-sm font-medium lg:flex"></div>
 						) : (

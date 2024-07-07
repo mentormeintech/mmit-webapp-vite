@@ -129,11 +129,10 @@ export default function LoginForm() {
 							className="hidden"
 						/>
 						<div
-							className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${
-								type === "mentor"
+							className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${type === "mentor"
 									? "border-[#0F88D9]"
 									: "border-black"
-							}`}
+								}`}
 							onClick={() => changeUser("mentor")}
 						>
 							{type === "mentor" && (
@@ -152,11 +151,10 @@ export default function LoginForm() {
 							className="hidden"
 						/>
 						<div
-							className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${
-								type === "mentee"
+							className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${type === "mentee"
 									? "border-[#0F88D9]"
 									: "border-black"
-							}`}
+								}`}
 							onClick={() => changeUser("mentee")}
 						>
 							{type === "mentee" && (
@@ -211,22 +209,20 @@ export default function LoginForm() {
 					<div className="mt-8 w-full">
 						<div className="flex flex-col">
 							<button
-								className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white smd:w-96 ${
-									loading === true
+								className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white smd:w-96 ${loading === true
 										? "cursor-not-allowed"
 										: "cursor-pointer"
-								}`}
+									}`}
 								disabled={loading === true ? true : false}
 							>
 								{loading ? <Loader /> : "Login"}
 							</button>
 							{message && (
 								<span
-									className={`text-xs ${
-										success === false
+									className={`text-xs ${success === false
 											? "text-red-500"
 											: "text-cyan-500"
-									} mt-3`}
+										} mt-3`}
 								>
 									{message}
 								</span>
