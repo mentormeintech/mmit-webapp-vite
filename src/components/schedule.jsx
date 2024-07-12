@@ -74,6 +74,7 @@ function MentorSchedule(props) {
             const response = await userGetRequest('event/mentor-events')
             if (response && response.success === true) {
                 setEvents(response.data)
+                console.log("response.data",response.data.length)
                 setEventloading(false)
             }
             else {
@@ -95,6 +96,7 @@ function MentorSchedule(props) {
         event: (props) => {
             const eventType = props?.event?.data?.type;
             const bg = props?.event?.bg;
+            console.log("bg",bg)
             return (
                 <ScheduleView className='capitalize ScheduleView' bg={bg}>
                     {props.title.substring(0, 19 - 3) + '...' || 'No Title'}
@@ -117,6 +119,8 @@ function MentorSchedule(props) {
         try {
             setToken(localStorage.getItem(accessToken))
             const { title, bg, event_date } = data
+            console.log("event_date",event_date)
+            console.log("data",data)
             const start = convertTimeToDate(data.start)
             const end = convertTimeToDate(data.end)
             if (new Date(start).getTime() > new Date(end).getTime()) {
@@ -127,7 +131,7 @@ function MentorSchedule(props) {
                     setloading(true)
                     const newEvent = {
                         title: title || 'available',
-                        start: new Date(event_date),
+                        start: new Date(start),
                         end: new Date(end),
                         event_date: new Date(event_date),
                         bg: selectRandomColor() ? selectRandomColor() : bgColor,
@@ -180,7 +184,7 @@ function MentorSchedule(props) {
                         {...props}
                         localizer={localizer}
                         events={myEvents}
-                        startAccessor="start"
+                        startAccessor="event_date"
                         endAccessor="end"
                         style={{ marginTop: '1rem', marginBottom: '2rem', width: '100%' }}
                         components={components}
@@ -202,7 +206,7 @@ function MentorSchedule(props) {
                                     <InputFormControl variant="standard">
                                         <InputLabel htmlFor="component-simple">Session Date</InputLabel>
                                         <Input id="component-simple1" placeholder=''  {...register("event_date", { required: true })} readOnly={loading ? true : false} type='date' />
-                                        {errors.start && (<FormHelperSPan id="component-error-text">{"Event date field is required"}</FormHelperSPan>)}
+                                        {errors.event_date && (<FormHelperSPan id="component-error-text">{"Event date field is required"}</FormHelperSPan>)}
                                     </InputFormControl>
                                 </InputView>
                                 <InputView>
