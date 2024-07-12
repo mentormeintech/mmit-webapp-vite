@@ -180,7 +180,7 @@ function MentorSchedule(props) {
                         {...props}
                         localizer={localizer}
                         events={myEvents}
-                        startAccessor="event_date"
+                        startAccessor="start"
                         endAccessor="end"
                         style={{ marginTop: '1rem', marginBottom: '2rem', width: '100%' }}
                         components={components}
