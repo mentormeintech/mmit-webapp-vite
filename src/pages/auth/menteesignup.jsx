@@ -20,7 +20,7 @@ const MenteeSignup = () => {
 						<div className="lg:ml-[5.5rem]">
 							<div className="relative flex flex-col justify-between">
 								<h1 className="lg:w-[33rem] smd:w-[460px] sm:w-[min-content]  md:w-[25rem] text-3xl md:text-4xl font-semibold text-black">
-									{"Mentor"}{" "}
+									{"Mentee"}{" "}
 									<span className="text-orange-400">&</span>{" "}
 									Experienced Professionals
 								</h1>
