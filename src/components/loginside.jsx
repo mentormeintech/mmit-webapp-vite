@@ -10,7 +10,7 @@ export default function LoginSide() {
 			<div className="hidden pl-24 mdl:block">
 				<div className="relative flex flex-col justify-between">
 					<h1 className="text-3xl font-semibold text-black">
-						Experience Professional Mentors
+						Experienced Professional Mentors
 					</h1>
 					<img
 						className="mt-8"
