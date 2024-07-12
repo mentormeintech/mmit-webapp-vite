@@ -127,7 +127,7 @@ function MentorSchedule(props) {
                     setloading(true)
                     const newEvent = {
                         title: title || 'available',
-                        start: new Date(start),
+                        start: new Date(event_date),
                         end: new Date(end),
                         event_date: new Date(event_date),
                         bg: selectRandomColor() ? selectRandomColor() : bgColor,
