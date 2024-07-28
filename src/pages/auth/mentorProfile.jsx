@@ -82,7 +82,7 @@ const MentorProfile = () => {
                         animate={{ x: 0 }}
                         transition={{ type: "spring", stiffness: 80 }}
                     >
-                        <div className="relative flex flex-col items-center mt-16 md:mt-44 px-4 md:px-11">
+                        <div className="relative flex flex-col items-center mt-16 px-4 md:px-11">
                             <img
                                 className="h-40 w-40 md:h-52 md:w-52 rounded-full object-cover"
                                 src="https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg"
@@ -93,7 +93,7 @@ const MentorProfile = () => {
                                     {mentor_name || "NIL"}
                                 </h1>
                                 <p className="text-lg md:text-xl capitalize">
-                                    {selected_mentor.area_of_expertise[0]?.name}
+                                    {selected_mentor?.area_of_expertise[0]?.name}
                                 </p>
                             </div>
                         </div>
@@ -107,7 +107,7 @@ const MentorProfile = () => {
                             duration: 1,
                             ease: "easeInOut",
                         }}
-                        className="m-auto mt-16 md:mt-44 max-w-screen-xl px-4 md:px-11"
+                        className="m-auto mt-16 max-w-screen-xl px-4 md:px-11"
                     >
                         <div className="flex justify-end mb-4 md:mb-0">
                             {card ? (

@@ -25,11 +25,11 @@ const MentorSide = ({ Mentor }) => {
     const nameIcon = `${Mentor?.first_name?.charAt(0)}${Mentor?.last_name?.charAt(0)}`
     return (
         <aside className=" p-4 mt-36 lg:w-1/6 pt-8 border-r flex justify-center min-h-[calc(100vh-144px)]">
-            {Mentor?.image && Mentor?.image?.link ? <img src="/images/mentorPic.png" alt="" width={40} height={40} className="h-[40px] w-[40px] mr-10 mt-2" /> : <div width={40} height={40} className="flex justify-center items-center font-bold h-[40px] w-[40px] mr-5 mt-2 bg-[#e3e3e3] rounded-full" >{`${nameIcon}`}</div>}
+            {/* {Mentor?.image && Mentor?.image?.link ? <img src="/images/mentorPic.png" alt="" width={40} height={40} className="h-[40px] w-[40px] mr-10 mt-2" /> : <div className="flex justify-center items-center font-bold h-[40px] w-[40px] mr-5 mt-2 bg-[#e3e3e3] rounded-full uppercase circle">{`${nameIcon}`}</div>} */}
             <ul>
                 <li className="mb-9">
                     <ul>
-                        <li>{Mentor?.first_name} {Mentor?.last_name}</li>
+                        <li className='capitalize'>{Mentor?.first_name} {Mentor?.last_name}</li>
                         <li className="text-[#0F88D9]">View Profile</li>
                     </ul>
                 </li>

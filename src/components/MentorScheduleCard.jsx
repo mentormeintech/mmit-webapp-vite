@@ -96,6 +96,7 @@ function MentorScheduleCard(props) {
 		setSelectedDate(start);
 		return setOpen(true);
 	};
+	
 	return (
 		<div className="relative h-max pb-20">
 			{loading ? (

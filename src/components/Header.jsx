@@ -25,15 +25,15 @@ export default function Header() {
 
 	const links = [
 		{ href: "/findamentor", text: "Find a mentor" },
-		{ href: "/bookasession", text: "Book a session" },
+		// type === "mentee" && token !== "" ? { href: "/bookasession", text: "Book a session" } : { href: "", text: "" }, //this link should be moved to mentee's profile
 		{ href: "/partnership", text: "Partnership" },
 		{ href: "#", text: "About Us" },
 		{ href: "#", text: "Insights" },
 		type === "mentor" && token === ""
 			? { href: "/auth/mentorsignup", text: "Become A Mentor" }
 			: type === "mentor" && token !== ""
-			? { href: "", text: "" }
-			: { href: "/auth/mentorsignup", text: "Become A Mentor" },
+				? { href: "", text: "" }
+				: { href: "/auth/mentorsignup", text: "Become A Mentor" },
 	];
 
 	const nameIcon = `${dashboard?.first_name?.charAt(
@@ -68,19 +68,17 @@ export default function Header() {
 							<div className="flex-row items-start justify-between gap-7">
 								<ul className="flex flex-row justify-between gap-8 text-sm font-semibold">
 									{links.map((link, index) => (
-										<li key={index}>
+										link.href !== '' && <li key={index}>
 											<Link
 												to={link?.href}
-												className={`transition-all ${
-													link.href === "#"
-														? "cursor-not-allowed opacity-50"
-														: "hover:text-sky-600"
-												} ${
-													location.pathname ===
-													link?.href
+												className={`transition-all ${link.href === "#"
+													? "cursor-not-allowed opacity-50"
+													: "hover:text-sky-600"
+													} ${location.pathname ===
+														link?.href
 														? "text-sky-600"
 														: "hover:text-sky-600"
-												}`}
+													}`}
 											>
 												{link.text}
 											</Link>
