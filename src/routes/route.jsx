@@ -28,6 +28,7 @@ import Groupsession from '../pages/group-sessions';
 import ForgotPassword from '../pages/forgot-password/pages';
 import PasswordRequest from '../pages/forgot-password/password-request/page';
 import MenteeNotification from '../pages/mentee-notification/page';
+import ContactUs from '../pages/contactus/page';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
 	{
 		path: '/mentor',
 		element: <MentorDashboard />,
+	},
+	{
+		path: '/contactus',
+		element: <ContactUs />,
 	},
 	{
 		path: '/mentor/booking',

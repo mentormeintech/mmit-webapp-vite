@@ -117,6 +117,27 @@ export const FormHelperSPan = styled(FormHelperText)`
 color: red !important;
 `;
 
+export const SocialContainer = styled.div`
+display: flex;
+align-items: center;
+margin: .7rem .5rem;
+`
+
+export const SocialCircle = styled.div`
+background-color: #D9D9D9;
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 0.2rem .5rem;
+margin-right: 0rem;
+margin-right: ${props => props.right ? props.right : '0rem'};
+width: ${props => props.width ? props.width : '2.5rem'};
+height: ${props => props.height ? props.height : '2.5rem'};
+border-radius: 50%;
+ i {
+ font-size: 0.9rem;
+ }
+`
 
 export const ButtonOutline = styled.button`
   width: 100% !important;
