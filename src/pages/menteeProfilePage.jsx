@@ -106,7 +106,7 @@ const menteeProfilePage = () => {
   }
 
   return (
-    <div className="pt-20 mx-3">
+    <div className="pt-20 mx-3 flex">
       <Header_Signin userData={menteeData} />
       <div className="flex gap-x-4">
         <MenteeSide Mentee={menteeData} />

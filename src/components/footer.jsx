@@ -106,7 +106,7 @@ export default function Footer() {
 						</div>
 
 						<div className="flex flex-col flex-wrap gap-6 sm:flex-row md:justify-end">
-							<FooterLink href="#" currentRoute={currentRoute}>
+							<FooterLink href="/contactus" currentRoute={currentRoute}>
 								Contact us
 							</FooterLink>
 							<FooterLink

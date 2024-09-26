@@ -7,6 +7,8 @@ import { logOutUser } from "../redux/slices/userslice";
 import { logUserOut } from "../utilities/apiClient";
 import { useDispatch, useSelector } from "react-redux";
 import { accessToken } from "../utilities/tokenClient";
+import { useState } from "react";
+
 
 const MenteeSide = ({ Mentee }) => {
   const navigate = useNavigate();
@@ -26,106 +28,93 @@ const MenteeSide = ({ Mentee }) => {
   const nameIcon = `${Mentee?.first_name?.charAt(0)}${Mentee?.last_name?.charAt(
     0
   )}`;
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   return (
-    <aside className="w-fit px-10 lg:w-3/12 pt-8 border-r flex justify-center min-h-[calc(100vh-144px)] mt-[2rem]">
+    <aside className={`lg:w-3/12 w-full transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} fixed lg:static bg-white shadow-lg h-full z-50`}>
+    <div className="flex items-center justify-between p-4 border-b">
+      <h2 className="font-bold text-lg">Mentee Menu</h2>
+      <button onClick={toggleSidebar} className="lg:hidden focus:outline-none">
+        <span className="text-xl">{isSidebarOpen ? '✖' : '☰'}</span> {/* Hamburger icon */}
+      </button>
+    </div>
+
+    <div className="flex flex-col items-center">
       {Mentee?.image && Mentee?.image?.link ? (
         <img
-          src="/images/mentorPic.png"
-          alt=""
-          width={40}
-          height={40}
-          className="h-[40px] w-[40px] mr-10 mt-2"
+          src={Mentee.image.link}
+          alt={`${Mentee.first_name} ${Mentee.last_name}`}
+          className="h-[60px] w-[60px] rounded-full object-cover border border-gray-300 my-4"
         />
       ) : (
-        <div
-          width={40}
-          height={40}
-          className="flex justify-center items-center font-bold h-[40px] w-[40px] mr-1.5 p-2 bg-[#e3e3e3] rounded-full"
-        >{`${nameIcon}`}</div>
+        <div className="flex justify-center items-center font-bold h-[60px] w-[60px] bg-[#e3e3e3] rounded-full text-gray-700 text-2xl my-4">
+          {nameIcon}
+        </div>
       )}
 
-      <ul>
-        <li className="mb-12 text-lg font-semibold">
+      <ul className="flex flex-col space-y-5 px-4">
+        <li className="text-lg font-semibold text-center">
           {Mentee?.first_name} {Mentee?.last_name}
         </li>
-
-        <li className="mb-5">
+        <li>
           <Link
             to="/mentee"
-            className={`${
-              location.pathname == "/mentee" ? "text-[#0F88D9]" : ""
-            } flex items-center hover:text-[#0F88D9]`}
+            className="flex items-center justify-center hover:text-[#0F88D9] transition-colors duration-300 text-gray-600"
           >
-            <i className="mr-2 text-xl">
-              <AiFillHome />
-            </i>
+            <AiFillHome className="mr-2 text-xl" />
             Home
           </Link>
         </li>
-
-        <li className="mb-5">
+        <li>
           <Link
             to="/mentee/booking"
-            className={`${
-              location.pathname == "/mentee/booking" ? "text-[#0F88D9]" : ""
-            } flex items-center hover:text-[#0F88D9]`}
+            className="flex items-center justify-center hover:text-[#0F88D9] transition-colors duration-300 text-gray-600"
           >
-            <i className="mr-2 text-xl">
-              <BsFillBookFill />
-            </i>
+            <BsFillBookFill className="mr-2 text-xl" />
             Bookings
           </Link>
         </li>
-
-        <li className="mb-5">
+        <li>
           <Link
             to="/group-session"
-            className={`${location.pathname == "/group-session" ? "text-[#0F88D9]" : ""
-              } flex items-center hover:text-[#0F88D9]`}
+            className="flex items-center justify-center hover:text-[#0F88D9] transition-colors duration-300 text-gray-600"
           >
-            <i className="mr-2 text-xl">
-              <BsFillBookFill />
-            </i>
+            <BsFillBookFill className="mr-2 text-xl" />
             Group Sessions
           </Link>
         </li>
-
-        <li className="mb-5">
+        <li>
           <Link
             to="/mentee-settings"
-            className={`${location.pathname == "/mentee-settings" ? "text-[#0F88D9]" : ""
-              } flex items-center hover:text-[#0F88D9]`}
+            className="flex items-center justify-center hover:text-[#0F88D9] transition-colors duration-300 text-gray-600"
           >
-            <i className="mr-2 text-xl">
-              <MdSettings />
-            </i>
+            <MdSettings className="mr-2 text-xl" />
             Settings
           </Link>
         </li>
-
-        <li className="mb-5">
+        <li>
           <Link
             to="/mentee-support"
-            className={`${location.pathname == "/mentee-support" ? "text-[#0F88D9]" : ""
-              } flex items-center hover:text-[#0F88D9]`}
+            className="flex items-center justify-center hover:text-[#0F88D9] transition-colors duration-300 text-gray-600"
           >
-            <i className="mr-2 text-xl">
-              <AiFillQuestionCircle />
-            </i>
+            <AiFillQuestionCircle className="mr-2 text-xl" />
             Support
           </Link>
         </li>
-
-        <div className="mb-5" onClick={logOut}>
-          <Link to="" className="flex items-center hover:text-[#0F88D9]">
-            <i className="mr-2 text-xl">
-              <HiOutlineLogout />
-            </i>
+        <li onClick={logOut} className="flex items-center justify-center hover:text-[#0F88D9] transition-colors duration-300">
+          <Link to="" className="flex items-center">
+            <HiOutlineLogout className="mr-2 text-xl" />
             Logout
           </Link>
-        </div>
+        </li>
       </ul>
-    </aside>
+    </div>
+  </aside>
+
   );
 };
 

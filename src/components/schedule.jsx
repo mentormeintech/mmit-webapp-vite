@@ -69,12 +69,12 @@ function MentorSchedule(props) {
 
     async function getMyEvents() {
         try {
-            setToken(localStorage.getItem(accessToken))
+            await setToken(localStorage.getItem(accessToken))
             setEventloading(true)
             const response = await userGetRequest('event/mentor-events')
             if (response && response.success === true) {
                 setEvents(response.data)
-                console.log("response.data",response.data.length)
+                console.log("response.data", response.data.length)
                 setEventloading(false)
             }
             else {
@@ -96,7 +96,7 @@ function MentorSchedule(props) {
         event: (props) => {
             const eventType = props?.event?.data?.type;
             const bg = props?.event?.bg;
-            console.log("bg",bg)
+            console.log("bg", bg)
             return (
                 <ScheduleView className='capitalize ScheduleView' bg={bg}>
                     {props.title.substring(0, 19 - 3) + '...' || 'No Title'}
@@ -119,8 +119,8 @@ function MentorSchedule(props) {
         try {
             setToken(localStorage.getItem(accessToken))
             const { title, bg, event_date } = data
-            console.log("event_date",event_date)
-            console.log("data",data)
+            console.log("event_date", event_date)
+            console.log("data", data)
             const start = convertTimeToDate(data.start)
             const end = convertTimeToDate(data.end)
             if (new Date(start).getTime() > new Date(end).getTime()) {

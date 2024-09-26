@@ -17,7 +17,7 @@ const Singupconfirm = () => {
 			<a href={"/auth/signin"}>
 				<button
 					type="button"
-					className="w-32 h-12 -mt-16 cursor-pointer bg-blue-500 px-5 py-3 rounded shadow items-center mx-auto flex flex-col ">
+					className="w-52 h-12 -mt-10 cursor-pointer bg-blue-500 px-5 py-3 rounded shadow items-center mx-auto flex flex-col ">
 					<div className=" whitespace-nowrap text-white text-base text-center font-semibold">
 						Back to Login
 					</div>
