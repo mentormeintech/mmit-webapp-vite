@@ -10,10 +10,11 @@ import { accessToken } from '../utilities/tokenClient';
 import { useState } from 'react';
 
 
-const MentorSide = ({ Mentor }) => {
+
+const MentorSide = (props) => {
+    let { Mentor, isMobileMenuOpen, setIsMobileMenuOpen } = props
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { dashboard } = useSelector(state => state.mentor_me_user)
     const location = useLocation();
     Mentor = !dashboard ? Mentor : dashboard
@@ -25,7 +26,7 @@ const MentorSide = ({ Mentor }) => {
     }
     const toggleMobileMenu = (event) => {
         event.preventDefault();
-        console.log("event",event)
+        console.log("event", event)
         setIsMobileMenuOpen(!isMobileMenuOpen);
         alert('Cicked')
     };

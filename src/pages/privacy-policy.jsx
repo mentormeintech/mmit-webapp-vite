@@ -37,7 +37,7 @@ export default function Privacypolicy() {
 			<Header />
 			<div>
 				<div className=" m-auto w-[73%] mt-[7rem] mb-[3rem] p-1">
-					<div className="bg-[#F6FAFDC9] w-[35%] p-4">
+					<div className="bg-[#F6FAFDC9] w-full sm:w-[35%] md:w-[55%] p-4">
 						{/* <div className='bg-[#F6FAFDC9]'> */}
 						<PolicyTitle>{"Privacy Policy"}</PolicyTitle>
 						<PolicyTime className="pt-[.5rem]">{`Updated on ${formatDateWithOf(

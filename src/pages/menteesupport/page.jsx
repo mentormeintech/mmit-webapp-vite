@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const MenteeSupport = () => {
   const supportLinks = [
     { text: "Help center", url: "" },
-    { text: "Contact us", url: "" },
+    { text: "Contact us", url: "/contactus" },
     { text: "Privacy Policy", url: "/privacy-policy" },
     { text: "FAQ", url: "" },
 ]

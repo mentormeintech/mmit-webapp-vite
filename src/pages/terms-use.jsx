@@ -27,17 +27,17 @@ export default function TermsUse() {
 			}
 		};
 
-		animateScroll();
+		// animateScroll();
 
 		return () => {
-			cancelAnimationFrame(animateScroll);
+			// cancelAnimationFrame(animateScroll);
 		};
 	}, []);
 	return (
 		<div className="justify-center overflow-hidden m-auto w-[100%]">
 			<Header />
-			<div className=" m-auto w-[73%] mt-[7rem] mb-[3rem] p-1">
-				<div className="bg-[#F6FAFDC9] w-[35%] p-4">
+			<div className="m-auto w-[73%] mt-[7rem] mb-[3rem] p-1">
+				<div className="bg-[#F6FAFDC9] w-full sm:w-[35%] md:w-[55%] p-4">
 					{/* <div className='bg-[#F6FAFDC9]'> */}
 					<PolicyTitle>{"Terms of Use"}</PolicyTitle>
 					<PolicyTime className="pt-[.5rem]">{`Updated on ${formatDateWithOf(
