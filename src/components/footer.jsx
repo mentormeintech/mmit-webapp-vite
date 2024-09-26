@@ -70,7 +70,7 @@ export default function Footer() {
 		>
 			<footer className="flex flex-col gap-10 bg-secondary-200 px-10 pb-[1rem] py-10 text-sm sm:px-20">
 				<div className="container mx-auto flex flex-col gap-6 md:flex-row md:justify-between">
-					<div className="w-[43%]">
+					<div className="sm:w-[43%] mx-auto">
 						<img
 							src="/images/footer-logo.png"
 							width={1000}

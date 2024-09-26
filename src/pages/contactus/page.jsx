@@ -18,14 +18,6 @@ export default function ContactUs() {
           <h2 className="font-[600] text-[#fff] text-[1.25rem] leading-[4rem] sm:text-[2.25rem] sm:leading-[2rem]">Contact Us</h2>
           <span className="font-[300] text-[#fff] text-[1rem] leading-[1.5rem] sm:[1.25rem]">Empowering Tech Futures Through Partnership</span>
         </div>
-        {/* <div className="absolute inset-0 sm:pl-4 md:pl-8 lg:pl-[3rem] sm:pt-8 md:pt-12 lg:pt-[15rem] bg-[rgba(69,69,69,0.6)] flex flex-col">
-          <h2 className="font-[600] text-[#fff] text-[1.5rem] sm:text-[2rem] md:text-[2.25rem] leading-[2rem] sm:leading-[3rem] md:leading-[4rem]">
-            Contact Us
-          </h2>
-          <span className="font-[300] text-[#fff] text-[1rem] sm:text-[1.1rem] md:text-[1.2rem] leading-[1.2rem] sm:leading-[1.5rem]">
-            Empowering Tech Futures Through Partnership
-          </span>
-        </div> */}
 
       </div>
       {/* Form section */}
@@ -34,9 +26,6 @@ export default function ContactUs() {
         <h1 className="w-[70%] mt-[5rem] mb-[2.5rem] font-[400] text-[rgba(0, 0, 0, 1)] text-[1.8rem] leading-[3rem] sm:text-[2.9rem] sm:font-[500] sm:leading-[4rem]">
           We’d Love to Hear From You
         </h1>
-
-
-
         <div className="w-full sm:w-[90%] md:w-[80%] flex flex-col lg:flex-row">
           <form className="w-[90%] lg:w-[47%] flex flex-col mx-auto my-[1rem]">
             <ContactInput title="Name" placeholder='Your name' />
