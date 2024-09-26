@@ -16,7 +16,7 @@ import MenteeSettings from '../pages/menteeSettings/page';
 import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
 import Mentorregister from '../pages/auth/mentorregist';
-import Privacypolicy from '../pages/privacy-policy';
+import Privacypolicy from '../pages/privacy-policy/page';
 import MenteeProfilePage from '../pages/menteeProfilePage';
 import TermsUse from '../pages/terms-use';
 import SiteMap from '../pages/sitemap/page';
