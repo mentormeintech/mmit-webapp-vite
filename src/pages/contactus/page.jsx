@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/footer'
 import svgRight from './svgright.svg';
@@ -6,8 +6,58 @@ import svgLeft from './svgleft.svg';
 import ContactInput from './ContactInput'
 import Button from '../../components/Button'
 import { SocialContainer, SocialCircle } from '../../styled/component';
+import Alert from '../../features/Alert';
+import emailjs from '@emailjs/browser';
+import Loader from '../../components/loader';
+import Spinner from '../../components/Spinner';
 
 export default function ContactUs() {
+  const PUBLIC_KEY = import.meta.env.VITE_EMAIL_PUBLIC_KEY
+  const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID
+  const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID
+  const SITE_KEY = import.meta.env.VITE_SITE_KEY
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [loading, setloading] = useState(false)
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    try {
+      event.preventDefault();
+      if (!formData.email || !formData.name || !formData.message) {
+        return Alert('Some fields are empty', 'warning')
+      }
+      // EmailJS send
+      emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, {
+        publicKey: PUBLIC_KEY,
+      })
+        .then((response) => {
+          setloading(true)
+          if (response.status === 200 && response.text === 'OK') {
+            setFormData({ name: '', email: '', message: '' });
+            Alert('Email sent successfully', 'success')
+            return setloading(false)
+          }
+          Alert('Something went wrong', 'warning')
+          return setloading(false)
+        })
+        .catch((error) => {
+          Alert(error.message, 'error')
+          return setloading(false)
+        });
+    } catch (error) {
+      Alert(error.message, 'error')
+      return setloading(false)
+    }
+  };
+
   return (
     <>
       <Header />
@@ -27,11 +77,21 @@ export default function ContactUs() {
           We’d Love to Hear From You
         </h1>
         <div className="w-full sm:w-[90%] md:w-[80%] flex flex-col lg:flex-row">
-          <form className="w-[90%] lg:w-[47%] flex flex-col mx-auto my-[1rem]">
-            <ContactInput title="Name" placeholder='Your name' />
-            <ContactInput title="Email" placeholder='Your email address' />
-            <ContactInput title="Message" placeholder='Your Message' textarea />
-            <Button name={"Send"} className="rounded-md mt-[1rem] bg-[#F89878] w-[30%] py-[.5rem] text-[#fff] font-[600] text-[1.25rem] self-center mt-[4.02rem]" />
+          <form className="w-[90%] lg:w-[47%] flex flex-col mx-auto my-[1rem]" onSubmit={handleSubmit}>
+            <ContactInput title="Name" placeholder='Your name' name="name"
+              value={formData.name}
+              onChange={handleChange} />
+            <ContactInput title="Email" placeholder='Your email address' name="email"
+              value={formData.email}
+              onChange={handleChange} />
+            <ContactInput title="Message" placeholder='Your Message' textarea name="message"
+              value={formData.message}
+              onChange={handleChange} />
+            <Button name={loading ? 'loading' : "Send"} disabled={loading ? true : false} className="rounded-md mt-[1rem] bg-[#F89878] w-[30%] py-[.5rem] text-[#fff] font-[600] text-[1.25rem] self-center mt-[4.02rem]" >
+              {'name'}
+            </Button>
+            {/* <div className="g-recaptcha" data-sitekey={SITE_KEY} data-action="LOGIN"></div>
+            <br /> */}
           </form>
 
           <div className="w-full lg:w-[40%] flex flex-col my-[1rem] items-center justify-start">
