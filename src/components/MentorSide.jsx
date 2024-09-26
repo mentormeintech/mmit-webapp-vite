@@ -34,7 +34,7 @@ const MentorSide = (props) => {
     const nameIcon = `${Mentor?.first_name?.charAt(0)}${Mentor?.last_name?.charAt(0)}`
     return (
         <aside className={`fixed left-0 top-0 h-full bg-white border-r shadow-md transition-transform duration-300 ease-in-out 
-            ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:w-1/6 p-4 mt-36`}>
+            ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:w-1/6 p-4 mt-32`}>
 
             {/* Toggle button for mobile view */}
             <div className="flex justify-between items-center lg:hidden mb-4 bg-[#000] p-2 rounded">
@@ -63,7 +63,7 @@ const MentorSide = (props) => {
                     </Link>
                 </li>
                 <li className="mb-5">
-                    <Link to="/mentor/calendar" className={`${location.pathname === '/mentor/calendar' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`}>
+                    <Link to="/mentor-calendar" className={`${location.pathname === '/mentor-calendar' ? 'text-[#0F88D9]' : ''} flex items-center hover:text-[#0F88D9]`}>
                         <AiFillCloud className="mr-2 text-xl" />
                         Calendar
                     </Link>

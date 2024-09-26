@@ -76,7 +76,7 @@ const MentorDashboard = () => {
 
               <section className="w-full mt-36 py-8 px-5">
                 <div className="w-[600px] mb-6">
-                  <h1 className="text-[24px] font-[600] mb-9">WELCOME {mentorData?.first_name} {mentorData?.last_name}</h1>
+                  <h1 className="text-[24px] font-[600] mb-9">Welcome {mentorData?.first_name} {mentorData?.last_name}</h1>
                   <p className="mb-7">{parseInt(mentorData.years_of_experience) <= 2 ? "Beginner" : (parseInt(mentorData.years_of_experience) < 4 ? "Intermediate" : (parseInt(mentorData.years_of_experience) < 6 ? "Mid Level" : "Advanced"))}</p>
                   <p className="mb-7">{mentorData.about_me}</p>
 

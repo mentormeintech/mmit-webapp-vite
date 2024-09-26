@@ -20,7 +20,7 @@ import Privacypolicy from '../pages/privacy-policy/page';
 import MenteeProfilePage from '../pages/menteeProfilePage';
 import TermsUse from '../pages/terms-use';
 import SiteMap from '../pages/sitemap/page';
-import MentorCalender from '../pages/calender/pages';
+import MentorCalender from '../pages/mentor-calendar/page';
 import Notifications from '../pages/mentor-notification/page';
 import ErrorPage from '../errorboudary';
 import { accessToken } from '../utilities/tokenClient';
@@ -114,7 +114,7 @@ const router = createBrowserRouter([
 		element: <MenteeSettings />,
 	},
 	{
-		path: '/mentor/calender',
+		path: '/mentor-calendar',
 		element: <MentorCalender />,
 	},
 	{
