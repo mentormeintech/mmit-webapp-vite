@@ -39,6 +39,7 @@ export default function ContactUs() {
         publicKey: PUBLIC_KEY,
       })
         .then((response) => {
+          console.log("response", response)
           setloading(true)
           if (response.status === 200 && response.text === 'OK') {
             setFormData({ name: '', email: '', message: '' });
@@ -53,6 +54,7 @@ export default function ContactUs() {
           return setloading(false)
         });
     } catch (error) {
+      console.log("Aler err",error)
       Alert(error.message, 'error')
       return setloading(false)
     }
@@ -90,8 +92,8 @@ export default function ContactUs() {
             <Button name={loading ? 'loading' : "Send"} disabled={loading ? true : false} className="rounded-md mt-[1rem] bg-[#F89878] w-[30%] py-[.5rem] text-[#fff] font-[600] text-[1.25rem] self-center mt-[4.02rem]" >
               {'name'}
             </Button>
-            {/* <div className="g-recaptcha" data-sitekey={SITE_KEY} data-action="LOGIN"></div>
-            <br /> */}
+            <div className="g-recaptcha" data-sitekey={SITE_KEY} data-action="LOGIN"></div>
+            <br />
           </form>
 
           <div className="w-full lg:w-[40%] flex flex-col my-[1rem] items-center justify-start">

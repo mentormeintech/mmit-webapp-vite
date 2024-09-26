@@ -127,7 +127,7 @@ export default function Footer() {
 							>
 								Terms of use
 							</FooterLink>
-							<FooterLink href="#" currentRoute={currentRoute}>
+							<FooterLink href="/sitemap" currentRoute={currentRoute}>
 								Sitemap
 							</FooterLink>
 						</div>

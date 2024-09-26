@@ -19,7 +19,7 @@ import Mentorregister from '../pages/auth/mentorregist';
 import Privacypolicy from '../pages/privacy-policy';
 import MenteeProfilePage from '../pages/menteeProfilePage';
 import TermsUse from '../pages/terms-use';
-import SiteMap from '../pages/site-map';
+import SiteMap from '../pages/sitemap/page';
 import MentorCalender from '../pages/calender/pages';
 import Notifications from '../pages/mentor-notification/page';
 import ErrorPage from '../errorboudary';
@@ -146,7 +146,7 @@ const router = createBrowserRouter([
 		element: <TermsUse />,
 	},
 	{
-		path: '/site-map',
+		path: '/sitemap',
 		element: <SiteMap />,
 	},
 	{
