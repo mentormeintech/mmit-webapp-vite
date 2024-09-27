@@ -70,7 +70,7 @@ export const NewsletterSection = () => {
                 disabled={loading === true ? true : false}
                 className={`${
                   loading === true ? "cursor-not-allowed" : "cursor-pointer"
-                } w-fit rounded border border-[#0F88D9] bg-[#0F88D9] my-[1rem] px-6 py-2 md:py-3 md:text-lg text-sm font-medium text-white transition-all hover:bg-opacity-70 sm:my-0 sm:pt-0`}
+                } w-fit rounded border border-[#0F88D9] bg-[#0F88D9] my-[1rem] ml-[0rem] px-6 py-2 md:py-3 md:text-lg text-sm font-medium text-white transition-all hover:bg-opacity-70 sm:my-0 sm:ml-[1rem] sm:pt-0`}
               >
                 {loading ? <Loader /> : "Subscribe"}
               </button>
