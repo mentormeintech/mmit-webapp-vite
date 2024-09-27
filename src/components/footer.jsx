@@ -90,7 +90,7 @@ export default function Footer() {
 							<SocialMediaLinks />
 							<a
 								href="/findamentor"
-								className="hidden w-fit rounded border border-primary-500 bg-primary-500 px-6 py-2 font-medium text-white transition-all hover:bg-opacity-70 md:block"
+								className="hidden w-fit rounded border border-primary-500 bg-primary-500 px-6 py-2 font-medium text-white transition-all hover:bg-opacity-70 md:flex items-center"
 							>
 								Join Our Community
 							</a>
