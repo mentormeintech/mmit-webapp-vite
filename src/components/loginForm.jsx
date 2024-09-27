@@ -167,13 +167,13 @@ export default function LoginForm() {
 					</label>
 				</div>
 				<form
-					className="mt-5 w-11/12"
+					className="mt-5 md:w-11/12"
 					onSubmit={handleSubmit(loginUser)}
 				>
 					<div className="flex flex-col">
 						<p className="text-xl">Email Address</p>
 						<input
-							className="inline-flex items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none smd:w-96"
+							className="inline-flex items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none w-full md:w-96"
 							type="email"
 							name="email"
 							placeholder="123456789@gmail.com"
@@ -188,7 +188,7 @@ export default function LoginForm() {
 					<div className="flex flex-col">
 						<p className="mt-3 text-xl">Password</p>
 						<input
-							className="inline-flex h-12 w-full items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none smd:w-96"
+							className="inline-flex h-12 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none w-full md:w-96"
 							type="password"
 							name="password"
 							placeholder="********"
@@ -209,7 +209,7 @@ export default function LoginForm() {
 					<div className="mt-8 w-full">
 						<div className="flex flex-col">
 							<button
-								className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white smd:w-96 ${loading === true
+								className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white md:w-96 ${loading === true
 										? "cursor-not-allowed"
 										: "cursor-pointer"
 									}`}
