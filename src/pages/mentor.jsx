@@ -70,7 +70,6 @@ const MentorDashboard = () => {
           <div className="flex relative">
             {/* Left Navigation */}
             <MentorSide Mentor={mentorData} setIsMobileMenuOpen={setIsMobileMenuOpen} isMobileMenuOpen={isMobileMenuOpen}/>
-
             {/* Main Content */}
             <main className={`flex-1 transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'ml-0' : 'ml-64'} p-5`}>
 

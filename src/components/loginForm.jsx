@@ -15,6 +15,7 @@ import Loader from "./loader";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+
 export default function LoginForm() {
 	const dispatch = useDispatch();
 	const { type } = useSelector((state) => state.mentor_me_user);
@@ -29,9 +30,15 @@ export default function LoginForm() {
 	};
 
 	const navigate = useNavigate();
+	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 	const [message, setmessage] = useState("");
 	const [success, setsuccess] = useState(false);
 	const [loading, setloading] = useState(false);
+	const [password, setPassword] = useState("")
+
+	const togglePasswordVisibility = () => {
+		setIsPasswordVisible((prevState) => !prevState);
+	};
 
 	// const url = 'mentor/signin'
 
@@ -130,8 +137,8 @@ export default function LoginForm() {
 						/>
 						<div
 							className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${type === "mentor"
-									? "border-[#0F88D9]"
-									: "border-black"
+								? "border-[#0F88D9]"
+								: "border-black"
 								}`}
 							onClick={() => changeUser("mentor")}
 						>
@@ -152,8 +159,8 @@ export default function LoginForm() {
 						/>
 						<div
 							className={`relative flex h-6 w-6 cursor-pointer items-center justify-center rounded border ${type === "mentee"
-									? "border-[#0F88D9]"
-									: "border-black"
+								? "border-[#0F88D9]"
+								: "border-black"
 								}`}
 							onClick={() => changeUser("mentee")}
 						>
@@ -187,13 +194,33 @@ export default function LoginForm() {
 					</div>
 					<div className="flex flex-col">
 						<p className="mt-3 text-xl">Password</p>
-						<input
+						<div className="relative w-full md:w-96">
+							<input
+								className="inline-flex h-12 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none w-full pr-12" // pr-12 adds padding to the right for the icon
+								type={isPasswordVisible ? "text" : "password"}
+								name="password"
+								placeholder="********"
+								{...register("password", { required: true })}
+								onChange={(event) => setPassword(event.target.value)}
+							/>
+
+							{/* Eye icon to toggle password visibility */}
+							<span
+								className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
+								onClick={togglePasswordVisibility}
+							>
+								<i class={!isPasswordVisible ? "fa-solid fa-lock" : "fa-solid fa-lock-open"}></i>
+								{/* {isPasswordVisible && <i class="fa-solid fa-lock-open"></i>} */}
+							</span>
+						</div>
+						{/* <input
 							className="inline-flex h-12 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none w-full md:w-96"
 							type="password"
 							name="password"
 							placeholder="********"
 							{...register("password", { required: true })}
-						/>
+							onChange={(event) => setPassword(event.target.value)}
+						/> */}
 						{errors.password && (
 							<span className="mt-1 text-xs text-red-500">
 								This field is required
@@ -210,8 +237,8 @@ export default function LoginForm() {
 						<div className="flex flex-col">
 							<button
 								className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white md:w-96 ${loading === true
-										? "cursor-not-allowed"
-										: "cursor-pointer"
+									? "cursor-not-allowed"
+									: "cursor-pointer"
 									}`}
 								disabled={loading === true ? true : false}
 							>
@@ -220,8 +247,8 @@ export default function LoginForm() {
 							{message && (
 								<span
 									className={`text-xs ${success === false
-											? "text-red-500"
-											: "text-cyan-500"
+										? "text-red-500"
+										: "text-cyan-500"
 										} mt-3`}
 								>
 									{message}

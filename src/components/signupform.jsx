@@ -8,6 +8,7 @@ import Alert from "../features/Alert";
 import Loader from "./loader";
 import { setToken } from "../utilities/axiosClient";
 import { motion } from "framer-motion";
+import PasswordChecklist from "react-password-checklist"
 
 const SignupForm = (props) => {
 	const dispatch = useDispatch();
@@ -16,12 +17,22 @@ const SignupForm = (props) => {
 	const [loading, setloading] = useState(false);
 	const [password, setPassword] = useState("");
 	const [passwordAgain, setPasswordAgain] = useState("");
+	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+	const [isPasswordVisible1, setIsPasswordVisible1] = useState(false);
+
+	const togglePasswordVisibility = () => {
+		setIsPasswordVisible((prevState) => !prevState);
+	};
+	const toggleRepeatPasswordVisibility = () => {
+		setIsPasswordVisible1((prevState) => !prevState);
+	};
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
 	const navigate = useNavigate();
+
 	const { user_type } = props;
 	const url = user_type === "mentor" ? "mentor/signup" : "mentee/signup";
 
@@ -130,53 +141,105 @@ const SignupForm = (props) => {
 					</div>
 					<div className="flex flex-col w-9/12">
 						<p className="mt-3 xs:text-xl">Password</p>
-						<input
+						{/* <input
 							className="inline-flex h-12 w-[134%] items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 ml-0 pl-5 pt-1.5 outline-none smd:w-full"
 							type="password"
 							name="password"
 							placeholder="********"
 							{...register("password", { required: true })}
-						/>
+							onChange={(event) => setPassword(event.target.value)}
+						/> */}
+						<div className="relative w-full md:w-100">
+							<input
+								className="inline-flex h-12 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none w-full pr-12" // pr-12 adds padding to the right for the icon
+								type={isPasswordVisible ? "text" : "password"}
+								name="password"
+								placeholder="********"
+								{...register("password", { required: true })}
+								onChange={(event) => setPassword(event.target.value)}
+							/>
+
+							{/* Eye icon to toggle password visibility */}
+							<span
+								className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
+								onClick={togglePasswordVisibility}
+							>
+								<i class={!isPasswordVisible ? "fa-solid fa-lock" : "fa-solid fa-lock-open"}></i>
+							</span>
+						</div>
 						{errors.password && (
 							<span className="mt-1 text-xs text-red-500">
 								This field is required
 							</span>
 						)}
+						<br></br>
+						<PasswordChecklist
+							rules={["minLength", "specialChar", "number", "capital"]}
+							minLength={8}
+							value={password}
+							valueAgain={passwordAgain}
+							onChange={(isValid) => { }}
+						/>
 					</div>
 					<div className="flex flex-col w-9/12">
 						<p className="mt-3 xs:text-xl">Confirm Password</p>
-						<input
+						{/* <input
 							className="inline-flex h-12 w-[134%] items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 ml-0 pl-5 pt-1.5 outline-none smd:w-full"
 							type="password"
 							name="repeat_password"
 							placeholder="********"
 							{...register("repeat_password", { required: true })}
-						/>
+							onChange={(event) => setPasswordAgain(event.target.value)}
+						/> */}
+						<div className="relative w-full md:w-100">
+							<input
+								className="inline-flex h-12 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none w-full pr-12" // pr-12 adds padding to the right for the icon
+								type={isPasswordVisible1 ? "text" : "password"}
+								name="repeat_password"
+								placeholder="********"
+								{...register("repeat_password", { required: true })}
+								onChange={(event) => setPasswordAgain(event.target.value)}
+							/>
+
+							{/* Eye icon to toggle password visibility */}
+							<span
+								className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
+								onClick={toggleRepeatPasswordVisibility}
+							>
+								<i class={!isPasswordVisible1 ? "fa-solid fa-lock" : "fa-solid fa-lock-open"}></i>
+							</span>
+						</div>
 						{errors.repeat_password && (
 							<span className="mt-1 text-xs text-red-500">
 								This field is required
 							</span>
 						)}
+						<br></br>
+						<PasswordChecklist
+							rules={["minLength", "specialChar", "number", "capital", "match"]}
+							minLength={8}
+							value={password}
+							valueAgain={passwordAgain}
+							onChange={(isValid) => { }}
+						/>
 					</div>
 					<div className="mt-8 smd:w-[75%]">
 						<div className="flex flex-col w-9/12">
 							<button
-								className={`inline-flex h-14 items-center justify-center whitespace-nowrap rounded-2xl bg-sky-600 py-3.5 text-xl font-bold text-white smd:px-[230px] sm:px-[175px] md:px-[200px] lg:px-[217px] xl:px-[225px] ${
-									loading === true
-										? "cursor-not-allowed"
-										: "cursor-pointer"
-								}`}
+								className={`inline-flex h-14 items-center justify-center whitespace-nowrap rounded-2xl bg-sky-600 py-3.5 text-xl font-bold text-white smd:px-[230px] sm:px-[175px] md:px-[200px] lg:px-[217px] xl:px-[225px] ${loading === true
+									? "cursor-not-allowed"
+									: "cursor-pointer"
+									}`}
 								disabled={loading === true ? true : false}
 							>
 								{loading ? <Loader /> : "Sign Up"}
 							</button>
 							{message && (
 								<span
-									className={`text-xs ${
-										success === false
-											? "text-red-500"
-											: "text-cyan-500"
-									} mt-3`}
+									className={`text-xs ${success === false
+										? "text-red-500"
+										: "text-cyan-500"
+										} mt-3`}
 								>
 									{message}
 								</span>
