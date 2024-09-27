@@ -10,7 +10,7 @@ const MentorLogin = () => {
     <>
       <div>
         <LoginHeader />
-        <div className="flex flex-col md:flex md:flex-row justify-around mx-5 mt-[5rem] mb-[10rem]">
+        <div className="flex flex-col md:flex md:flex-row gap-5 items-center md:items-start justify-around mx-5 mt-[5rem] mb-[10rem]">
           <LoginSide />
           <LoginForm />
         </div>

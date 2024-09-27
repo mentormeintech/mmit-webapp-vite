@@ -7,9 +7,9 @@ export default function LoginSide() {
 			animate={{ x: 0 }}
 			transition={{ type: "spring", stiffness: 120 }}
 		>
-			<div className="hidden pl-24 mdl:block">
+			<div className="hidden md:block">
 				<div className="relative flex flex-col justify-between">
-					<h1 className="text-3xl font-semibold text-black">
+					<h1 className="text-3xl max-w-[450px] font-semibold text-black">
 						Experienced Professional Mentors
 					</h1>
 					<img
