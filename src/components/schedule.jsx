@@ -12,6 +12,9 @@ import { setToken } from '../utilities/axiosClient';
 import { accessToken } from '../utilities/tokenClient';
 import Spinner from './Spinner';
 import { convertTimeToDate } from '../utilities/util';
+import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react';
+import axios from 'axios';
+
 
 const style = {
     position: 'absolute',
@@ -34,7 +37,11 @@ const defaultState = {
     end: new Date(),
     bg: '',
 }
+
 function MentorSchedule(props) {
+    const session = useSession()
+    const supaBaseClient = useSupabaseClient()
+    const { isLoading } = useSessionContext()
     const {
         register,
         reset,
@@ -59,6 +66,8 @@ function MentorSchedule(props) {
     })
 
     useLayoutEffect(() => {
+        // console.log("session", session)
+        // console.log("supaBaseClient", supaBaseClient)
         getMyEvents()
     }, [])
 
@@ -74,7 +83,6 @@ function MentorSchedule(props) {
             const response = await userGetRequest('event/mentor-events')
             if (response && response.success === true) {
                 setEvents(response.data)
-                console.log("response.data", response.data.length)
                 setEventloading(false)
             }
             else {
@@ -111,7 +119,7 @@ function MentorSchedule(props) {
         return eventColors[randomIndex];
     }
 
-    const handleSelectSlot = ({ start, end }) => {
+    const handleSelectSlot = () => {
         handleOpen()
     };
 
@@ -139,14 +147,15 @@ function MentorSchedule(props) {
                     }
                     const response = await postRequest('event/create', newEvent)
                     if (response && response.success === true) {
+                        await handleGoogleCalendarEvent(newEvent)
                         // setEvents(response.data)
-                        setmessageBox({ message: 'Event added', type: 'success' })
-                        setloading(false)
-                        getMyEvents()
-                        setTimeout(() => {
-                            handleClose()
-                            reset(defaultState);
-                        }, 2000);
+                        // setmessageBox({ message: 'Event added', type: 'success' })
+                        // setloading(false)
+                        // getMyEvents()
+                        // setTimeout(() => {
+                        //     handleClose()
+                        //     reset(defaultState);
+                        // }, 2000);
                     }
                     else {
                         setmessageBox({ message: response.message, type: 'warning' })
@@ -169,18 +178,140 @@ function MentorSchedule(props) {
         }
     }
 
+    // Refactor this code in such a way that when the google event is done creating update the event table and add the meeting link created created by google to it
+    const handleGoogleCalendarEvent = async (data) => {
+        try {
+            const newEvent = data
+            setToken(localStorage.getItem(accessToken))
+            const { start, end } = newEvent
+            if (start && end) {
+                setloading(true)
+                newEvent.description = 'Session with a mentee'
+                newEvent.summary = 'Mentorship Session'
+                newEvent.start = {
+                    'dateTime': new Date(start).toISOString(),
+                    'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
+                }
+                newEvent.end = {
+                    'dateTime': new Date(end).toISOString(),
+                    'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
+                }
+                const event = {
+                    ...newEvent, conferenceData: {
+                        createRequest: {
+                            requestId: new Date().getTime(),
+                            conferenceSolutionKey: {
+                                type: "hangoutsMeet",
+                            },
+                        },
+                    },
+                }
+                const response = await axios.post('https://www.googleapis.com/calendar/v3/calendars/primary/events', event, {
+                    headers: {
+                        Authorization: `Bearer ${session.provider_token}`,
+                    },
+                    params: {
+                        conferenceDataVersion: 1,
+                    },
+                })
+                // console.log("handleGoogleCalendarEvent", response)
+                if (response && response.status === 200) {
+                    setmessageBox({ message: 'Event added', type: 'success' })
+                    console.log('Meeting link', response.data.hangoutLink)
+                    console.log('Meeting description', response.data.description)
+                    setloading(false)
+                    getMyEvents()
+                    setTimeout(() => {
+                        handleClose()
+                        reset(defaultState);
+                    }, 2000);
+                }
+                else {
+
+                }
+
+            }
+            else {
+                clearMessage()
+                return alert('Some input are empty')
+            }
+        } catch (error) {
+            setmessageBox({ message: error.message, type: 'warning' })
+            setloading(false)
+        }
+        finally {
+            setTimeout(() => {
+                clearMessage()
+            }, 5000);
+        }
+    }
+
     const handleSelectEvent = (event) => {
         const { title, end, start } = event
         alert(title)
     }
 
 
+    const handleLogin = async (event) => {
+        event.preventDefault()
+        try {
+            const { error } = await supaBaseClient.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    scopes: "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events"
+                }
+            })
+            if (error) {
+                console.error('Auht error:', error);
+                setmessageBox({ message: error.message, type: 'warning' })
+            }
+        } catch (error) {
+            console.error('Login failed:', error);
+            setmessageBox({ message: error.message, type: 'error' })
+        }
+    };
+
+    const handleSignOut = async (event) => {
+        event.preventDefault()
+        await supaBaseClient.auth.signOut()
+    };
+    const handleLoginError = () => {
+        console.log('Login Failed');
+    };
+
+    if (isLoading) {
+        return <></>
+    }
     return (
         <>
-            {eventloading ? <Spinner /> :
+            {isLoading && eventloading ? <Spinner /> :
                 <div className="mt-36 py-8 bg-[#f3f4]" style={{ margin: 'auto', display: 'flex', background: '#fff', flexDirection: 'column', justifySelf: 'center', justifyContent: 'center', alignItems: 'center', height: '100vh', padding: '1rem', width: '100%', zIndex: 0 }}>
                     {messageBox && messageBox.message && <MessageAlert message={messageBox.message} type={messageBox.type} clearMessage={clearMessage} />}
-                    <Calendar
+
+                    {session && session.user ? <ButtonOutline
+                        onClick={handleSignOut}
+                        className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white smd:w-96 ${loading === true ? "cursor-not-allowed" : "cursor-pointer"
+                            }`}
+                        disabled={loading === true ? true : false}
+                    >
+                        {loading ? <Loader loader_color={'#F89878'} /> : "Unlink Your Calendar"}
+                    </ButtonOutline> : <ButtonOutline
+                        onClick={handleLogin}
+                        className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white smd:w-96 ${loading === true ? "cursor-not-allowed" : "cursor-pointer"
+                            }`}
+                        disabled={loading === true ? true : false}
+                    >
+                        {loading ? <Loader loader_color={'#F89878'} /> : "Link Your Calendar"}
+                    </ButtonOutline>}
+                    {session && session.user && <ButtonOutline
+                        onClick={handleSelectSlot}
+                        className={`inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-2xl  bg-sky-600 py-3.5 text-xl font-bold text-white smd:w-96 ${loading === true ? "cursor-not-allowed" : "cursor-pointer"
+                            }`}
+                        disabled={loading === true ? true : false}
+                    >
+                        {loading ? <Loader loader_color={'#F89878'} /> : "Create Event"}
+                    </ButtonOutline>}
+                    {/* <Calendar
                         {...props}
                         localizer={localizer}
                         events={myEvents}
@@ -192,7 +323,7 @@ function MentorSchedule(props) {
                         popup
                         onSelectSlot={handleSelectSlot}
                         onSelectEvent={handleSelectEvent}
-                    />
+                    /> */}
                     <Modal
                         open={open}
                         onClose={handleClose}
@@ -223,35 +354,6 @@ function MentorSchedule(props) {
                                         {errors.end && (<FormHelperSPan id="component-error-text">{"End time field is required"}</FormHelperSPan>)}
                                     </InputFormControl>
                                 </InputView>
-                                <input type="number" id="quantity" name="quantity" max="30" />
-                                {/* <InputView>
-                            <InputFormControl variant="standard">
-                                <InputLabel htmlFor="component-simple">{'Duration'}</InputLabel>
-                                <Input id="component-duration" placeholder='Duration' max="10" type='number' {...register("duration", { required: true })} readOnly={loading ? true : false} />
-                                <input type="number" id="quantity" name="quantity" max="10" />
-                                {errors.end && (<FormHelperSPan id="component-error-text">{"End date field is required"}</FormHelperSPan>)}
-                            </InputFormControl>
-                        </InputView> */}
-                                {/* <InputView>
-                            <InputFormControl variant="standard">
-                                <ColorView>
-                                    <InputLabel htmlFor="component-simple">{`Pick Background Color ${bgColor}`}</InputLabel>
-                                    {eventColors.map((color, index) => (
-                                        <>
-                                            <ColourInput id="component-bg" placeholder='Background Color'  {...register("bg", { required: true })} readOnly={loading ? true : false} value={color} name='bg' type='color' />
-                                            <div style={{
-                                                background: 'red',
-                                                width: '6rem',
-                                                height: '6rem',
-                                            }}>
-                                                <Colour key={index} color={color} />
-                                            </div>
-                                        </>
-                                    ))}
-                                </ColorView>
-                                {!bgColor && (<FormHelperSPan id="component-error-text">{"Background color field is required"}</FormHelperSPan>)}
-                            </InputFormControl>
-                        </InputView> */}
                                 <InputView>
                                     <div className="flex flex-col mt-5">
                                         <ButtonOutline

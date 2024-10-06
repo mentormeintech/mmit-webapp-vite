@@ -10,8 +10,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import {
   BrowserRouter as Router,
   RouterProvider,
-  Routes,
-  Route
 } from "react-router-dom";
 import router from './routes/route';
 import AOS from "aos";
@@ -19,9 +17,19 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import "@bitnoi.se/react-scheduler/dist/style.css";
 import { setToken } from "./utilities/axiosClient";
 import { accessToken } from "./utilities/tokenClient";
+import { createClient } from "@supabase/supabase-js";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const VITE_SITE_SUPABASE_URL = import.meta.env.VITE_SITE_SUPABASE_URL;
+  const VITE_SITE_SUPABASE_API_KEY = import.meta.env.VITE_SITE_SUPABASE_API_KEY;
+  const GOOGLE_CLIENT_ID = import.meta.env.VITE_SITE_GOOGLE_CLIENT_ID;
+
+
+  const supabaseClient = createClient(
+    VITE_SITE_SUPABASE_URL,
+    VITE_SITE_SUPABASE_API_KEY
+  )
 
   useEffect(() => {
     async () => {
@@ -32,20 +40,16 @@ function App() {
     }
   }, []);
 
+
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        {/* <Router>
-          <Routes>
-            {privateRoutes.map(route => (
-              <Route key={route.path} {...route} />
-            ))}
-          </Routes>
-        </Router> */}
-        <RouterProvider router={router} />
-        <ToastContainer />
-      </PersistGate>
-    </Provider>
+    <SessionContextProvider supabaseClient={supabaseClient}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={router} />
+          <ToastContainer />
+        </PersistGate>
+      </Provider>
+    </SessionContextProvider>
   )
 }
 
