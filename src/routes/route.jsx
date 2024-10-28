@@ -16,11 +16,11 @@ import MenteeSettings from '../pages/menteeSettings/page';
 import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
 import Mentorregister from '../pages/auth/mentorregist';
-import Privacypolicy from '../pages/privacy-policy';
+import Privacypolicy from '../pages/privacy-policy/page';
 import MenteeProfilePage from '../pages/menteeProfilePage';
 import TermsUse from '../pages/terms-use';
-import SiteMap from '../pages/site-map';
-import MentorCalender from '../pages/calender/pages';
+import SiteMap from '../pages/sitemap/page';
+import MentorCalender from '../pages/mentor-calendar/page';
 import Notifications from '../pages/mentor-notification/page';
 import ErrorPage from '../errorboudary';
 import { accessToken } from '../utilities/tokenClient';
@@ -28,6 +28,7 @@ import Groupsession from '../pages/group-sessions';
 import ForgotPassword from '../pages/forgot-password/pages';
 import PasswordRequest from '../pages/forgot-password/password-request/page';
 import MenteeNotification from '../pages/mentee-notification/page';
+import ContactUs from '../pages/contactus/page';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
 		element: <MentorDashboard />,
 	},
 	{
+		path: '/contactus',
+		element: <ContactUs />,
+	},
+	{
 		path: '/mentor/booking',
 		element: <MentorBooking />,
 	},
@@ -109,7 +114,7 @@ const router = createBrowserRouter([
 		element: <MenteeSettings />,
 	},
 	{
-		path: '/mentor/calender',
+		path: '/mentor-calendar',
 		element: <MentorCalender />,
 	},
 	{
@@ -141,7 +146,7 @@ const router = createBrowserRouter([
 		element: <TermsUse />,
 	},
 	{
-		path: '/site-map',
+		path: '/sitemap',
 		element: <SiteMap />,
 	},
 	{

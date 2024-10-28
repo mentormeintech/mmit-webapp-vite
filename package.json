@@ -14,11 +14,13 @@
   },
   "dependencies": {
     "@bitnoi.se/react-scheduler": "^0.1.4",
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.6",
     "@mui/material": "^5.15.2",
     "@mui/x-date-pickers": "^6.19.6",
+    "@syncfusion/ej2-react-schedule": "^27.1.50",
     "aos": "^2.3.4",
     "axios": "^1.6.2",
     "classnames": "^2.5.1",

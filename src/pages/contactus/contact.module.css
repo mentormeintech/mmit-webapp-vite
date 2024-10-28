@@ -1,0 +1,17 @@
+textarea {
+    resize: none;
+    background-color: rgba(230, 230, 230, 0.2);
+    outline: none;
+    border-radius: .3rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: .9em 1rem;
+}
+
+input {
+    background-color: rgba(230, 230, 230, 0.2);
+    outline: none;
+    border-radius: .1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: .9em 1rem;
+    font-size: 1.01rem;
+}

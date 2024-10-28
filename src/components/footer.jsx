@@ -17,7 +17,8 @@ const FooterLink = ({ href, children }) => {
 	);
 	return (
 		// <Link to={href} className={`transition-all hover:text-secondary-500 cursor-pointer `} target='_blank'>
-		<Link to={href} className={linkClasses} target="_blank">
+		// <Link to={href} className={linkClasses} target="_blank">
+		<Link to={href} className={linkClasses}>
 			{children}
 		</Link>
 	);
@@ -67,16 +68,21 @@ export default function Footer() {
 			}}
 			ref={ref}
 		>
-			<footer className="flex flex-col gap-10 bg-secondary-200 px-10 py-10 text-sm sm:px-20">
+			<footer className="flex flex-col gap-10 bg-secondary-200 px-10 pb-[1rem] py-10 text-sm sm:px-20">
 				<div className="container mx-auto flex flex-col gap-6 md:flex-row md:justify-between">
-					<div className="">
+					<div className="sm:w-[43%] mx-auto">
 						<img
 							src="/images/footer-logo.png"
 							width={1000}
 							height={1000}
 							alt=""
-							className="h-auto w-48"
+							className="h-auto w-48 mb-[1.2rem]"
 						/>
+						<span className="w-[40%] leading-6">
+							MentorMeInTech is a Non-profit startup aimed to help African youths break
+							into tech and build successful careers through mentorship, guidance and on
+							going support provided by our inclusive community.
+						</span>
 					</div>
 
 					<div className="grid gap-8">
@@ -84,7 +90,7 @@ export default function Footer() {
 							<SocialMediaLinks />
 							<a
 								href="/findamentor"
-								className="hidden w-fit rounded border border-primary-500 bg-primary-500 px-6 py-2 font-medium text-white transition-all hover:bg-opacity-70 md:block"
+								className="hidden w-fit rounded border border-primary-500 bg-primary-500 px-6 py-2 font-medium text-white transition-all hover:bg-opacity-70 md:flex items-center"
 							>
 								Join Our Community
 							</a>
@@ -106,7 +112,7 @@ export default function Footer() {
 						</div>
 
 						<div className="flex flex-col flex-wrap gap-6 sm:flex-row md:justify-end">
-							<FooterLink href="#" currentRoute={currentRoute}>
+							<FooterLink href="/contactus" currentRoute={currentRoute}>
 								Contact us
 							</FooterLink>
 							<FooterLink
@@ -121,14 +127,14 @@ export default function Footer() {
 							>
 								Terms of use
 							</FooterLink>
-							<FooterLink href="#" currentRoute={currentRoute}>
+							<FooterLink href="/sitemap" currentRoute={currentRoute}>
 								Sitemap
 							</FooterLink>
 						</div>
 					</div>
 				</div>
 
-				<p className="text-xs md:text-center">
+				<p className="text-xs md:text-center mt-[5rem]">
 					© {new Date().getFullYear()} MentorMeInTech. All rights
 					reserved
 				</p>

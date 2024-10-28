@@ -27,7 +27,7 @@ function Header_Signin(props) {
 					width={200}
 					height={1000}
 					alt="MMIT Logo"
-					className="ml-[100px] mb-[38]"
+					className="h-auto w-auto ml-[100px] mb-[38]"
 					src="/images/mmit-logo.png"
 				/>
 			</a>

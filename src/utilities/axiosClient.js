@@ -22,16 +22,14 @@ export const useAxiosFormData = axios.create({
 });
 
 export async function setToken(token) {
-    token = token || await getValidToken()
-    useAxios.defaults.headers.common["token"] = `Bearer ${token}`;
-    useAxios.defaults.headers.common["Authorization"] = `Basic ${encoded}`
-    // if (token) {
-    //     useAxios.defaults.headers.common["token"] = `Bearer ${token}`;
-    //     useAxios.defaults.headers.common["Authorization"] = `Basic ${encoded}`
-    // } else {
-    //     delete useAxios.defaults.headers.common["Authorization"];
-    //     delete useAxios.defaults.headers.common["token"];
-    // }
+    let validToken = await token || await getValidToken();
+    if (validToken) {
+        useAxios.defaults.headers.common["token"] = `Bearer ${await validToken}`;
+        useAxios.defaults.headers.common["Authorization"] = `Basic ${encoded}`
+    } else {
+        delete useAxios.defaults.headers.common["Authorization"];
+        delete useAxios.defaults.headers.common["token"];
+    }
 }
 
 // Validates token, and removes it if it's invalid

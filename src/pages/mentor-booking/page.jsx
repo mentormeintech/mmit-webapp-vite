@@ -14,6 +14,7 @@ function MentorBooking() {
     const navigation = useNavigate();
     const [loading, setloading] = useState(false);
     const [upcomingSessions, setUpcomingSessions] = useState([]);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [bookingSection, setBookingSection] = useState({
         upcoming: true,
         pending: false,
@@ -82,31 +83,34 @@ function MentorBooking() {
     return (
         <>
             <Header_Signin />
-            {loading ? <Spinner /> : <div className="flex">
-                <MentorSide Mentor={Mentor} />
-                <section className="w-9/12 mt-36 py-8 px-5">
-                    <h4 className="text-[24px] font-semibold mb-3">Booking</h4>
-                    <p>The session timings are following your local timezone Nigeria.</p>
+            {loading ? <Spinner /> :
+                <div className="flex">
+                    <MentorSide Mentor={Mentor} setIsMobileMenuOpen={setIsMobileMenuOpen} isMobileMenuOpen={isMobileMenuOpen} />
+                    <main className={`flex-1 transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'ml-0' : 'ml-64'} p-5`}>
+                        <section className="w-9/12 mt-36 py-8 px-5">
+                            <h4 className="text-[24px] font-semibold mb-3">Booking</h4>
+                            <p>The session timings are following your local timezone Nigeria.</p>
 
-                    <ul className="flex items-center mt-12 mb-12">
-                        <li className={`relative cursor-pointer group ${bookingSection.upcoming ? 'text-[#0F88D9]' : ''}`} onClick={upcomingSection}>
-                            <div className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] ${bookingSection.upcoming ? 'w-full' : 'w-0'} absolute left-0 -bottom-[3px]`}></div> Upcoming
-                        </li>
+                            <ul className="flex items-center mt-12 mb-12">
+                                <li className={`relative cursor-pointer group ${bookingSection.upcoming ? 'text-[#0F88D9]' : ''}`} onClick={upcomingSection}>
+                                    <div className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] ${bookingSection.upcoming ? 'w-full' : 'w-0'} absolute left-0 -bottom-[3px]`}></div> Upcoming
+                                </li>
 
-                        <li className={`relative cursor-pointer group mx-16 ${bookingSection.pending ? 'text-[#0F88D9]' : ''}`} onClick={pendingSection}>
-                            <div className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] absolute left-0 -bottom-[3px] ${bookingSection.pending ? 'w-full' : 'w-0'}`}></div> Pending
-                        </li>
+                                <li className={`relative cursor-pointer group mx-16 ${bookingSection.pending ? 'text-[#0F88D9]' : ''}`} onClick={pendingSection}>
+                                    <div className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] absolute left-0 -bottom-[3px] ${bookingSection.pending ? 'w-full' : 'w-0'}`}></div> Pending
+                                </li>
 
-                        <li className={`relative cursor-pointer group ${bookingSection.doneSessions ? 'text-[#0F88D9]' : ''}`} onClick={doneSessionSection}>
-                            <div className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] absolute left-0 -bottom-[3px] ${bookingSection.doneSessions ? 'w-full' : 'w-0'}`}></div> Done Sessions
-                        </li>
-                    </ul>
+                                <li className={`relative cursor-pointer group ${bookingSection.doneSessions ? 'text-[#0F88D9]' : ''}`} onClick={doneSessionSection}>
+                                    <div className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] absolute left-0 -bottom-[3px] ${bookingSection.doneSessions ? 'w-full' : 'w-0'}`}></div> Done Sessions
+                                </li>
+                            </ul>
 
-                    {
-                        alternateSections()
-                    }
-                </section>
-            </div>}
+                            {
+                                alternateSections()
+                            }
+                        </section>
+                    </main>
+                </div>}
         </>
     )
 }
