@@ -159,8 +159,8 @@ export const SocialCircle = styled.div`
 `;
 
 export const ButtonOutline = styled.button`
-	width: 100% !important;
-	padding: 0.2rem 4rem !important;
+	// width: 60% !important;
+	padding: 1.5rem 1.5rem !important;
 	border: 0.07rem solid #123b64 !important;
 	color: #123b64 !important;
 	text-transform: capitalize !important;

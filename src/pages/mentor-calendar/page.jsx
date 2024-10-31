@@ -11,7 +11,7 @@ export default function MentorCalender() {
             <div className="flex">
                 <MentorSide setIsMobileMenuOpen={setIsMobileMenuOpen} isMobileMenuOpen={isMobileMenuOpen} />
                 <main className={`flex-1 transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'ml-0' : 'ml-64'} p-5`}>
-                    <section className="w-5/6 mt-36 py-8">
+                    <section className="w-5/6 mt-36">
                         <MentorSchedule />
                     </section>
                 </main>
