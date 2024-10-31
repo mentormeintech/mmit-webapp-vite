@@ -68,7 +68,7 @@ function MentorSchedule(props) {
     useLayoutEffect(() => {
         // console.log("session", session)
         // console.log("supaBaseClient", supaBaseClient)
-        getMyEvents()
+        // getMyEvents()
     }, [])
 
     async function clearMessage() {
@@ -100,20 +100,6 @@ function MentorSchedule(props) {
         }
     }
 
-    const components = {
-        event: (props) => {
-            const eventType = props?.event?.data?.type;
-            const bg = props?.event?.bg;
-            console.log("bg", bg)
-            return (
-                <ScheduleView className='capitalize ScheduleView' bg={bg}>
-                    {props.title.substring(0, 19 - 3) + '...' || 'No Title'}
-                </ScheduleView>
-            )
-        },
-    };
-
-
     function selectRandomColor() {
         const randomIndex = Math.floor(Math.random() * eventColors.length);
         return eventColors[randomIndex];
@@ -123,7 +109,7 @@ function MentorSchedule(props) {
         handleOpen()
     };
 
-    const handleAddEvent = async (data) => {
+    const handleAddEventOld = async (data) => {
         try {
             setToken(localStorage.getItem(accessToken))
             const { title, bg, event_date } = data
@@ -178,8 +164,63 @@ function MentorSchedule(props) {
         }
     }
 
+    const handleAddEvent = async (data) => {
+        try {
+            setToken(localStorage.getItem(accessToken))
+            const { title, bg, event_date } = data
+            console.log("event_date", event_date)
+            console.log("data", data)
+            const start = convertTimeToDate(data.start)
+            const end = convertTimeToDate(data.end)
+            if (new Date(start).getTime() > new Date(end).getTime()) {
+                setmessageBox({ message: "Start date can't be after end date", type: 'warning' })
+            }
+            else {
+                if (start && end && event_date) {
+                    setloading(true)
+                    const newEvent = {
+                        title: title || 'available',
+                        start: new Date(start),
+                        end: new Date(end),
+                        event_date: new Date(event_date),
+                        bg: selectRandomColor() ? selectRandomColor() : bgColor,
+                        // type: "",
+                    }
+                    const response = await postRequest('event/create', newEvent)
+                    if (response && response.success === true) {
+                        // await handleGoogleCalendarEvent(newEvent)
+                        setEvents(response.data)
+                        setmessageBox({ message: 'Event added', type: 'success' })
+                        setloading(false)
+                        getMyEvents()
+                        setTimeout(() => {
+                            handleClose()
+                            reset(defaultState);
+                        }, 2000);
+                    }
+                    else {
+                        setmessageBox({ message: response.message, type: 'warning' })
+                        setloading(false)
+                    }
+                }
+                else {
+                    clearMessage()
+                    return alert('Some input are empty')
+                }
+            }
+        } catch (error) {
+            setmessageBox({ message: error.message, type: 'warning' })
+            setloading(false)
+        }
+        finally {
+            setTimeout(() => {
+                clearMessage()
+            }, 5000);
+        }
+    }
+
     // Refactor this code in such a way that when the google event is done creating update the event table and add the meeting link created created by google to it
-    const handleGoogleCalendarEvent = async (data) => {
+    const handleGoogleCalendarEventOld = async (data) => {
         try {
             const newEvent = data
             setToken(localStorage.getItem(accessToken))
@@ -225,6 +266,78 @@ function MentorSchedule(props) {
                         handleClose()
                         reset(defaultState);
                     }, 2000);
+                }
+                else {
+
+                }
+
+            }
+            else {
+                clearMessage()
+                return alert('Some input are empty')
+            }
+        } catch (error) {
+            setmessageBox({ message: error.message, type: 'warning' })
+            setloading(false)
+        }
+        finally {
+            setTimeout(() => {
+                clearMessage()
+            }, 5000);
+        }
+    }
+
+    const handleGoogleCalendarEvent = async (data) => {
+        try {
+            const { title, bg, event_date } = data
+            const newEvent = data
+            setToken(localStorage.getItem(accessToken))
+            const { start, end } = newEvent
+            if (new Date(start).getTime() > new Date(end).getTime()) {
+                return setmessageBox({ message: "Start date can't be after end date", type: 'warning' })
+            }
+            if (start && end && event_date) {
+                setloading(true)
+                newEvent.description = 'Session with a mentee'
+                newEvent.summary = 'Mentorship Session'
+                newEvent.start = {
+                    'dateTime': new Date(start).toISOString(),
+                    'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
+                }
+                newEvent.end = {
+                    'dateTime': new Date(end).toISOString(),
+                    'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
+                }
+                const event = {
+                    ...newEvent, conferenceData: {
+                        createRequest: {
+                            requestId: new Date().getTime(),
+                            conferenceSolutionKey: {
+                                type: "hangoutsMeet",
+                            },
+                        },
+                    },
+                }
+                const response = await axios.post('https://www.googleapis.com/calendar/v3/calendars/primary/events', event, {
+                    headers: {
+                        Authorization: `Bearer ${session.provider_token}`,
+                    },
+                    params: {
+                        conferenceDataVersion: 1,
+                    },
+                })
+                // console.log("handleGoogleCalendarEvent", response)
+                if (response && response.status === 200) {
+                    await handleAddEvent(newEvent)
+                    // setmessageBox({ message: 'Event added', type: 'success' })
+                    // console.log('Meeting link', response.data.hangoutLink)
+                    // console.log('Meeting description', response.data.description)
+                    // setloading(false)
+                    // getMyEvents()
+                    // setTimeout(() => {
+                    //     handleClose()
+                    //     reset(defaultState);
+                    // }, 2000);
                 }
                 else {
 
@@ -332,7 +445,8 @@ function MentorSchedule(props) {
                     >
                         <Box sx={style}>
                             {messageBox && messageBox.message && <MessageAlert message={messageBox.message} type={messageBox.type} clearMessage={clearMessage} />}
-                            <FormView onSubmit={handleSubmit(handleAddEvent)}>
+                            {/* <FormView onSubmit={handleSubmit(handleAddEvent)}> */}
+                            <FormView onSubmit={handleSubmit(handleGoogleCalendarEvent)}>
                                 <InputView>
                                     <InputFormControl variant="standard">
                                         <InputLabel htmlFor="component-simple">Session Date</InputLabel>
