@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Modal, Box } from "@mui/material";
-import { ScheduleView } from "../styled/component";
 import SessionTime from "./sessionTime";
 import Alert from "../features/Alert";
 import { getValidToken } from "../utilities/tokenClient";

@@ -13,7 +13,6 @@ import {
 } from "react-router-dom";
 import router from './routes/route';
 import AOS from "aos";
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 import "@bitnoi.se/react-scheduler/dist/style.css";
 import { setToken } from "./utilities/axiosClient";
 import { accessToken } from "./utilities/tokenClient";

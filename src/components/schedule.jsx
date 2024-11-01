@@ -1,6 +1,4 @@
-import { Calendar, momentLocalizer } from 'react-big-calendar'
 import React, { useState, useLayoutEffect } from 'react';
-import moment from "moment";
 import { Box, InputLabel, Input, Modal } from '@mui/material';
 import { useForm } from "react-hook-form";
 import Loader from './loader';
@@ -15,6 +13,7 @@ import { convertTimeToDate } from '../utilities/util';
 import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react';
 import axios from 'axios';
 import { EventCard } from './eventCard';
+import { BsCalendarEvent } from "react-icons/bs";
 
 
 const style = {
@@ -49,7 +48,6 @@ function MentorSchedule(props) {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const localizer = momentLocalizer(moment);
     const [myEvents, setEvents] = useState([])
     const [open, setOpen] = useState(false);
     const [bgColor, setbgColor] = useState('#000')
@@ -414,12 +412,20 @@ function MentorSchedule(props) {
                     {/* Action Buttons Container */}
                     <div className="flex flex-col items-start justify-start w-full max-w-lg space-y-2 mb-4">
                         {session && session.user ? (
+                            // <ButtonOutline
+                            //     onClick={handleSignOut}
+                            //     className={`h-12 flex items-center justify-center rounded-full bg-sky-600 text-white text-lg font-bold transition-all duration-300 ease-in-out ${loading ? "cursor-not-allowed opacity-70" : "hover:bg-sky-700"}`}
+                            //     disabled={loading}
+                            // >
+                            //     {loading ? <Loader loader_color="#F89878" /> : "Unlink Your Calendar"}
+                            // </ButtonOutline>
                             <ButtonOutline
-                                onClick={handleSignOut}
-                                className={`h-12 flex items-center justify-center rounded-full bg-sky-600 text-white text-lg font-bold transition-all duration-300 ease-in-out ${loading ? "cursor-not-allowed opacity-70" : "hover:bg-sky-700"}`}
+                                onClick={handleSelectSlot}
+                                className={`flex items-center justify-center rounded-full bg-sky-600 text-white text-lg font-bold transition-all duration-300 ease-in-out ${loading ? "cursor-not-allowed opacity-70" : "hover:bg-sky-700"}`}
                                 disabled={loading}
                             >
-                                {loading ? <Loader loader_color="#F89878" /> : "Unlink Your Calendar"}
+                                <BsCalendarEvent className='mr-4 text- text-500' />
+                                {loading ? <Loader loader_color="#F89878" /> : "Create Event"}
                             </ButtonOutline>
                         ) : (
                             <ButtonOutline
@@ -431,15 +437,16 @@ function MentorSchedule(props) {
                             </ButtonOutline>
                         )}
 
-                        {session && session.user && (
+                        {/* {session && session.user && (
                             <ButtonOutline
                                 onClick={handleSelectSlot}
                                 className={`h-12 flex items-center justify-center rounded-full bg-sky-600 text-white text-lg font-bold transition-all duration-300 ease-in-out ${loading ? "cursor-not-allowed opacity-70" : "hover:bg-sky-700"}`}
                                 disabled={loading}
                             >
+                                <BsCalendarEvent className='mr-4 text- text-500' />
                                 {loading ? <Loader loader_color="#F89878" /> : "Create Event"}
                             </ButtonOutline>
-                        )}
+                        )} */}
                     </div>
 
 
