@@ -33,7 +33,7 @@ const MentorSide = (props) => {
 		0
 	)}${Mentor?.last_name?.charAt(0)}`;
 	return (
-		<aside className="fixed bg-white">
+		<aside className="fixed bg-white z-10">
 			{/* Toggle button for mobile view */}
 			{!isMobileMenuOpen && <div className="flex justify-between items-center ml-3 mt-5 p-2 lg:hidden border rounded-xl">
 				<button

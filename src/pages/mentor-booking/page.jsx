@@ -1,6 +1,5 @@
 import MentorSide from "../../components/MentorSide";
-import React, { useState, useLayoutEffect } from "react"
-import { CurrentMentor } from "../../components/CurrentMentor";
+import React, { useState, useLayoutEffect } from "react";
 import Header_Signin from "../../components/Header_Signin";
 import Upcoming from "./upcoming";
 import { useSelector } from "react-redux";
@@ -9,110 +8,164 @@ import { useNavigate } from "react-router-dom";
 import Alert from "../../features/Alert";
 import Spinner from "../../components/Spinner";
 import PendingSession from "./pending-session";
+import MentorLayout from "../../components/MentorLayout";
 
 function MentorBooking() {
-    const navigation = useNavigate();
-    const [loading, setloading] = useState(false);
-    const [upcomingSessions, setUpcomingSessions] = useState([]);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [bookingSection, setBookingSection] = useState({
-        upcoming: true,
-        pending: false,
-        doneSessions: false,
-    })
-    const { dashboard } = useSelector((state) => state.mentor_me_user)
+	const navigate = useNavigate();
+	const [loading, setLoading] = useState(false);
+	const [upcomingSessions, setUpcomingSessions] = useState([]);
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+	const [bookingSection, setBookingSection] = useState({
+		upcoming: true,
+		pending: false,
+		doneSessions: false,
+	});
 
-    async function getMentorUpcomingSession() {
-        try {
-            if (!dashboard && dashboard._id) {
-                return navigation("/mentor");
-            }
-            setloading(true);
-            const response = await userGetRequest(`event/upcoming-session?mentor_id=${dashboard._id}`);
-            if (response && response.success === true) {
-                setUpcomingSessions(response?.data);
-                setloading(false);
-            } else {
-                Alert(response.message, "warning");
-                setloading(false);
-            }
-            setloading(false);
-        } catch (error) {
-            Alert(error.message, "error");
-            setloading(false);
-        }
-    }
+	// Retrieve mentor data from Redux
+	const { dashboard } = useSelector((state) => state.mentor_me_user);
 
-    useLayoutEffect(() => {
-        getMentorUpcomingSession()
-    }, [])
-    function upcomingSection() {
-        setBookingSection({
-            upcoming: true, pending: false, doneSessions: false
-        })
-    }
+	// Fetch upcoming sessions if the mentor data is available
+	async function getMentorUpcomingSession() {
+		try {
+			if (!dashboard || !dashboard._id) {
+				return navigate("/mentor"); // Redirect if no dashboard data
+			}
+			setLoading(true);
+			const response = await userGetRequest(
+				`event/upcoming-session?mentor_id=${dashboard._id}`
+			);
+			if (response && response.success) {
+				setUpcomingSessions(response.data);
+			} else {
+				Alert(response.message, "warning");
+			}
+			setLoading(false);
+			console.log(dashboard);
+		} catch (error) {
+			Alert(error.message, "error");
+			setLoading(false);
+		}
+	}
 
-    function pendingSection() {
-        setBookingSection({
-            upcoming: false, pending: true, doneSessions: false
-        })
-    }
+	useLayoutEffect(() => {
+		getMentorUpcomingSession();
+	}, []);
 
-    function doneSessionSection() {
-        setBookingSection({
-            upcoming: false, pending: false, doneSessions: true
-        })
-    }
+	function upcomingSection() {
+		setBookingSection({
+			upcoming: true,
+			pending: false,
+			doneSessions: false,
+		});
+	}
 
-    function alternateSections() {
-        if (bookingSection.upcoming) {
-            return <Upcoming upcomingSession={upcomingSessions} />
-        }
+	function pendingSection() {
+		setBookingSection({
+			upcoming: false,
+			pending: true,
+			doneSessions: false,
+		});
+	}
 
-        else if (bookingSection.pending) {
-            return <PendingSession upcomingSession={upcomingSessions} />
-        }
+	function doneSessionSection() {
+		setBookingSection({
+			upcoming: false,
+			pending: false,
+			doneSessions: true,
+		});
+	}
 
-        else if (bookingSection.doneSessions) {
-            return <p>You have no done sessions</p>
-        }
-    }
+	function alternateSections() {
+		if (bookingSection.upcoming) {
+			return <Upcoming upcomingSession={upcomingSessions} />;
+		} else if (bookingSection.pending) {
+			return <PendingSession upcomingSession={upcomingSessions} />;
+		} else if (bookingSection.doneSessions) {
+			return <p>You have no done sessions</p>;
+		}
+	}
 
-    const Mentor = CurrentMentor
+	return (
+		<>
+			{loading ? (
+				<Spinner loading={loading} />
+			) : (
+				<MentorLayout
+					mentorData={dashboard}
+					setIsMobileMenuOpen={setIsMobileMenuOpen}
+					isMobileMenuOpen={isMobileMenuOpen}
+				>
+					<section className=" pb-8 px-0 pr-5 lg:pr-0 lg:px-5">
+						<h4 className="text-[24px] font-semibold mb-3">
+							Booking
+						</h4>
+						<p>
+							The session timings are following your local
+							timezone Nigeria.
+						</p>
 
-    return (
-        <>
-            <Header_Signin />
-            {loading ? <Spinner /> :
-                <div className="flex">
-                    <MentorSide Mentor={Mentor} setIsMobileMenuOpen={setIsMobileMenuOpen} isMobileMenuOpen={isMobileMenuOpen} />
-                    <main className={`flex-1 transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'ml-0' : 'ml-64'} p-5`}>
-                        <section className="w-9/12 mt-36 py-8 px-5">
-                            <h4 className="text-[24px] font-semibold mb-3">Booking</h4>
-                            <p>The session timings are following your local timezone Nigeria.</p>
+						<ul className="flex items-center mt-12 mb-12">
+							<li
+								className={`relative cursor-pointer group ${
+									bookingSection.upcoming
+										? "text-[#0F88D9]"
+										: ""
+								}`}
+								onClick={upcomingSection}
+							>
+								<div
+									className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] ${
+										bookingSection.upcoming
+											? "w-full"
+											: "w-0"
+									} absolute left-0 -bottom-[3px]`}
+								></div>
+								Upcoming
+							</li>
 
-                            <ul className="flex items-center mt-12 mb-12">
-                                <li className={`relative cursor-pointer group ${bookingSection.upcoming ? 'text-[#0F88D9]' : ''}`} onClick={upcomingSection}>
-                                    <div className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] ${bookingSection.upcoming ? 'w-full' : 'w-0'} absolute left-0 -bottom-[3px]`}></div> Upcoming
-                                </li>
+							<li
+								className={`relative cursor-pointer group mx-16 ${
+									bookingSection.pending
+										? "text-[#0F88D9]"
+										: ""
+								}`}
+								onClick={pendingSection}
+							>
+								<div
+									className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] absolute left-0 -bottom-[3px] ${
+										bookingSection.pending
+											? "w-full"
+											: "w-0"
+									}`}
+								></div>
+								Pending
+							</li>
 
-                                <li className={`relative cursor-pointer group mx-16 ${bookingSection.pending ? 'text-[#0F88D9]' : ''}`} onClick={pendingSection}>
-                                    <div className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] absolute left-0 -bottom-[3px] ${bookingSection.pending ? 'w-full' : 'w-0'}`}></div> Pending
-                                </li>
+							<li
+								className={`relative cursor-pointer group ${
+									bookingSection.doneSessions
+										? "text-[#0F88D9]"
+										: ""
+								}`}
+								onClick={doneSessionSection}
+							>
+								<div
+									className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] absolute left-0 -bottom-[3px] ${
+										bookingSection.doneSessions
+											? "w-full"
+											: "w-0"
+									}`}
+								></div>
+								Done Sessions
+							</li>
+						</ul>
 
-                                <li className={`relative cursor-pointer group ${bookingSection.doneSessions ? 'text-[#0F88D9]' : ''}`} onClick={doneSessionSection}>
-                                    <div className={`group-hover:w-full transition-all delay-500 ease-in-out h-[2px] bg-[#0F88D9] absolute left-0 -bottom-[3px] ${bookingSection.doneSessions ? 'w-full' : 'w-0'}`}></div> Done Sessions
-                                </li>
-                            </ul>
-
-                            {
-                                alternateSections()
-                            }
-                        </section>
-                    </main>
-                </div>}
-        </>
-    )
+						{alternateSections()}
+					</section>
+				</MentorLayout>
+			)}
+		</>
+	);
 }
 
-export default MentorBooking
+export default MentorBooking;
