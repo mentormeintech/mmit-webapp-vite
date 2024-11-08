@@ -1,5 +1,3 @@
-import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -7,7 +5,6 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 
-const localizer = momentLocalizer(moment);
 
 function SessionTime(props) {
 	const { handleAddEvent, setSelectedTime, selectedDate } = props;

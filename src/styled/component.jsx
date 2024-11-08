@@ -159,10 +159,10 @@ export const SocialCircle = styled.div`
 `;
 
 export const ButtonOutline = styled.button`
-	width: 100% !important;
-	padding: 0.2rem 4rem !important;
+	// width: 60% !important;
+	padding: .3rem 1.2rem !important;
 	border: 0.07rem solid #123b64 !important;
-	color: #123b64 !important;
+	color: #F89878 !important;
 	text-transform: capitalize !important;
 	font-size: 1.2rem !important;
 	font-family: var(--Montserrat);

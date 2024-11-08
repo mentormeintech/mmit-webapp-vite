@@ -49,6 +49,7 @@ export default function LoginForm() {
 				setmessage("");
 				const url =
 					type === "mentor" ? "mentor/signin" : "mentee/signin";
+				setIsPasswordVisible((prevState) => !prevState);
 				const response = await signInUser(url, event);
 				if (response && response.success === true) {
 					if (response.data.user_type === "mentor") {
