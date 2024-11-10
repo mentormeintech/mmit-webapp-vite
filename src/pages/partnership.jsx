@@ -8,15 +8,9 @@ function PartnershipPage() {
   return (
     <div>
       <Header />
-      <Handshake /> {/* This is the correct usage of the Handshake component */}
-      <div className="relative flex justify-between pb-[400px] pl-24 pt-14">
-        <img
-          src="/images/right-tri.png"
-          width={352}
-          height={557}
-          alt="tri"
-          className="absolute bottom-0 right-0 z-[-1]"
-        />
+      {/* This is the correct usage of the Handshake component */}
+      <Handshake />
+      <div className="pt-10 max-w-6xl lg:mx-auto mx-4">
         <PartnershipLeft />
         <PartnershipForm />
       </div>
