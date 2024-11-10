@@ -33,27 +33,27 @@ const MentorSide = (props) => {
 		0
 	)}${Mentor?.last_name?.charAt(0)}`;
 	return (
-		<aside className="fixed bg-white">
+		<aside className="fixed z-10">
 			{/* Toggle button for mobile view */}
-			{!isMobileMenuOpen && <div className="flex justify-between items-center ml-3 mt-5 p-2 lg:hidden border rounded-xl">
-				<button
-					onClick={(event) => toggleMobileMenu(event)}
-					className="text-sm text-black"
-				>
-					Menu
-				</button>
-			</div>}
+			{!isMobileMenuOpen && (
+				<div className="flex bg-white justify-between items-center ml-3 mt-5 lg:hidden">
+					<button
+						onClick={(event) => toggleMobileMenu(event)}
+						className="text-sm text-black p-2 border rounded-xl"
+					>
+						Menu
+					</button>
+				</div>
+			)}
 			<div
 				className={`fixed left-0 top-0 h-full bg-white border-r shadow-md transition-transform duration-300 ease-in-out 
             ${
 				isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-			} lg:translate-x-0 lg:w-1/6 p-4 mt-[75px] md:mt-32`}
+			} lg:translate-x-0 w-52 lg:w-1/6 p-4 mt-[75px] md:mt-32`}
 			>
 				{isMobileMenuOpen && (
 					<div className="flex justify-self-end p-2 -mt-5 mb-4 rounded-full border h-min w-min lg:hidden">
-						<FaXmark
-							onClick={(event) => toggleMobileMenu(event)}
-						/>
+						<FaXmark onClick={(event) => toggleMobileMenu(event)} />
 					</div>
 				)}
 				<ul>
