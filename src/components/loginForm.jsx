@@ -43,13 +43,14 @@ export default function LoginForm() {
 	// const url = 'mentor/signin'
 
 	async function loginUser(event) {
+		setIsPasswordVisible(false);
 		try {
 			if (type === "mentee" || type === "mentor") {
 				setloading(true);
 				setmessage("");
 				const url =
 					type === "mentor" ? "mentor/signin" : "mentee/signin";
-				setIsPasswordVisible((prevState) => !prevState);
+				setIsPasswordVisible(false);
 				const response = await signInUser(url, event);
 				if (response && response.success === true) {
 					if (response.data.user_type === "mentor") {
