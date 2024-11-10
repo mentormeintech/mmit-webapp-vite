@@ -1,16 +1,17 @@
 import { useForm, Controller } from "react-hook-form";
-
-import MMITContacts from "./MMITContacts";
-
 import InputField from "./ui/InputField";
 
 const PartnershipForm = () => {
-  const { control, handleSubmit } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      fullName: "",
       email: "",
-      companyName: "",
       message: "",
+      full_name: "",
+      company_name: "",
     },
   });
   const onsSubmit = (data) => console.log(data);
@@ -27,53 +28,88 @@ const PartnershipForm = () => {
           <Controller
             name="full_name"
             control={control}
-            render={() => (
+            rules={{
+              required: "The name field is required",
+            }}
+            render={({ field }) => (
               <InputField
                 inputType="text"
+                required={true}
                 htmlFor="full_name"
                 inputLabelText="Name"
+                pattern="^[a-zA-Z ]*$"
+                onChange={field.onChange}
+                errors={errors.full_name}
                 inputPlaceholder="Full Name..."
               />
             )}
           />
+          {errors.full_name && (
+            <p role="alert" className="-mt-2 mb-2 text-sm text-red-500">
+              {errors.full_name.message}
+            </p>
+          )}
           <Controller
             name="email"
             control={control}
-            render={() => (
+            rules={{
+              required: "The email field is required",
+            }}
+            render={({ field }) => (
               <InputField
                 htmlFor="email"
+                required={true}
                 inputType="email"
+                errors={errors.email}
                 inputLabelText="Email"
+                onChange={field.onChange}
                 inputPlaceholder="example@gmail.com"
               />
             )}
           />
+          {errors.email && (
+            <p role="alert" className="-mt-2 mb-2 text-sm text-red-500">
+              {errors.email.message}
+            </p>
+          )}
           <Controller
             name="company_name"
             control={control}
-            render={() => (
+            rules={{
+              required: "The company name field is required",
+            }}
+            render={({ field }) => (
               <InputField
+                required={true}
                 inputType="text"
                 htmlFor="company_name"
+                onChange={field.onChange}
+                errors={errors.company_name}
                 inputLabelText="Company Name"
                 inputPlaceholder="mentormeintech..."
               />
             )}
           />
+          {errors.company_name && (
+            <p role="alert" className="-mt-2 mb-2 text-sm text-red-500">
+              {errors.company_name.message}
+            </p>
+          )}
           <Controller
             name="message"
             control={control}
-            render={() => (
+            render={({ field }) => (
               <>
                 <label
                   htmlFor="message"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Your message
+                  Your message <span className="text-gray-500">(optional)</span>
                 </label>
                 <textarea
-                  id="message"
                   rows="4"
+                  id="message"
+                  onChange={field.onChange}
                   className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-200 focus:ring-primary-500 focus:border-primary-500"
                   placeholder="Write your thoughts here..."
                 ></textarea>
@@ -102,65 +138,6 @@ const PartnershipForm = () => {
           </button>
         </form>
       </div>
-      {/* <form className="mb-10 px-4">
-        <div className="mb-6">
-          <label
-            className="block text-[20px] mb-1 text-[#000000]"
-            htmlFor="name"
-          >
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            className="w-full h-[52px] bg-transparent border border-[rgba(0,0,0,0.21)] outline-none px-4 rounded-[10px]"
-          />
-        </div>
-        <InputField inputLabelText="Name" inputPlaceholder="Full Name..." />
-        <div className="mb-6">
-          <label
-            className="block text-[20px] mb-1 text-[#000000]"
-            htmlFor="mail"
-          >
-            Email
-          </label>
-          <input
-            type="text"
-            id="mail"
-            className="w-full h-[52px] bg-transparent border border-[rgba(0,0,0,0.21)] outline-none px-4 rounded-[10px]"
-          />
-        </div>
-        <div className="mb-6">
-          <label
-            className="block text-[20px] mb-1 text-[#000000]"
-            htmlFor="company"
-          >
-            Company name
-          </label>
-          <input
-            type="text"
-            id="company"
-            className="w-full h-[52px] bg-transparent border border-[rgba(0,0,0,0.21)] outline-none px-4 rounded-[10px]"
-          />
-        </div>
-        <div className="mb-6">
-          <label
-            className="block text-[20px] mb-1 text-[#000000]"
-            htmlFor="name"
-          >
-            Message
-          </label>
-          <textarea className="resize-none w-full h-[207px] border border-[rgba(0,0,0,0.21)] rounded-[10px] bg-transparent outline-none px-4"></textarea>
-        </div>
-        <button
-          type="submit"
-          className="block ml-auto bg-[#FE9B7E] w-[94px] h-[43px] rounded-[5px] text-white"
-        >
-          Send
-        </button>
-      </form> */}
-
-      {/* <MMITContacts /> */}
     </section>
   );
 };
