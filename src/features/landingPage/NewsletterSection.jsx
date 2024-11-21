@@ -48,15 +48,15 @@ export const NewsletterSection = () => {
           {/* <h2 className="text-2xl font-semibold text-secondary-500 sm:text-3xl">
             Newsletter
           </h2> */}
-          <h2 className="text-sm sm:text-base md:text-2xl md:mt-3 text-center">
+          <h2 className="text-sm sm:text-base md:text-2xl md:mt-3 sm:text-center">
             To get more information subscribe to our news letter
           </h2>
-          <div className="flex max-w-3xl flex-col gap-4 sm:flex-row md:max-w-[90%] md:justify-center md:items-center md:mx-auto md:w-full">
+          <div className="flex max-w-3xl flex-col gap-4 lg:flex-row sm:max-w-[90%] sm:justify-center sm:items-center sm:mx-auto sm:w-full">
             {/* <p className=" w-full md:w-[35%] md:font-bold md:text-xl text-[#0F88D9]"> */}
-            <p className=" w-full md:w-[60%] md:font-bold md:text-xl text-[#0F88D9]">
+            <p className=" w-full sm:w-[60%] sm:font-bold sm:text-base md:text-xl text-[#0F88D9]">
               Subscribe to our Newsletter
             </p>
-            <div className="flex flex-col md:flex-row bg-secondary-200 md:p-2 md:w-[85%]">
+            <div className="flex flex-col sm:flex-row sm:p-2 sm:w-[85%]">
               <input
                 type="email"
                 name="email"
@@ -70,7 +70,7 @@ export const NewsletterSection = () => {
                 disabled={loading === true ? true : false}
                 className={`${
                   loading === true ? "cursor-not-allowed" : "cursor-pointer"
-                } w-fit rounded border border-[#0F88D9] bg-[#0F88D9] my-[1rem] ml-[0rem] px-6 py-2 md:py-3 md:text-lg text-sm font-medium text-white transition-all hover:bg-opacity-70 sm:my-0 sm:ml-[1rem] sm:pt-0`}
+                } w-fit rounded border border-[#0F88D9] bg-[#0F88D9] my-[1rem] ml-[0rem] px-6 py-2 md:py-3 md:text-lg text-sm font-medium text-white transition-all hover:bg-opacity-70 sm:my-0 sm:ml-[1rem] `}
               >
                 {loading ? <Loader /> : "Subscribe"}
               </button>

@@ -9,11 +9,13 @@ import { postRequest, userGetRequest } from '../utilities/apiClient';
 import { setToken } from '../utilities/axiosClient';
 import { accessToken } from '../utilities/tokenClient';
 import Spinner from './Spinner';
-import { convertTimeToDate } from '../utilities/util';
+import { convertTimeToDate, formatEventDescription } from '../utilities/util';
 import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react';
 import axios from 'axios';
 import { EventCard } from './eventCard';
 import { BsCalendarEvent } from "react-icons/bs";
+import { AiOutlineSchedule } from "react-icons/ai";
+
 
 
 const style = {
@@ -32,6 +34,7 @@ const style = {
 
 const defaultState = {
     title: '',
+    duration: 0,
     event_date: new Date(),
     start: new Date(),
     end: new Date(),
@@ -65,6 +68,8 @@ function MentorSchedule(props) {
     })
 
     useLayoutEffect(() => {
+        const duration = formatEventDescription(90)
+        console.log("duration", duration)
         // console.log("session", session)
         // console.log("supaBaseClient", supaBaseClient)
         getMyEvents()
@@ -288,16 +293,20 @@ function MentorSchedule(props) {
 
     const handleGoogleCalendarEvent = async (data) => {
         try {
-            const { title, bg, event_date } = data
+            const { title, bg, duration, event_date } = data
             const newEvent = data
             setToken(localStorage.getItem(accessToken))
             const { start, end } = newEvent
+            if (parseInt(duration) > 60) {
+                return setmessageBox({ message: "Duration should be between 1 and 60 minutes", type: 'warning' })
+            }
             if (new Date(start).getTime() > new Date(end).getTime()) {
                 return setmessageBox({ message: "Start date can't be after end date", type: 'warning' })
             }
             if (start && end && event_date) {
                 setloading(true)
-                newEvent.description = 'Session with a mentee'
+                // newEvent.description = 'Session with a mentee'
+                newEvent.description = title
                 newEvent.summary = 'Mentorship Session'
                 newEvent.start = {
                     'dateTime': new Date(start).toISOString(),
@@ -419,14 +428,25 @@ function MentorSchedule(props) {
                             // >
                             //     {loading ? <Loader loader_color="#F89878" /> : "Unlink Your Calendar"}
                             // </ButtonOutline>
-                            <ButtonOutline
-                                onClick={handleSelectSlot}
-                                className={`flex items-center justify-center rounded-full bg-sky-600 text-white text-lg font-bold transition-all duration-300 ease-in-out ${loading ? "cursor-not-allowed opacity-70" : "hover:bg-sky-700"}`}
-                                disabled={loading}
-                            >
-                                <BsCalendarEvent className='mr-4 text- text-500' />
-                                {loading ? <Loader loader_color="#F89878" /> : "Create Event"}
-                            </ButtonOutline>
+                            <>
+                                <ButtonOutline
+                                    onClick={handleSelectSlot}
+                                    className={`flex items-center justify-center rounded-full bg-sky-600 text-white text-lg font-bold transition-all duration-300 ease-in-out ${loading ? "cursor-not-allowed opacity-70" : "hover:bg-sky-700"}`}
+                                    disabled={loading}
+                                >
+                                    <BsCalendarEvent className='mr-2 text- text-500' />
+                                    {loading ? <Loader loader_color="#F89878" /> : "Create Event"}
+                                </ButtonOutline>
+                                <ButtonOutline
+                                    onClick={handleSelectSlot}
+                                    className={`flex items-center justify-center rounded-full bg-sky-600 text-white text-lg font-bold transition-all duration-300 ease-in-out ${loading ? "cursor-not-allowed opacity-70" : "hover:bg-sky-700"}`}
+                                    disabled={loading}
+                                >
+                                    <AiOutlineSchedule className='mr-2 text- text-500' />
+                                    {loading ? <Loader loader_color="#F89878" /> : "Create Schedule"}
+                                </ButtonOutline>
+                            </>
+
                         ) : (
                             <ButtonOutline
                                 onClick={handleLogin}
@@ -480,6 +500,40 @@ function MentorSchedule(props) {
                                 />
                             )}
                             <FormView onSubmit={handleSubmit(handleGoogleCalendarEvent)}>
+                                <InputView>
+                                    <InputFormControl variant="standard">
+                                        <InputLabel htmlFor="component-title">Event Name</InputLabel>
+                                        <Input
+                                            id="component-title"
+                                            placeholder=""
+                                            {...register("title", { required: true })}
+                                            readOnly={loading}
+                                            type="text"
+                                        />
+                                        {errors.title && (
+                                            <FormHelperSPan id="component-error-text">
+                                                {"Event name field is required"}
+                                            </FormHelperSPan>
+                                        )}
+                                    </InputFormControl>
+                                </InputView>
+                                <InputView>
+                                    <InputFormControl variant="standard">
+                                        <InputLabel htmlFor="component-duration">Event Duration</InputLabel>
+                                        <Input
+                                            id="component-duration"
+                                            placeholder=""
+                                            {...register("duration", { required: true })}
+                                            readOnly={loading}
+                                            type="number"
+                                        />
+                                        {errors.duration && (
+                                            <FormHelperSPan id="component-error-text">
+                                                {"Event duration field is required"}
+                                            </FormHelperSPan>
+                                        )}
+                                    </InputFormControl>
+                                </InputView>
                                 <InputView>
                                     <InputFormControl variant="standard">
                                         <InputLabel htmlFor="component-simple">Session Date</InputLabel>

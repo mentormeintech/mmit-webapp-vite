@@ -174,3 +174,23 @@ export const siteMap = [
     body: "The platform will foster a sense of community by providing discussion forums or chat groups where mentees can interact with fellow mentees, share experiences, and seek advice. This feature encourages collaboration, knowledge sharing, and networking among mentees.",
   },
 ];
+
+// export const DAYS_OF_WEEKS_IN_ORDER = [
+//   "monday",
+//   "tuesday",
+//   "wednesday",
+//   "thursday",
+//   "friday",
+//   "saturday",
+//   "sunday",
+// ] as const
+
+export const DAYS_OF_WEEKS_IN_ORDER = Object.freeze([
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
+]);
