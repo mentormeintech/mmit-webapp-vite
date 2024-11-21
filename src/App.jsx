@@ -49,7 +49,7 @@ function App() {
         </PersistGate>
       </Provider>
     </SessionContextProvider>
-  )
+)
 }
 
 export default App

@@ -167,8 +167,9 @@ export const ButtonOutline = styled.button`
 	font-size: 1.2rem !important;
 	font-family: var(--Montserrat);
 	font-weight: 500;
+	margin: auto;
+
 	background: transparent;
-	border-radius: 0.2rem;
 `;
 export const ScheduleView = styled.div`
 	color: white;
