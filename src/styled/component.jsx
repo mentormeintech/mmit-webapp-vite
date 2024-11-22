@@ -92,6 +92,12 @@ export const FormView = styled.form`
 	align-items: center;
 	flex-direction: column;
 `;
+export const ScheduleCard = styled.form`
+	width: 98%;
+	display: flex;
+	justify-self: center;
+	flex-direction: column;
+`;
 
 export const ColorView = styled.div`
 	width: 100%;

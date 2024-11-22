@@ -175,17 +175,7 @@ export const siteMap = [
   },
 ];
 
-// export const DAYS_OF_WEEKS_IN_ORDER = [
-//   "monday",
-//   "tuesday",
-//   "wednesday",
-//   "thursday",
-//   "friday",
-//   "saturday",
-//   "sunday",
-// ] as const
-
-export const DAYS_OF_WEEKS_IN_ORDER = Object.freeze([
+export const DAYS_OF_WEEKS_IN_ORDER = [
   "monday",
   "tuesday",
   "wednesday",
@@ -193,4 +183,4 @@ export const DAYS_OF_WEEKS_IN_ORDER = Object.freeze([
   "friday",
   "saturday",
   "sunday",
-]);
+]

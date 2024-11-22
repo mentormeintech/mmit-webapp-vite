@@ -30,6 +30,70 @@ li {
   list-style: none;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 0.5rem; /* Adjusts row and column gaps */
+}
+
+.day {
+  font-weight: bold; /* Make the day stand out */
+  color: #333; /* Optional styling */
+}
+
+.content {
+  color: #666; /* Optional styling */
+}
+
+
+/* Schedule */
+
+.schedule-title{
+  font-family: var(--Montserrat);
+  font-size: 2rem;
+  font-weight: 600;
+  /* width: 100%; */
+  text-align: center;
+  color: #213547;
+}
+.schedule-page-container {
+  padding: 2rem;
+  width: 100%;
+  background-color: #f9f9f9;
+}
+.schedule-page-container {
+  padding: 2rem;
+  width: 100%; /* Adjust the width of the card */
+  max-width: 800px; /* Optional: Set a maximum width */
+  margin: 2rem auto; /* Center the card horizontally */
+  background-color: #ffffff; /* Card background */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  border-radius: 8px; /* Rounded corners */
+  border: 1px solid #e0e0e0; /* Optional: Border for a defined edge */
+
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 0.5rem;
+  margin: 2rem 0;
+}
+
+.day-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.day-content {
+  color: #666;
+}
+
+.button-container {
+  margin-top: 2rem;
+}
+/* Schedule end */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
