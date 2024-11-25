@@ -21,19 +21,19 @@ function MentorsSupport() {
 			setIsMobileMenuOpen={setIsMobileMenuOpen}
 			isMobileMenuOpen={isMobileMenuOpen}
 		>
-			<section className=" pb-8 px-0 pr-5 lg:pr-0 lg:px-5">
-				<h4 className="text-[#454545] text-xl font-semibold mb-12">
+			<section className="">
+				<h4 className="text-[#454545] text-xl font-semibold mb-8">
 					Support
 				</h4>
 
-				<div className="w-9/12 flex justify-between items-center">
+				<div className="flex flex-wrap gap-4 sm:gap-6 items-center">
 					{supportLinks.map((link, index) => {
 						return (
 							<Link
 								key={index}
 								to={link.url}
 								target="_blank"
-								className="text-[#454545] flex items-center justify-center w-[23%] h-28 border rounded"
+								className="text-[#454545] flex items-center justify-center text-sm md:text-base w-32 md:w-36 lg:w-44 h-24 md:h-28 border rounded"
 							>
 								{link.text}
 							</Link>
