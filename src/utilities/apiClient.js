@@ -2,6 +2,7 @@ import { setToken, useAxios } from "./axiosClient";
 import { accessToken, getValidToken } from "./tokenClient";
 
 setToken(getValidToken())
+
 export const signInUser = async (url, formData) => {
     try {
         const response = await useAxios.post(`/${url}`, formData);
@@ -123,15 +124,7 @@ export const logUserOut = async (url) => {
         sessionStorage.removeItem(`${accessToken}`)
         sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
         localStorage.removeItem(`${accessToken}`)
-        // return redirect('/auth/signin')
-        // return window.location.href = '/auth/signin'
-        // const response = await useAxios.delete(`/${url}`);
-        // const { data, status } = response;
-        // if (status === 200 && data.success === false) {
-        //     return { data: {}, status, success: data.success, message: data?.message };
-        // } else if (status === 200 && data.success === true) {
-        //     return { data: data.payload, status, success: data.success, message: data?.message };
-        // }
+        return window.location.href = '/auth/signin'
     } catch (error) {
         return { status: error?.response?.status || 500, message: error?.response?.data?.message || error?.message, success: false };
     }

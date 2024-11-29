@@ -61,13 +61,13 @@ export default function EventModal(props) {
                                 <Input
                                     id="component-duration"
                                     placeholder=""
-                                    {...register("duration", { required: true })}
+                                    {...register("duration", { required: true,valueAsNumber: true, min: 10, max: 60 })}
                                     readOnly={loading}
                                     type="number"
                                 />
                                 {errors.duration && (
                                     <FormHelperSPan id="component-error-text">
-                                        {"Event duration field is required"}
+                                        {"Event duration should be between 30 and 60"}
                                     </FormHelperSPan>
                                 )}
                             </InputFormControl>
@@ -85,42 +85,6 @@ export default function EventModal(props) {
                                 {errors.event_date && (
                                     <FormHelperSPan id="component-error-text">
                                         {"Event date field is required"}
-                                    </FormHelperSPan>
-                                )}
-                            </InputFormControl>
-                        </InputView>
-                        <InputView>
-                            <InputFormControl variant="standard">
-                                <InputLabel htmlFor="component-simple">Start Time</InputLabel>
-                                <Input
-                                    id="component-simple1"
-                                    placeholder="Start time"
-                                    min={new Date()}
-                                    {...register("start", { required: true })}
-                                    readOnly={loading}
-                                    type="time"
-                                />
-                                {errors.start && (
-                                    <FormHelperSPan id="component-error-text">
-                                        {"Start time field is required"}
-                                    </FormHelperSPan>
-                                )}
-                            </InputFormControl>
-                        </InputView>
-                        <InputView>
-                            <InputFormControl variant="standard">
-                                <InputLabel htmlFor="component-simple">End Time</InputLabel>
-                                <Input
-                                    id="component-simple1"
-                                    placeholder="End Date"
-                                    min={new Date()}
-                                    {...register("end", { required: true })}
-                                    readOnly={loading}
-                                    type="time"
-                                />
-                                {errors.end && (
-                                    <FormHelperSPan id="component-error-text">
-                                        {"End time field is required"}
                                     </FormHelperSPan>
                                 )}
                             </InputFormControl>
