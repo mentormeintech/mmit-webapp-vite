@@ -26,7 +26,7 @@ function MentorsSupport() {
 					Support
 				</h4>
 
-				<div className="flex flex-wrap gap-4 sm:gap-6 items-center">
+				<div className="flex flex-wrap gap-4 sm:gap-6 items-center justify-center sm:justify-normal">
 					{supportLinks.map((link, index) => {
 						return (
 							<Link
