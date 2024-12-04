@@ -6,7 +6,7 @@ const MentorLayout = ({ children, mentorData, setIsMobileMenuOpen, isMobileMenuO
 	return (
 		<>
 			<Header_Signin />
-			<div className="flex mt-16 md:mt-[130px] lg:mt-36 relative">
+			<div className="flex mt-16 md:mt-[1px] lg:mt-20 relative">
 				<MentorSide
 					Mentor={mentorData}
 					setIsMobileMenuOpen={setIsMobileMenuOpen}
