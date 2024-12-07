@@ -23,10 +23,6 @@ export const EventCard = ({ event }) => {
                                 <span className="text-gray-700">{new Date(event.end).toLocaleString()}</span>
                             </div> */}
                             {/* Optional Time Zone Display */}
-                            {/* <div className="flex items-center justify-between mt-4">
-                                <span className="font-semibold text-gray-600">Time Zone:</span>
-                                <span className="text-gray-700">{Intl.DateTimeFormat().resolvedOptions().timeZone}</span>
-                            </div> */}
                         </div>
                     </div>
                 ) : (
