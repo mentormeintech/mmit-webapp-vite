@@ -30,6 +30,30 @@ export default function ScheduleModal(props) {
     );
 
 
+    // function checkForOverlaps(schedule) {
+    //     // Iterate over each day in the schedule
+    //     Object.keys(schedule).forEach((day) => {
+    //         const slots = schedule[day];
+    //         if (slots.length > 0) {
+    //             // Sort slots by start time
+    //             const sortedSlots = slots.sort((a, b) => a.start_time.localeCompare(b.start_time));
+
+    //             // Check for overlaps
+    //             for (let i = 0; i < sortedSlots.length - 1; i++) {
+    //                 const currentSlot = sortedSlots[i];
+    //                 const nextSlot = sortedSlots[i + 1];
+
+    //                 // If the current slot's end time is greater than the next slot's start time, there's an overlap
+    //                 if (currentSlot.end_time > nextSlot.start_time) {
+    //                     throw new Error(`Overlap detected on ${day}: Slot ${JSON.stringify(currentSlot)} overlaps with ${JSON.stringify(nextSlot)}`);
+    //                 }
+    //             }
+    //         }
+    //     });
+    //     return "No overlaps found!";
+    // }
+
+
     function checkForOverlaps(schedule) {
         // Iterate over each day in the schedule
         Object.keys(schedule).forEach((day) => {
@@ -70,9 +94,10 @@ export default function ScheduleModal(props) {
             const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
             setToken(localStorage.getItem(accessToken))
             const updatedSchedule = checkForOverlaps(timeSlots)
-            console.log('timeSlots',JSON.stringify(timeSlots))
+            console.log('timeSlots',timeSlots)
             if (updatedSchedule === 'No overlaps found!') {
                 setmessageBox({ message: updatedSchedule, type: 'success' })
+                alert(updatedSchedule)
                 clearMessage()
             }
 
