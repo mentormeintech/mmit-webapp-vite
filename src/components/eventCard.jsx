@@ -7,8 +7,8 @@ export const EventCard = ({ event }) => {
             <div className="w-full max-w-md mx-auto md:mx-0 md:ml-4 md:mt-4">
                 {event ? (
                     <div className="bg-gray-100 shadow-lg rounded-lg p-6" >
-                        <h2 className="text-2xl font-bold text-gray-700 mb-2">Mentorship Session</h2>
-                        <p className="text-gray-500 mb-4">Session with a mentee</p>
+                        <h2 className="text-2xl font-bold text-gray-700 mb-2 capitalize">{event.title || 'Mentorship Session'}</h2>
+                        <p className="text-gray-500 mb-4">{event?.description || "Session with a mentee"}</p>
                         <div className="flex flex-col space-y-2">
                             <div className="flex items-center justify-between">
                                 <span className="font-semibold text-gray-600">Duration:</span>
