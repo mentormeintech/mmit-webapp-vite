@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment } from "react";
 import { Box, Input, InputLabel } from "@mui/material";
 import Loader from "./loader";
 import { ScheduleCard, ButtonOutline } from "../styled/component";
@@ -6,88 +6,21 @@ import MessageAlert from "./MessageAlert";
 import { DAYS_OF_WEEKS_IN_ORDER } from "../utilities/pageData.util";
 import { FaPlus } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
-import { useForm } from "react-hook-form";
-import { accessToken } from "../utilities/tokenClient";
-import { setToken } from "../utilities/axiosClient";
 
 // export default function SchedulePage(props) {
 export default function ScheduleModal(props) {
+    const { handleSubmit, messageBox, clearMessage, handleAddEvent, loading, errors, message, register } = props;
 
-    const {
-        register,
-        reset,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
-    const [messageBox, setmessageBox] = useState({
-        message: '',
-        type: 'error'
-    })
-    const { clearMessage, loading, message, setloading } = props;
-
-    const [timeSlots, setTimeSlots] = useState(
+    const [timeSlots, setTimeSlots] = React.useState(
         DAYS_OF_WEEKS_IN_ORDER.reduce((acc, day) => ({ ...acc, [day]: [] }), {})
     );
-
-
-    function checkForOverlaps(schedule) {
-        // Iterate over each day in the schedule
-        Object.keys(schedule).forEach((day) => {
-            const slots = schedule[day];
-            if (slots.length > 0) {
-                // Sort slots by start time
-                const sortedSlots = slots.sort((a, b) => a.start_time.localeCompare(b.start_time));
-
-                // Check for overlaps
-                for (let i = 0; i < sortedSlots.length; i++) {
-                    const currentSlot = sortedSlots[i];
-
-                    // Ensure start_time is before end_time in each slot
-                    if (currentSlot.start_time >= currentSlot.end_time) {
-                        throw new Error(`Invalid time range on ${day}: Start time (${currentSlot.start_time}) must be before end time (${currentSlot.end_time}).`);
-                    }
-
-                    // If there's a next slot, check for overlaps
-                    if (i < sortedSlots.length - 1) {
-                        const nextSlot = sortedSlots[i + 1];
-
-                        // If the current slot's end time is greater than the next slot's start time, there's an overlap
-                        if (currentSlot.end_time > nextSlot.start_time) {
-                            throw new Error(`Overlap detected on ${day}: Slot ${JSON.stringify(currentSlot)} overlaps with ${JSON.stringify(nextSlot)}`);
-                        }
-                    }
-                }
-            }
-        });
-
-        return "No overlaps found!";
-    }
-
-
-    const handleScheduleSlot = async (event, timeSlots) => {
-        event.preventDefault()
-        try {
-            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            setToken(localStorage.getItem(accessToken))
-            const updatedSchedule = checkForOverlaps(timeSlots)
-            console.log('timeSlots',JSON.stringify(timeSlots))
-            if (updatedSchedule === 'No overlaps found!') {
-                setmessageBox({ message: updatedSchedule, type: 'success' })
-                clearMessage()
-            }
-
-        } catch (error) {
-            setmessageBox({ message: error.message, type: 'warning' })
-            setloading(false)
-        }
-    }
 
     // Function to add a new time slot
     const addTimeSlot = (event, day) => {
         event.preventDefault()
         setTimeSlots((prev) => ({
             ...prev,
-            [day]: [...prev[day], { start_time: "09:00", end_time: "12:00" }],
+            [day]: [...prev[day], { start: "09:00", end: "12:00" }],
         }));
     };
 
@@ -117,7 +50,15 @@ export default function ScheduleModal(props) {
                     Schedule
                 </h1> */}
 
-                {/* <ScheduleCard onSubmit={handleSubmit(handleAddSchedule)}> */}
+                {messageBox && messageBox.message && (
+                    <MessageAlert
+                        message={messageBox.message}
+                        type={messageBox.type}
+                        clearMessage={clearMessage}
+                    />
+                )}
+
+                {/* <ScheduleCard onSubmit={handleSubmit(handleAddEvent)}> */}
                 <ScheduleCard>
                     <div className="grid-container">
                         {DAYS_OF_WEEKS_IN_ORDER?.map((day) => (
@@ -131,16 +72,16 @@ export default function ScheduleModal(props) {
                                         <div key={index} className="time-slot">
                                             <input
                                                 type="time"
-                                                value={slot.start_time}
+                                                value={slot.start}
                                                 onChange={(e) =>
-                                                    handleTimeChange(day, index, "start_time", e.target.value)
+                                                    handleTimeChange(day, index, "start", e.target.value)
                                                 }
                                             />
                                             <input
                                                 type="time"
-                                                value={slot.end_time}
+                                                value={slot.end}
                                                 onChange={(e) =>
-                                                    handleTimeChange(day, index, "end_time", e.target.value)
+                                                    handleTimeChange(day, index, "end", e.target.value)
                                                 }
                                             />
                                             <div className="delete-button">
@@ -158,19 +99,11 @@ export default function ScheduleModal(props) {
                         ))}
                     </div>
 
-                    {messageBox && messageBox.message && (
-                        <MessageAlert
-                            message={messageBox.message}
-                            type={messageBox.type}
-                            clearMessage={() => setmessageBox({ message: '', type: 'warning' })}
-                        />
-                    )}
                     <div className="button-container">
                         <ButtonOutline
                             className={`inline-flex items-center justify-center rounded-2xl bg-sky-600 text-white text-xl font-bold transition-all duration-300 ${loading ? "cursor-not-allowed opacity-70" : "hover:bg-sky-700"
                                 }`}
                             disabled={loading}
-                            onClick={(event) => handleScheduleSlot(event, timeSlots)}
                         >
                             {loading ? <Loader loader_color="#F89878" /> : "Save"}
                         </ButtonOutline>
