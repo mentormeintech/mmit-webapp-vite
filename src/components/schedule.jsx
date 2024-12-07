@@ -434,7 +434,8 @@ function MentorSchedule(props) {
                 <Spinner />
             ) : (
                 // <div className="flex flex-col items-center justify-center bg-[#e3e3e3] py-10 px-10">
-                <div className="flex flex-col items-start justify-center pt-4 md:px-10">
+                <div className="flex flex-col items-start justify-center pt-4 px-10">
+                    <CalendarTabs setValue={setValue} value={value} handleChange={handleChange} />
                     {messageBox && messageBox.message && (
                         <MessageAlert
                             message={messageBox.message}
