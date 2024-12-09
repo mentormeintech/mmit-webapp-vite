@@ -1,10 +1,10 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { useForm } from "react-hook-form";
 import Loader from './loader';
-import { FormHelperSPan, FormView, InputFormControl, InputView, ButtonOutline } from '../styled/component';
+import { ButtonOutline } from '../styled/component';
 import MessageAlert from './MessageAlert';
 import { eventColors } from '../utilities/pageData.util';
-import { postRequest, userGetRequest } from '../utilities/apiClient';
+import { logUserOut, postRequest, userGetRequest } from '../utilities/apiClient';
 import { setToken } from '../utilities/axiosClient';
 import { accessToken } from '../utilities/tokenClient';
 import Spinner from './Spinner';
@@ -20,26 +20,11 @@ import CalendarTabs from './CalendarTabs';
 
 
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '50%',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    p: 4,
-};
-
 const defaultState = {
     title: '',
+    description: '',
     duration: 0,
     event_date: new Date(),
-    start: new Date(),
-    end: new Date(),
     bg: '',
 }
 
@@ -70,8 +55,6 @@ function MentorSchedule(props) {
     })
 
     useLayoutEffect(() => {
-        const duration = formatEventDescription(230)
-        console.log("duration", duration)
         getMyEvents()
     }, [])
 
@@ -93,6 +76,11 @@ function MentorSchedule(props) {
             if (response && response.success === true) {
                 setEvents(response.data)
                 setEventloading(false)
+            }
+            else if (response.status === 401) {
+                setmessageBox({ message: response.message, type: 'warning' })
+                setEventloading(false)
+                logUserOut()
             }
             else {
                 setmessageBox({ message: response.message, type: 'warning' })
@@ -124,8 +112,8 @@ function MentorSchedule(props) {
             const { title, bg, event_date } = data
             console.log("event_date", event_date)
             console.log("data", data)
-            const start = convertTimeToDate(data.start)
-            const end = convertTimeToDate(data.end)
+            const start = convertTimeToDate(data.start_time)
+            const end = convertTimeToDate(data.end_time)
             if (new Date(start).getTime() > new Date(end).getTime()) {
                 setmessageBox({ message: "Start date can't be after end date", type: 'warning' })
             }
@@ -176,46 +164,39 @@ function MentorSchedule(props) {
     const handleAddEvent = async (data) => {
         try {
             setToken(localStorage.getItem(accessToken))
-            const { title, bg, event_date } = data
-            console.log("event_date", event_date)
-            console.log("data", data)
-            const start = convertTimeToDate(data.start)
-            const end = convertTimeToDate(data.end)
-            if (new Date(start).getTime() > new Date(end).getTime()) {
-                setmessageBox({ message: "Start date can't be after end date", type: 'warning' })
-            }
-            else {
-                if (start && end && event_date) {
-                    setloading(true)
-                    const newEvent = {
-                        title: title || 'available',
-                        start: new Date(start),
-                        end: new Date(end),
-                        event_date: new Date(event_date),
-                        bg: selectRandomColor() ? selectRandomColor() : bgColor,
-                        // type: "",
-                    }
-                    const response = await postRequest('event/create', newEvent)
-                    if (response && response.success === true) {
-                        // await handleGoogleCalendarEvent(newEvent)
-                        setEvents(response.data)
-                        setmessageBox({ message: 'Event added', type: 'success' })
-                        setloading(false)
-                        getMyEvents()
-                        setTimeout(() => {
-                            handleClose()
-                            reset(defaultState);
-                        }, 2000);
-                    }
-                    else {
-                        setmessageBox({ message: response.message, type: 'warning' })
-                        setloading(false)
-                    }
+            const { title, bg, description, duration } = data
+            // if(duration)
+            if (description) {
+                setloading(true)
+                const newEvent = {
+                    title: title || 'available',
+                    // event_date: new Date(),
+                    description: description,
+                    duration: parseInt(duration),
+                    bg: selectRandomColor() ? selectRandomColor() : bgColor,
+                    // type: "",
+                }
+                console.log("newEvent", newEvent)
+                const response = await postRequest('event/create', newEvent)
+                if (response && response.success === true) {
+                    // await handleGoogleCalendarEvent(newEvent)
+                    setEvents(response.data)
+                    setmessageBox({ message: 'Event added', type: 'success' })
+                    setloading(false)
+                    getMyEvents()
+                    setTimeout(() => {
+                        handleClose()
+                        reset(defaultState);
+                    }, 2000);
                 }
                 else {
-                    clearMessage()
-                    return alert('Some input are empty')
+                    setmessageBox({ message: response.message, type: 'warning' })
+                    setloading(false)
                 }
+            }
+            else {
+                clearMessage()
+                return alert('Some input are empty')
             }
         } catch (error) {
             setmessageBox({ message: error.message, type: 'warning' })
@@ -228,27 +209,9 @@ function MentorSchedule(props) {
         }
     }
 
-    const handleScheduleSlot = async (data) => {
-        try {
-            setToken(localStorage.getItem(accessToken))
-            const { title, bg, event_date } = data
-            console.log("event_date", event_date)
-            console.log("data", data)
-            const start = convertTimeToDate(data.start)
-            const end = convertTimeToDate(data.end)
-
-        } catch (error) {
-            setmessageBox({ message: error.message, type: 'warning' })
-            setloading(false)
-        }
-        finally {
-            setTimeout(() => {
-                clearMessage()
-            }, 5000);
-        }
-    }
 
     // Refactor this code in such a way that when the google event is done creating update the event table and add the meeting link created created by google to it
+
     const handleGoogleCalendarEventOld = async (data) => {
         try {
             const newEvent = data
@@ -332,7 +295,7 @@ function MentorSchedule(props) {
                 setloading(true)
                 // newEvent.description = 'Session with a mentee'
                 newEvent.description = title
-                newEvent.summary = 'Mentorship Session'
+                newEvent.summary = title || 'Mentorship Session'
                 newEvent.start = {
                     'dateTime': new Date(start).toISOString(),
                     'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -385,11 +348,6 @@ function MentorSchedule(props) {
             setmessageBox({ message: error.message, type: 'warning' })
             setloading(false)
         }
-        finally {
-            setTimeout(() => {
-                clearMessage()
-            }, 5000);
-        }
     }
 
     const handleSelectEvent = (event) => {
@@ -421,6 +379,7 @@ function MentorSchedule(props) {
         event.preventDefault()
         await supaBaseClient.auth.signOut()
     };
+
     const handleLoginError = () => {
         console.log('Login Failed');
     };
@@ -486,7 +445,7 @@ function MentorSchedule(props) {
 
                     {/* Modal for Scheduling */}
                     {value === 0 ? <EventModal handleSubmit={handleSubmit} handleClose={handleClose} open={open} messageBox={messageBox} clearMessage={clearMessage} handleAddEvent={handleAddEvent} loading={loading} errors={errors} message={message} register={register} /> :
-                        <ScheduleModal handleSubmit={handleSubmit} messageBox={messageBox} clearMessage={clearMessage} handleAddEvent={handleScheduleSlot} loading={loading} errors={errors} message={message} register={register} />}
+                        <ScheduleModal clearMessage={clearMessage} setloading={setloading} loading={loading} errors={errors} message={message} />}
                 </div>
             )}
         </>
