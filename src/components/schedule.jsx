@@ -53,7 +53,7 @@ function MentorSchedule(props) {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const [myEvents, setEvents] = useState([])
+    const [myEvents, setEvents] = useState([]);
     const [open, setOpen] = useState(false);
     const [bgColor, setbgColor] = useState('#000')
     const [loading, setloading] = useState(false);
@@ -79,6 +79,14 @@ function MentorSchedule(props) {
         setmessageBox({ ...messageBox, message: '' })
     }
 
+    const selectedDelete = (eventIndex) => {
+        setEvents((prevEvents) => {
+          const updatedEvents = [...prevEvents]; // Copy the array
+          updatedEvents.splice(eventIndex, 1); // Remove the event
+          return updatedEvents; // Update state
+        });
+        console.log("Deleted event at index:", eventIndex);
+      };
 
     const handleChange = (event, newValue) => {
         console.log("newValue", newValue)
@@ -471,10 +479,13 @@ function MentorSchedule(props) {
 
 
                     {/* Event Cards */}
-                    {value === 0 && <div className="mt-1 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                    {value === 0 && <div className="mt-1 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {myEvents && myEvents.length > 0 ? (
                             myEvents.map((event, index) => (
-                                <EventCard key={index} event={event} />
+                                <>
+                                
+                                <EventCard key={index} event={event} onEventDelete={() => selectedDelete(index)} />
+                                </>
                             ))
                         ) : (
                             <div className="bg-gray-100 shadow-md rounded-lg p-6 text-center">
