@@ -212,6 +212,7 @@ function MentorSchedule(props) {
 
     // Refactor this code in such a way that when the google event is done creating update the event table and add the meeting link created created by google to it
 
+    
     const handleGoogleCalendarEventOld = async (data) => {
         try {
             const newEvent = data

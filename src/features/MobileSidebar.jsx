@@ -45,7 +45,8 @@ export const MobileSidebar = ({ links }) => {
             <div className="flex w-full flex-col justify-center gap-4 px-8">
               <Link to="/auth/menteesignup">
                 <button className="border-primary-500 bg-primary-500 w-full rounded border px-4 py-2  text-white transition-all hover:bg-opacity-70">
-                  Sign up
+                  {/* Sign up */}
+                  Become A Mentee
                 </button>
               </Link>
 
