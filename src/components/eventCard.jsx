@@ -53,7 +53,6 @@ export const EventCard = ({event, onEventDelete }) => {
                 )}
             </div>
         </div>
-
     );
 };
 
