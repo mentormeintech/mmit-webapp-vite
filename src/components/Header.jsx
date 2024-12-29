@@ -94,7 +94,8 @@ export default function Header() {
 							<div className="hidden flex-row gap-4 text-sm font-medium lg:flex">
 								<Link to="/auth/menteesignup">
 									<button className="rounded border border-primary-500 bg-primary-500 px-4 py-2  text-white transition-all hover:bg-opacity-70">
-										Sign up
+											{/* Sign up */}
+											Become A Mentee
 									</button>
 								</Link>
 

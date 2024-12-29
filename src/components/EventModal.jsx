@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
-import { Box, InputLabel, Input, Modal } from '@mui/material';
+import { Box, InputLabel, Input, Modal, TextField } from '@mui/material';
 import Loader from './loader';
 import { FormHelperSPan, FormView, InputFormControl, InputView, ButtonOutline } from '../styled/component';
 import MessageAlert from './MessageAlert';
-
+import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 
 const style = {
     position: 'absolute',
@@ -18,6 +18,59 @@ const style = {
     justifyContent: 'center',
     p: 4,
 };
+
+// const blue = {
+//     100: '#DAECFF',
+//     200: '#b6daff',
+//     400: '#3399FF',
+//     500: '#007FFF',
+//     600: '#0072E5',
+//     900: '#003A75',
+// };
+
+// const grey = {
+//     50: '#F3F6F9',
+//     100: '#E5EAF2',
+//     200: '#DAE2ED',
+//     300: '#C7D0DD',
+//     400: '#B0B8C4',
+//     500: '#9DA8B7',
+//     600: '#6B7A90',
+//     700: '#434D5B',
+//     800: '#303740',
+//     900: '#1C2025',
+// };
+
+// const Textarea = styled(BaseTextareaAutosize)(
+//     ({ theme }) => `
+//     box-sizing: border-box;
+//     width: 320px;
+//     font-family: 'IBM Plex Sans', sans-serif;
+//     font-size: 0.875rem;
+//     font-weight: 400;
+//     line-height: 1.5;
+//     padding: 8px 12px;
+//     border-radius: 8px;
+//     color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+//     background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+//     border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+//     box-shadow: 0px 2px 2px ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
+
+//     &:hover {
+//       border-color: ${blue[400]};
+//     }
+
+//     &:focus {
+//       border-color: ${blue[400]};
+//       box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
+//     }
+
+//     // firefox
+//     &:focus-visible {
+//       outline: 0;
+//     }
+//   `,
+// );
 
 export default function EventModal(props) {
     const { handleSubmit, handleClose, open, messageBox, clearMessage, handleAddEvent, loading, errors, message, register } = props
@@ -40,13 +93,17 @@ export default function EventModal(props) {
                     <FormView onSubmit={handleSubmit(handleAddEvent)}>
                         <InputView>
                             <InputFormControl variant="standard">
-                                <InputLabel htmlFor="component-title">Event Name</InputLabel>
-                                <Input
-                                    id="component-title"
+                                <TextField
+                                    required
+                                    id="standard-title"
+                                    variant="standard"
                                     placeholder=""
+                                    label="Title"
                                     {...register("title", { required: true })}
                                     readOnly={loading}
                                     type="text"
+                                // error
+                                // helperText={"Event name field is required"}
                                 />
                                 {errors.title && (
                                     <FormHelperSPan id="component-error-text">
@@ -57,70 +114,41 @@ export default function EventModal(props) {
                         </InputView>
                         <InputView>
                             <InputFormControl variant="standard">
-                                <InputLabel htmlFor="component-duration">Event Duration</InputLabel>
-                                <Input
-                                    id="component-duration"
+                                {/* <InputLabel htmlFor="component-duration">Event Duration</InputLabel> */}
+                                <TextField
+                                    id="standard-event-duration"
                                     placeholder=""
-                                    {...register("duration", { required: true })}
+                                    label="Event Duration"
+                                    {...register("duration", { required: true, valueAsNumber: true, min: 10, max: 60 })}
                                     readOnly={loading}
                                     type="number"
+                                    variant="standard"
+                                // error
+                                // helperText={"Event duration should be between 30 and 60"}
                                 />
                                 {errors.duration && (
                                     <FormHelperSPan id="component-error-text">
-                                        {"Event duration field is required"}
+                                        {"Event duration should be between 30 and 60"}
                                     </FormHelperSPan>
                                 )}
                             </InputFormControl>
                         </InputView>
                         <InputView>
                             <InputFormControl variant="standard">
-                                <InputLabel htmlFor="component-simple">Session Date</InputLabel>
-                                <Input
-                                    id="component-simple1"
+                                <TextField
+                                    id="standard-description"
+                                    variant="standard"
+                                    maxRows={5}
+                                    label="Description"
                                     placeholder=""
-                                    {...register("event_date", { required: true })}
+                                    {...register("description", { required: true })}
                                     readOnly={loading}
-                                    type="date"
-                                />
-                                {errors.event_date && (
+                                    multiline
+                                    rows={4}
+                                    type="text" />
+                                {errors.description && (
                                     <FormHelperSPan id="component-error-text">
-                                        {"Event date field is required"}
-                                    </FormHelperSPan>
-                                )}
-                            </InputFormControl>
-                        </InputView>
-                        <InputView>
-                            <InputFormControl variant="standard">
-                                <InputLabel htmlFor="component-simple">Start Time</InputLabel>
-                                <Input
-                                    id="component-simple1"
-                                    placeholder="Start time"
-                                    min={new Date()}
-                                    {...register("start", { required: true })}
-                                    readOnly={loading}
-                                    type="time"
-                                />
-                                {errors.start && (
-                                    <FormHelperSPan id="component-error-text">
-                                        {"Start time field is required"}
-                                    </FormHelperSPan>
-                                )}
-                            </InputFormControl>
-                        </InputView>
-                        <InputView>
-                            <InputFormControl variant="standard">
-                                <InputLabel htmlFor="component-simple">End Time</InputLabel>
-                                <Input
-                                    id="component-simple1"
-                                    placeholder="End Date"
-                                    min={new Date()}
-                                    {...register("end", { required: true })}
-                                    readOnly={loading}
-                                    type="time"
-                                />
-                                {errors.end && (
-                                    <FormHelperSPan id="component-error-text">
-                                        {"End time field is required"}
+                                        {"Event description field is required"}
                                     </FormHelperSPan>
                                 )}
                             </InputFormControl>

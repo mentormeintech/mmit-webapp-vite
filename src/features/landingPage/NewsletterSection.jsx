@@ -27,6 +27,7 @@ export const NewsletterSection = () => {
         if (response && response.success === true) {
           Alert(`${response.message}`, "success");
           setloading(false);
+          setemail("")
         } else {
           Alert(`${response.message}`, "warning");
           setloading(false);
@@ -49,7 +50,7 @@ export const NewsletterSection = () => {
             Newsletter
           </h2> */}
           <h2 className="text-sm sm:text-base md:text-2xl md:mt-3 sm:text-center">
-            To get more information subscribe to our news letter
+            To get more information subscribe to our newsletter
           </h2>
           <div className="flex max-w-3xl flex-col gap-4 lg:flex-row sm:max-w-[90%] sm:justify-center sm:items-center sm:mx-auto sm:w-full">
             {/* <p className=" w-full md:w-[35%] md:font-bold md:text-xl text-[#0F88D9]"> */}

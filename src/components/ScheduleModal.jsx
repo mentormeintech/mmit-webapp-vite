@@ -9,6 +9,7 @@ import { ImCross } from "react-icons/im";
 import { useForm } from "react-hook-form";
 import { accessToken } from "../utilities/tokenClient";
 import { setToken } from "../utilities/axiosClient";
+import { postRequest } from "../utilities/apiClient";
 
 // export default function SchedulePage(props) {
 export default function ScheduleModal(props) {
@@ -24,7 +25,6 @@ export default function ScheduleModal(props) {
         type: 'error'
     })
     const { clearMessage, loading, message, setloading } = props;
-
     const [timeSlots, setTimeSlots] = useState(
         DAYS_OF_WEEKS_IN_ORDER.reduce((acc, day) => ({ ...acc, [day]: [] }), {})
     );
@@ -63,17 +63,43 @@ export default function ScheduleModal(props) {
         return "No overlaps found!";
     }
 
+    const transformSchedule = (schedule) => {
+        const transformedAvailabilities = [];
+
+        Object.keys(schedule).forEach((day) => {
+            schedule[day].forEach((slot) => {
+                transformedAvailabilities.push({
+                    start_time: new Date(`1970-01-01T${slot.start_time}:00Z`), // Convert to Date
+                    end_time: new Date(`1970-01-01T${slot.end_time}:00Z`),     // Convert to Date
+                    dayOfWeek: day
+                });
+            });
+        });
+
+        return transformedAvailabilities;
+    };
 
     const handleScheduleSlot = async (event, timeSlots) => {
         event.preventDefault()
         try {
+            const formData = {}
             const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
             setToken(localStorage.getItem(accessToken))
             const updatedSchedule = checkForOverlaps(timeSlots)
-            console.log('timeSlots',JSON.stringify(timeSlots))
             if (updatedSchedule === 'No overlaps found!') {
-                setmessageBox({ message: updatedSchedule, type: 'success' })
-                clearMessage()
+                const transformedSchedule = transformSchedule(timeSlots)
+                formData.timezone = timezone
+                formData.availabilities = transformedSchedule
+                console.log('timeSlots', JSON.stringify(formData))
+                const response = await postRequest('schedule/create', formData)
+                if (response && response.success === true) {
+                    setmessageBox({ message: 'Schedule created', type: 'success' })
+                    setloading(false)
+                }
+                else {
+                    setmessageBox({ message: response.message, type: 'warning' })
+                    setloading(false)
+                }
             }
 
         } catch (error) {
