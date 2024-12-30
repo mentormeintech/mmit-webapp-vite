@@ -29,19 +29,6 @@ export const EventCard = ({ event, onEventDelete }) => {
                                 <span className="font-semibold text-gray-600">Duration:</span>
                                 <span className="text-gray-700">{formatEventDescription(event?.duration) || '0'}</span>
                             </div>
-                            {/* <div className="flex items-center justify-between">
-                            <span className="font-semibold text-gray-600">Start:</span>
-                            <span className="text-gray-700">{new Date(event.start).toLocaleString()}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <span className="font-semibold text-gray-600">End:</span>
-                            <span className="text-gray-700">{new Date(event.end).toLocaleString()}</span>
-                        </div> */}
-                            {/* Optional Time Zone Display */}
-                            {/* <div className="flex items-center justify-between mt-4">
-                            <span className="font-semibold text-gray-600">Time Zone:</span>
-                            <span className="text-gray-700">{Intl.DateTimeFormat().resolvedOptions().timeZone}</span>
-                        </div> */}
                         </div>
                     </div>
                 ) : (
