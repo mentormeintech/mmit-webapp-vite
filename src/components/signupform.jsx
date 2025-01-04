@@ -101,7 +101,7 @@ const SignupForm = (props) => {
 						<input
 							className="inline-flex h-12 w-[134%] items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none smd:w-full"
 							type="text"
-							placeholder="Ololade"
+							placeholder="First Name"
 							{...register("first_name", { required: true })}
 						/>
 						{errors.first_name && (
@@ -115,7 +115,7 @@ const SignupForm = (props) => {
 						<input
 							className="inline-flex h-12 w-[134%] items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 ml-0 pl-5 pt-1.5 outline-none smd:w-full"
 							type="text"
-							placeholder="Martha"
+							placeholder="Last name"
 							{...register("last_name", { required: true })}
 						/>
 						{errors.last_name && (
@@ -130,7 +130,7 @@ const SignupForm = (props) => {
 							className="inline-flex h-12 w-[134%] items-center justify-start rounded-lg border border-black border-opacity-20 pb-2\ ml-0 pl-5 pt-1.5 outline-none smd:w-full"
 							type="email"
 							name="email"
-							placeholder="123456789@gmail.com"
+							placeholder="example@gmail.com"
 							{...register("email", { required: true })}
 						/>
 						{errors.email && (
