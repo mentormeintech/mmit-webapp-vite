@@ -111,7 +111,7 @@ const SignupForm = (props) => {
 						)}
 					</div>
 					<div className="flex flex-col mt-3 mb-2 w-9/12">
-						<p className="xs:text-xl ml-5 smd:ml-0">Last Name</p>
+						<p className="xs:text-xl smd:ml-0">Last Name</p>
 						<input
 							className="inline-flex h-12 w-[134%] items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 ml-0 pl-5 pt-1.5 outline-none smd:w-full"
 							type="text"
@@ -139,7 +139,7 @@ const SignupForm = (props) => {
 							</span>
 						)}
 					</div>
-					<div className="flex flex-col w-9/12">
+					<div className="flex flex-col smd:w-9/12">
 						<p className="mt-3 xs:text-xl">Password</p>
 						{/* <input
 							className="inline-flex h-12 w-[134%] items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 ml-0 pl-5 pt-1.5 outline-none smd:w-full"
@@ -164,7 +164,7 @@ const SignupForm = (props) => {
 								className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
 								onClick={togglePasswordVisibility}
 							>
-								<i class={!isPasswordVisible ? "fa-solid fa-lock" : "fa-solid fa-lock-open"}></i>
+								<i class={!isPasswordVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
 							</span>
 						</div>
 						{errors.password && (
@@ -181,7 +181,7 @@ const SignupForm = (props) => {
 							onChange={(isValid) => { }}
 						/>
 					</div>
-					<div className="flex flex-col w-9/12">
+					<div className="flex flex-col smd:w-9/12">
 						<p className="mt-3 xs:text-xl">Confirm Password</p>
 						{/* <input
 							className="inline-flex h-12 w-[134%] items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 ml-0 pl-5 pt-1.5 outline-none smd:w-full"
@@ -206,7 +206,7 @@ const SignupForm = (props) => {
 								className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
 								onClick={toggleRepeatPasswordVisibility}
 							>
-								<i class={!isPasswordVisible1 ? "fa-solid fa-lock" : "fa-solid fa-lock-open"}></i>
+								<i class={!isPasswordVisible1 ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
 							</span>
 						</div>
 						{errors.repeat_password && (
