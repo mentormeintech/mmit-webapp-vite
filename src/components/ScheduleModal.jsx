@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Input, InputLabel } from "@mui/material";
 import Loader from "./loader";
 import { ScheduleCard, ButtonOutline } from "../styled/component";
@@ -24,11 +24,25 @@ export default function ScheduleModal(props) {
         message: '',
         type: 'error'
     })
-    const { clearMessage, loading, message, setloading } = props;
+    const { clearMessage, existingAvailabilities, loading, message, setloading } = props;
     const [timeSlots, setTimeSlots] = useState(
         DAYS_OF_WEEKS_IN_ORDER.reduce((acc, day) => ({ ...acc, [day]: [] }), {})
     );
 
+    useEffect(() => {
+        if (existingAvailabilities?.length > 0) {
+            const transformed = existingAvailabilities.reduce((acc, slot) => {
+                const { dayOfWeek, start_time, end_time } = slot;
+                acc[dayOfWeek] = acc[dayOfWeek] || [];
+                acc[dayOfWeek].push({
+                    start_time: new Date(start_time).toISOString().slice(11, 16), // Format as HH:mm
+                    end_time: new Date(end_time).toISOString().slice(11, 16),   // Format as HH:mm
+                });
+                return acc;
+            }, DAYS_OF_WEEKS_IN_ORDER.reduce((acc, day) => ({ ...acc, [day]: [] }), {}));
+            setTimeSlots(transformed);
+        }
+    }, [existingAvailabilities]);
 
     function checkForOverlaps(schedule) {
         // Iterate over each day in the schedule

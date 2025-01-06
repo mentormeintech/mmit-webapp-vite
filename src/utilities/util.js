@@ -20,7 +20,7 @@ export const convertTimeToDate = (time) => {
     return timeDate
 }
 
-export function formatEventDescription(durationInMinutes) {
+export function formatEventDuration(durationInMinutes) {
     const hours = Math.floor(durationInMinutes / 60)
     const minutes = durationInMinutes % 60
     const minutesString = `${minutes} ${minutes > 1 ? "mins" : "min"}`

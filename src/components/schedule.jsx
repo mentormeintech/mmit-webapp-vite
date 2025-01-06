@@ -8,7 +8,7 @@ import { logUserOut, postRequest, userGetRequest } from '../utilities/apiClient'
 import { setToken } from '../utilities/axiosClient';
 import { accessToken } from '../utilities/tokenClient';
 import Spinner from './Spinner';
-import { convertTimeToDate, formatEventDescription } from '../utilities/util';
+import { convertTimeToDate, formatEventDuration } from '../utilities/util';
 import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react';
 import axios from 'axios';
 import { EventCard } from './eventCard';
@@ -49,6 +49,7 @@ function MentorSchedule(props) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const [existingAvailabilities, setexistingAvailabilities] = useState([])
     const [messageBox, setmessageBox] = useState({
         message: '',
         type: 'error'
@@ -64,12 +65,12 @@ function MentorSchedule(props) {
 
     const selectedDelete = (eventIndex) => {
         setEvents((prevEvents) => {
-          const updatedEvents = [...prevEvents]; // Copy the array
-          updatedEvents.splice(eventIndex, 1); // Remove the event
-          return updatedEvents; // Update state
+            const updatedEvents = [...prevEvents]; // Copy the array
+            updatedEvents.splice(eventIndex, 1); // Remove the event
+            return updatedEvents; // Update state
         });
         console.log("Deleted event at index:", eventIndex);
-      };
+    };
 
     const handleChange = (event, newValue) => {
         console.log("newValue", newValue)
@@ -83,6 +84,35 @@ function MentorSchedule(props) {
             const response = await userGetRequest('event/mentor-events')
             if (response && response.success === true) {
                 setEvents(response.data)
+                await getMySchedules()
+            }
+            else if (response.status === 401) {
+                setmessageBox({ message: response.message, type: 'warning' })
+                setEventloading(false)
+                logUserOut()
+            }
+            else {
+                setmessageBox({ message: response.message, type: 'warning' })
+                setEventloading(false)
+            }
+        } catch (error) {
+            setmessageBox({ message: error.message, type: 'warning' })
+            setEventloading(false)
+        } finally {
+            setTimeout(() => {
+                clearMessage()
+                setEventloading(false)
+            }, 5000);
+        }
+    }
+
+    async function getMySchedules() {
+        try {
+            await setToken(localStorage.getItem(accessToken))
+            setEventloading(true)
+            const response = await userGetRequest('event/mentor-schedule')
+            if (response && response.success === true) {
+                setexistingAvailabilities(response.data)
                 setEventloading(false)
             }
             else if (response.status === 401) {
@@ -169,16 +199,32 @@ function MentorSchedule(props) {
         }
     }
 
-    const handleAddEvent = async (data) => {
+    const fetchSession = async () => {
+        const { data, error } = await supaBaseClient.auth.getSession();
+        if (error) {
+            return ''
+        } else if (data.session) {
+            const token = data.session;
+            console.log('Google Access Token:', token);
+            console.log('session', session);
+            return token
+        }
+    };
+
+    const handleAddEvent = async (formData) => {
         try {
             setToken(localStorage.getItem(accessToken))
-            const { title, bg, description, duration } = data
-            // if(duration)
+            const { title, bg, description, duration } = formData
+            const { data, error } = await supaBaseClient.auth.getSession();
+            const mentor_access_token = data.session.access_token;
+            const mentor_refresh_token = data.session.refresh_token;
             if (description) {
                 setloading(true)
                 const newEvent = {
                     title: title || 'available',
-                    // event_date: new Date(),
+                    mentor_google_id: session.user.id,
+                    mentor_access_token: mentor_access_token,
+                    mentor_refresh_token: mentor_refresh_token,
                     description: description,
                     duration: parseInt(duration),
                     bg: selectRandomColor() ? selectRandomColor() : bgColor,
@@ -220,7 +266,7 @@ function MentorSchedule(props) {
 
     // Refactor this code in such a way that when the google event is done creating update the event table and add the meeting link created created by google to it
 
-    
+
     const handleGoogleCalendarEventOld = async (data) => {
         try {
             const newEvent = data
@@ -368,15 +414,21 @@ function MentorSchedule(props) {
     const handleLogin = async (event) => {
         event.preventDefault()
         try {
-            const { error } = await supaBaseClient.auth.signInWithOAuth({
+            const { error, data } = await supaBaseClient.auth.signInWithOAuth({
                 provider: 'google',
                 options: {
-                    scopes: "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events"
+                    scopes: "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events",
+                    redirectTo: 'https://hmyrddqbiisnsxrafafi.supabase.co/auth/v1/callback'
                 }
             })
+            localStorage.setItem("google", JSON.stringify(data))
+            alert(JSON.stringify(data))
             if (error) {
                 console.error('Auht error:', error);
                 setmessageBox({ message: error.message, type: 'warning' })
+            }
+            else {
+                getMyEvents(data);
             }
         } catch (error) {
             console.error('Login failed:', error);
@@ -443,8 +495,8 @@ function MentorSchedule(props) {
                         {myEvents && myEvents.length > 0 ? (
                             myEvents.map((event, index) => (
                                 <>
-                                
-                                <EventCard key={index} event={event} onEventDelete={() => selectedDelete(index)} />
+
+                                    <EventCard key={index} event={event} onEventDelete={() => selectedDelete(index)} />
                                 </>
                             ))
                         ) : (
@@ -457,7 +509,7 @@ function MentorSchedule(props) {
 
                     {/* Modal for Scheduling */}
                     {value === 0 ? <EventModal handleSubmit={handleSubmit} handleClose={handleClose} open={open} messageBox={messageBox} clearMessage={clearMessage} handleAddEvent={handleAddEvent} loading={loading} errors={errors} message={message} register={register} /> :
-                        <ScheduleModal clearMessage={clearMessage} setloading={setloading} loading={loading} errors={errors} message={message} />}
+                        <ScheduleModal existingAvailabilities={existingAvailabilities} clearMessage={clearMessage} setloading={setloading} loading={loading} errors={errors} message={message} />}
                 </div>
             )}
         </>

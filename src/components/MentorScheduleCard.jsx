@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { postRequest } from "../utilities/apiClient";
 import { setToken } from "../utilities/axiosClient";
 import Spinner from "./Spinner";
+import { formatEventDuration } from "../utilities/util";
 
 function MentorScheduleCard(props) {
 	const { mentorEvent, mentor_id } = props;
@@ -21,7 +22,7 @@ function MentorScheduleCard(props) {
 	const navigation = useNavigate();
 
 	useEffect(() => {
-		console.log('mentorEvent',mentorEvent)
+		console.log('mentorEvent', mentorEvent)
 		setEvents(mentorEvent);
 	}, []);
 
@@ -86,6 +87,7 @@ function MentorScheduleCard(props) {
 
 	const handleSelectEvent = async (event) => {
 		const { title, end, start } = event;
+		console.log("event",event._id)
 		setcurrentEvent(event);
 		const token = await getValidToken();
 		if (!token) {
@@ -93,64 +95,58 @@ function MentorScheduleCard(props) {
 		}
 		await setToken(token);
 		setSelectedDate(start);
-		return setOpen(true);
+		// return setOpen(true);
+		return navigation(`/book-session/${event._id}`);
 	};
-	
+
 	return (
 		<div className="relative h-max pb-20">
 			{loading ? (
 				<Spinner loading={loading} />
 			) : (
-				<div className="flex flex-wrap items-center mx-auto justify-evenly gap-6 w-max max-w-[100%] p-4 rounded-2xl cursor-pointer">
-					{events && events.length > 0 ? events?.map((event, index) => (
-						<React.Fragment key={index}>
-							{event?.available ? (
-								<div
-									className="rounded-md border pb-3 shadow-md w-72 h-max cursor-pointer"
-									onClick={() => handleSelectEvent(event)}
-								>
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-center mx-auto max-w-[90%] p-4 rounded-2xl">
+					{events && events.length > 0 ? (
+						events.map((event, index) => (
+							<React.Fragment key={index}>
+								{event?.available ? (
 									<div
-										className="text-center text-xl text-white rounded-t-md p-4 font-semibold"
-										style={{
-											backgroundColor: event.bg,
-										}}
+										className="rounded-lg border shadow-lg w-full h-max cursor-pointer transition-all duration-300 hover:scale-105"
+										onClick={() => handleSelectEvent(event)}
 									>
-										Available
-									</div>
-									<div className="pt-3 flex flex-col items-center">
-										<div className="text-2xl font-semibold mb-3">
-											{moment(event.start).format(
-												"h:mma"
-											)}{" "}
-											-{" "}
-											{moment(event.end).format("h:mma")}
+										{/* Title Section */}
+										<div
+											className="text-center text-xl text-white rounded-t-lg p-4 font-semibold capitalize"
+											style={{
+												backgroundColor: event.bg || "var(--theme-blue)",
+											}}
+										>
+											{event?.title || "Session"}
 										</div>
-										<div className="text-xl text-gray-700 font-semibold">
-											{moment(event.start).format(
-												"MMMM D, YYYY"
-											)}
-										</div>
-										<div className="text-2xl font-semibold">
-											{/* {moment(event.start).format("YYYY")} */}
+
+										{/* Duration Section */}
+										<div className="p-4 flex flex-col items-center space-y-3">
+											<div className="text-md font-semibold text-gray-700">
+												Duration: <span className="text-gray-600">{formatEventDuration(event?.duration) || "30 Mins"}</span>
+											</div>
 										</div>
 									</div>
-								</div>
-							) : (
-								<div key={index}></div>
-							)}
-						</React.Fragment>
-					)): 	<div
-					className="rounded-md border pb-3 shadow-md w-72 h-max cursor-pointer"
-				>
-					<div
-						className="text-center text-xl text-white rounded-t-md p-4 font-semibold"
-						style={{
-							backgroundColor: 'var(--theme-blue)',
-						}}
-					>
-						No Session Available
-					</div>
-				</div>}
+								) : (
+									<div></div>
+								)}
+							</React.Fragment>
+						))
+					) : (
+						<div className="rounded-lg border shadow-lg w-full h-max">
+							<div
+								className="text-center text-xl text-white rounded-t-lg p-4 font-semibold"
+								style={{
+									backgroundColor: "var(--theme-blue)",
+								}}
+							>
+								No Session Available
+							</div>
+						</div>
+					)}
 				</div>
 			)}
 
@@ -160,7 +156,7 @@ function MentorScheduleCard(props) {
 				aria-labelledby="modal-title"
 				aria-describedby="modal-description"
 			>
-				<Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded">
+				<Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-lg shadow-xl">
 					<SessionTime
 						handleAddEvent={handleAddEvent}
 						setSelectedTime={setSelectedTime}
@@ -169,6 +165,9 @@ function MentorScheduleCard(props) {
 				</Box>
 			</Modal>
 		</div>
+
+
+
 	);
 }
 

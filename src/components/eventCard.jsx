@@ -1,9 +1,7 @@
 import React from 'react';
-import { formatEventDescription } from '../utilities/util';
+import { formatEventDuration } from '../utilities/util';
 
 export const EventCard = ({ event, onEventDelete }) => {
-    console.log("event.start.timeZone", event)
-
 
     const handleDelete = () => {
         console.log('Selected Event to delete', event);
@@ -23,11 +21,11 @@ export const EventCard = ({ event, onEventDelete }) => {
                 {event ? (
                     <div className="bg-gray-100 shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold text-gray-600 mb-2 capitalize">{event.title || 'Mentorship Session'}</h2>
-                        <p className="text-gray-500 mb-4">Session with a mentee</p>
+                        <p className="text-gray-500 mb-4">{event?.description || "Session with a mentee"}</p>
                         <div className="flex flex-col space-y-2">
                             <div className="flex items-center justify-between">
                                 <span className="font-semibold text-gray-600">Duration:</span>
-                                <span className="text-gray-700">{formatEventDescription(event?.duration) || '0'}</span>
+                                <span className="text-gray-700">{formatEventDuration(event?.duration) || '0'}</span>
                             </div>
                         </div>
                     </div>

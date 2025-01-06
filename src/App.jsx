@@ -1,4 +1,5 @@
 import "aos/dist/aos.css";
+import "react-datepicker/dist/react-datepicker.css";
 import { useState, useEffect } from 'react'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
