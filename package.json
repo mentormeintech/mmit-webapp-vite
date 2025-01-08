@@ -28,6 +28,7 @@
     "axios": "^1.6.2",
     "classnames": "^2.5.1",
     "date-fns": "^3.3.1",
+    "firebase": "^11.1.0",
     "framer-motion": "^10.16.5",
     "globalize": "^1.7.0",
     "moment": "^2.30.1",

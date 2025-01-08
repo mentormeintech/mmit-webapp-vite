@@ -13,7 +13,10 @@ import moment from "moment";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react';
-
+import axios from 'axios';
+import { setToken } from "../../utilities/axiosClient";
+import { calculateStartEndTimes } from "../../utilities/util";
+import { addDays, format } from "date-fns";
 
 const BookSession = () => {
 
@@ -22,6 +25,7 @@ const BookSession = () => {
     const GOOGLE_CLIENT_ID = import.meta.env.VITE_SITE_GOOGLE_CLIENT_ID;
 
     const { session_id } = useParams();
+    const session = useSession()
     const navigation = useNavigate();
     const [loading, setLoading] = useState(false);
     const [mentorSession, setMentorSession] = useState({});
@@ -30,7 +34,11 @@ const BookSession = () => {
     const [availabilities, setAvailabilities] = useState([]);
     const { selected_mentor } = useSelector((state) => state.selected_mentor);
     const [timeZone, settimeZone] = useState('')
+    const [selectedTime, setSelectedTime] = useState(null);
     const supaBaseClient = useSupabaseClient()
+
+    const today = format(new Date(), "yyyy-MM-dd");
+    const maxDate = format(addDays(new Date(), 6), "yyyy-MM-dd");
     //   const timeZone = moment.tz.guess(); // Detect system timezone
 
     useLayoutEffect(() => {
@@ -41,11 +49,12 @@ const BookSession = () => {
         try {
             const userToken = localStorage.getItem(accessToken);
             if (!userToken) return logUserOut();
-
+            // console.log("Session", session)
             setLoading(true);
             const response = await userGetRequest(`event/session?session_id=${session_id}`);
             if (response?.success) {
-                await fetchCalendarEvents(response.data.oAuthClient)
+                // await fetchCalendarEvents(response.data.oAuthClient)
+                // await fetchCalendarEvents("ya29.a0ARW5m761zs8WON36x4lcAHLnJtM5ByFYjKBosKPnG262CM_O0Di2XGzo8p-V-NX1nADrC8E8HQ10sDzPyIgIsKiyvfWF0JVPuPwtoqVtNdo9pUrAVnyKqrJLMoqVtmSnTTo-ejzz9NVYoC_CguA72wN1DLOqXdBImJYaCgYKATUSARASFQHGX2MiCxxucVziTmXx5uz7Gqoudg0170")
                 setMentorSession(response.data.session);
                 setAvailabilities(response.data.availabilities);
                 settimeZone(response.data.timezone)
@@ -65,7 +74,6 @@ const BookSession = () => {
     }
 
     const fetchCalendarEvents = async (accessToken) => {
-        console.log("accessToken", accessToken)
         const response = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
             method: 'GET',
             headers: {
@@ -79,9 +87,94 @@ const BookSession = () => {
         }
 
         const data = await response.json();
-        console.log('Google Calendar Events:', data.items);
+        // console.log('Google Calendar Events:', data.items);
     };
 
+    const handleGoogleCalendarEvent = async (event) => {
+        event.preventDefault()
+        try {
+            if (!selectedDate && !selectedTime) {
+                return Alert("Start end date can't be empty", "warning");
+            }
+            if (new Date().getTime() > new Date(selectedDate).getTime()) {
+                return Alert("You can't select a previous date", "warning");
+            }
+            const { start, end } = calculateStartEndTimes(selectedDate, selectedTime)
+            const { title, bg, duration, event_date, description, mentor_provider_token, mentor_access_token } = mentorSession
+            mentorSession.start = start
+            mentorSession.end = end
+            const newEvent = { title, bg, duration, event_date, description, start, end }
+            setToken(localStorage.getItem(accessToken))
+            if (parseInt(duration) > 60) {
+                return Alert("Duration should be between 1 and 60 minutes", "warning");
+            }
+            if (new Date(start).getTime() > new Date(end).getTime()) {
+                return Alert("Start date can't be after end date", "warning");
+            }
+            if (start && end && event_date) {
+                setLoading(true)
+                newEvent.description = description
+                newEvent.summary = description || 'Mentorship Session'
+                newEvent.start = {
+                    'dateTime': new Date(start).toISOString(),
+                    'timeZone': timeZone
+                }
+                newEvent.end = {
+                    'dateTime': new Date(end).toISOString(),
+                    'timeZone': timeZone
+                }
+                const event = {
+                    ...newEvent, conferenceData: {
+                        createRequest: {
+                            requestId: new Date().getTime(),
+                            conferenceSolutionKey: {
+                                type: "hangoutsMeet",
+                            },
+                        },
+                    },
+                }
+                const response = await axios.post('https://www.googleapis.com/calendar/v3/calendars/primary/events', event, {
+                    headers: {
+                        Authorization: `Bearer ${mentor_access_token}`,
+                    },
+                    params: {
+                        conferenceDataVersion: 1,
+                    },
+                })
+                if (!response.ok) {
+                    setLoading(false)
+                    return Alert('Unable to perform action', "warning");
+                }
+                if (response && response.status === 200) {
+                    console.log("response", response)
+                    // setmessageBox({ message: 'Event added', type: 'success' })
+                    // console.log('Meeting link', response.data.hangoutLink)
+                    // console.log('Meeting description', response.data.description)
+                    // setLoading(false)
+                    // getMyEvents()
+                    // setTimeout(() => {
+                    //     handleClose()
+                    //     reset(defaultState);
+                    // }, 2000);
+                }
+                else {
+
+                }
+
+            }
+            else {
+                setLoading(false)
+                return Alert('Some input are empty', "warning");
+            }
+        } catch (error) {
+            Alert(error.message, "warning");
+            setLoading(false)
+        }
+    }
+
+    const handleTimeChange = (event) => {
+        setSelectedTime(event.target.value);
+    };
 
     useEffect(() => {
         if (selectedDate) {
@@ -170,6 +263,8 @@ const BookSession = () => {
                             </label>
                             <input
                                 type="date"
+                                min={today}
+                                max={maxDate}
                                 value={selectedDate}
                                 onChange={(date) => {
                                     // const formatted = formatDate(date.target.value);
@@ -178,16 +273,6 @@ const BookSession = () => {
                                 }}
                                 className="w-full border rounded-lg p-2"
                             />
-                            {/* <DatePicker
-                                selected={selectedDate}
-                                // onChange={(date) => setSelectedDate(date)}
-                                onChange={(date) => {
-                                    console.log("onChange", date)
-                                    setSelectedDate(date)
-                                }}
-                                className="w-full border rounded-lg p-2"
-                                dateFormat="MMMM d, yyyy"
-                            /> */}
                         </div>
 
                         {/* Time Slots */}
@@ -195,7 +280,11 @@ const BookSession = () => {
                             <label className="block text-gray-700 font-semibold mb-2">
                                 Time
                             </label>
-                            <select className="w-full border rounded-lg p-2">
+                            <select
+                                className="w-full border rounded-lg p-2"
+                                onChange={handleTimeChange}
+                                value={selectedTime || ""}
+                            >
                                 {timeSlots.length > 0 ? (
                                     timeSlots.map((slot, index) => (
                                         <option key={index} value={slot}>
@@ -216,7 +305,7 @@ const BookSession = () => {
                             >
                                 Cancel
                             </button>
-                            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+                            <button onClick={handleGoogleCalendarEvent} className="bg-blue-500 text-white px-4 py-2 rounded-lg">
                                 Save
                             </button>
                         </div>

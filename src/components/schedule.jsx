@@ -57,6 +57,7 @@ function MentorSchedule(props) {
 
     useLayoutEffect(() => {
         getMyEvents()
+        // fetchSession()
     }, [])
 
     async function clearMessage() {
@@ -205,8 +206,9 @@ function MentorSchedule(props) {
             return ''
         } else if (data.session) {
             const token = data.session;
+            const provider_token = data.session.provider_token;
             console.log('Google Access Token:', token);
-            console.log('session', session);
+            console.log('session provider_token', provider_token);
             return token
         }
     };
@@ -216,8 +218,10 @@ function MentorSchedule(props) {
             setToken(localStorage.getItem(accessToken))
             const { title, bg, description, duration } = formData
             const { data, error } = await supaBaseClient.auth.getSession();
+            console.log("getSession", data)
             const mentor_access_token = data.session.access_token;
             const mentor_refresh_token = data.session.refresh_token;
+            const mentor_provider_token = session.provider_token;
             if (description) {
                 setloading(true)
                 const newEvent = {
@@ -225,6 +229,7 @@ function MentorSchedule(props) {
                     mentor_google_id: session.user.id,
                     mentor_access_token: mentor_access_token,
                     mentor_refresh_token: mentor_refresh_token,
+                    mentor_provider_token: mentor_provider_token,
                     description: description,
                     duration: parseInt(duration),
                     bg: selectRandomColor() ? selectRandomColor() : bgColor,
@@ -421,8 +426,6 @@ function MentorSchedule(props) {
                     redirectTo: 'https://hmyrddqbiisnsxrafafi.supabase.co/auth/v1/callback'
                 }
             })
-            localStorage.setItem("google", JSON.stringify(data))
-            alert(JSON.stringify(data))
             if (error) {
                 console.error('Auht error:', error);
                 setmessageBox({ message: error.message, type: 'warning' })
@@ -475,6 +478,14 @@ function MentorSchedule(props) {
                                 >
                                     <BsCalendarEvent className='mr-2 text- text-500' />
                                     {loading ? <Loader loader_color="#F89878" /> : "Create Event"}
+                                </ButtonOutline>
+                                <ButtonOutline
+                                    onClick={handleSignOut}
+                                    className={`flex items-center justify-center rounded-full bg-sky-600 text-white text-lg font-bold transition-all duration-300 ease-in-out ${loading ? "cursor-not-allowed opacity-70" : "hover:bg-sky-700"}`}
+                                    disabled={loading}
+                                >
+                                    <BsCalendarEvent className='mr-2 text- text-500' />
+                                    {"Unlink your calendar"}
                                 </ButtonOutline>
                             </>
 
