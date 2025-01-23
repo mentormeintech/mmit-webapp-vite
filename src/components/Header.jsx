@@ -27,8 +27,8 @@ export default function Header() {
 		{ href: "/findamentor", text: "Find a mentor" },
 		// type === "mentee" && token !== "" ? { href: "/bookasession", text: "Book a session" } : { href: "", text: "" }, //this link should be moved to mentee's profile
 		{ href: "/partnership", text: "Partnership" },
-		{ href: "#", text: "About Us" },
-		{ href: "#", text: "Insights" },
+		{ href: "/aboutus", text: "About Us" },
+		{ href: "/insight", text: "Insights" },
 		type === "mentor" && token === ""
 			? { href: "/auth/mentorsignup", text: "Become A Mentor" }
 			: type === "mentor" && token !== ""

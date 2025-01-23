@@ -30,6 +30,8 @@ import PasswordRequest from '../pages/forgot-password/password-request/page';
 import MenteeNotification from '../pages/mentee-notification/page';
 import ContactUs from '../pages/contactus/page';
 import BookSession from '../pages/book-session/page';
+import AboutUs from '../pages/aboutUs';
+import Insightss from '../pages/insight';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
@@ -73,6 +75,14 @@ const router = createBrowserRouter([
 	{
 		path: '/findamentor',
 		element: <FindAMentor />,
+	},
+	{
+		path: '/insight',
+		element: <Insightss />,
+	},
+	{
+		path: '/aboutus',
+		element: <AboutUs />,
 	},
 	{
 		path: '/mentee',
@@ -159,7 +169,7 @@ const router = createBrowserRouter([
 		element: <MenteeNotification />,
 	},
 	{
-		path: 'mentor-notifications',
+		path: '/mentor-notifications',
 		element: <Notifications />,
 	},
 	{
