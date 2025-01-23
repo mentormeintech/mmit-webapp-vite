@@ -11,7 +11,8 @@ const AboutUs = () => {
     <div>
       <Header />
       <Whoweare />
-      <div className="pt-10 max-w-6xl lg:mx-auto mx-4">
+          <div className="pt-10 max-w-6xl lg:mx-auto mx-4">
+              
         <AboutLeft />
       </div>
       <Footer />
