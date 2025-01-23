@@ -31,7 +31,7 @@ import MenteeNotification from '../pages/mentee-notification/page';
 import ContactUs from '../pages/contactus/page';
 import BookSession from '../pages/book-session/page';
 import WhyMMIT from '../pages/why-mmit/page';
-import AboutUs from '../pages/aboutUs';
+import AboutUs from '../pages/about-us/page';
 import Insightss from '../pages/insight/page';
 
 function PrivateRoute({ path, element, ...props }) {
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
 		element: <Insightss />,
 	},
 	{
-		path: '/aboutus',
+		path: '/about-us',
 		element: <AboutUs />,
 	},
 	{

@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../../components/Header';
 import Footer from '../../components/footer';
 import Whoweare from '../../components/WhoWeAre';
-import AboutLeft from '../components/AboutLeft';
+import AboutLeft from '../../components/AboutLeft';
 
 
 
