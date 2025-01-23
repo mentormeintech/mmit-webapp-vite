@@ -32,7 +32,7 @@ import ContactUs from '../pages/contactus/page';
 import BookSession from '../pages/book-session/page';
 import WhyMMIT from '../pages/why-mmit/page';
 import AboutUs from '../pages/aboutUs';
-import Insightss from '../pages/insight';
+import Insightss from '../pages/insight/page';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
