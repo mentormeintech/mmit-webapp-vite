@@ -35,7 +35,7 @@ const SocialMediaLinks = () => {
       color: "text-black",
     },
     {
-      href: "https://instagram.com/mentormeintech5",
+      href: "https://instagram.com/mentormeintech",
       icon: <RiInstagramFill />,
       color: "text-red-500",
     },
@@ -148,8 +148,8 @@ export default function Footer() {
         </div>
         <div className="py-7 border-t border-gray-200">
           <div className="flex items-center justify-center flex-col">
-            <span className="text-sm text-gray-500 ">
-              ©<a href="https://pagedone.io/">MentorMeInTech</a> {calendarYear},
+            <span className="text-sm text-gray-500">
+              ©<span>MentorMeInTech</span> {calendarYear},
               All rights reserved.
             </span>
           </div>

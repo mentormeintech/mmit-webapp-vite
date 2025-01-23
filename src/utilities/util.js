@@ -52,7 +52,7 @@ export function calculateStartEndTimes(date, selectedTime) {
     const start = setMinutes(setHours(new Date(date), hours), minutes);
 
     // Add 30 minutes for the end time
-    const end = addMinutes(start, parseInt(minutesStr));
+    const end = addMinutes(start, parseInt(30));
 
     return { start, end };
 }

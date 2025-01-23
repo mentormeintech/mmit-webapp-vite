@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useLayoutEffect } from "react";
 import Spinner from "../../components/Spinner";
 import Alert from "../../features/Alert";
-import { logUserOut, userGetRequest } from "../../utilities/apiClient";
+import { logUserOut, postRequest, userGetRequest } from "../../utilities/apiClient";
 import { accessToken } from "../../utilities/tokenClient";
 import DatePicker from "react-datepicker";
 import moment from "moment";
@@ -35,6 +35,7 @@ const BookSession = () => {
     const { selected_mentor } = useSelector((state) => state.selected_mentor);
     const [timeZone, settimeZone] = useState('')
     const [selectedTime, setSelectedTime] = useState(null);
+    const [calendarToken, setcalendarToken] = useState('ya29.a0ARW5m761zs8WON36x4lcAHLnJtM5ByFYjKBosKPnG262CM_O0Di2XGzo8p-V-NX1nADrC8E8HQ10sDzPyIgIsKiyvfWF0JVPuPwtoqVtNdo9pUrAVnyKqrJLMoqVtmSnTTo-ejzz9NVYoC_CguA72wN1DLOqXdBImJYaCgYKATUSARASFQHGX2MiCxxucVziTmXx5uz7Gqoudg0170')
     const supaBaseClient = useSupabaseClient()
 
     const today = format(new Date(), "yyyy-MM-dd");
@@ -49,12 +50,13 @@ const BookSession = () => {
         try {
             const userToken = localStorage.getItem(accessToken);
             if (!userToken) return logUserOut();
-            // console.log("Session", session)
             setLoading(true);
             const response = await userGetRequest(`event/session?session_id=${session_id}`);
             if (response?.success) {
-                // await fetchCalendarEvents(response.data.oAuthClient)
+                setcalendarToken(response.data.oAuthClient)
+                await fetchCalendarEvents(response.data.oAuthClient)
                 // await fetchCalendarEvents("ya29.a0ARW5m761zs8WON36x4lcAHLnJtM5ByFYjKBosKPnG262CM_O0Di2XGzo8p-V-NX1nADrC8E8HQ10sDzPyIgIsKiyvfWF0JVPuPwtoqVtNdo9pUrAVnyKqrJLMoqVtmSnTTo-ejzz9NVYoC_CguA72wN1DLOqXdBImJYaCgYKATUSARASFQHGX2MiCxxucVziTmXx5uz7Gqoudg0170")
+                // refreshProviderToken(response.data.session.mentor_refresh_token)
                 setMentorSession(response.data.session);
                 setAvailabilities(response.data.availabilities);
                 settimeZone(response.data.timezone)
@@ -73,11 +75,35 @@ const BookSession = () => {
         }
     }
 
+    const refreshProviderToken = async (refresh_token, client_id, client_secret) => {
+        try {
+            const response = await axios.post('https://oauth2.googleapis.com/token', null, {
+                params: {
+                    client_id: client_id, // Your Google OAuth client ID
+                    client_secret: client_secret, // Your Google OAuth client secret
+                    refresh_token: refresh_token, // The stored refresh token
+                    grant_type: 'refresh_token',
+                },
+            });
+
+            if (response.data.access_token) {
+                console.log('New provider_token generated:', response.data);
+                return response.data.access_token; // The new provider_token
+            } else {
+                throw new Error('Failed to refresh provider_token');
+            }
+        } catch (error) {
+            console.error('Error refreshing provider_token:', error.response?.data || error.message);
+            throw error;
+        }
+    };
+
     const fetchCalendarEvents = async (accessToken) => {
         const response = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
             method: 'GET',
             headers: {
-                Authorization: `Bearer ${accessToken}`, // Use the access token here
+                // Authorization: `Bearer ${accessToken}`,
+                Authorization: `Bearer ya29.a0ARW5m74pqe9Ag5wWoq2BFSq_1JS2QVBkWwP1yC4e6rkC-0x6uCP5G2WGsEmO5kJdPjvYki48lRGy-_f8oL5pi4FHjkcJSDdE9o1WvWAlJGCMT65blXklg5y8PkUk-XJBwOd60iJm-SgutlrjmozInfBTDifX383VJ_cG6MKhaCgYKAUISARASFQHGX2MiKkc9meOD7vy33izoAsytuw0175`,
             },
         });
 
@@ -87,23 +113,28 @@ const BookSession = () => {
         }
 
         const data = await response.json();
-        // console.log('Google Calendar Events:', data.items);
+        console.log('Google Calendar Events:', data);
     };
 
     const handleGoogleCalendarEvent = async (event) => {
         event.preventDefault()
         try {
-            if (!selectedDate && !selectedTime) {
-                return Alert("Start end date can't be empty", "warning");
+            console.log("selectedTime", selectedTime)
+            if (!selectedDate) {
+                return Alert("Date can't be empty", "warning");
+            }
+            if (!selectedTime) {
+                return Alert("Start time can't be empty", "warning");
             }
             if (new Date().getTime() > new Date(selectedDate).getTime()) {
                 return Alert("You can't select a previous date", "warning");
             }
             const { start, end } = calculateStartEndTimes(selectedDate, selectedTime)
-            const { title, bg, duration, event_date, description, mentor_provider_token, mentor_access_token } = mentorSession
+            const { title, bg, duration, event_date, description, mentor_provider_token, mentor_access_token, mentor_refresh_token } = mentorSession
+            mentorSession.start = start
             mentorSession.start = start
             mentorSession.end = end
-            const newEvent = { title, bg, duration, event_date, description, start, end }
+            const newEvent = { title, bg, duration, event_date, description, start, end, mentor_refresh_token, mentor_provider_token:calendarToken }
             setToken(localStorage.getItem(accessToken))
             if (parseInt(duration) > 60) {
                 return Alert("Duration should be between 1 and 60 minutes", "warning");
@@ -123,6 +154,16 @@ const BookSession = () => {
                     'dateTime': new Date(end).toISOString(),
                     'timeZone': timeZone
                 }
+                newEvent.attendees = [
+                    { 'email': 'dolaposokoya97@gmail.com' }
+                ]
+                newEvent.reminders = {
+                    'useDefault': false,
+                    'overrides': [
+                        { 'method': 'email', 'minutes': 24 * 60 },
+                        { 'method': 'popup', 'minutes': 10 }
+                    ]
+                }
                 const event = {
                     ...newEvent, conferenceData: {
                         createRequest: {
@@ -133,20 +174,24 @@ const BookSession = () => {
                         },
                     },
                 }
-                const response = await axios.post('https://www.googleapis.com/calendar/v3/calendars/primary/events', event, {
-                    headers: {
-                        Authorization: `Bearer ${mentor_access_token}`,
-                    },
-                    params: {
-                        conferenceDataVersion: 1,
-                    },
-                })
-                if (!response.ok) {
+                const response = await postRequest('event/book', { event })
+                // const response = await axios.post('https://www.googleapis.com/calendar/v3/calendars/primary/events', event, {
+                //     headers: {
+                //         // Authorization: `Bearer ${mentor_access_token}`,
+                //         Authorization: `Bearer ${calendarToken}`,
+                //     },
+                //     params: {
+                //         conferenceDataVersion: 1,
+                //     },
+                // })
+                if (response && response.status !== 200) {
                     setLoading(false)
-                    return Alert('Unable to perform action', "warning");
+                    return Alert(response.message || 'Unable to perform action', "warning");
                 }
                 if (response && response.status === 200) {
-                    console.log("response", response)
+                    console.log("response", response.data)
+                    setLoading(false)
+                    return Alert('Session scheduled', "success");
                     // setmessageBox({ message: 'Event added', type: 'success' })
                     // console.log('Meeting link', response.data.hangoutLink)
                     // console.log('Meeting description', response.data.description)

@@ -17,7 +17,7 @@ import { AiOutlineSchedule } from "react-icons/ai";
 import EventModal from './EventModal';
 import ScheduleModal from './ScheduleModal';
 import CalendarTabs from './CalendarTabs';
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth, googleProvider, } from '../firebase.config';
 import { useNavigate } from "react-router-dom";
 
@@ -63,19 +63,15 @@ function MentorSchedule(props) {
     useLayoutEffect(() => {
         const unsubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
             setloading(true)
-            // console.log("currentUser refreshToken", currentUser.stsTokenManager.refreshToken)
+            console.log("currentUser", currentUser)
             if (currentUser) {
-                // console.log("currentUser", Object.keys(currentUser))
                 // User is signed in
-                // console.log("onAuthStateChanged:", currentUser);
-                // localStorage.getItem()
-                setUser(currentUser);
-                setloading(false);
+                console.log("User signed in:", currentUser);
+                setUser(currentUser); // Set the user state
             } else {
-                // setUser(null);
-                setloading(false);
+                setUser(null); // Set the user state to null
             }
-            setloading(false);
+            //   setLoading(false); // Stop loading when authentication state is determined
         });
         return () => unsubscribe();
     }, []);
@@ -243,18 +239,17 @@ function MentorSchedule(props) {
 
             setToken(localStorage.getItem(accessToken))
             const { title, bg, description, duration } = formData
-            const mentor_access_token = user?.accessToken;
-            // console.log("user._tokenResponse",Object.keys(user))
-            const mentor_refresh_token = user?.stsTokenManager?.refreshToken;
-            // const mentor_provider_token = session.provider_token;
-            // const mentor_provider_token = user._tokenResponse.oauthAccessToken;
-            const mentor_provider_token = "ya29.a0ARW5m74MZPHl8sZsbR4qriZMZ8C7_gKDDC9r6Rm1CpsPoBzcwk6VmtD5YPaKtWU2iOzYYWJxwem5wovFDX12weS-5TRZ34reAnVzOjQ5YfpU0exFE5Aoqofyu4gyThM_RGJxvgUhbVn2SCu4KTWNzmw_VexbYm4pkwaCgYKAY4SARASFQHGX2MiLfnG2XM4zEnQn9vNvZt4Qg0169";
+            const { data, error } = await supaBaseClient.auth.getSession();
+            console.log("getSession", data)
+            const mentor_access_token = data.session.access_token;
+            const mentor_refresh_token = data.session.refresh_token;
+            const mentor_provider_token = session.provider_token;
             if (description) {
                 setloading(true)
                 const newEvent = {
                     title: title || 'available',
-                    // mentor_google_id: session.user.id,
-                    mentor_google_id: 'session.user.email',
+                    mentor_google_id: session.user.id,
+                    mentor_google_id: session.user.email,
                     mentor_access_token: mentor_access_token,
                     mentor_refresh_token: mentor_refresh_token,
                     mentor_provider_token: mentor_provider_token,
@@ -263,6 +258,7 @@ function MentorSchedule(props) {
                     bg: selectRandomColor() ? selectRandomColor() : bgColor,
                     // type: "",
                 }
+                console.log("newEvent", newEvent)
                 const response = await postRequest('event/create', newEvent)
                 if (response && response.success === true) {
                     // await handleGoogleCalendarEvent(newEvent)
@@ -282,18 +278,15 @@ function MentorSchedule(props) {
             }
             else {
                 clearMessage()
-                setloading(false)
-                return  setmessageBox({ message: 'Some inputs are empty', type: 'warning' })
+                return alert('Some input are empty')
             }
         } catch (error) {
-            console.log("setmessageBox",error)
             setmessageBox({ message: error.message, type: 'warning' })
             setloading(false)
         }
         finally {
             setTimeout(() => {
                 clearMessage()
-                setloading(false)
             }, 5000);
         }
     }
@@ -331,7 +324,7 @@ function MentorSchedule(props) {
                 }
                 const response = await axios.post('https://www.googleapis.com/calendar/v3/calendars/primary/events', event, {
                     headers: {
-                        Authorization: `Bearer ${user.accessToken}`,
+                        Authorization: `Bearer ${session.provider_token}`,
                     },
                     params: {
                         conferenceDataVersion: 1,
@@ -406,7 +399,7 @@ function MentorSchedule(props) {
                 }
                 const response = await axios.post('https://www.googleapis.com/calendar/v3/calendars/primary/events', event, {
                     headers: {
-                        Authorization: `Bearer ${user.accessToken}`,
+                        Authorization: `Bearer ${session.provider_token}`,
                     },
                     params: {
                         conferenceDataVersion: 1,
@@ -475,12 +468,6 @@ function MentorSchedule(props) {
         try {
             googleProvider.addScope("https://www.googleapis.com/auth/calendar");
             googleProvider.addScope("https://www.googleapis.com/auth/calendar.events");
-            googleProvider.setCustomParameters({
-                // prompt: "consent", // Ensures the user sees the consent screen
-                access_type: "offline", // Requests a refresh token
-            });
-
-            // access_type: 'offline',
             const result = await signInWithPopup(firebaseAuth, googleProvider);
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken; // You can use this token for accessing Google APIs
@@ -491,30 +478,18 @@ function MentorSchedule(props) {
                 user: result.user,
                 tokenResponse: result._tokenResponse
             }));
-            // if (user) {
-            //     window.location.href = '/mentor-calendar'
-            // }
+            if (user) {
+                window.location.href = '/mentor-calendar'
+            }
         } catch (error) {
             console.error('Login failed:', error);
             setmessageBox({ message: error.message, type: 'error' })
         }
     };
 
-    // const handleSignOut = async (event) => {
-    //     event.preventDefault()
-    //     await supaBaseClient.auth.signOut()
-    // };
-
-    const handleSignOut = async () => {
-        const auth = getAuth(); // Get the Firebase Auth instance
-        try {
-            await signOut(auth);
-            setUser(null)
-            setloading(false)
-            console.log("User signed out successfully");
-        } catch (error) {
-            console.error("Error signing out:", error);
-        }
+    const handleSignOut = async (event) => {
+        event.preventDefault()
+        await supaBaseClient.auth.signOut()
     };
 
     const handleLoginError = () => {
@@ -526,7 +501,7 @@ function MentorSchedule(props) {
     }
     return (
         <>
-            {loading && eventloading ? (
+            {isLoading && eventloading ? (
                 <Spinner />
             ) : (
                 // <div className="flex flex-col items-center justify-center bg-[#e3e3e3] py-10 px-10">
@@ -542,7 +517,7 @@ function MentorSchedule(props) {
 
                     {/* Action Buttons Container */}
                     <div className="flex flex-col items-start justify-start w-full max-w-lg space-y-2 mb-4 pt-4">
-                        {user && user.email ? (
+                        {session && session.user ? (
                             value === 0 && <>
                                 <ButtonOutline
                                     onClick={handleSelectSlot}

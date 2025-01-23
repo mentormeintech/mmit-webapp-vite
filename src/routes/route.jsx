@@ -30,8 +30,12 @@ import PasswordRequest from '../pages/forgot-password/password-request/page';
 import MenteeNotification from '../pages/mentee-notification/page';
 import ContactUs from '../pages/contactus/page';
 import BookSession from '../pages/book-session/page';
+<<<<<<< HEAD
 import AboutUs from '../pages/aboutUs';
 import Insightss from '../pages/insight';
+=======
+import WhyMMIT from '../pages/why-mmit/page';
+>>>>>>> 201614ba5399fd33fdad4af2634cd0770e0e9243
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
@@ -127,6 +131,10 @@ const router = createBrowserRouter([
 	{
 		path: '/mentor-calendar',
 		element: <MentorCalender />,
+	},
+	{
+		path: '/why-mmit',
+		element: <WhyMMIT />,
 	},
 	{
 		path: '/mentor-settings',
