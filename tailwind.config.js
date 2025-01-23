@@ -26,6 +26,7 @@ export default {
         'mdl':"900px",
         ...defaultTheme.screens,
       }
+      
     },
   },
   extend: {},
