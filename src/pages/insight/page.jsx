@@ -1,9 +1,18 @@
 import React from 'react'
+import Header from '../../components/Header';
+import OurInsight from '../../components/OurInsight';
+import Insights from '../../components/Insight';
+import Footer from '../../components/footer';
 
 const Insightss = () => {
   return (
     <div>
-        <h1>Insight...</h1>
+        <Header />
+        {/* <OurInsight /> */}
+        <div>
+          <Insights />
+        </div>
+        <Footer />
     </div>
   )
 }
