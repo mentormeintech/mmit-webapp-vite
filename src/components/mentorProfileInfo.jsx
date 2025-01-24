@@ -7,11 +7,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 export default function MentorProfileInfo(props) {
     const { dashboard, onSubmit } = props
+    
     const schema = yup.object().shape({
         years_of_experience: yup.number().typeError('Years of experience should be a number').min(2, 'Years of experience should be at least 2').required('Years of experience is required'),
-        tools: yup.string().required('Tools is required'),
+        // tools: yup.string().required('Tools is required'),
         company: yup.string().required('Company is required'),
-        role: yup.string().required('Role is required'),
+        area_of_expertise: yup.string().required('Area of expertise is required'),
         linked_in_url: yup.string().url('LinkedIn URL is invalid').required('LinkedIn url is required'),
         twitter_url: yup.string().url('Twitter URL is invalid').typeError('Twitter url is invalid').required('Twitter url is required'),
         portfolio_url: yup.string().url().optional('Portfolio url is required'),
@@ -24,21 +25,15 @@ export default function MentorProfileInfo(props) {
     } = useForm({
         defaultValues: {
             years_of_experience: dashboard?.years_of_experience || '',
-            tools: dashboard?.tools || '',
+            // tools: dashboard?.tools || '',
             company: dashboard?.company || '',
-            role: dashboard && dashboard?.area_of_expertise && dashboard?.area_of_expertise[0]?.name || '',
+            area_of_expertise: dashboard && dashboard?.area_of_expertise && dashboard?.area_of_expertise[0]?.name || '',
             linked_in_url: dashboard?.linked_in_url || '',
             twitter_url: dashboard?.twitter_url || '',
             portfolio_url: dashboard?.portfolio_url || '',
         },
         resolver: yupResolver(schema),
     });
-
-
-
-    const seeError = (message) => {
-        console.log("Error", message)
-    }
 
 
     return (
@@ -58,13 +53,12 @@ export default function MentorProfileInfo(props) {
                     />
                     {errors.years_of_experience && (
                         <span className="mt-1 text-xs text-red-500">
-                            {seeError(errors)}
                             {errors?.years_of_experience?.message} {'\n \n'}
                         </span>
                     )}
                 </div>
 
-                <div className="w-full mb-8">
+                {/* <div className="w-full mb-8">
                     <div className="flex justify-between items-center mb-3">
                         <p>Tools</p>
                         <label htmlFor="tools" className="cursor-pointer">Edit</label>
@@ -81,7 +75,7 @@ export default function MentorProfileInfo(props) {
                             {errors?.tools?.message || 'This field is required'}
                         </span>
                     )}
-                </div>
+                </div> */}
 
                 <div className="w-full mb-8">
                     <div className="flex justify-between items-center mb-3">
@@ -110,14 +104,14 @@ export default function MentorProfileInfo(props) {
                     <input
                         type="text"
                         style={{ textTransform: 'capitalize' }}
-                        id="role"
+                        id="area_of_expertise"
                         placeholder="N/A"
                         className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3"
-                        {...register('role', { required: 'Role is a required field' })}
+                        {...register('area_of_expertise', { required: true})}
                     />
-                    {errors.role && (
+                    {errors.area_of_expertise && (
                         <span className="mt-1 text-xs text-red-500">
-                            {errors?.role?.message || 'This field is required'}
+                            {errors?.area_of_expertise?.message || 'This field is required'}
                         </span>
                     )}
                 </div>

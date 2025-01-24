@@ -5,10 +5,17 @@ import Personalinfo from "./personalinfo"
 import MentorProfileInfo from "./mentorProfileInfo"
 import { useForm } from 'react-hook-form';
 import { patchRequest } from '../utilities/apiClient'
+import Alert from '../features/Alert'
+import { useDispatch } from "react-redux";
+import { dashboardData } from '../redux/slices/userslice'
+import Spinner from './Spinner'
+
+
 
 function MentorsSettingsComps(props) {
   const { mentorship, dashboard } = props
-
+  const [loading, setloading] = useState(false);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -27,22 +34,40 @@ function MentorsSettingsComps(props) {
     portfolioUrl: dashboard?.portfolio_url || '',
   });
 
+  async function filterOutRoleId(role) {
+    const foundId = dashboard?.area_of_expertise.find(expertise => expertise.name === role)
+    return foundId._id
+  }
   async function onSubmit(data) {
-    console.log("onSubmit", data)
     try {
-      // Send data to backend (replace with your actual API endpoint)
-      const response = await patchRequest('/mentor/profile',data)
-
+      setloading(true)
+      const area_of_expertise = await filterOutRoleId(data.area_of_expertise)
+      const formData = { ...data, area_of_expertise }
+      const response = await patchRequest('mentor/profile', formData)
+      if (response && response?.status === 200) {
+        dispatch(dashboardData(response.data));
+        setloading(false)
+        return Alert(response?.message, 'success')
+      }
+      if (response && (response?.status >= 300 || response?.status < 500)) {
+        setloading(false)
+        return Alert(response?.message, 'error')
+      }
+      if (response && response?.status !== 200) {
+        setloading(false)
+        return Alert(response?.message, 'warning')
+      }
     } catch (error) {
       // Handle errors (e.g., display error message)
-      console.error('Error updating profile:', error);
+      setloading(false)
+      return Alert(error?.message, 'warning')
     }
   }
 
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
+  if (loading) {
+    return <Spinner loading={loading} />
+  }
 
   if (mentorship && mentorship?.profile) {
     return <>

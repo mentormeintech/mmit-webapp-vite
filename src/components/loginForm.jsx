@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
 	loggedInUser,
 	registeredUser,
@@ -24,6 +24,11 @@ export default function LoginForm() {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [])
+
 
 	const changeUser = (type) => {
 		dispatch(changeUserType(type));
