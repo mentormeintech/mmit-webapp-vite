@@ -131,7 +131,7 @@ export default function Footer() {
                 </FooterLink>
               </li>
               <li className="mb-5">
-                <FooterLink href="#" currentRoute={currentRoute}>
+                <FooterLink href="/partnership" currentRoute={currentRoute}>
                   Partnerships
                 </FooterLink>
               </li>
