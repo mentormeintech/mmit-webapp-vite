@@ -185,7 +185,7 @@ export default function LoginForm() {
 							className="inline-flex items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none w-full md:w-96"
 							type="email"
 							name="email"
-							placeholder="123456789@gmail.com"
+							placeholder="Email"
 							{...register("email", { required: true })}
 						/>
 						{errors.email && (
@@ -201,7 +201,7 @@ export default function LoginForm() {
 								className="inline-flex h-12 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none w-full pr-12" // pr-12 adds padding to the right for the icon
 								type={isPasswordVisible ? "text" : "password"}
 								name="password"
-								placeholder="********"
+								placeholder="Password"
 								{...register("password", { required: true })}
 								onChange={(event) => setPassword(event.target.value)}
 							/>
@@ -211,7 +211,7 @@ export default function LoginForm() {
 								className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
 								onClick={togglePasswordVisibility}
 							>
-								<i class={!isPasswordVisible ? "fa-solid fa-lock" : "fa-solid fa-lock-open"}></i>
+								<i class={!isPasswordVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
 								{/* {isPasswordVisible && <i class="fa-solid fa-lock-open"></i>} */}
 							</span>
 						</div>
