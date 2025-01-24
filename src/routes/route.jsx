@@ -11,7 +11,6 @@ import MentorDashboard from '../pages/mentor';
 import MentorBooking from '../pages/mentor-booking/page';
 import MenteeBooking from '../pages/menteebooking/pages';
 import MenteeSupport from '../pages/menteesupport/page';
-import MentorSettings from '../pages/mentorsSettings';
 import MenteeSettings from '../pages/menteeSettings/page';
 import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
@@ -33,6 +32,7 @@ import BookSession from '../pages/book-session/page';
 import WhyMMIT from '../pages/why-mmit/page';
 import AboutUs from '../pages/about-us/page';
 import Insightss from '../pages/insight/page';
+import MentorSettings from '../pages/mentor-settings/page';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context

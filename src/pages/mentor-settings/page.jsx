@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import MentorsSettingsComps from "../components/MentorsSettingsComps";
-import MentorSide from "../components/MentorSide";
-import { CurrentMentor } from "../components/CurrentMentor";
-import Header_Signin from "../components/Header_Signin";
+import MentorsSettingsComps from "../../components/MentorsSettingsComps";
+import { CurrentMentor } from "../../components/CurrentMentor";
 import { useSelector } from "react-redux";
-import MentorLayout from "../components/MentorLayout";
+import MentorLayout from "../../components/MentorLayout";
 
 function MentorSettings() {
 	const [mentorship, setMentorship] = useState({

@@ -15,10 +15,33 @@ function MentorsSettingsComps(props) {
     twitterUrl: dashboard?.twitter_url || '',
     portfolioUrl: dashboard?.portfolio_url || '',
   });
-  
+
   async function handleSubmit(event) {
     event.preventDefault(); 
-    console.log("formData",JSON.stringify(formData))
+    console.log("formData", JSON.stringify(formData))
+    // try {
+    //   // Send data to backend (replace with your actual API endpoint)
+    //   const response = await fetch('/api/update-profile', { 
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(formData),
+    //   });
+
+    //   if (!response.ok) {
+    //     throw new Error('Network response was not ok');
+    //   }
+
+    //   const data = await response.json(); 
+
+    //   // Handle success (e.g., show success message, update local state)
+    //   console.log('Profile updated successfully:', data); 
+
+    // } catch (error) {
+    //   // Handle errors (e.g., display error message)
+    //   console.error('Error updating profile:', error); 
+    // }
   }
 
   const handleChange = (e) => {
