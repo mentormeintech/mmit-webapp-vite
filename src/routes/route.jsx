@@ -11,7 +11,7 @@ import MentorDashboard from '../pages/mentor';
 import MentorBooking from '../pages/mentor-booking/page';
 import MenteeBooking from '../pages/menteebooking/pages';
 import MenteeSupport from '../pages/menteesupport/page';
-import MentorSettings from '../pages/mentorsSettings';
+import MentorSettings from '../pages/mentor-settings/page';
 import MenteeSettings from '../pages/menteeSettings/page';
 import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';

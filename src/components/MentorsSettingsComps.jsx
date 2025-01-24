@@ -1,9 +1,55 @@
+import { useState } from 'react'
 import { BsEyeSlash } from "react-icons/bs"
 import { FaToggleOn } from "react-icons/fa"
 import Personalinfo from "./personalinfo"
+import MentorProfileInfo from "./mentorProfileInfo"
+import { useForm } from 'react-hook-form';
+import { patchRequest } from '../utilities/apiClient'
 
 function MentorsSettingsComps(props) {
   const { mentorship, dashboard } = props
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    // resolver: yupResolver(schema), 
+  });
+
+  const [formData, setFormData] = useState({
+    yearsOfExperience: dashboard?.years_of_experience || '',
+    tools: dashboard?.tools || '',
+    company: dashboard?.company || '',
+    role: dashboard && dashboard?.area_of_expertise && dashboard?.area_of_expertise[0]?.name || '',
+    linkedInUrl: dashboard?.linked_in_url || '',
+    twitterUrl: dashboard?.twitter_url || '',
+    portfolioUrl: dashboard?.portfolio_url || '',
+  });
+
+  async function onSubmit(data) {
+    console.log("onSubmit", data)
+    try {
+      // Send data to backend (replace with your actual API endpoint)
+      const response = await patchRequest('/mentor/profile',data)
+
+    } catch (error) {
+      // Handle errors (e.g., display error message)
+      console.error('Error updating profile:', error);
+    }
+  }
+
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  if (mentorship && mentorship?.profile) {
+    return <>
+      <MentorProfileInfo dashboard={dashboard} onSubmit={onSubmit} />
+    </>
+  }
+
   if (mentorship && mentorship?.personalInfo) {
     return <Personalinfo dashboard={dashboard} />
   }
@@ -44,85 +90,6 @@ function MentorsSettingsComps(props) {
     </section>
   }
 
-  else if (mentorship && mentorship?.profile) {
-    return <>
-      <form>
-        <section className="w-72">
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>Level of Experience</p>
-              <label htmlFor="experience" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" id="experience" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.years_of_experience} />
-          </div>
-
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>Tools</p>
-              <label htmlFor="tools" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" id="tools" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.tools || ''} />
-          </div>
-
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>Company</p>
-              <label htmlFor="company" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" id="company" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.company || ''} />
-          </div>
-
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>Role</p>
-              <label htmlFor="role" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" style={{
-              textTransform: 'capitalize'
-            }} id="role" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard && dashboard?.area_of_expertise && dashboard?.area_of_expertise[0]?.name || ''} />
-            {/* <input type="text" style={{
-              textTransform: 'capitalize'
-            }} id="role" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={ dashboard && dashboard?.area_of_expertise[0]?.name || ''} /> */}
-          </div>
-
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>LinkedIn Profile</p>
-              <label htmlFor="linkedIn" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" id="linkedIn" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.linked_in_url} />
-          </div>
-
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>Twitter Profile</p>
-              <label htmlFor="twitter" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" id="twitter" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.twitter_url} />
-          </div>
-
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>Portfolio Link</p>
-              <label htmlFor="experience" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" id="experience" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.portfolio_url} />
-          </div>
-        </section>
-
-        <button className="bg-[#FE9B7E] rounded-md w-96 h-11 text-white">save</button>
-
-        <div className="flex justify-between items-center min-h-32 w-11/12 max-w-[840px] px-12 py-5 bg-[#F9F9F9] rounded-md mt-14">
-          <div className="w-4/12">
-            <h5 className="mb-2 font-medium">I want to take a break</h5>
-            <p className="italic text-[12px]">When {"you're"} on a break, members will be unable to book calls with you.</p>
-          </div>
-
-          <span className="text-4xl"><FaToggleOn /></span>
-        </div>
-      </form>
-    </>
-  }
 }
 
 export default MentorsSettingsComps

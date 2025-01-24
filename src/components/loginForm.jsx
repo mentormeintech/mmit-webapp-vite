@@ -215,14 +215,6 @@ export default function LoginForm() {
 								{/* {isPasswordVisible && <i class="fa-solid fa-lock-open"></i>} */}
 							</span>
 						</div>
-						{/* <input
-							className="inline-flex h-12 items-center justify-start rounded-lg border border-black border-opacity-20 pb-2 pl-5 pt-1.5 outline-none w-full md:w-96"
-							type="password"
-							name="password"
-							placeholder="********"
-							{...register("password", { required: true })}
-							onChange={(event) => setPassword(event.target.value)}
-						/> */}
 						{errors.password && (
 							<span className="mt-1 text-xs text-red-500">
 								This field is required
