@@ -8,11 +8,6 @@ import Alert from "../features/Alert";
 import Spinner from "../components/Spinner";
 import { useDispatch } from "react-redux";
 import { dashboardData } from "../redux/slices/userslice";
-import { useNavigate, useLocation, Link } from "react-router-dom";
-import { AiFillCloud, AiFillHome, AiFillQuestionCircle } from "react-icons/ai";
-import { BsFillBookFill } from "react-icons/bs";
-import { HiOutlineLogout } from "react-icons/hi";
-import { MdSettings } from "react-icons/md";
 import MentorLayout from "../components/MentorLayout";
 
 const MentorDashboard = () => {

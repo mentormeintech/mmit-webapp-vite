@@ -1,10 +1,28 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import { BsEyeSlash } from "react-icons/bs"
 import { FaToggleOn } from "react-icons/fa"
 import Personalinfo from "./personalinfo"
+import MentorProfileInfo from "./mentorProfileInfo"
+import { useForm } from 'react-hook-form';
+import { patchRequest } from '../utilities/apiClient'
+import Alert from '../features/Alert'
+import { useDispatch } from "react-redux";
+import { dashboardData } from '../redux/slices/userslice'
+import Spinner from './Spinner'
+
+
 
 function MentorsSettingsComps(props) {
   const { mentorship, dashboard } = props
+  const [loading, setloading] = useState(false);
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    // resolver: yupResolver(schema), 
+  });
 
   const [formData, setFormData] = useState({
     yearsOfExperience: dashboard?.years_of_experience || '',
@@ -16,38 +34,46 @@ function MentorsSettingsComps(props) {
     portfolioUrl: dashboard?.portfolio_url || '',
   });
 
-  async function handleSubmit(event) {
-    event.preventDefault(); 
-    console.log("formData", JSON.stringify(formData))
-    // try {
-    //   // Send data to backend (replace with your actual API endpoint)
-    //   const response = await fetch('/api/update-profile', { 
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(formData),
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error('Network response was not ok');
-    //   }
-
-    //   const data = await response.json(); 
-
-    //   // Handle success (e.g., show success message, update local state)
-    //   console.log('Profile updated successfully:', data); 
-
-    // } catch (error) {
-    //   // Handle errors (e.g., display error message)
-    //   console.error('Error updating profile:', error); 
-    // }
+  async function filterOutRoleId(role) {
+    const foundId = dashboard?.area_of_expertise.find(expertise => expertise.name === role)
+    return foundId._id
+  }
+  async function onSubmit(data) {
+    try {
+      setloading(true)
+      const area_of_expertise = await filterOutRoleId(data.area_of_expertise)
+      const formData = { ...data, area_of_expertise }
+      const response = await patchRequest('mentor/profile', formData)
+      if (response && response?.status === 200) {
+        dispatch(dashboardData(response.data));
+        setloading(false)
+        return Alert(response?.message, 'success')
+      }
+      if (response && (response?.status >= 300 || response?.status < 500)) {
+        setloading(false)
+        return Alert(response?.message, 'error')
+      }
+      if (response && response?.status !== 200) {
+        setloading(false)
+        return Alert(response?.message, 'warning')
+      }
+    } catch (error) {
+      // Handle errors (e.g., display error message)
+      setloading(false)
+      return Alert(error?.message, 'warning')
+    }
   }
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
 
+  if (loading) {
+    return <Spinner loading={loading} />
+  }
+
+  if (mentorship && mentorship?.profile) {
+    return <>
+      <MentorProfileInfo dashboard={dashboard} onSubmit={onSubmit} />
+    </>
+  }
 
   if (mentorship && mentorship?.personalInfo) {
     return <Personalinfo dashboard={dashboard} />
@@ -89,132 +115,6 @@ function MentorsSettingsComps(props) {
     </section>
   }
 
-  else if (mentorship && mentorship?.profile) {
-    return <>
-    <form onSubmit={handleSubmit}>
-      <section className="w-72">
-        <div className="w-full mb-8">
-          <div className="flex justify-between items-center mb-3">
-            <p>Level of Experience</p>
-            <label htmlFor="yearsOfExperience" className="cursor-pointer">Edit</label> 
-          </div>
-          <input 
-            type="text" 
-            id="yearsOfExperience" 
-            placeholder="N/A" 
-            className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" 
-            value={formData.yearsOfExperience} 
-            onChange={handleChange} 
-          />
-        </div>
-
-        <div className="w-full mb-8">
-          <div className="flex justify-between items-center mb-3">
-            <p>Tools</p>
-            <label htmlFor="tools" className="cursor-pointer">Edit</label>
-          </div>
-          <input 
-            type="text" 
-            id="tools" 
-            placeholder="N/A" 
-            className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" 
-            value={formData.tools} 
-            onChange={handleChange} 
-          />
-        </div>
-
-        <div className="w-full mb-8">
-          <div className="flex justify-between items-center mb-3">
-            <p>Company</p>
-            <label htmlFor="company" className="cursor-pointer">Edit</label>
-          </div>
-          <input 
-            type="text" 
-            id="company" 
-            placeholder="N/A" 
-            className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" 
-            value={formData.company} 
-            onChange={handleChange} 
-          />
-        </div>
-
-        <div className="w-full mb-8">
-          <div className="flex justify-between items-center mb-3">
-            <p>Role</p>
-            <label htmlFor="role" className="cursor-pointer">Edit</label>
-          </div>
-          <input 
-            type="text" 
-            style={{ textTransform: 'capitalize' }} 
-            id="role" 
-            placeholder="N/A" 
-            className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" 
-            value={formData.role} 
-            onChange={handleChange} 
-          />
-        </div>
-
-        <div className="w-full mb-8">
-          <div className="flex justify-between items-center mb-3">
-            <p>LinkedIn Profile</p>
-            <label htmlFor="linkedInUrl" className="cursor-pointer">Edit</label> 
-          </div>
-          <input 
-            type="text" 
-            id="linkedInUrl" 
-            placeholder="N/A" 
-            className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" 
-            value={formData.linkedInUrl} 
-            onChange={handleChange} 
-          />
-        </div>
-
-        <div className="w-full mb-8">
-          <div className="flex justify-between items-center mb-3">
-            <p>Twitter Profile</p>
-            <label htmlFor="twitterUrl" className="cursor-pointer">Edit</label> 
-          </div>
-          <input 
-            type="text" 
-            id="twitterUrl" 
-            placeholder="N/A" 
-            className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" 
-            value={formData.twitterUrl} 
-            onChange={handleChange} 
-          />
-        </div>
-
-        <div className="w-full mb-8">
-          <div className="flex justify-between items-center mb-3">
-            <p>Portfolio Link</p>
-            <label htmlFor="portfolioUrl" className="cursor-pointer">Edit</label> 
-          </div>
-          <input 
-            type="text" 
-            id="portfolioUrl" 
-            placeholder="N/A" 
-            className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" 
-            value={formData.portfolioUrl} 
-            onChange={handleChange} 
-          />
-        </div>
-      </section>
-
-      <button className="bg-[#FE9B7E] rounded-md w-96 h-11 text-white" type="submit">
-        save
-      </button>
-
-      <div className="flex justify-between items-center min-h-32 w-11/12 max-w-[840px] px-12 py-5 bg-[#F9F9F9] rounded-md mt-14">
-        <div className="w-4/12">
-          <h5 className="mb-2 font-medium">I want to take a break</h5>
-          <p className="italic text-[12px]">When {"you're"} on a break, members will be unable to book calls with you.</p>
-        </div>
-
-        <span className="text-4xl"><FaToggleOn /></span>
-      </div>
-    </form>
-    </>
-  }
 }
 
 export default MentorsSettingsComps
