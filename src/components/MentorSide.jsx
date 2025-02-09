@@ -62,7 +62,6 @@ const MentorSide = (props) => {
 							<li className="capitalize">
 								{Mentor?.first_name} {Mentor?.last_name}
 							</li>
-							<li className="text-[#0F88D9]">View Profile</li>
 						</ul>
 					</li>
 					<li className="mb-5">

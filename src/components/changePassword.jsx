@@ -55,11 +55,10 @@ export default function ChangePassword(props) {
 
     async function onSubmit(data) {
         try {
-            // setloading(true)
+            setloading(true)
             setIsPasswordVisible(false)
             setIsPasswordVisible1(false)
             const response = await patchRequest('mentor/password', data)
-            console.log("response", response)
             if (response && response?.status === 200) {
                 setloading(false)
                 Alert(response?.message, 'success')
