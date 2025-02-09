@@ -27,6 +27,42 @@ function MentorSettings() {
 		checkAndSetToken()
 	}, [])
 
+	function displayProfile() {
+		setMentorship({
+			profile: true,
+			personalInfo: false,
+			login: false,
+			notification: false,
+		});
+	}
+
+	function displayPersonalInfo() {
+		setMentorship({
+			profile: false,
+			personalInfo: true,
+			login: false,
+			notification: false,
+		});
+	}
+
+	function displayLogin() {
+		setMentorship({
+			profile: false,
+			personalInfo: false,
+			login: true,
+			notification: false,
+		});
+	}
+
+	function displayNotification() {
+		setMentorship({
+			profile: false,
+			personalInfo: false,
+			login: false,
+			notification: true,
+		});
+	}
+
 	async function checkAndSetToken() {
 		const token = await getValidToken();
 		if (!token) {
