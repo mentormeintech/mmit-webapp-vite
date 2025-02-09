@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { dashboardData } from '../redux/slices/userslice'
 import Spinner from './Spinner'
 import MentorPersonalinfo from './mentorPersonalInfo'
-
+import ChangePassword from './changePassword';
 
 
 function MentorsSettingsComps(props) {
@@ -32,25 +32,23 @@ function MentorsSettingsComps(props) {
     return setloading(false)
   }, [])
 
-  const [formData, setFormData] = useState({
-    yearsOfExperience: dashboard?.years_of_experience || '',
-    tools: dashboard?.tools || '',
-    company: dashboard?.company || '',
-    role: dashboard && dashboard?.area_of_expertise && dashboard?.area_of_expertise[0]?.name || '',
-    linkedInUrl: dashboard?.linked_in_url || '',
-    twitterUrl: dashboard?.twitter_url || '',
-    portfolioUrl: dashboard?.portfolio_url || '',
-  });
 
   async function filterOutRoleId(role) {
     const foundId = dashboard?.area_of_expertise.find(expertise => expertise.name === role)
     return foundId._id
   }
+
   async function onSubmit(data) {
     try {
       setloading(true)
-      const area_of_expertise = await filterOutRoleId(data.area_of_expertise)
-      const formData = { ...data, area_of_expertise }
+      let area_of_expertise = ''
+      let formData = {}
+      if (data && data?.area_of_expertise) {
+        area_of_expertise = await filterOutRoleId(data.area_of_expertise)
+        formData.area_of_expertise = area_of_expertise
+      }
+      formData = { ...formData, ...data }
+      console.log("formData", formData)
       const response = await patchRequest('mentor/profile', formData)
       if (response && response?.status === 200) {
         dispatch(dashboardData(response.data));
@@ -78,26 +76,17 @@ function MentorsSettingsComps(props) {
   }
 
   if (mentorship && mentorship?.profile) {
-    return <>
-      <MentorProfileInfo dashboard={dashboard} onSubmit={onSubmit} />
-    </>
+    return <MentorProfileInfo dashboard={dashboard} onSubmit={onSubmit} />
   }
 
   if (mentorship && mentorship?.personalInfo) {
-    return <MentorPersonalinfo dashboard={dashboard} />
+    return <MentorPersonalinfo dashboard={dashboard} onSubmit={onSubmit} />
   }
 
   else if (mentorship && mentorship?.login) {
     return <section className="w-[500px]">
       <div className="mb-6">
-        <div className="flex items-center justify-between">
-          <p>Change Password</p>
-          <label htmlFor="password" className="text-[#0F88D9]">Update</label>
-        </div>
-        <div className="relative">
-          <input type="password" readOnly={true} id="password" className="w-full border outline-none h-10 rounded-md" />
-          <i className="absolute right-14 top-1/2 -translate-y-1/2 cursor-pointer"><BsEyeSlash /></i>
-        </div>
+        <ChangePassword setloading={setloading} />
       </div>
 
       <button className="text-[#0F88D9] cursor-pointer">Delete Account</button>
