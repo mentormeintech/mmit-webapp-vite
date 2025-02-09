@@ -1,7 +1,6 @@
-import { useState } from 'react'
+import { useState, useLayoutEffect } from 'react'
 import { BsEyeSlash } from "react-icons/bs"
 import { FaToggleOn } from "react-icons/fa"
-import Personalinfo from "./personalinfo"
 import MentorProfileInfo from "./mentorProfileInfo"
 import { useForm } from 'react-hook-form';
 import { patchRequest } from '../utilities/apiClient'
@@ -9,12 +8,13 @@ import Alert from '../features/Alert'
 import { useDispatch } from "react-redux";
 import { dashboardData } from '../redux/slices/userslice'
 import Spinner from './Spinner'
+import MentorPersonalinfo from './mentorPersonalInfo'
 
 
 
 function MentorsSettingsComps(props) {
   const { mentorship, dashboard } = props
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(true);
   const dispatch = useDispatch();
   const {
     register,
@@ -23,6 +23,14 @@ function MentorsSettingsComps(props) {
   } = useForm({
     // resolver: yupResolver(schema), 
   });
+
+
+  useLayoutEffect(() => {
+    if (dashboard && dashboard?.first_name) {
+      return setloading(false)
+    }
+    return setloading(false)
+  }, [])
 
   const [formData, setFormData] = useState({
     yearsOfExperience: dashboard?.years_of_experience || '',
@@ -76,7 +84,7 @@ function MentorsSettingsComps(props) {
   }
 
   if (mentorship && mentorship?.personalInfo) {
-    return <Personalinfo dashboard={dashboard} />
+    return <MentorPersonalinfo dashboard={dashboard} />
   }
 
   else if (mentorship && mentorship?.login) {

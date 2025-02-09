@@ -1,13 +1,15 @@
-import { useState } from 'react'
 import { FaToggleOn } from "react-icons/fa"
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import DefaultInput from './defaultInput';
+import { useRef } from "react";
 
 
 export default function MentorProfileInfo(props) {
     const { dashboard, onSubmit } = props
-    
+    const inputRef = useRef(null);
+
     const schema = yup.object().shape({
         years_of_experience: yup.number().typeError('Years of experience should be a number').min(2, 'Years of experience should be at least 2').required('Years of experience is required'),
         // tools: yup.string().required('Tools is required'),
@@ -41,15 +43,15 @@ export default function MentorProfileInfo(props) {
             <section className="w-72">
                 <div className="w-full mb-8">
                     <div className="flex justify-between items-center mb-3">
-                        <p>Level of Experience</p>
+                        <p>Years of Experience</p>
                         <label htmlFor="years_of_experience" className="cursor-pointer">Edit</label>
                     </div>
-                    <input
-                        type="text"
+                    <DefaultInput
+                        ref={inputRef}
+                        type="number"
                         id="years_of_experience"
                         placeholder="N/A"
-                        className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3"
-                        {...register('years_of_experience', { required: "Year of experience is required", valueAsNumber: true })}
+                        {...register('years_of_experience', { required: "Years of experience is required", valueAsNumber: true,validate: (value) => value >= 0 && value <= 50 || "Years of experience must be between 0 and 50", })}
                     />
                     {errors.years_of_experience && (
                         <span className="mt-1 text-xs text-red-500">
@@ -67,7 +69,7 @@ export default function MentorProfileInfo(props) {
                         type="text"
                         id="tools"
                         placeholder="N/A"
-                        className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3"
+                        
                         {...register('tools', { required: "Tools is a required field" })}
                     />
                     {errors.tools && (
@@ -82,11 +84,12 @@ export default function MentorProfileInfo(props) {
                         <p>Company</p>
                         <label htmlFor="company" className="cursor-pointer">Edit</label>
                     </div>
-                    <input
+                    <DefaultInput
+                        ref={inputRef}
                         type="text"
                         id="company"
                         placeholder="N/A"
-                        className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3"
+                        
                         {...register('company', { required: 'Company is a required field' })}
                     />
                     {errors.company && (
@@ -101,13 +104,14 @@ export default function MentorProfileInfo(props) {
                         <p>Role</p>
                         <label htmlFor="role" className="cursor-pointer">Edit</label>
                     </div>
-                    <input
+                    <DefaultInput
+                         ref={inputRef}
                         type="text"
                         style={{ textTransform: 'capitalize' }}
                         id="area_of_expertise"
                         placeholder="N/A"
-                        className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3"
-                        {...register('area_of_expertise', { required: true})}
+                        
+                        {...register('area_of_expertise', { required: true })}
                     />
                     {errors.area_of_expertise && (
                         <span className="mt-1 text-xs text-red-500">
@@ -121,11 +125,11 @@ export default function MentorProfileInfo(props) {
                         <p>LinkedIn Profile</p>
                         <label htmlFor="linkedInUrl" className="cursor-pointer">Edit</label>
                     </div>
-                    <input
+                    <DefaultInput
+                         ref={inputRef}
                         type="text"
                         id="linked_in_url"
                         placeholder="N/A"
-                        className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3"
                         {...register('linked_in_url', { required: 'LinkedIn URL is a required field' })}
                     />
                     {errors.linked_in_url && (
@@ -140,11 +144,11 @@ export default function MentorProfileInfo(props) {
                         <p>Twitter Profile</p>
                         <label htmlFor="twitter_url" className="cursor-pointer">Edit</label>
                     </div>
-                    <input
+                    <DefaultInput
+                         ref={inputRef}
                         type="text"
                         id="twitter_url"
                         placeholder="N/A"
-                        className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3"
                         {...register('twitter_url', { required: true })}
                     />
                     {errors.twitter_url && (
@@ -159,11 +163,12 @@ export default function MentorProfileInfo(props) {
                         <p>Portfolio Link</p>
                         <label htmlFor="portfolio_url" className="cursor-pointer">Edit</label>
                     </div>
-                    <input
+                    <DefaultInput
+                         ref={inputRef}
                         type="text"
                         id="portfolio_url"
                         placeholder="N/A"
-                        className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3"
+                        
                         {...register('portfolio_url', { required: 'Portfolio is a required field' })}
                     />
                     {errors.portfolio_url && (
