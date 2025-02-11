@@ -1,9 +1,13 @@
-import React from "react";
+import { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/footer";
 import { siteMap } from "../../utilities/pageData.util";
 
 export default function SiteMap() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
   return (
     <div className="justify-center overflow-hidden m-auto w-[100%]">
       <Header />
@@ -19,7 +23,7 @@ export default function SiteMap() {
         </div>
 
         <div>
-          {siteMap.map((item,index) => (
+          {siteMap.map((item, index) => (
             <div className="flex flex-col gap-1.5 my-4" key={index}>
               <h3 className="font-semibold">{item.title}</h3>
               <p>{item.body}</p>

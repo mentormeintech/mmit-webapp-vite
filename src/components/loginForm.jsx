@@ -216,8 +216,8 @@ export default function LoginForm() {
 								className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
 								onClick={togglePasswordVisibility}
 							>
-								<i class={!isPasswordVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
-								{/* {isPasswordVisible && <i class="fa-solid fa-lock-open"></i>} */}
+								<i className={!isPasswordVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
+								{/* {isPasswordVisible && <i className="fa-solid fa-lock-open"></i>} */}
 							</span>
 						</div>
 						{errors.password && (

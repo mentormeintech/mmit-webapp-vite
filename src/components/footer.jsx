@@ -35,7 +35,7 @@ const SocialMediaLinks = () => {
       color: "text-black",
     },
     {
-      href: "https://instagram.com/mentormeintech",
+      href: "https://www.instagram.com/mentormeintech_/",
       icon: <RiInstagramFill />,
       color: "text-red-500",
     },

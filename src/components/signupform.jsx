@@ -164,7 +164,7 @@ const SignupForm = (props) => {
 								className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
 								onClick={togglePasswordVisibility}
 							>
-								<i class={!isPasswordVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
+								<i className={!isPasswordVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
 							</span>
 						</div>
 						{errors.password && (
@@ -206,7 +206,7 @@ const SignupForm = (props) => {
 								className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
 								onClick={toggleRepeatPasswordVisibility}
 							>
-								<i class={!isPasswordVisible1 ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
+								<i className={!isPasswordVisible1 ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
 							</span>
 						</div>
 						{errors.repeat_password && (

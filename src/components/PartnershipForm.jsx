@@ -14,7 +14,9 @@ const PartnershipForm = () => {
       company_name: "",
     },
   });
-  const onsSubmit = (data) => console.log(data);
+  const onsSubmit = (data) => {
+    console.log("onsSubmit", data)
+  };
   return (
     <section
       id="become-a-partner"

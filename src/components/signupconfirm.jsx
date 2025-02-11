@@ -1,4 +1,3 @@
-import FindAMentor from "../pages/findamentor";
 import { MdEmail } from "react-icons/md";
 
 const Singupconfirm = () => {

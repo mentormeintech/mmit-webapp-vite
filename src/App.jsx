@@ -31,7 +31,13 @@ function App() {
     VITE_SITE_SUPABASE_API_KEY
   )
 
+
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
     async () => {
       AOS.init({
         once: true,
@@ -50,7 +56,7 @@ function App() {
         </PersistGate>
       </Provider>
     </SessionContextProvider>
-)
+  )
 }
 
 export default App

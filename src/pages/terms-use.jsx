@@ -12,27 +12,12 @@ import { termsData } from "../utilities/pageData.util";
 
 export default function TermsUse() {
 	useEffect(() => {
-		const scrollHeight = document.documentElement.scrollHeight;
-		const viewportHeight = window.innerHeight;
-
-		const animateScroll = () => {
-			const currentPosition =
-				window.pageYOffset || document.documentElement.scrollTop;
-			const remainingScroll =
-				scrollHeight - viewportHeight - currentPosition;
-
-			if (remainingScroll > 0) {
-				window.scrollBy(0, 1);
-				requestAnimationFrame(animateScroll);
-			}
-		};
-
-		// animateScroll();
-
-		return () => {
-			// cancelAnimationFrame(animateScroll);
-		};
-	}, []);
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth', // Optional: Smooth scrolling effect
+        });
+    }, [])
 	return (
 		<div className="justify-center overflow-hidden m-auto w-[100%]">
 			<Header />

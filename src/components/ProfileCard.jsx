@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 const ProfileCard = (props) => {
 
   const { name, role, sessions, reviews, experience, attendance, image, id, index, mentor } = props
-
   const navigate = useNavigate()
   const dispatch = useDispatch();
 
@@ -26,7 +25,7 @@ const ProfileCard = (props) => {
           src={image}
           alt="mentor-dp"
         /> : <img
-          className="rounded-[1rem] w-[100%] h-[135%] sm:h-[120%]"
+          className="rounded-[1rem] w-[100%] h-[125%] sm:h-[100%]"
           src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3f0j-Ox8s4hYDLrs9CN2EP9QqPGTxyvkpshO4_iza3Q&s'}
           alt="mentor-dp"
         />}

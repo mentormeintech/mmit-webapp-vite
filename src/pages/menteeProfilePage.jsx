@@ -132,6 +132,8 @@ const menteeProfilePage = () => {
                         ? mentor?.area_of_expertise[0]?.name
                         : "NIL"
                     }
+                    id={mentor._id}
+                    mentor={mentor}
                     sessions={mentor.sessions || "0"} //sessions organised by the mentors
                     reviews={mentor.ratings && mentor.ratings?.length}
                     experience={mentor?.years_of_experience || 0}

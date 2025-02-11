@@ -4,8 +4,7 @@ import MenteeSignUp from '../pages/auth/menteesignup';
 import MentorSignUp from '../pages/auth/mentorsignup';
 import MentorProfile from '../pages/auth/mentorProfile';
 import Home from '../pages/index';
-import FindAMentor from '../pages/findamentor';
-import BookASession from '../pages/bookasession';
+import FindAMentor from '../pages/findmentor/page';
 import PartnershipPage from '../pages/partnership';
 import MentorDashboard from '../pages/mentor';
 import MentorBooking from '../pages/mentor-booking/page';
@@ -88,10 +87,6 @@ const router = createBrowserRouter([
 	{
 		path: '/mentee',
 		element: <MenteeProfilePage />,
-	},
-	{
-		path: '/bookasession',
-		element: <BookASession />,
 	},
 	{
 		path: '/group-session',

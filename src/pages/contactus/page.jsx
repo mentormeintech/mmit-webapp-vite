@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/footer'
 import svgRight from './svgright.svg';
@@ -16,6 +16,15 @@ export default function ContactUs() {
   const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID
   const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID
   const SITE_KEY = import.meta.env.VITE_SITE_KEY
+
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth', // Optional: Smooth scrolling effect
+    });
+  }, [])
 
   const [formData, setFormData] = useState({
     name: '',
@@ -54,7 +63,7 @@ export default function ContactUs() {
           return setloading(false)
         });
     } catch (error) {
-      console.log("Aler err",error)
+      console.log("Aler err", error)
       Alert(error.message, 'error')
       return setloading(false)
     }
