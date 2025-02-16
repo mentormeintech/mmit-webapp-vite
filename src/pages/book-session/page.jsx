@@ -60,7 +60,6 @@ const BookSession = () => {
                 setMentorSession(response.data.session);
                 setAvailabilities(response.data.availabilities);
                 settimeZone(response.data.timezone)
-                console.log("response.data", response.data)
                 return setLoading(false);
             }
             else if (response.status === 401) {
@@ -88,7 +87,6 @@ const BookSession = () => {
             });
 
             if (response.data.access_token) {
-                console.log('New provider_token generated:', response.data);
                 return response.data.access_token; // The new provider_token
             } else {
                 throw new Error('Failed to refresh provider_token');
@@ -114,7 +112,6 @@ const BookSession = () => {
         }
 
         const data = await response.json();
-        console.log('Google Calendar Events:', data);
     };
 
     const handleGoogleCalendarEvent = async (event) => {
@@ -157,12 +154,9 @@ const BookSession = () => {
                     return Alert(response.message || 'Unable to perform action', "warning");
                 }
                 if (response && response.status === 200) {
-                    console.log("response", response.data)
                     setLoading(false)
                     return Alert('Session scheduled', "success");
                     // setmessageBox({ message: 'Event added', type: 'success' })
-                    // console.log('Meeting link', response.data.hangoutLink)
-                    // console.log('Meeting description', response.data.description)
                     // setLoading(false)
                     // getMyEvents()
                     // setTimeout(() => {

@@ -63,11 +63,7 @@ function MentorSchedule(props) {
     useLayoutEffect(() => {
         const unsubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
             setloading(true)
-            // console.log("currentUser refreshToken", currentUser.stsTokenManager.refreshToken)
             if (currentUser) {
-                // console.log("currentUser", Object.keys(currentUser))
-                // User is signed in
-                // console.log("onAuthStateChanged:", currentUser);
                 // localStorage.getItem()
                 setUser(currentUser);
                 setloading(false);
@@ -95,11 +91,9 @@ function MentorSchedule(props) {
             updatedEvents.splice(eventIndex, 1); // Remove the event
             return updatedEvents; // Update state
         });
-        console.log("Deleted event at index:", eventIndex);
     };
 
     const handleChange = (event, newValue) => {
-        console.log("newValue", newValue)
         setValue(newValue);
     };
 
@@ -174,8 +168,6 @@ function MentorSchedule(props) {
         try {
             setToken(localStorage.getItem(accessToken))
             const { title, bg, event_date } = data
-            console.log("event_date", event_date)
-            console.log("data", data)
             const start = convertTimeToDate(data.start_time)
             const end = convertTimeToDate(data.end_time)
             if (new Date(start).getTime() > new Date(end).getTime()) {
@@ -232,8 +224,6 @@ function MentorSchedule(props) {
         } else if (data.session) {
             const token = data.session;
             const provider_token = data.session.provider_token;
-            console.log('Google Access Token:', token);
-            console.log('session provider_token', provider_token);
             return token
         }
     };
@@ -244,7 +234,6 @@ function MentorSchedule(props) {
             setToken(localStorage.getItem(accessToken))
             const { title, bg, description, duration } = formData
             const mentor_access_token = user?.accessToken;
-            // console.log("user._tokenResponse",Object.keys(user))
             const mentor_refresh_token = user?.stsTokenManager?.refreshToken;
             // const mentor_provider_token = session.provider_token;
             // const mentor_provider_token = user._tokenResponse.oauthAccessToken;
@@ -286,7 +275,6 @@ function MentorSchedule(props) {
                 return  setmessageBox({ message: 'Some inputs are empty', type: 'warning' })
             }
         } catch (error) {
-            console.log("setmessageBox",error)
             setmessageBox({ message: error.message, type: 'warning' })
             setloading(false)
         }
@@ -337,7 +325,6 @@ function MentorSchedule(props) {
                         conferenceDataVersion: 1,
                     },
                 })
-                // console.log("handleGoogleCalendarEvent", response)
                 if (response && response.status === 200) {
                     setmessageBox({ message: 'Event added', type: 'success' })
                     console.log('Meeting link', response.data.hangoutLink)
@@ -412,7 +399,6 @@ function MentorSchedule(props) {
                         conferenceDataVersion: 1,
                     },
                 })
-                // console.log("handleGoogleCalendarEvent", response)
                 if (response && response.status === 200) {
                     await handleAddEvent(newEvent)
                     // setmessageBox({ message: 'Event added', type: 'success' })
@@ -457,7 +443,6 @@ function MentorSchedule(props) {
                 }
             })
             if (error) {
-                console.error('Auht error:', error);
                 setmessageBox({ message: error.message, type: 'warning' })
             }
             else {
@@ -465,7 +450,6 @@ function MentorSchedule(props) {
                 getMyEvents(data);
             }
         } catch (error) {
-            console.error('Login failed:', error);
             setmessageBox({ message: error.message, type: 'error' })
         }
     };
@@ -485,7 +469,6 @@ function MentorSchedule(props) {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken; // You can use this token for accessing Google APIs
             const user = result.user;
-            console.log("User signed in:", result);
             // localStorage.setItem("result", JSON.stringify(result))
             localStorage.setItem("user", JSON.stringify({
                 user: result.user,
@@ -495,7 +478,6 @@ function MentorSchedule(props) {
             //     window.location.href = '/mentor-calendar'
             // }
         } catch (error) {
-            console.error('Login failed:', error);
             setmessageBox({ message: error.message, type: 'error' })
         }
     };
@@ -511,15 +493,10 @@ function MentorSchedule(props) {
             await signOut(auth);
             setUser(null)
             setloading(false)
-            console.log("User signed out successfully");
         } catch (error) {
-            console.error("Error signing out:", error);
         }
     };
 
-    const handleLoginError = () => {
-        console.log('Login Failed');
-    };
 
     if (isLoading) {
         return <></>

@@ -21,7 +21,6 @@ function MentorScheduleCard(props) {
 	const navigation = useNavigate();
 
 	useEffect(() => {
-		console.log('mentorEvent', mentorEvent)
 		setEvents(mentorEvent);
 	}, []);
 
@@ -86,7 +85,6 @@ function MentorScheduleCard(props) {
 
 	const handleSelectEvent = async (event) => {
 		const { title, end, start } = event;
-		console.log("event",event._id)
 		setcurrentEvent(event);
 		const token = await getValidToken();
 		if (!token) {

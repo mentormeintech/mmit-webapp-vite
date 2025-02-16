@@ -40,7 +40,6 @@ function MentorBooking() {
 				Alert(response.message, "warning");
 			}
 			setLoading(false);
-			console.log(dashboard);
 		} catch (error) {
 			Alert(error.message, "error");
 			setLoading(false);

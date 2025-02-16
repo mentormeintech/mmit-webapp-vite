@@ -72,7 +72,6 @@ export const postRequest = async (url, formData) => {
             return { data: data.payload, status: parseInt(status), success: data.success, message: data?.message };
         }
     } catch (error) {
-        console.log("error", error)
         return { status: parseInt(error?.response?.status) || 500, message: error?.response?.data?.message || error?.message, success: false };
     }
 };

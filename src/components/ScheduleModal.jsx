@@ -104,7 +104,6 @@ export default function ScheduleModal(props) {
                 const transformedSchedule = transformSchedule(timeSlots)
                 formData.timezone = timezone
                 formData.availabilities = transformedSchedule
-                console.log('timeSlots', JSON.stringify(formData))
                 const response = await postRequest('schedule/create', formData)
                 if (response && response.success === true) {
                     setmessageBox({ message: 'Schedule created', type: 'success' })

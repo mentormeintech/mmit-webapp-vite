@@ -23,7 +23,6 @@ export default function MentorPersonalinfo(props) {
             Alert(error.message, 'error')
         }
     };
-    // console.log("dashboard", dashboard)
 
     async function submitForm(event) {
         event.preventDefault()

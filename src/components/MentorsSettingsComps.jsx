@@ -48,7 +48,6 @@ function MentorsSettingsComps(props) {
         formData.area_of_expertise = area_of_expertise
       }
       formData = { ...formData, ...data }
-      console.log("formData", formData)
       const response = await patchRequest('mentor/profile', formData)
       if (response && response?.status === 200) {
         dispatch(dashboardData(response.data));

@@ -48,7 +48,6 @@ export default function ContactUs() {
         publicKey: PUBLIC_KEY,
       })
         .then((response) => {
-          console.log("response", response)
           setloading(true)
           if (response.status === 200 && response.text === 'OK') {
             setFormData({ name: '', email: '', message: '' });
@@ -63,7 +62,6 @@ export default function ContactUs() {
           return setloading(false)
         });
     } catch (error) {
-      console.log("Aler err", error)
       Alert(error.message, 'error')
       return setloading(false)
     }

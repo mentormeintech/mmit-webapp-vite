@@ -4,7 +4,6 @@ import { formatEventDuration } from '../utilities/util';
 export const EventCard = ({ event, onEventDelete }) => {
 
     const handleDelete = () => {
-        console.log('Selected Event to delete', event);
         onEventDelete(event)
     }
 

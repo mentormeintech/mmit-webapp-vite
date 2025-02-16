@@ -16,9 +16,7 @@ const Notifications = () => {
 		try {
 			await setToken()
 			setloading(true);
-			const formattedDat = moment(new Date).format("MMMM Do, YYYY");
 			const response = await userGetRequest('notifications/mentor')
-			console.log("response",response)
 			if (response && response?.success === true) {
 				setsessions(response.data);
 				setloading(false);
@@ -34,7 +32,6 @@ const Notifications = () => {
 
 	const approveSession = async (event_id, session_id, status, meeting_time) => {
 		try {
-			console.log("meeting_time",meeting_time)
 			await setToken()
 			// alert(event_id)
 			setloading(true);
