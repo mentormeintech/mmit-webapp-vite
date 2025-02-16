@@ -18,6 +18,7 @@ const Notifications = () => {
 			setloading(true);
 			const formattedDat = moment(new Date).format("MMMM Do, YYYY");
 			const response = await userGetRequest('notifications/mentor')
+			console.log("response",response)
 			if (response && response?.success === true) {
 				setsessions(response.data);
 				setloading(false);
@@ -66,7 +67,7 @@ const Notifications = () => {
 								<div>
 									{item?.mentee[index]?.first_name} {item?.mentee[index]?.last_name} {""}
 									would like to schedule a session for{" "}
-									{moment(session_item?.time || new Date).format("MMMM Do, YYYY, h:mm A")}
+									{moment(session_item?.start || new Date).format("MMMM Do, YYYY, h:mm A")}
 								</div>
 								<div className="flex gap-4 w-full justify-end">
 									<button className="text-white font-semibold bg-green-700 hover:bg-green-600 p-2 rounded-xl shadow-md" onClick={() => approveSession(item._id, session_item._id, "approved", session_item?.time)}>
