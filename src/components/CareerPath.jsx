@@ -14,12 +14,12 @@ import {
 import Loader from "./loader";
 
 export default function CareerPath(props) {
-	const { careers, setcareerPath, careerPath, createCareer, loading } = props;
+	const { careers, setcareerPath, careerPath, createCareer, loading, userType } = props;
 	return (
 		<div className="my-[3rem] mx-0 sm:mx-5">
 			<div className="p-6">
 				<Title>
-					{"Please Choose a career path you would like to mentor on"}
+					{`Please Choose a career path you would like to ${userType === 'mentee' ? 'be mentored on' : 'mentor on'}`}
 				</Title>
 				<FormControl>
 					<RadioGroup
@@ -47,11 +47,10 @@ export default function CareerPath(props) {
 						</LinkButton>
 					)}
 					<Button
-						className={`${
-							loading === true
+						className={`${loading === true
 								? "cursor-not-allowed"
 								: "cursor-pointer"
-						}`}
+							}`}
 						disabled={loading === true ? true : false}
 						onClick={(event) => createCareer(event)}
 					>

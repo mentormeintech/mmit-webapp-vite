@@ -32,6 +32,7 @@ import BookSession from '../pages/book-session/page';
 import WhyMMIT from '../pages/why-mmit/page';
 import AboutUs from '../pages/about-us/page';
 import Insightss from '../pages/insight/page';
+import MenteeCareer from '../pages/mentee-career/page';
 
 function PrivateRoute({ path, element, ...props }) {
 	// const { isAuthenticated } = useAuth(); // Assuming you have an authentication context
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
 	{
 		path: '/auth/menteesignup',
 		element: <MenteeSignUp />,
+	},
+	{
+		path: '/mentee-career',
+		element: <MenteeCareer />,
 	},
 	{
 		path: '/auth/mentorsignup',

@@ -60,7 +60,7 @@ const SignupForm = (props) => {
 					response.data.user_type === "mentor" &&
 						navigate("/auth/career");
 					response.data.user_type === "mentee" &&
-						navigate("/auth/signin");
+						navigate("/mentee-career");
 					setloading(false);
 				}, 40);
 			} else {
@@ -216,7 +216,7 @@ const SignupForm = (props) => {
 						)}
 						<br></br>
 						<PasswordChecklist
-							rules={["minLength", "specialChar", "number", "capital", "match"]}
+							rules={["match"]}
 							minLength={8}
 							value={password}
 							valueAgain={passwordAgain}

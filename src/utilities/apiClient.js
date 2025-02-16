@@ -72,7 +72,7 @@ export const postRequest = async (url, formData) => {
             return { data: data.payload, status: parseInt(status), success: data.success, message: data?.message };
         }
     } catch (error) {
-        console.log("error",error)
+        console.log("error", error)
         return { status: parseInt(error?.response?.status) || 500, message: error?.response?.data?.message || error?.message, success: false };
     }
 };
@@ -84,7 +84,7 @@ export const patchRequest = async (url, formData) => {
         if (status !== 200) {
             return { data: {}, status, success: data.success, message: data?.message };
         } else if (status === 200 && data.success === true) {
-            return { data: data.payload, status: parseInt(status), success: data.success, message: data?.message };
+            return { data: data.payload || {}, status: parseInt(status), success: data.success, message: data?.message };
         }
     } catch (error) {
         return { status: error?.response?.status || 500, message: error?.response?.data?.message || error?.message, success: false };

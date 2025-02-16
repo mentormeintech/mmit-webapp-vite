@@ -17,7 +17,7 @@ const Notifications = () => {
 			await setToken()
 			setloading(true);
 			const formattedDat = moment(new Date).format("MMMM Do, YYYY");
-			const response = await userGetRequest('event/session')
+			const response = await userGetRequest('notifications/mentor')
 			if (response && response?.success === true) {
 				setsessions(response.data);
 				setloading(false);

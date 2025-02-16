@@ -25,12 +25,13 @@ export default function ChangePassword(props) {
         password: yup.string().typeError('Password should be a number')
             .min(8, 'Password should be at least 8').
             required('Old password is required')
-            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, 'Must contain at least one uppercase, one lowercase, and one number'),
+            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/, 'Must contain at least one uppercase, one lowercase, and one number'),
         // tools: yup.string().required('Tools is required'),
         repeat_password: yup.string()
             .min(8, 'New password should be at least 8').
             required('Old password is required')
-            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                 'Must contain at least one uppercase, one lowercase, one number, and one special character'
             ).notOneOf([yup.ref('password')], 'New password should not be the same as the old password'),
     });
@@ -62,7 +63,7 @@ export default function ChangePassword(props) {
             if (response && response?.status === 200) {
                 setloading(false)
                 Alert(response?.message, 'success')
-                window.location.href = '/auth/signin'
+                return window.location.href = '/auth/signin'
             }
             if (response && (response?.status >= 300 || response?.status < 500)) {
                 setloading(false)
@@ -118,7 +119,7 @@ export default function ChangePassword(props) {
                         <DefaultInput
                             ref={inputRef}
                             type={isPasswordVisible1 ? "text" : "password"}
-                            id="password"
+                            id="repeat_password"
                             placeholder="New Password"
                             {...register('repeat_password', { required: "Password is required", })}
                         />

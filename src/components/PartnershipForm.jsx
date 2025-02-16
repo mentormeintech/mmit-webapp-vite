@@ -15,7 +15,7 @@ const PartnershipForm = () => {
     },
   });
   const onsSubmit = (data) => {
-    console.log("onsSubmit", data)
+    console.log("PartnershipForm", data)
   };
   return (
     <section

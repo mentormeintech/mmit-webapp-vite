@@ -25,8 +25,6 @@ const MentorProfile = () => {
         getMentorEvent();
     }, []);
 
-    const toggleSchedule = () => setShowSchedule(!showSchedule);
-
     async function getMentorEvent() {
         try {
             const mentor_id = localStorage.getItem(mentorAccess);
@@ -75,26 +73,13 @@ const MentorProfile = () => {
                         </div>
                     </motion.div>
 
-                    <motion.div initial={{ x: -100, y: 130 }} animate={{ x: 0, y: 0 }} transition={{ duration: 1, ease: "easeInOut" }} className="m-auto mt-16 max-w-screen-xl px-4 md:px-11">
+                    <motion.div initial={{ x: -100, y: 130 }} animate={{ x: 0, y: 0 }} transition={{ duration: 1, ease: "easeInOut" }} className="m-auto mt-16 max-w-screen-xl px-4 md:px-11 mb-[3rem]">
                         <h1 className="mb-5 text-2xl md:text-4xl font-semibold">Overview</h1>
                         <MentorCard selected_mentor={selected_mentor} />
-
-                        <div className="mt-8">
-                            <button
-                                className="bg-primary-500 hover:bg-opacity-70 w-full md:w-[200px] text-center py-2 text-white rounded-md font-semibold"
-                                onClick={toggleSchedule}
-                            >
-                                {showSchedule ? "Hide Schedule" : "Book a Session"}
-                            </button>
-                        </div>
-
-                        {showSchedule && (
-                            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 120 }} className="mt-8">
-                                <h1 className="mb-4 text-2xl md:text-4xl font-semibold">Book a Session</h1>
-                                <MentorScheduleCard mentorEvent={mentorEvents} mentor_id={localStorage.getItem(mentorAccess)} />
-                            </motion.div>
-                        )}
-
+                        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 120 }} className="mt-8">
+                            <h1 className="mb-4 text-2xl md:text-4xl font-semibold">Book a Session</h1>
+                            <MentorScheduleCard mentorEvent={mentorEvents} mentor_id={localStorage.getItem(mentorAccess)} />
+                        </motion.div>
                         <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 120 }} className="mt-8 flex gap-4">
                             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-8 w-8 rounded-full bg-zinc-300 text-black hover:bg-blue-500 hover:text-white transition">
                                 <FaTwitter />

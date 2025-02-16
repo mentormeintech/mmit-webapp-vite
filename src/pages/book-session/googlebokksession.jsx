@@ -60,19 +60,18 @@ const BookSession = () => {
                 setMentorSession(response.data.session);
                 setAvailabilities(response.data.availabilities);
                 settimeZone(response.data.timezone)
-                console.log("response.data", response.data)
-                return setLoading(false);
+                setLoading(false);
             }
             else if (response.status === 401) {
-                return navigation('/auth/signin')
+                navigation('/auth/signin')
             }
             else {
                 Alert(response.message, "warning");
-                return setLoading(false);
+                setLoading(false);
             }
         } catch (error) {
             Alert(error.message, "error");
-            return setLoading(false);
+            setLoading(false);
         }
     }
 
@@ -120,6 +119,7 @@ const BookSession = () => {
     const handleGoogleCalendarEvent = async (event) => {
         event.preventDefault()
         try {
+            console.log("selectedTime", selectedTime)
             if (!selectedDate) {
                 return Alert("Date can't be empty", "warning");
             }
@@ -130,11 +130,11 @@ const BookSession = () => {
                 return Alert("You can't select a previous date", "warning");
             }
             const { start, end } = calculateStartEndTimes(selectedDate, selectedTime)
-            const { title, bg, duration, event_date, description, mentor_refresh_token, _id } = mentorSession
+            const { title, bg, duration, event_date, description, mentor_provider_token, mentor_access_token, mentor_refresh_token } = mentorSession
             mentorSession.start = start
             mentorSession.start = start
             mentorSession.end = end
-            const newEvent = { title, bg, duration, event_date, description, start, end, mentor_refresh_token, mentor_provider_token: calendarToken, event_id: _id }
+            const newEvent = { title, bg, duration, event_date, description, start, end, mentor_refresh_token, mentor_provider_token:calendarToken }
             setToken(localStorage.getItem(accessToken))
             if (parseInt(duration) > 60) {
                 return Alert("Duration should be between 1 and 60 minutes", "warning");
@@ -146,12 +146,44 @@ const BookSession = () => {
                 setLoading(true)
                 newEvent.description = description
                 newEvent.summary = description || 'Mentorship Session'
-                newEvent.start = new Date(start).toISOString()
-                newEvent.end = new Date(end).toISOString()
+                newEvent.start = {
+                    'dateTime': new Date(start).toISOString(),
+                    'timeZone': timeZone
+                }
+                newEvent.end = {
+                    'dateTime': new Date(end).toISOString(),
+                    'timeZone': timeZone
+                }
                 newEvent.attendees = [
                     { 'email': 'dolaposokoya97@gmail.com' }
                 ]
-                const response = await postRequest('event/book', { newEvent })
+                newEvent.reminders = {
+                    'useDefault': false,
+                    'overrides': [
+                        { 'method': 'email', 'minutes': 24 * 60 },
+                        { 'method': 'popup', 'minutes': 10 }
+                    ]
+                }
+                const event = {
+                    ...newEvent, conferenceData: {
+                        createRequest: {
+                            requestId: new Date().getTime(),
+                            conferenceSolutionKey: {
+                                type: "hangoutsMeet",
+                            },
+                        },
+                    },
+                }
+                const response = await postRequest('event/book', { event })
+                // const response = await axios.post('https://www.googleapis.com/calendar/v3/calendars/primary/events', event, {
+                //     headers: {
+                //         // Authorization: `Bearer ${mentor_access_token}`,
+                //         Authorization: `Bearer ${calendarToken}`,
+                //     },
+                //     params: {
+                //         conferenceDataVersion: 1,
+                //     },
+                // })
                 if (response && response.status !== 200) {
                     setLoading(false)
                     return Alert(response.message || 'Unable to perform action', "warning");
