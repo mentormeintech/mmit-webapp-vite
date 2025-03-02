@@ -9,44 +9,53 @@ export default function MenteeBooking() {
         doneSessions: false,
     })
 
-    function upcomingSection(){
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    function upcomingSection() {
         setBookingSection({
-           upcoming: true, pending: false, doneSessions: false
+            upcoming: true, pending: false, doneSessions: false
         })
     }
 
-    function pendingSection(){
+    function pendingSection() {
         setBookingSection({
-           upcoming: false, pending: true, doneSessions: false
+            upcoming: false, pending: true, doneSessions: false
         })
     }
 
-    function doneSessionSection(){
+    function doneSessionSection() {
         setBookingSection({
-           upcoming: false, pending: false, doneSessions: true
+            upcoming: false, pending: false, doneSessions: true
         })
     }
 
-    function alternateSections(){
-        if(bookingSection.upcoming){
+    function alternateSections() {
+        if (bookingSection.upcoming) {
             return <p>You have no upcoming sessionsadasa</p>
         }
 
-        else if(bookingSection.pending){
+        else if (bookingSection.pending) {
             return <p>You have no pending sessions</p>
         }
 
-        else if(bookingSection.doneSessions){
+        else if (bookingSection.doneSessions) {
             return <p>You have no done sessions</p>
         }
     }
 
 
+    const toggleSidebar = () => {
+        try {
+            setIsSidebarOpen(!isSidebarOpen);
+        } catch (error) {
+            alert(error.message)
+        }
+    };
+
     return (
         <div className="pt-20 mx-3">
-            <Header_Signin />
+            <Header_Signin toggleSidebar={toggleSidebar} />
             <div className="flex">
-                <MenteeSide />
+                <MenteeSide toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
                 <section className="w-9/12 py-8 px-5 mt-[3rem]">
                     <h4 className="text-[24px] font-semibold mb-3">Booking</h4>
                     <p>The session timings are following your local timezone Nigeria.</p>

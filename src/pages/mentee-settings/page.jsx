@@ -11,6 +11,7 @@ function MenteeSettings() {
     personalInfo: false,
     login: false,
   });
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { dashboard } = useSelector((state) => state.mentor_me_user);
 
   function displayProfile() {
@@ -40,11 +41,18 @@ function MenteeSettings() {
     });
   }
 
+  const toggleSidebar = () => {
+    try {
+      setIsSidebarOpen(!isSidebarOpen);
+    } catch (error) {
+      alert(error.message)
+    }
+  };
   return (
     <div className="pt-20 mx-3">
-      <Header_Signin />
+      <Header_Signin toggleSidebar={toggleSidebar} />
       <div className="flex text-[#454545]">
-        <MenteeSide />
+        <MenteeSide toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <section className="w-9/12 mt-[3rem] py-8 px-5">
           <h4 className="text-[#454545] text-xl font-semibold mb-12">
             Settings

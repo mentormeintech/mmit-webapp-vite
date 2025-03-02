@@ -10,7 +10,7 @@ import MentorDashboard from '../pages/mentor';
 import MentorBooking from '../pages/mentor-booking/page';
 import MenteeBooking from '../pages/menteebooking/pages';
 import MentorSettings from '../pages/mentor-settings/page';
-import MenteeSettings from '../pages/menteeSettings/page';
+import MenteeSettings from '../pages/mentee-settings/page';
 import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
 import Mentorregister from '../pages/auth/mentorregist';
