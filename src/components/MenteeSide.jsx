@@ -10,7 +10,7 @@ import { accessToken } from "../utilities/tokenClient";
 import { useState } from "react";
 
 
-const MenteeSide = ({ Mentee, toggleSidebar,isSidebarOpen }) => {
+const MenteeSide = ({ Mentee, toggleSidebar, isSidebarOpen }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,6 +23,9 @@ const MenteeSide = ({ Mentee, toggleSidebar,isSidebarOpen }) => {
     logUserOut();
   };
 
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
 
   return (
     <aside
@@ -57,27 +60,46 @@ const MenteeSide = ({ Mentee, toggleSidebar,isSidebarOpen }) => {
               {Mentee?.first_name} {Mentee?.last_name}
             </li>
             <li className="float-left w-full">
-              <Link to="/mentee" className="flex items-center justify-start hover:text-[#0F88D9] transition-colors duration-300 text-gray-600">
+              <Link
+                to="/mentee"
+                className={`flex items-center justify-start hover:text-[#0F88D9] transition-colors duration-300 ${isActive("/mentee") ? "text-[#0F88D9]" : "text-gray-600"
+                  }`}
+              >
                 <AiFillHome className="mr-2 text-xl" /> Home
               </Link>
             </li>
             <li className="float-left w-full">
-              <Link to="/mentee/booking" className="flex items-center justify-start hover:text-[#0F88D9] transition-colors duration-300 text-gray-600">
-                <BsFillBookFill className="mr-2 text-xl" /> Bookings
+              <Link
+                to="/mentee-booking"
+                className={`flex items-center justify-start hover:text-[#0F88D9] transition-colors duration-300 ${isActive("/mentee-booking") ? "text-[#0F88D9]" : "text-gray-600"
+                  }`}
+              >
+              <i className="fa-solid fa-book-open-reader mr-2"></i> Bookings
               </Link>
             </li>
             <li className="float-left w-full">
-              <Link to="/group-session" className="flex items-center justify-start hover:text-[#0F88D9] transition-colors duration-300 text-gray-600">
-                <BsFillBookFill className="mr-2 text-xl" /> Group Sessions
+              <Link
+                to="/group-session"
+                className={`flex items-center justify-start hover:text-[#0F88D9] transition-colors duration-300 ${isActive("/group-session") ? "text-[#0F88D9]" : "text-gray-600"
+                  }`}
+              >
+                <i className="fa-solid fa-user-group mr-2">{" "}</i> { "\n"} Group Sessions
               </Link>
             </li>
             <li className="float-left w-full">
-              <Link to="/mentee-settings" className="flex items-center justify-start hover:text-[#0F88D9] transition-colors duration-300 text-gray-600">
+              <Link
+                to="/mentee-settings"
+                className={`flex items-center justify-start hover:text-[#0F88D9] transition-colors duration-300 ${isActive("/mentee-settings") ? "text-[#0F88D9]" : "text-gray-600"
+                  }`}
+              >
                 <MdSettings className="mr-2 text-xl" /> Settings
               </Link>
             </li>
             <li onClick={logOut} className="float-left w-full">
-              <Link to="" className="flex items-center justify-start hover:text-[#0F88D9] transition-colors duration-300">
+              <Link
+                to=""
+                className="flex items-center justify-start hover:text-[#0F88D9] transition-colors duration-300 text-gray-600"
+              >
                 <HiOutlineLogout className="mr-2 text-xl" /> Logout
               </Link>
             </li>

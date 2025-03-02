@@ -8,7 +8,7 @@ import FindAMentor from '../pages/findmentor/page';
 import PartnershipPage from '../pages/partnership';
 import MentorDashboard from '../pages/mentor';
 import MentorBooking from '../pages/mentor-booking/page';
-import MenteeBooking from '../pages/menteebooking/pages';
+import MenteeBooking from '../pages/mentee-booking/page';
 import MentorSettings from '../pages/mentor-settings/page';
 import MenteeSettings from '../pages/mentee-settings/page';
 import MentorsSupport from '../pages/mentorsSupport';
@@ -22,7 +22,7 @@ import MentorCalender from '../pages/mentor-calendar/page';
 import Notifications from '../pages/mentor-notification/page';
 import ErrorPage from '../errorboudary';
 import { accessToken } from '../utilities/tokenClient';
-import Groupsession from '../pages/group-sessions';
+import Groupsession from '../pages/group-session/page';
 import ForgotPassword from '../pages/forgot-password/pages';
 import PasswordRequest from '../pages/forgot-password/password-request/page';
 import MenteeNotification from '../pages/mentee-notification/page';
@@ -113,7 +113,7 @@ const router = createBrowserRouter([
 		element: <MentorBooking />,
 	},
 	{
-		path: '/mentee/booking',
+		path: '/mentee-booking',
 		element: <MenteeBooking />,
 	},
 	{

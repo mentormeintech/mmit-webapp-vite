@@ -23,6 +23,7 @@ const MentorProfile = () => {
 
     useLayoutEffect(() => {
         getMentorEvent();
+        console.log("selected_mentor", selected_mentor)
     }, []);
 
     async function getMentorEvent() {
@@ -81,13 +82,13 @@ const MentorProfile = () => {
                             <MentorScheduleCard mentorEvent={mentorEvents} mentor_id={localStorage.getItem(mentorAccess)} />
                         </motion.div>
                         <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 120 }} className="mt-8 flex gap-4">
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-8 w-8 rounded-full bg-zinc-300 text-black hover:bg-blue-500 hover:text-white transition">
+                            <a href={selected_mentor.twitter_url || "#"} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-8 w-8 rounded-full bg-zinc-300 text-black hover:bg-blue-500 hover:text-white transition">
                                 <FaTwitter />
                             </a>
-                            <a href="mailto:someone@example.com" className="flex items-center justify-center h-8 w-8 rounded-full bg-zinc-300 text-black hover:bg-red-500 hover:text-white transition">
+                            {/* <a href="mailto:someone@example.com" className="flex items-center justify-center h-8 w-8 rounded-full bg-zinc-300 text-black hover:bg-red-500 hover:text-white transition">
                                 <GrMail />
-                            </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-8 w-8 rounded-full bg-zinc-300 text-black hover:bg-blue-700 hover:text-white transition">
+                            </a> */}
+                            <a href={selected_mentor.linked_in_url || "#"} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-8 w-8 rounded-full bg-zinc-300 text-black hover:bg-blue-700 hover:text-white transition">
                                 <FaLinkedinIn />
                             </a>
                         </motion.div>

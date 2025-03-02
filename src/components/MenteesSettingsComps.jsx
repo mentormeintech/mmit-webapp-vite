@@ -8,66 +8,112 @@ function MenteesSettingsComps(props) {
   }
 
   else if (mentee && mentee?.login) {
-    return <section className="w-[500px]">
+    return <section className="w-full max-w-[500px]">
+      {/* Old Password Field */}
       <div className="mb-6">
         <div className="flex items-center justify-between">
-          <p>Email Address</p>
-          <label htmlFor="email" className="text-[#0F88D9]">Change Email Address</label>
+          <p className="text-sm lg:text-base mb-2">Old Password</p>
         </div>
         <div className="relative">
-          <input type="email" readOnly={true} id="email" className="w-full border outline-none h-10 rounded-md" />
-          <i className="absolute right-14 top-1/2 -translate-y-1/2 cursor-pointer"><BsEyeSlash /></i>
+          <input
+            type="password"
+            id="old-password"
+            placeholder="Enter your old password"
+            className="w-full border outline-none h-10 rounded-md px-3 text-sm lg:text-base"
+          />
+          <i className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+            <BsEyeSlash />
+          </i>
         </div>
       </div>
 
-	  <div className="mb-6">
+      {/* New Password Field */}
+      <div className="mb-6">
         <div className="flex items-center justify-between">
-          <p>Change Password</p>
-          <label htmlFor="password" className="text-[#0F88D9]">Update</label>
+          <p className="text-sm lg:text-base mb-2">New Password</p>
         </div>
         <div className="relative">
-          <input type="password" readOnly={true} id="password" className="w-full border outline-none h-10 rounded-md" />
-          <i className="absolute right-14 top-1/2 -translate-y-1/2 cursor-pointer"><BsEyeSlash /></i>
+          <input
+            type="password"
+            id="new-password"
+            placeholder="Enter your new password"
+            className="w-full border outline-none h-10 rounded-md px-3 text-sm lg:text-base"
+          />
+          <i className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+            <BsEyeSlash />
+          </i>
         </div>
       </div>
 
-      <button className="text-[#0F88D9] cursor-pointer">Delete Account</button>
+      {/* Save Button */}
+      <button className="bg-[#0F88D9] text-white rounded-md w-full h-10 text-sm lg:text-base hover:bg-[#2C88D8] transition-colors duration-300">
+        Save Changes
+      </button>
     </section>
   }
 
   else if (mentee && mentee?.profile) {
     return <>
-      <form>
-        <section className="w-72">
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>Interest</p>
-              <label htmlFor="experience" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" id="experience" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.years_of_experience} />
+      <form className="w-full max-w-[400px] lg:max-w-[500px] float-left">
+        {/* Interest Field */}
+        <div className="w-full mb-6">
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-sm lg:text-base">Interest</p>
+            <label htmlFor="experience" className="cursor-pointer text-sm lg:text-base text-[#0F88D9]">
+              Edit
+            </label>
           </div>
+          <input
+            type="text"
+            id="experience"
+            placeholder="N/A"
+            className="outline-none border-b-[0.02px] w-full border-[#434343] pb-2 text-sm lg:text-base"
+            defaultValue={dashboard?.years_of_experience || ""}
+          />
+        </div>
 
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>LinkedIn Profile</p>
-              <label htmlFor="tools" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" id="tools" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.tools || ''} />
+        {/* LinkedIn Profile Field */}
+        <div className="w-full mb-6">
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-sm lg:text-base">LinkedIn Profile</p>
+            <label htmlFor="tools" className="cursor-pointer text-sm lg:text-base text-[#0F88D9]">
+              Edit
+            </label>
           </div>
+          <input
+            type="text"
+            id="tools"
+            placeholder="N/A"
+            className="outline-none border-b-[0.02px] w-full border-[#434343] pb-2 text-sm lg:text-base"
+            defaultValue={dashboard?.tools || ""}
+          />
+        </div>
 
-          <div className="w-full mb-8">
-            <div className="flex justify-between items-center mb-3">
-              <p>Twitter Profile</p>
-              <label htmlFor="company" className="cursor-pointer">Edit</label>
-            </div>
-            <input type="text" id="company" placeholder="N/A" className="outline-none border-b-[0.02px] w-full border-[#434343] pb-3" defaultValue={dashboard?.company || ''} />
+        {/* Twitter Profile Field */}
+        <div className="w-full mb-6">
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-sm lg:text-base">Twitter Profile</p>
+            <label htmlFor="company" className="cursor-pointer text-sm lg:text-base text-[#0F88D9]">
+              Edit
+            </label>
           </div>
-        </section>
+          <input
+            type="text"
+            id="company"
+            placeholder="N/A"
+            className="outline-none border-b-[0.02px] w-full border-[#434343] pb-2 text-sm lg:text-base"
+            defaultValue={dashboard?.company || ""}
+          />
+        </div>
 
-        <button className="bg-[#FE9B7E] rounded-md w-96 h-11 text-white">save</button>
+        {/* Save Button */}
+        <button className="bg-[#FE9B7E] rounded-md w-full lg:w-96 h-11 text-white text-sm lg:text-base hover:bg-[#FF8A6A] transition-colors duration-300">
+          Save
+        </button>
       </form>
     </>
   }
+
 }
 
 export default MenteesSettingsComps
