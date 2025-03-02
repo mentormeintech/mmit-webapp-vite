@@ -121,10 +121,10 @@ export const putRequest = async (url, formData) => {
 export const logUserOut = async (url) => {
     try {
         sessionStorage.removeItem(`${accessToken}`)
-        sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
+        // sessionStorage.removeItem('persist:MENTOR_ME_REDUX_STATE_STORE')
         localStorage.removeItem(`${accessToken}`)
         // return redirect('/auth/signin')
-        // return window.location.href = '/auth/signin'
+        return window.location.href = '/auth/signin'
         // const response = await useAxios.delete(`/${url}`);
         // const { data, status } = response;
         // if (status === 200 && data.success === false) {

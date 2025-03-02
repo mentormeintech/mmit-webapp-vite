@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Header_Signin from "../../components/Header_Signin";
-import { putRequest, userGetRequest } from "../../utilities/apiClient";
+import { logUserOut, putRequest, userGetRequest } from "../../utilities/apiClient";
 import Spinner from "../../components/Spinner";
 import Alert from "../../features/Alert";
 import { setToken } from "../../utilities/axiosClient";
 import moment from "moment/moment";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logOutUser } from "../../redux/slices/userslice";
 
 
 const MenteeNotification = () => {
 
 	const [loading, setloading] = useState(false);
+	const dispatch = useDispatch();
 	const [menteeSessions, setmenteeSessions] = useState([])
 	const { dashboard } = useSelector(
 		(state) => state.mentor_me_user
@@ -24,12 +26,16 @@ const MenteeNotification = () => {
 		try {
 			await setToken()
 			setloading(true);
-			const formattedDate = moment(new Date).format("MMMM Do, YYYY");
 			const response = await userGetRequest('notifications/mentee')
+			if (response && response?.status === 401) {
+				dispatch(logOutUser())
+				logUserOut()
+				return setloading(false);
+			}
 			if (response && response?.status === 200 && response?.success === true) {
 				setmenteeSessions(response.data);
 				Alert(response.message, "success");
-				setloading(false);
+				return setloading(false);
 			} else {
 				Alert(response.message, "warning");
 				setloading(false);

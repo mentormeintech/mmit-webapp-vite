@@ -29,6 +29,7 @@ const menteeProfilePage = () => {
   });
   const dispatch = useDispatch();
   const [menteeData, setmenteeData] = useState({});
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     getMentors();
@@ -41,6 +42,14 @@ const menteeProfilePage = () => {
   useLayoutEffect(() => {
     retrieveMenteeData();
   }, []);
+
+  const toggleSidebar = () => {
+  try {
+    setIsSidebarOpen(!isSidebarOpen);
+  } catch (error) {
+    alert(error.message)
+  }
+  };
 
   const retrieveMenteeData = async () => {
     try {
@@ -87,40 +96,26 @@ const menteeProfilePage = () => {
 
   const firstThreeMentors = data?.docs?.slice(0, 3);
 
-  const getMyNotifications = async () => {
-    try {
-      await setToken()
-      setloading(true);
-      const response = await userGetRequest('notifications/mentor')
-      if (response && response?.success === true) {
-        setdata({ ...data, ...response.data });
-        setloading(false);
-      } else {
-        Alert(response.message, "warning");
-        setloading(false);
-      }
-    } catch (error) {
-      Alert(error.message, "warning");
-      setloading();
-    }
-  }
-
   return (
-    <div className="pt-20 mx-3 flex">
-      <Header_Signin userData={menteeData} />
-      <div className="flex gap-x-4">
-        <MenteeSide Mentee={menteeData} />
-        <div className="flex flex-col gap-y-4 mt-[2.5Sessionrem]">
-          <h2 className="text-3xl my-5 font-semibold">
+
+    <div className="w-full pt-2 lg:mx-0 lg:flex lg:flex-col lg:gap-y-10">
+      <div className="w-full mx-3 lg:mx-0 bg-red-100"></div>
+      <Header_Signin userData={menteeData} toggleSidebar={toggleSidebar} />
+      <div className="lg:flex lg:flex-row lg:gap-x-8 mt-[3rem]">
+        <div>
+          <MenteeSide Mentee={menteeData} toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+        </div>
+
+        {/* Main Content (Scrollable, 80% width) */}
+        <div className="mt-[6rem] mx-3 lg:mx-0 lg:w-4/5 lg:ml-[6%] flex flex-col gap-y-8 lg:mt-[3rem]">
+          <h2 className="text-3xl font-semibold text-center lg:text-left">
             Welcome {menteeData?.first_name} {menteeData?.last_name}
           </h2>
-          <div className="md:max-w-[70vw] md:h-[30vh]">
-            <DynamicParagraph />
-          </div>
+          <DynamicParagraph />
 
           <div className="pb-10">
-            <h3 className="my-5 text-xl font-semibold">Mentors to meet</h3>
-            <div className="flex gap-3">
+            <h3 className="text-xl font-semibold">Mentors to meet</h3>
+            <div className="flex flex-col md:flex-row flex-wrap gap-6">
               {firstThreeMentors &&
                 firstThreeMentors.map((mentor, index) => (
                   <ProfileCard
@@ -134,18 +129,18 @@ const menteeProfilePage = () => {
                     }
                     id={mentor._id}
                     mentor={mentor}
-                    sessions={mentor.sessions || "0"} //sessions organised by the mentors
+                    sessions={mentor.sessions || "0"}
                     reviews={mentor.ratings && mentor.ratings?.length}
-                    experience={mentor?.years_of_experience || 0}
+                    experience={mentor?.years_of_expertise || 0}
                     attendance={mentor?.attendance || "97%"}
                     image={mentor.image}
                   />
                 ))}
             </div>
-            <div className="flex justify-end md:w-[54.5vw] mt-5">
+            <div className="flex justify-start mt-5">
               <Link
                 to="/findamentor"
-                className="p-4 rounded-lg text-white bg-[#0F88D9]"
+                className="p-4 rounded-lg text-white bg-[#0F88D9] hover:bg-[#2C88D8] transition-colors duration-300"
               >
                 Browse more mentor
               </Link>

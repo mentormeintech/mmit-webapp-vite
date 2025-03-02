@@ -29,8 +29,8 @@ export const userTypeSlice = createSlice({
             state.user = action.payload.user
         },
         logOutUser: (state, action) => {
-            state.token = action.payload.token
-            state.user = action.payload.user
+            state.token = ''
+            state.user = {}
             state.dashboard = {}
         },
         registeredUser: (state, action) => {
