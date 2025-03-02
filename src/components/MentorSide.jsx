@@ -116,19 +116,6 @@ const MentorSide = (props) => {
 							Settings
 						</Link>
 					</li>
-					<li className="mb-5">
-						<Link
-							to="/mentor-support"
-							className={`${
-								location.pathname === "/mentor-support"
-									? "text-[#0F88D9]"
-									: ""
-							} flex items-center hover:text-[#0F88D9]`}
-						>
-							<AiFillQuestionCircle className="mr-2 text-xl" />
-							Support
-						</Link>
-					</li>
 					<li className="mb-5" onClick={logOut}>
 						<Link
 							to=""

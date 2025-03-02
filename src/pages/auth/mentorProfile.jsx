@@ -23,7 +23,6 @@ const MentorProfile = () => {
 
     useLayoutEffect(() => {
         getMentorEvent();
-        console.log("selected_mentor", selected_mentor)
     }, []);
 
     async function getMentorEvent() {

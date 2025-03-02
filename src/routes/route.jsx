@@ -11,7 +11,6 @@ import MentorBooking from '../pages/mentor-booking/page';
 import MenteeBooking from '../pages/mentee-booking/page';
 import MentorSettings from '../pages/mentor-settings/page';
 import MenteeSettings from '../pages/mentee-settings/page';
-import MentorsSupport from '../pages/mentorsSupport';
 import Career from '../pages/auth/career';
 import Mentorregister from '../pages/auth/mentorregist';
 import Privacypolicy from '../pages/privacy-policy/page';
@@ -131,10 +130,6 @@ const router = createBrowserRouter([
 	{
 		path: '/mentor-settings',
 		element: <MentorSettings />,
-	},
-	{
-		path: '/mentor-support',
-		element: <MentorsSupport />,
 	},
 	{
 		path: '/auth/career',
