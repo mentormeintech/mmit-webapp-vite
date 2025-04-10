@@ -119,8 +119,8 @@ import Tabs from "../../components/Tabs";
 
 function MenteeSettings() {
   const [mentee, setMentee] = useState({
-    profile: true,
-    personalInfo: false,
+    profile: false,
+    personalInfo: true,
     login: false,
   });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

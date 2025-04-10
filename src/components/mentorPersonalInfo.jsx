@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react'
-import UserInlineInput from './userInlineInput'
 import DefaultInput from './defaultInput'
 import Alert from '../features/Alert';
 

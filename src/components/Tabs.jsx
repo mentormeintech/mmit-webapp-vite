@@ -18,12 +18,12 @@ const TabItem = ({ label, isActive, onClick }) => {
 
 const Tabs = ({ mentee, displayProfile, displayPersonalInfo, displayLogin }) => {
     return (
-        <ul className="flex flex-wrap items-center mb-8 lg:mb-12 w-full lg:w-7/12 justify-start lg:justify-between gap-1">
-        <TabItem
+      <ul className="flex flex-wrap items-center mb-8 lg:mb-12 w-full lg:w-7/12 justify-start gap-10">
+        {/* <TabItem
           label={"Mentee's Profile"}
           isActive={mentee.profile}
           onClick={displayProfile}
-        />
+        /> */}
         <TabItem
           label="Personal Information"
           isActive={mentee.personalInfo}

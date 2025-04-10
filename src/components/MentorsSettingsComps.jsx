@@ -3,13 +3,13 @@ import { BsEyeSlash } from "react-icons/bs"
 import { FaToggleOn } from "react-icons/fa"
 import MentorProfileInfo from "./mentorProfileInfo"
 import { useForm } from 'react-hook-form';
-import { patchRequest } from '../utilities/apiClient'
+import { logUserOut, patchRequest } from '../utilities/apiClient'
 import Alert from '../features/Alert'
 import { useDispatch } from "react-redux";
-import { dashboardData } from '../redux/slices/userslice'
+import { dashboardData, logOutUser } from '../redux/slices/userslice'
 import Spinner from './Spinner'
 import MentorPersonalinfo from './mentorPersonalInfo'
-import ChangePassword from './changePassword';
+import MentorChangePassword from './mentorChangePassword';
 
 
 function MentorsSettingsComps(props) {
@@ -54,7 +54,14 @@ function MentorsSettingsComps(props) {
         setloading(false)
         return Alert(response?.message, 'success')
       }
-      if (response && (response?.status >= 300 || response?.status < 500)) {
+      if (response && response?.status === 401) {
+        setloading(false)
+        Alert(response?.message, 'warning')
+        dispatch(logOutUser())
+        return logUserOut()
+
+      }
+      if (response && (response?.status >= 300 || response?.status <= 400)) {
         setloading(false)
         return Alert(response?.message, 'error')
       }
@@ -85,7 +92,7 @@ function MentorsSettingsComps(props) {
   else if (mentorship && mentorship?.login) {
     return <section className="w-[500px]">
       <div className="mb-6">
-        <ChangePassword setloading={setloading} />
+        <MentorChangePassword setloading={setloading} />
       </div>
 
       <button className="text-[#0F88D9] cursor-pointer">Delete Account</button>

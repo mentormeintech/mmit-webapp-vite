@@ -7,7 +7,7 @@ import Alert from '../features/Alert';
 import { patchRequest } from '../utilities/apiClient';
 
 
-export default function ChangePassword(props) {
+export default function MentorChangePassword(props) {
     const { setloading } = props
     const inputRef = useRef(null);
 
