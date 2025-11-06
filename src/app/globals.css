@@ -1,26 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* @theme {
+  
+} */
+/* 
+@utility {
+  .bg-hero-image {
+    background-image: var(--background-image-hero);
   }
+} */
+
+@theme {
+  --primary: #0e88d8;
+  --theme-blue: #0f88d9;
+  --secondary: #eb9572;
+  --text-dark: #454545;
+  --smoke-white: #f5f5f5;
+
+  --color-primary-500: #f89878;
+  --color-secondary-200: #f1f9ff;
+  --color-secondary-500: #0f88d9;
+
+  --textDark: #454545;
+  --theme_orange: #f89878;
+  --pale-yellow: #fffccc;
+  --light-gray: #f5f5f5;
+  --white: #fff;
+
+  --breakpoint-xs: 395px;
+  --breakpoint-smd: 500px;
+  --breakpoint-mdl: 900px;
+
+  --Montserrat: "Montserrat", sans-serif;
+
+  --hero-bg:url(/images/hero-bg.jpg);
+  /*--background-image-hero: url("/assets/hero-background.jpg"); */
+  
 }
+
+
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+  /* font-family: 'Montserrat', sans-serif; */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.rbc-header {
+  background: var(--theme-blue);
+  color: var(--white) !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 0rem !important;
+  font-family: var(--Montserrat) !important;
+  border-radius: 0.3rem;
+}
+.rbc-day-bg {
+  /* background: var(--smoke-white); */
+  font-family: var(--Montserrat) !important;
+  border-radius: 0.3rem;
+}
+.rbc-today {
+  background: var(--pale-yellow) !important;
+  /* padding: .3rem 1rem; */
+  color: var(--white) !important;
+  font-family: var(--Montserrat) !important;
+  font-weight: 400 !important;
+}
+.rbc-button-link {
+  color: var(--textDark) !important;
+  font-family: var(--Montserrat) !important;
+  font-weight: 500 !important;
+}
+
+.rbc-event {
+  /* background: var(--theme_orange) !important; */
+  background-color: white !important;
+  font-family: var(--Montserrat) !important;
+  font-weight: 400 !important;
+}
+
+/* Your custom global styles can go here */
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.circle {
+  width: 2rem !important;
+  height: 2rem !important;
+  background-color: red !important;
+}
+
+.schedule-page-container {
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  /* Adjusts spacing between rows and columns */
+  margin-top: 2rem;
+}
+
+.day-label {
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+}
+
+.day-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.time-slot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.add-button,
+.delete-button {
+  display: flex;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+}
+
+.add-button {
+  color: var(--theme-blue);
+  color: #303030;
+}
+
+.delete-button {
+  /* background-color: #ff4d4d; */
+  color: white;
+  color: #ff4d4d;
+  /* cursor: pointer; */
 }

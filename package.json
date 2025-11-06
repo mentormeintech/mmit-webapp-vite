@@ -9,14 +9,46 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@bitnoi.se/react-scheduler": "^0.3.1",
+    "@emailjs/browser": "^4.4.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.4",
+    "@next/font": "^14.2.15",
+    "@reduxjs/toolkit": "^2.9.2",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/auth-helpers-react": "^0.5.0",
+    "@supabase/supabase-js": "^2.77.0",
+    "aos": "^2.3.4",
+    "axios": "^1.13.1",
+    "classnames": "^2.5.1",
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.548.0",
+    "next": "16.0.1",
     "react": "19.2.0",
+    "react-datepicker": "^8.8.0",
     "react-dom": "19.2.0",
-    "next": "16.0.1"
+    "react-hook-form": "^7.65.0",
+    "react-icons": "^5.5.0",
+    "react-password-checklist": "^1.8.1",
+    "react-redux": "^9.2.0",
+    "react-simple-typewriter": "^5.0.1",
+    "react-spinners": "^0.17.0",
+    "react-toastify": "^11.0.5",
+    "react-use": "^17.6.0",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.8",
+    "tailwind-scrollbar-hide": "^4.0.0",
+    "typeface-inter": "^3.18.1",
+    "typeface-nunito": "^1.1.13",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "@tailwindcss/postcss": "^4.1.16",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
-    "eslint-config-next": "16.0.1"
+    "eslint-config-next": "16.0.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.16"
   }
 }
